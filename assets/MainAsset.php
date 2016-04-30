@@ -15,5 +15,6 @@ class MainAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
+        'opw\react\ReactAsset',
     ];
 }
