@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6b436090ea05ec51cc6b376127b7fb08",
-    "content-hash": "f055758fb2f448b47225e21c13393bf4",
+    "hash": "1106380d95cadfccabc8f46a89ebb9e8",
+    "content-hash": "06869dda4dadfad3a121ba18baa7d18c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
-            "version": "v3.3.6",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "81df608a40bf0629a1dc08e584849bb1e43e0b7a"
+                "reference": "16b48259a62f576e52c903c476bd42b90ab22482"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/81df608a40bf0629a1dc08e584849bb1e43e0b7a",
-                "reference": "81df608a40bf0629a1dc08e584849bb1e43e0b7a",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/16b48259a62f576e52c903c476bd42b90ab22482",
+                "reference": "16b48259a62f576e52c903c476bd42b90ab22482",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/jquery": ">=1.9.1,<=2"
+                "bower-asset/jquery": ">=1.9.1"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -58,36 +58,22 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "1.11.3",
+            "version": "2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "1472290917f17af05e98007136096784f9051fab"
+                "reference": "af22a351b2ea5801ffb1695abb3bb34d5bed9198"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/1472290917f17af05e98007136096784f9051fab",
-                "reference": "1472290917f17af05e98007136096784f9051fab",
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/af22a351b2ea5801ffb1695abb3bb34d5bed9198",
+                "reference": "af22a351b2ea5801ffb1695abb3bb34d5bed9198",
                 "shasum": ""
-            },
-            "require-dev": {
-                "bower-asset/qunit": "1.14.0",
-                "bower-asset/requirejs": "2.1.10",
-                "bower-asset/sinon": "1.8.1",
-                "bower-asset/sizzle": "2.1.1-patch2"
             },
             "type": "bower-asset-library",
             "extra": {
                 "bower-asset-main": "dist/jquery.js",
                 "bower-asset-ignore": [
-                    "**/.*",
-                    "build",
-                    "dist/cdn",
-                    "speed",
-                    "test",
-                    "*.md",
-                    "AUTHORS.txt",
-                    "Gruntfile.js",
                     "package.json"
                 ]
             },
@@ -95,6 +81,7 @@
                 "MIT"
             ],
             "keywords": [
+                "browser",
                 "javascript",
                 "jquery",
                 "library"
@@ -173,30 +160,6 @@
                     "package.json"
                 ]
             }
-        },
-        {
-            "name": "bower-asset/react",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/reactjs/react-bower.git",
-                "reference": "624b4f21e8bf11b7a102cd0855553d1a4279da3f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/reactjs/react-bower/zipball/624b4f21e8bf11b7a102cd0855553d1a4279da3f",
-                "reference": "624b4f21e8bf11b7a102cd0855553d1a4279da3f",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "react.js",
-                    "react-dom.js"
-                ],
-                "bower-asset-ignore": []
-            },
-            "time": "2016-04-30 00:29:26"
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -337,59 +300,17 @@
             "time": "2015-08-05 01:03:42"
         },
         {
-            "name": "opw/yii2-react",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/opw/yii2-react.git",
-                "reference": "62fffbbd7789e7583ed11184854f304a6484d8ba"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/opw/yii2-react/zipball/62fffbbd7789e7583ed11184854f304a6484d8ba",
-                "reference": "62fffbbd7789e7583ed11184854f304a6484d8ba",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/react": "*",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "opw\\react\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT License"
-            ],
-            "authors": [
-                {
-                    "name": "Paulo Santiago",
-                    "email": "paulo@mobilizy.com.br",
-                    "homepage": "http://www.mobilizy.com.br/"
-                }
-            ],
-            "description": "The React.js library extension for the Yii framework",
-            "keywords": [
-                "react",
-                "yii2"
-            ],
-            "time": "2015-05-27 01:06:26"
-        },
-        {
             "name": "swiftmailer/swiftmailer",
             "version": "5.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "18f52d0894c06bc7ac36a2249815798d6b6860cf"
+                "reference": "bf40b5635c09e09eaad9c48bcb245ca4a6961401"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/18f52d0894c06bc7ac36a2249815798d6b6860cf",
-                "reference": "18f52d0894c06bc7ac36a2249815798d6b6860cf",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/bf40b5635c09e09eaad9c48bcb245ca4a6961401",
+                "reference": "bf40b5635c09e09eaad9c48bcb245ca4a6961401",
                 "shasum": ""
             },
             "require": {
@@ -429,7 +350,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-04-30 09:09:19"
+            "time": "2016-04-30 13:52:30"
         },
         {
             "name": "yiisoft/yii2",
@@ -437,12 +358,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "0d3c7aa71311f779c658972cd74ded95a59b42d7"
+                "reference": "8629491d238e6f06ba00486abeef33cd501e8147"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/0d3c7aa71311f779c658972cd74ded95a59b42d7",
-                "reference": "0d3c7aa71311f779c658972cd74ded95a59b42d7",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/8629491d238e6f06ba00486abeef33cd501e8147",
+                "reference": "8629491d238e6f06ba00486abeef33cd501e8147",
                 "shasum": ""
             },
             "require": {
@@ -523,7 +444,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-04-28 21:02:23"
+            "time": "2016-04-30 18:05:33"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -934,12 +855,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "62eddfcbf377353777742b3ceaf2b75dc81178e3"
+                "reference": "6777f007457b4f18597d03ac707581e59a3084b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/62eddfcbf377353777742b3ceaf2b75dc81178e3",
-                "reference": "62eddfcbf377353777742b3ceaf2b75dc81178e3",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/6777f007457b4f18597d03ac707581e59a3084b6",
+                "reference": "6777f007457b4f18597d03ac707581e59a3084b6",
                 "shasum": ""
             },
             "require": {
@@ -979,14 +900,12 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2016-04-21 13:19:47"
+            "time": "2016-04-30 16:12:40"
         }
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "opw/yii2-react": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
