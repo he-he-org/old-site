@@ -30,15 +30,17 @@ WORKDIR /var/www/site
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y apache2 php5 git wget php5-imagick
+    apt-get install -y apache2 php5 git wget php5-imagick curl && \
+    apt-get install -y vim httpie # Usefull apps for development
 
 # Install composer
 RUN wget https://getcomposer.org/download/1.0.2/composer.phar && \
     chmod a+x composer.phar && \
     mv composer.phar /usr/local/bin/composer
 
-# Install usefull apps
-RUN apt-get install -y vim httpie
+# Install node and npm
+RUN curl -sL https://deb.nodesource.com/setup_5.x | bash - && \
+    apt-get install -y nodejs
 
 # Configure php
 RUN php5enmod imagick
