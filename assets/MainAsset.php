@@ -11,10 +11,10 @@ class MainAsset extends AssetBundle
         'css/main.css',
     ];
     public $js = [
-        'js/main.js'
+        'js/vendor.js',
+        'js/page-main.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'opw\react\ReactAsset',
     ];
 }
