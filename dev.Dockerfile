@@ -38,9 +38,10 @@ RUN wget https://getcomposer.org/download/1.0.2/composer.phar && \
     chmod a+x composer.phar && \
     mv composer.phar /usr/local/bin/composer
 
-# Install node and npm
+# Install node, npm and gulp
 RUN curl -sL https://deb.nodesource.com/setup_5.x | bash - && \
-    apt-get install -y nodejs
+    apt-get install -y nodejs && \
+    npm i -g gulp
 
 # Configure php
 RUN php5enmod imagick
