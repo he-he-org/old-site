@@ -18,13 +18,9 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
-<?php
-//
-// TODO: what's up here? Nothing. This is empty layout.
-//
-?>
-<?php $this->endBody() ?>
+    <?php $this->beginBody() ?>
+    <?= $content ?>
+    <?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>
