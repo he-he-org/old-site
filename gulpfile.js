@@ -2,7 +2,6 @@
 var gulp = require("gulp"),
     gutil = require("gulp-util"),
 
-    cleanCSS = require("gulp-clean-css"),
     streamify = require("gulp-streamify"),
     uglify = require("gulp-uglify"),
     rename = require("gulp-rename"),
@@ -105,7 +104,7 @@ gulp.task("styles", function(){
 })
 
 gulp.task('lint', function() {
-    return gulp.src(settings.src.scripts + '**').pipe(eslint())
+    return gulp.src(settings.src.scripts + '/**').pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failOnError())
 });
