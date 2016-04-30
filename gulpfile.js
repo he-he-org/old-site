@@ -113,9 +113,9 @@ gulp.task('lint-n-fix', function() {
     function isFixed(file) {
         return file.eslint != null && file.eslint.fixed
     }
-    return gulp.src('scripts/**.js').pipe(eslint({fix:true}))
+    return gulp.src(settings.src.js + '/**.js').pipe(eslint({fix:true}))
         .pipe(eslint.format())
-        .pipe(gulpIf(isFixed, gulp.dest('scripts')))
+        .pipe(gulpIf(isFixed, gulp.dest(settings.src.js)))
 });
 
 
