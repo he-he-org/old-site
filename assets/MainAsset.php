@@ -15,6 +15,5 @@ class MainAsset extends AssetBundle
         'js/page-main.js',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
     ];
 }
