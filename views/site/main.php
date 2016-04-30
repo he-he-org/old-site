@@ -1,9 +1,12 @@
 <?php
 
 //
-// TODO: add localization EN, RU
+// TODO: update localization algorythm
 //
 $pageName = 'Main';
+if (Yii::$app->language == 'ru:RU') {
+    $pageName = 'Главная';
+}
 
 $this->title = 'Health & Help - '.$pageName;
 
