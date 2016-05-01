@@ -21,4 +21,4 @@ echo <<< JS_DISABLED
 JS_DISABLED;
 
 ?>
-
+<div id="react-container"></div>
