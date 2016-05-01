@@ -11,7 +11,8 @@ class MainAsset extends AssetBundle
         'css/main.css',
     ];
     public $js = [
-        'js/main.js'
+        'js/vendor.js',
+        'js/main.js',
     ];
     public $depends = [
     ];
