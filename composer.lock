@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1106380d95cadfccabc8f46a89ebb9e8",
+    "hash": "ee20ec53157fa757030abfe6f7bff797",
     "content-hash": "06869dda4dadfad3a121ba18baa7d18c",
     "packages": [
         {
@@ -317,12 +317,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "fffbc0e2a7e376dbb0a4b5f2ff6847330f20ccf9"
+                "reference": "68f50da0fdd6cb0146d17d6bde20b76e0e57e7fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/fffbc0e2a7e376dbb0a4b5f2ff6847330f20ccf9",
-                "reference": "fffbc0e2a7e376dbb0a4b5f2ff6847330f20ccf9",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/68f50da0fdd6cb0146d17d6bde20b76e0e57e7fb",
+                "reference": "68f50da0fdd6cb0146d17d6bde20b76e0e57e7fb",
                 "shasum": ""
             },
             "require": {
@@ -362,7 +362,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-01-03 15:42:47"
+            "time": "2016-05-01 08:46:16"
         },
         {
             "name": "yiisoft/yii2",
@@ -370,12 +370,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "625d0b0033c550ae920041ab479471a2bb1ddf5b"
+                "reference": "70c7fe5273719f8566a34c904125b94e9c508ad0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/625d0b0033c550ae920041ab479471a2bb1ddf5b",
-                "reference": "625d0b0033c550ae920041ab479471a2bb1ddf5b",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/70c7fe5273719f8566a34c904125b94e9c508ad0",
+                "reference": "70c7fe5273719f8566a34c904125b94e9c508ad0",
                 "shasum": ""
             },
             "require": {
@@ -456,7 +456,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-04-20 06:26:07"
+            "time": "2016-05-01 02:50:18"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
