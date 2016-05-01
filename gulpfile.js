@@ -251,4 +251,11 @@ gulp.task("debug_styles", function () {
     return watcher
 })
 
-gulp.task("debug", ["debug_styles", "debug_scripts_vendor", "debug_scripts"]);
+gulp.task("browser-sync", function(){
+    require('browser-sync').create().init({
+        proxy: "localhost:80",
+        files: ["web/css/*.css", "web/js/*.js"]
+    })
+})
+
+gulp.task("debug", ["debug_styles", "debug_scripts_vendor", "debug_scripts", "browser-sync"]);
