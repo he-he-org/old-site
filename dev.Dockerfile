@@ -11,7 +11,7 @@
 #
 # To run this image:
 #
-# > docker run -it -p <PORT>:80 -e UID=<UID> -v <PATH>:/var/www/site <IMAGE_NAME>
+# > docker run -it -p <PORT>:80 -v <PATH>:/var/www/site <IMAGE_NAME>
 #
 # where:
 #  * PATH - path to repository on host machine

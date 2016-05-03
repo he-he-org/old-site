@@ -49,16 +49,19 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        $this->layout = 'origin';
         return $this->render('index');
     }
 
     public function actionMain()
     {
+        $this->layout = 'main';
         return $this->render('main');
     }
 
     public function actionLogin()
     {
+        $this->layout = 'origin';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -74,6 +77,7 @@ class SiteController extends Controller
 
     public function actionLogout()
     {
+        $this->layout = 'origin';
         Yii::$app->user->logout();
 
         return $this->goHome();
@@ -81,6 +85,7 @@ class SiteController extends Controller
 
     public function actionContact()
     {
+        $this->layout = 'origin';
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
@@ -94,6 +99,7 @@ class SiteController extends Controller
 
     public function actionAbout()
     {
+        $this->layout = 'origin';
         return $this->render('about');
     }
 }

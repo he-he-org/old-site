@@ -38,3 +38,11 @@ phpunit.phar
 # ignore sub directory for dev installed apps and extensions
 /apps
 /extensions
+
+# ignode node modules
+/node_modules
+
+# ignore react builds
+/web/css/main.css
+/web/js/main.js
+/web/js/vendor.js
