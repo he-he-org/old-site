@@ -1,5 +1,9 @@
 <?php
 
+use app\widgets\main\PersonWidget;
+use app\widgets\main\SpecialProject;
+
+
 //
 // TODO: update localization algorythm
 // NOTE! See https://github.com/samdark/yii2-cookbook/blob/master/book/i18n-selecting-application-language.md
@@ -65,41 +69,17 @@ JS_DISABLED;
                     <div class="collected">
                         <div class="collected_header">На проект уже собрано</div>
                         <div class="collected_amount">1 245 548 ₽</div>
-                        <button class="uk-button uk-button-success">Пожертвовать</button>
+                        <button>Пожертвовать</button>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="person row_block-2">
-                    <img src="/no_photo.png" class="person_photo"/>
-                    <div class="person_name">Лариса Мельникова</div>
-                    <div class="person_role">Менеджер</div>
-                </div>
-                <div class="person row_block-2">
-                    <img src="/no_photo.png" class="person_photo"/>
-                    <div class="person_name">Кристина Башарова</div>
-                    <div class="person_role">Менеджер продукта</div>
-                </div>
-                <div class="person row_block-2">
-                    <img src="/no_photo.png" class="person_photo"/>
-                    <div class="person_name">Михаил Никифоров</div>
-                    <div class="person_role">Менеджер</div>
-                </div>
-                <div class="person row_block-2">
-                    <img src="/no_photo.png" class="person_photo"/>
-                    <div class="person_name">Николай Мавренков</div>
-                    <div class="person_role">Веб-разработчик</div>
-                </div>
-                <div class="person row_block-2">
-                    <img src="/no_photo.png" class="person_photo"/>
-                    <div class="person_name">Анна Дудко</div>
-                    <div class="person_role">Менеджер</div>
-                </div>
-                <div class="person row_block-2">
-                    <img src="/no_photo.png" class="person_photo"/>
-                    <div class="person_name">Полина Стародубцева</div>
-                    <div class="person_role">Главный управляющий проектами</div>
-                </div>
+                <?= PersonWidget::widget(['name' => 'Лариса Мельникова', 'role' => 'Менеджер']) ?>
+                <?= PersonWidget::widget(['name' => 'Кристина Башарова', 'role' => 'Менеджер продукта']) ?>
+                <?= PersonWidget::widget(['name' => 'Михаил Никифоров', 'role' => 'Менеджер']) ?>
+                <?= PersonWidget::widget(['name' => 'Николай Мавренков', 'role' => 'Веб-разработчик']) ?>
+                <?= PersonWidget::widget(['name' => 'Анна Дудко', 'role' => 'Менеджер']) ?>
+                <?= PersonWidget::widget(['name' => 'Полина Стародубцева', 'role' => 'Главный управляющий проектами']) ?>
             </div>
             <div class="row">
                 <button class="row_block-12 uk-button uk-button-success all-team-button">Вся команда</button>
@@ -108,36 +88,43 @@ JS_DISABLED;
                 <h2>Наши спецпроекты</h2>
             </div>
             <div class="row">
-                <div class="special-project">
-                    <div class="special-project_top">
-                        <div class="special-project_left">
-                            <h1>Строительство клиники</h1>
-                            <p>В округе нет чистой воды, пригодной для питья, нам необходимо создать
-                                водопровод и очистные сооружения</p>
-                        </div>
-                        <div class="special-project_right">
-                            <div class="special-project_news">
-                                <div class="special-project_news-header">Новости</div>
-                                <ol class="special-project_news-list">
-                                    <li class="special-project_news-item">Готов фундамент для здания клиники</li>
-                                    <li class="special-project_news-item">Доставлено 350 упаковок лекарств</li>
-                                    <li class="special-project_news-item">Вылечено пятеро детей</li>
-                                    <li class="special-project_news-item">В спонсоры вошел Сбербанк</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="special-project_bottom">
-                        <div class="special-project_donate">
-                            <input value="1 000 ₽" class="special-project_donate-amount"/>
-                            <button class="uk-button uk-button-success">Пожертвовать</button>
-                        </div>
-                        <div class="special-project_links">
-                            <button class="uk-button uk-button-success">Как помочь</button>
-                            <button class="uk-button uk-button-success">План развития</button>
-                        </div>
-                    </div>
-                </div>
+                <?= SpecialProject::widget([
+                    'title' => 'Cтроительство клиники',
+                    'modifier' => 'green',
+                    'desc' => 'В округе нет чистой воды, пригодной для питья, нам необходимо создать  водопровод и очистные сооружения.',
+                    'news' => [
+                        'Готов фундамент для здания клиники',
+                        'Доставлено 350 упаковок лекарств',
+                        'Вылечено пятеро детей',
+                        'В спонсоры вошел Сбербанк',
+                    ]
+                ]) ?>
+            </div>
+            <div class="row">
+                <?= SpecialProject::widget([
+                    'title' => 'Прокладка водопровода',
+                    'modifier' => 'blue',
+                    'desc' => 'В округе нет чистой воды, пригодной для питья, нам необходимо создать  водопровод и очистные сооружения.',
+                    'news' => [
+                        'Готов фундамент для здания клиники',
+                        'Доставлено 350 упаковок лекарств',
+                        'Произошло что-то невероятное',
+                        'Вылечено пятеро детей',
+                        'В спонсоры вошел Сбербанк',
+                    ]
+                ]) ?>
+            </div>
+            <div class="row">
+                <?= SpecialProject::widget([
+                    'title' => 'Гуманитарная помощь',
+                    'modifier' => 'red',
+                    'desc' => 'Медикаменты, продукты, одежда. Мы хотим обеспечить максимальное количество людей хотя бы минимальным количество еды.',
+                    'news' => [
+                        'Готов фундамент для здания клиники',
+                        'Доставлено 350 упаковок лекарств',
+                        'В спонсоры вошел Сбербанк',
+                    ]
+                ]) ?>
             </div>
         </div>
     </div>

@@ -33,7 +33,6 @@
 .special-project {
     display: flex;
     flex-direction: column;
-    background: #f9fff3;
     padding: 30px;
     justify-content: space-between;
     margin-bottom: 30px;
@@ -88,12 +87,92 @@
         display: flex;
     }
 
+    &_donate-button {
+        background: #ffed49;
+        border-color: #ffed49;
+
+        &:active {
+            background: #ffe04e;
+            border-color: #ffe04e;
+        }
+    }
+
     &_donate-amount {
         border: none;
+        border-bottom-width: 2px;
+        border-bottom-style: solid;
         background: transparent;
         font-size: 30px;
-        border-bottom: 2px solid #b3ea8b;;
         width: 150px;
         margin-right: 5px;
+    }
+
+    &_link-button {
+        border-width: 2px;
+        background: transparent;
+    }
+
+
+    &--green {
+        background: #f9fff3;
+    }
+    &--green &_link-button {
+        border-color: #B7EA84;
+
+        &:hover {
+            background: #B7EA84;
+        }
+
+        &:active {
+            background: #A3D473;
+            border-color: #A3D473;
+        }
+    }
+    &--green &_donate-amount {
+        border-color: #b3ea8b;;
+    }
+
+
+    &--blue {
+        background: #f1fbff;
+    }
+    &--blue &_link-button {
+        border-color: #43d7fc;
+
+        &:hover {
+            color: white;
+            background: #43d7fc;;
+        }
+
+        &:active {
+            color: white;
+            background: #00b8e0;;
+            border-color: #00b8e0;;
+        }
+    }
+    &--blue &_donate-amount {
+        border-color: #b3ea8b;;
+    }
+
+
+    &--red {
+        background: #fff2f2;
+    }
+    &--red &_link-button {
+        border-color: #ff4048;
+
+        &:hover {
+            color: white;
+            background: #ff4048;
+        }
+
+        &:active {
+            color: white;
+            background: #f0343c;
+            border-color: #f0343c;
+        }
+    }
+    &--red &_donate-amount {
+        border-color: #ff4048;
     }
 }

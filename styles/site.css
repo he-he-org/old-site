@@ -129,28 +129,14 @@ input, button, textarea {
     justify-content: center;
 }
 
-/* UIKit classes */
-.uk-button {
+button {
     border-radius: 4px;
-    border-width: 3px;
+    border: 3px solid #B7EA84;
     border-style: solid;
     width: 178px;
     height: 42px;
     outline: none;
     font-size: 16px;
     font-weight: 300;
-}
-
-.uk-button-success {
-    border-color: #B7EA84;
     background: white;
-}
-
-.uk-button-success:hover {
-    background: #B7EA84;
-}
-
-.uk-button-success:active {
-    background: #A3D473;
-    border-color: #A3D473;
 }
