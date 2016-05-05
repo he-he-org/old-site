@@ -15,14 +15,6 @@ if (Yii::$app->language == 'ru-RU') {
 
 $this->title = 'Health & Help - '.$pageName;
 
-//
-// TODO: remove js-disabled block at page load.
-//
-echo <<< JS_DISABLED
-    <div class="js-disabled">
-        <p> Website requires Javascript to be enabled. </p>
-    </div>
-JS_DISABLED;
 
 ?>
 
@@ -31,32 +23,24 @@ JS_DISABLED;
 <div class="container">
     <div class="fields">
         <header class="header">
-            <img src="/logo.png"/>
+            <img src="/images/logo.png"/>
             <div class="social-networks">
                 <div class="social-networks__header">Мы в социальных сетях</div>
             </div>
         </header>
-    </div>
-    <div class="main-menu row main-center">
-        <div class="fields row">
+
+        <div class="row menu-row">
             <div class="navigation-menu row_block-8">
-                <div class="navigation-menu_item">О нас</div>
+                <div class="navigation-menu_item navigation-menu_item--active">О нас</div>
                 <div class="navigation-menu_item">Помочь проекту</div>
                 <div class="navigation-menu_item">Стать волонтером</div>
                 <div class="navigation-menu_item">Новости</div>
                 <div class="navigation-menu_item">Контакты</div>
             </div>
-            <div class="language-switch row_block-3">
-                <div class="language-switch_item">Русский</div>
-                <div class="language-switch_item">English</div>
-                <div class="language-switch_item">Español</div>
-            </div>
         </div>
-    </div>
-    <div class="fields">
         <div class="body">
             <div class="row intro-row">
-                <div class="row_block-9 intro">
+                <div class="row_block-7 intro">
                     <h1>Благотворительный проект</h1>
                     <p>
                         В проекте Health&Help почти сотня людей объединилась для того, чтобы дать гватемальским индейцам
@@ -65,13 +49,28 @@ JS_DISABLED;
                         помочь вылечить человека
                     </p>
                 </div>
-                <div class="row_block-3 column main-center">
-                    <div class="collected">
-                        <div class="collected_header">На проект уже собрано</div>
-                        <div class="collected_amount">1 245 548 ₽</div>
-                        <button>Пожертвовать</button>
+                <div class="row_block-5 column main-center">
+                    <div class="common-donation">
+                        <div class="common-donation_top">
+                            <input value="1000 ₽" class="common-donation_amount"/>
+                            <button class="common-donation_donate-button">Пожертвовать</button>
+                        </div>
+                        <div class="common-donation_bottom">
+                            <div class="common-donation_status">
+                                <div class="common-donation_collected-title">Уже собрано</div>
+                                <div class="common-donation_collected">1 245 584 ₽</div>
+                                <div class="common-donation_boom-link"><a href="#">Проект на boomstarter</a></div>
+                            </div>
+                            <div class="common-donation_gateway">
+                                Платеж через систему<br/>
+                                Яндекс-деньги
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="row_block-12 uk-button uk-button-success all-team-link"><a href="#">Вся команда</a></div>
             </div>
             <div class="row">
                 <?= PersonWidget::widget(['name' => 'Лариса Мельникова', 'role' => 'Менеджер']) ?>
@@ -80,9 +79,6 @@ JS_DISABLED;
                 <?= PersonWidget::widget(['name' => 'Николай Мавренков', 'role' => 'Веб-разработчик']) ?>
                 <?= PersonWidget::widget(['name' => 'Анна Дудко', 'role' => 'Менеджер']) ?>
                 <?= PersonWidget::widget(['name' => 'Полина Стародубцева', 'role' => 'Главный управляющий проектами']) ?>
-            </div>
-            <div class="row">
-                <button class="row_block-12 uk-button uk-button-success all-team-button">Вся команда</button>
             </div>
             <div class="row">
                 <h2>Наши спецпроекты</h2>
