@@ -7,4 +7,3 @@ use app\widgets\main\PersonWidget;
     <div class="person_name"><?= $name ?></div>
     <div class="person_role"><?= $role ?></div>
 </div>
-
