@@ -21,22 +21,26 @@ var gulp = require("gulp"),
 // Read settings from package.json
 var settings = packageJson.gulp //todo: validate and provide reasonable defaults
 
-function logError(err) {
-    gutil.log(gutil.colors.red(err.message))
-}
-
 var babelConfig = {
     global: true,
     presets: [require('babel-preset-es2015')],
 };
 
 
+function onError(e) {
+    gutil.log(e.message)
+    notifier.notify({
+        "title": "ERROR",
+        "message": e.message
+    })
+}
+
 /*
  *
  * PRODUCTION TASKS
  *
  */
-gulp.task("scripts_vendor", function () {
+gulp.task("scripts:vendor", function () {
     var bundler = browserify("", {
         debug: false,
         cache: {},
@@ -49,15 +53,15 @@ gulp.task("scripts_vendor", function () {
     bundler = bundler.transform(babelify, babelConfig)
 
     return bundler.bundle()
-        .on("error", logError)
+        .on("error", onError)
         .pipe(source("vendor.js"))
-        .on("error", logError)
+        .on("error", onError)
         .pipe(streamify(envify({NODE_ENV: "production"})))
-        .on("error", logError)
+        .on("error", onError)
         .pipe(streamify(uglify()))
-        .on("error", logError)
+        .on("error", onError)
         .pipe(gulp.dest(settings.dest.scripts))
-        .on("error", logError)
+        .on("error", onError)
 })
 
 
@@ -79,15 +83,15 @@ gulp.task("scripts", function () {
         bundler = bundler.transform(babelify, babelConfig)
 
         return bundler.bundle()
-            .on("error", logError)
+            .on("error", onError)
             .pipe(source(entryPoint.to))
-            .on("error", logError)
+            .on("error", onError)
             .pipe(streamify(envify({NODE_ENV: "production"})))
-            .on("error", logError)
+            .on("error", onError)
             .pipe(streamify(uglify()))
-            .on("error", logError)
+            .on("error", onError)
             .pipe(gulp.dest(settings.dest.scripts))
-            .on("error", logError)
+            .on("error", onError)
     }
 
     return merge(settings.entryPoints.map(makeBundle))
@@ -123,7 +127,7 @@ gulp.task('lint-n-fix', function () {
 });
 
 
-gulp.task("default", ["lint", "scripts_vendor", "scripts", "styles"])
+gulp.task("default", ["lint", "scripts:vendor", "scripts", "styles"])
 
 
 /*
@@ -131,7 +135,7 @@ gulp.task("default", ["lint", "scripts_vendor", "scripts", "styles"])
  * DEBUG TASKS
  *
  */
-gulp.task("debug_scripts_vendor", function () {
+gulp.task("debug:scripts:vendor", function () {
 
     var bundler = browserify("", {
         debug: true,
@@ -144,15 +148,6 @@ gulp.task("debug_scripts_vendor", function () {
 
     bundler = bundler.transform(babelify, babelConfig)
     bundler = watchify(bundler)
-
-    function onError(err) {
-        gutil.log(gutil.colors.red(err.message))
-
-        notifier.notify({
-            "title": "ERROR",
-            "message": err.message
-        })
-    }
 
     function rebundle() {
         return bundler.bundle()
@@ -176,7 +171,7 @@ gulp.task("debug_scripts_vendor", function () {
 })
 
 
-gulp.task("debug_scripts", function () {
+gulp.task("debug:scripts", function () {
     function makeBundle(entryPoint) {
         var bundler = browserify(settings.src.scripts + "/" + entryPoint.from, {
             debug: true,
@@ -193,14 +188,6 @@ gulp.task("debug_scripts", function () {
 
         bundler = bundler.transform(babelify, babelConfig)
         bundler = watchify(bundler, {poll: true})
-
-        function onError(err) {
-            gutil.log(gutil.colors.red(err.message))
-            notifier.notify({
-                "title": "ERROR",
-                "message": err.message
-            })
-        }
 
         function rebundle() {
             return bundler.bundle()
@@ -226,7 +213,7 @@ gulp.task("debug_scripts", function () {
     return merge(settings.entryPoints.map(makeBundle))
 })
 
-gulp.task("debug_styles", function () {
+gulp.task("debug:styles", function () {
     var files = settings.src.styles + "/**.css"
     var plugins = [
         require("postcss-nested"),
@@ -236,15 +223,16 @@ gulp.task("debug_styles", function () {
     function build() {
         return gulp.src(files)
             .pipe(postcss(plugins))
+            .on('error', onError)
             .pipe(gulp.dest(settings.dest.styles))
     }
 
     build()
-    var watcher = gulp.watch(files, build);
+    var watcher = gulp.watch(files);
     watcher.on('change', function(event) {
         gutil.log('File ' + event.path + ' was ' + event.type + ', rebuilding styles...');
         var start = Date.now()
-        build().on('end', function(){
+        build().on('end', function() {
             gutil.log("Rebuilding styles... Done! Time: " + + (Date.now() - start))
         })
     });
@@ -258,4 +246,4 @@ gulp.task("browser-sync", function(){
     })
 })
 
-gulp.task("debug", ["debug_styles", "debug_scripts_vendor", "debug_scripts", "browser-sync"]);
+gulp.task("debug", ["debug:styles", "debug:scripts:vendor", "debug:scripts", "browser-sync"]);
