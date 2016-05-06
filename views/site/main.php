@@ -134,39 +134,39 @@ $this->title = 'Health & Help - '.$pageName;
             </div>
         </div>
     </div>
-    <footer class="footer">
-        <div class="fields  row">
-            <div class="footer_links-block row_block-3">
-                <div class="footer_links-block_header">Задачи</div>
-                <div class="footer_links-block_item">Строительство клиники</div>
-                <div class="footer_links-block_item">Медикаменты</div>
-                <div class="footer_links-block_item">Продукты питания</div>
-                <div class="footer_links-block_item">Строительство водопровода</div>
-            </div>
-            <div class="footer_links-block row_block-3">
-                <div class="footer_links-block_header">О проекте</div>
-                <div class="footer_links-block_item">Новости</div>
-                <div class="footer_links-block_item">Наши спецпроекты</div>
-                <div class="footer_links-block_item">Команда проекта</div>
-                <div class="footer_links-block_item">История создания</div>
-                <div class="footer_links-block_item">На что мы тратим деньги</div>
-            </div>
-            <div class="footer_links-block row_block-3">
-                <div class="footer_links-block_header">Как помочь</div>
-                <div class="footer_links-block_item">Внести пожертвование</div>
-                <div class="footer_links-block_item">Стать волонтером</div>
-                <div class="footer_links-block_item">Отправить посылку</div>
-                <div class="footer_links-block_item">Рассказать в соцсетях</div>
-                <div class="footer_links-block_item">Написать нам</div>
-            </div>
-            <div class="row_block-3">
-                <div class="social-networks">
-                    <i class="fa fa-facebook social-networks_item" aria-hidden="true"></i>
-                    <i class="fa fa-twitter social-networks_item" aria-hidden="true"></i>
-                    <i class="fa fa-instagram social-networks_item" aria-hidden="true"></i>
-                    <i class="fa fa-vk social-networks_item" aria-hidden="true"></i>
-                </div>
+</div>
+<footer class="footer">
+    <div class="fields  row">
+        <div class="footer_links-block row_block-3">
+            <div class="footer_links-block_header">Задачи</div>
+            <div class="footer_links-block_item">Строительство клиники</div>
+            <div class="footer_links-block_item">Медикаменты</div>
+            <div class="footer_links-block_item">Продукты питания</div>
+            <div class="footer_links-block_item">Строительство водопровода</div>
+        </div>
+        <div class="footer_links-block row_block-3">
+            <div class="footer_links-block_header">О проекте</div>
+            <div class="footer_links-block_item">Новости</div>
+            <div class="footer_links-block_item">Наши спецпроекты</div>
+            <div class="footer_links-block_item">Команда проекта</div>
+            <div class="footer_links-block_item">История создания</div>
+            <div class="footer_links-block_item">На что мы тратим деньги</div>
+        </div>
+        <div class="footer_links-block row_block-3">
+            <div class="footer_links-block_header">Как помочь</div>
+            <div class="footer_links-block_item">Внести пожертвование</div>
+            <div class="footer_links-block_item">Стать волонтером</div>
+            <div class="footer_links-block_item">Отправить посылку</div>
+            <div class="footer_links-block_item">Рассказать в соцсетях</div>
+            <div class="footer_links-block_item">Написать нам</div>
+        </div>
+        <div class="row_block-3">
+            <div class="social-networks">
+                <i class="fa fa-facebook social-networks_item" aria-hidden="true"></i>
+                <i class="fa fa-twitter social-networks_item" aria-hidden="true"></i>
+                <i class="fa fa-instagram social-networks_item" aria-hidden="true"></i>
+                <i class="fa fa-vk social-networks_item" aria-hidden="true"></i>
             </div>
         </div>
-    </footer>
-</div>
+    </div>
+</footer>
