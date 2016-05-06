@@ -114,6 +114,7 @@ input, button, textarea {
     flex-direction: column;
     align-items: center;
     padding: 38px;
+    box-sizing: border-box;
 
     &_links-block {
         &_header {
