@@ -59,6 +59,19 @@ input, button, textarea {
     justify-content: space-between;
     padding-top: 22px;
     padding-bottom: 55px;
+
+    &_social-networks {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        color: #c7c7c7;
+        font-size: 14px;
+
+        &_title {
+            color: #686767;
+            margin: 12px 0;
+        }
+    }
 }
 
 .menu-row {
@@ -84,10 +97,18 @@ input, button, textarea {
     }
 }
 
+.social-networks {
+    display: flex;
+    justify-content: flex-end;
+    & &_item {
+        font-size: 28px;
+        margin-left: 30px;
+    }
+}
 
 .footer {
     background: #403939;
-    color: #e2e1e1;
+    color: #EFEFEF;
     width: 100%;
     display: flex;
     flex-direction: column;

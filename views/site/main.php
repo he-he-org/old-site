@@ -19,13 +19,23 @@ $this->title = 'Health & Help - '.$pageName;
 ?>
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
 <div class="container">
     <div class="fields">
         <header class="header">
             <img src="/images/logo.png"/>
-            <div class="social-networks">
-                <div class="social-networks__header">Мы в социальных сетях</div>
+
+            <div class="header_social-networks">
+                <div class="header_social-networks_title">
+                    Мы в социальных сетях
+                </div>
+                <div class="social-networks">
+                    <i class="fa fa-facebook social-networks_item" aria-hidden="true"></i>
+                    <i class="fa fa-twitter social-networks_item" aria-hidden="true"></i>
+                    <i class="fa fa-instagram social-networks_item" aria-hidden="true"></i>
+                    <i class="fa fa-vk social-networks_item" aria-hidden="true"></i>
+                </div>
             </div>
         </header>
 
@@ -150,7 +160,12 @@ $this->title = 'Health & Help - '.$pageName;
                 <div class="footer_links-block_item">Написать нам</div>
             </div>
             <div class="row_block-3">
-                todo: Мы в социальных сетях
+                <div class="social-networks">
+                    <i class="fa fa-facebook social-networks_item" aria-hidden="true"></i>
+                    <i class="fa fa-twitter social-networks_item" aria-hidden="true"></i>
+                    <i class="fa fa-instagram social-networks_item" aria-hidden="true"></i>
+                    <i class="fa fa-vk social-networks_item" aria-hidden="true"></i>
+                </div>
             </div>
         </div>
     </footer>
