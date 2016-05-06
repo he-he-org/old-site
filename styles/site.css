@@ -84,6 +84,30 @@ input, button, textarea {
     }
 }
 
+
+.footer {
+    background: #403939;
+    color: #e2e1e1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 38px;
+
+    &_links-block {
+        &_header {
+            font-weight: 500;
+            font-size: 16px;
+            border-bottom: 1px solid #544d4d;
+            padding: 8px 0;
+        }
+        &_item {
+            font-size: 16px;
+            margin: 18px 0;
+        }
+    }
+}
+
 /* Grid */
 .row {
     display: flex;
