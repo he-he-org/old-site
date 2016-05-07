@@ -50,7 +50,7 @@ $this->title = 'Health & Help - '.$pageName;
         </div>
         <div class="body">
             <div class="row intro-row">
-                <div class="row_block-7 intro">
+                <div class="row_block-6 intro">
                     <h1>Благотворительный проект</h1>
                     <p>
                         В проекте Health&Help почти сотня людей объединилась для того, чтобы дать гватемальским индейцам
@@ -62,7 +62,7 @@ $this->title = 'Health & Help - '.$pageName;
                 <div class="row_block-5 column main-center">
                     <div class="common-donation">
                         <div class="common-donation_top">
-                            <input value="1000 ₽" class="common-donation_amount"/>
+                            <input value="1000 ₽" class="common-donation_amount" size="1"/>
                             <button class="common-donation_donate-button">Пожертвовать</button>
                         </div>
                         <div class="common-donation_bottom">

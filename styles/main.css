@@ -17,7 +17,9 @@
     }
 
     &_amount, &_donate-button {
-        width: 50%; /*todo: fix this with flexbox*/
+        flex-grow: 1;
+        flex-basis: 50%;
+        box-sizing: border-box;
     }
 
     &_amount {
@@ -26,13 +28,14 @@
         font-size: 30px;
         font-weight: 600;
         padding-left: 10px;
+        margin-right: 2px;
     }
 
     &_donate-button {
         background: #6fd035;
         border-color: #6fd035;
         color: white;
-        margin-left: 4px;
+        margin-left: 2px;
     }
 
     &_status, &_gateway {
