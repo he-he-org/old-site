@@ -1,6 +1,6 @@
 <?php
 
-use app\widgets\main\PersonWidget;
+use app\widgets\main\TeamMemberWidget;
 use app\widgets\main\SpecialProject;
 
 
@@ -14,7 +14,6 @@ if (Yii::$app->language == 'ru-RU') {
 }
 
 $this->title = 'Health & Help - ' . $pageName;
-
 
 ?>
 <div class="row intro-row">
@@ -51,12 +50,12 @@ $this->title = 'Health & Help - ' . $pageName;
     <div class="row_block-12 uk-button uk-button-success all-team-link"><a href="#">Вся команда</a></div>
 </div>
 <div class="row">
-    <?= PersonWidget::widget(['name' => 'Лариса Мельникова', 'role' => 'Менеджер']) ?>
-    <?= PersonWidget::widget(['name' => 'Кристина Башарова', 'role' => 'Менеджер продукта']) ?>
-    <?= PersonWidget::widget(['name' => 'Михаил Никифоров', 'role' => 'Менеджер']) ?>
-    <?= PersonWidget::widget(['name' => 'Николай Мавренков', 'role' => 'Веб-разработчик']) ?>
-    <?= PersonWidget::widget(['name' => 'Анна Дудко', 'role' => 'Менеджер']) ?>
-    <?= PersonWidget::widget(['name' => 'Полина Стародубцева', 'role' => 'Главный управляющий проектами']) ?>
+    <?= TeamMemberWidget::widget(['name' => 'Лариса Мельникова', 'role' => 'Менеджер']) ?>
+    <?= TeamMemberWidget::widget(['name' => 'Кристина Башарова', 'role' => 'Менеджер продукта']) ?>
+    <?= TeamMemberWidget::widget(['name' => 'Михаил Никифоров', 'role' => 'Менеджер']) ?>
+    <?= TeamMemberWidget::widget(['name' => 'Николай Мавренков', 'role' => 'Веб-разработчик']) ?>
+    <?= TeamMemberWidget::widget(['name' => 'Анна Дудко', 'role' => 'Менеджер']) ?>
+    <?= TeamMemberWidget::widget(['name' => 'Полина Стародубцева', 'role' => 'Главный управляющий проектами']) ?>
 </div>
 <div class="row">
     <h2>Наши спецпроекты</h2>

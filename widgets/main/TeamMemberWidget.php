@@ -3,7 +3,7 @@ namespace app\widgets\main;
 use yii\base\Widget;
 use yii\helpers\Html;
 
-class PersonWidget extends Widget {
+class TeamMemberWidget extends Widget {
     public $name;
     public $role;
 
@@ -14,6 +14,6 @@ class PersonWidget extends Widget {
 
     public function run()
     {
-        return $this->render('person_widget', ['name' => $this->name, 'role' => $this->role]);
+        return $this->render('team_member', ['name' => $this->name, 'role' => $this->role]);
     }
 }

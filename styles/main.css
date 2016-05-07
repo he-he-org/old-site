@@ -68,9 +68,17 @@
     padding: 48px 0;
 }
 
-.person {
+.team-member {
     &_name {
-        font-weight: bold;
+        font-weight: 600;
+        font-size: 16px;
+        word-spacing: 9999px; /*todo: hack to force word-wrap*/
+    }
+
+    &_role {
+        margin-top: 6px;
+        font-size: 14px;
+        color: #919191;
     }
 }
 
