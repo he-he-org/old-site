@@ -7,7 +7,7 @@
 # where:
 #  * IMAGE_NAME - name for new image
 #
-# For example: docker build -f dev.Dockerfile -t hehe.
+# For example: docker build -f dev.Dockerfile -t hehe .
 #
 # To run this image:
 #
@@ -55,9 +55,14 @@ RUN echo '\
             Options Indexes FollowSymLinks\n\
             AllowOverride All\n\
             Require all granted\n\
+            RewriteEngine on\n\
+            RewriteCond %{REQUEST_FILENAME} !-f\n\
+            RewriteCond %{REQUEST_FILENAME} !-d\n\
+            RewriteRule . index.php\n\
         </Directory>\n\
     </VirtualHost>'\
     >> /etc/apache2/sites-enabled/hehe.conf && \
+    a2enmod rewrite && \
     rm /etc/apache2/sites-enabled/000-default.conf && \
     echo 'ServerName localhost' >> /etc/apache2/apache2.conf && \
     usermod -u 1000 www-data
