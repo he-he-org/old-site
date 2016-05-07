@@ -5,6 +5,9 @@
 
 use yii\helpers\Html;
 use app\assets\MainAsset;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 
 MainAsset::register($this);
 ?>
@@ -16,8 +19,8 @@ MainAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <link property="stylesheet" href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-    <link property="stylesheet" href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
     <?php $this->beginBody() ?>
@@ -42,11 +45,11 @@ MainAsset::register($this);
 
             <div class="row menu-row">
                 <div class="navigation-menu row_block-8">
-                    <div class="navigation-menu_item navigation-menu_item--active">О нас</div>
-                    <div class="navigation-menu_item">Помочь проекту</div>
-                    <div class="navigation-menu_item">Стать волонтером</div>
-                    <div class="navigation-menu_item">Новости</div>
-                    <div class="navigation-menu_item">Контакты</div>
+                    <a class="navigation-menu_item navigation-menu_item--active" href="<?=Url::to(['/main'])?>">О нас</a>
+                    <a class="navigation-menu_item" href="<?=Url::to(['/help'])?>">Помочь проекту</a>
+                    <a class="navigation-menu_item" href="<?=Url::to(['/volunteers'])?>">Стать волонтером</a>
+                    <a class="navigation-menu_item" href="<?=Url::to(['/news'])?>">Новости</a>
+                    <a class="navigation-menu_item" href="<?=Url::to(['/contacts'])?>">Контакты</a>
                 </div>
             </div>
             <div class="body">
