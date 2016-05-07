@@ -1,7 +1,6 @@
 /*
     Global styles
 */
-
 html {
     font-family: 'Open Sans', 'PT Sans', sans-serif;
     font-size: 18px;
@@ -34,6 +33,7 @@ h2 {
 
 input, button, textarea {
     outline: none;
+    min-width: 0;
 }
 
 /*
