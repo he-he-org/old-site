@@ -11,6 +11,8 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+    public $defaultAction = 'main';
+
     public function behaviors()
     {
         return [
