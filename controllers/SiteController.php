@@ -69,9 +69,4 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionAbout()
-    {
-        $this->layout = 'origin';
-        return $this->render('about');
-    }
 }
