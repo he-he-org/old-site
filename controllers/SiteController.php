@@ -13,46 +13,13 @@ class SiteController extends Controller
 {
     public $defaultAction = 'main';
 
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     public function actions()
     {
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
         ];
-    }
-
-    public function actionIndex()
-    {
-        $this->layout = 'origin';
-        return $this->render('index');
     }
 
     public function actionMain()
@@ -61,47 +28,28 @@ class SiteController extends Controller
         return $this->render('main');
     }
 
-    public function actionLogin()
+    public function actionHelp()
     {
-        $this->layout = 'origin';
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+        $this->layout = 'main';
+        return $this->render('help');
     }
 
-    public function actionLogout()
+    public function actionVolunteers()
     {
-        $this->layout = 'origin';
-        Yii::$app->user->logout();
-
-        return $this->goHome();
+        $this->layout = 'main';
+        return $this->render('volunteers');
     }
 
-    public function actionContact()
+    public function actionNews()
     {
-        $this->layout = 'origin';
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
+        $this->layout = 'main';
+        return $this->render('news');
     }
 
-    public function actionAbout()
+    public function actionContacts()
     {
-        $this->layout = 'origin';
-        return $this->render('about');
+        $this->layout = 'main';
+        return $this->render('contacts');
     }
+
 }
