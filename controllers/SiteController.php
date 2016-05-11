@@ -49,12 +49,6 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionIndex()
-    {
-        $this->layout = 'origin';
-        return $this->render('index');
-    }
-
     public function actionMain()
     {
         $this->layout = 'main';
