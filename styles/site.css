@@ -1,49 +1,37 @@
 /*
-    Global styles
+    Global layout
 */
-html {
-    font-family: 'Open Sans', 'PT Sans', sans-serif;
-    font-size: 18px;
-    font-weight: 300;
-    color: #2c2c2c;
-}
-
-a {
-    color: #2c2c2c;
+html, body {
+    width: 100%;
+    height: 100%;
 }
 
 body {
+    display: table;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-h1 {
-    font-size: 34px;
-    font-weight: 600;
-    margin-top: 0;
+main, footer {
+    display: table-row;
+    padding: 0;
+    margin: 0;
+    width: 100%;
 }
 
-h2 {
-    font-weight: 300;
-    font-size: 30px;
+main {
+    height: 100%;
 }
 
-input, button, textarea {
-    outline: none;
-    min-width: 0;
-}
-
-/*
-    Content containers and header
-*/
 .container {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.content {
+    padding: 2rem 0;
 }
 
 .fields {
@@ -73,6 +61,39 @@ input, button, textarea {
         }
     }
 }
+/*
+    Global styles
+*/
+html {
+    font-family: 'Open Sans', 'PT Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: #2c2c2c;
+}
+
+a {
+    color: #2c2c2c;
+}
+
+h1 {
+    font-size: 34px;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+h2 {
+    font-weight: 300;
+    font-size: 30px;
+}
+
+input, button, textarea {
+    outline: none;
+    min-width: 0;
+}
+
+/*
+    Header and footer blocks
+*/
 
 .menu-row {
     width: 100%;
@@ -98,15 +119,6 @@ input, button, textarea {
     }
 }
 
-.social-networks {
-    display: flex;
-    justify-content: flex-end;
-    & &_item {
-        font-size: 28px;
-        margin-left: 30px;
-    }
-}
-
 .footer {
     background: #403939;
     color: #EFEFEF;
@@ -128,6 +140,15 @@ input, button, textarea {
             font-size: 16px;
             margin: 18px 0;
         }
+    }
+}
+
+.social-networks {
+    display: flex;
+    justify-content: flex-end;
+    & &_item {
+        font-size: 28px;
+        margin-left: 30px;
     }
 }
 
