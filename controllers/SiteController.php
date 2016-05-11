@@ -28,4 +28,28 @@ class SiteController extends Controller
         return $this->render('main');
     }
 
+    public function actionHelp()
+    {
+        $this->layout = 'main';
+        return $this->render('help');
+    }
+
+    public function actionVolunteers()
+    {
+        $this->layout = 'main';
+        return $this->render('volunteers');
+    }
+
+    public function actionNews()
+    {
+        $this->layout = 'main';
+        return $this->render('news');
+    }
+
+    public function actionContacts()
+    {
+        $this->layout = 'main';
+        return $this->render('contacts');
+    }
+
 }
