@@ -1,24 +1,66 @@
-Array.prototype.slice.apply(document.querySelectorAll(".js-disabled"))
-    .forEach((node) => node.parentNode.removeChild(node))
+import {createStore} from "redux"
 
-let value = 1000
+const initialState = {
+    value: 1000,
+    focused: false,
+}
 
-Array.prototype.slice.apply(document.querySelectorAll(".common-donation_amount")).forEach((input) => {
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
+        case "FOCUS": {
+            return Object.assign({}, state, {
+                focused: true,
+            })
+        }
+        case "BLUR": {
+            return Object.assign({}, state, {
+                focused: false,
+            })
+        }
+        case "INPUT": {
+            const number = Number(action.text);
+            if (!Number.isNaN(number)) {
+                return Object.assign({}, state, {
+                    value: number,
+                })
+            }
+        }
+    }
+    return state
+}
 
-    const button = Array.prototype.slice.apply(document.querySelectorAll(".common-donation_donate-button"))[0];
+const store = createStore(reducer)
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const input = document.querySelectorAll(".common-donation_amount")[0]
+
+    store.subscribe(() => {
+        const {value, focused} = store.getState();
+        if (focused) {
+            input.value = value
+        }
+        else {
+            input.value = value + " ₽"
+        }
+    })
+
+    input.addEventListener("input", (e) => {
+        store.dispatch({
+            type: "INPUT",
+            text: e.target.value,
+        })
+    })
 
     input.addEventListener("focus", (_e) => {
-        input.value = value
+        store.dispatch({
+            type: "FOCUS",
+        })
     })
-    input.addEventListener("input", (e) => {
-        const newValue = Number(e.target.value)
-        if (!Number.isNaN(newValue)) { //todo: need polyfill?
-            value = newValue
-        }
-        input.value = value | 0
-        button.disabled = value <= 0
-    })
+
     input.addEventListener("blur", (_e) => {
-        input.value = value + " ₽"
+        store.dispatch({
+            type: "BLUR",
+        })
     })
 })
