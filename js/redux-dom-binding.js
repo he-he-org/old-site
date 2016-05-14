@@ -5,11 +5,11 @@ allEventTypes.forEach((eventType) => {
     allTranslations[eventType] = (() => {
         switch (eventType) {
             case "input":
-                return (event) => ({type: "DOM_INPUT", text: event.target.value})
+                return (e) => ({type: "DOM_INPUT", text: e.target.value})
             case "focus":
-                return (event) => ({type: "DOM_FOCUS"})
+                return (_e) => ({type: "DOM_FOCUS"})
             case "blur":
-                return (event) => ({type: "DOM_BLUR"})
+                return (_e) => ({type: "DOM_BLUR"})
             default:
                 throw new Error("Unsupported event: " + eventType)
         }

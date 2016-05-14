@@ -85,7 +85,8 @@
 }
 
 .intro-row {
-    padding: 0px 0 48px 0;
+    padding: 0 0 48px 0;
+    align-items: flex-start;
 }
 
 .team-member {

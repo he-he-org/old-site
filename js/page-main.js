@@ -5,11 +5,7 @@ import {merge} from "functional-utils"
 const initialState = {
     value: 1000,
     focused: false,
-    paymentType: "PC",
 }
-
-const PC_COEFFICIENT = 0.005
-const AC_COEFFICIENT = 0.002
 
 const donationFormReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -33,8 +29,6 @@ const donationFormReducer = (state = initialState, action) => {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-
-
     Array.from(document.querySelectorAll(".common-donation")).forEach((formDiv) => {
         const form = formDiv.querySelector(".common-donation_form")
 
@@ -42,32 +36,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const input = formDiv.querySelector(".common-donation_amount")
         const button = formDiv.querySelector(".common-donation_donate-button")
 
-        const aInput = form.querySelector("input[name=a]")
         const sumInput = form.querySelector("input[name=sum]")
-        const amountDueInput = form.querySelector("input[name=amount_due]")
 
         // Configure rendering
         const store = createStore(donationFormReducer)
         const render = () => {
-            const {value, focused, paymentType} = store.getState()
+            const {value, focused} = store.getState()
 
-            if (paymentType === "MC") {
-                throw new Error("MC payment type is not supported yet")
-            }
+            // Calculate derived values
+            const a = 0.005 // coefficient for PC payment type
+            const amountDue = value - value * (a / (1 + a))
+            const fee = value - amountDue
 
-            if (focused) {
-                input.value = value
-            }
-            else {
-                input.value = value + " ₽"
-            }
+            // Update view
+            input.value = value + (!focused ? " ₽" : "")
             button.disabled = !(value > 0)
-
-            const a = paymentType === "PC" ? PC_COEFFICIENT : AC_COEFFICIENT
-            const amountDue = Math.round((value - value * (a / (1 + a))) * 100) / 100
-            const fee = Math.round((value - amountDue) * 100) / 100
-
-            tips.innerText = `Будет переведено ${amountDue} ₽ (комиссия ${fee} ₽)`
+            tips.innerText = `Будет переведено ${amountDue.toFixed(2)} ₽ (комиссия ${fee.toFixed(2)} ₽)`
             sumInput.value = value
         }
         store.subscribe(render)
