@@ -1,66 +1,56 @@
 import {createStore} from "redux"
+import {bindEvents} from "./redux-dom-binding"
+import {merge} from "functional-utils"
 
 const initialState = {
     value: 1000,
     focused: false,
 }
 
-const reducer = (state = initialState, action) => {
+const donationFormReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "FOCUS": {
-            return Object.assign({}, state, {
-                focused: true,
-            })
+        case "DOM_FOCUS": {
+            return merge(state, {focused: true})
         }
-        case "BLUR": {
-            return Object.assign({}, state, {
-                focused: false,
-            })
+        case "DOM_BLUR": {
+            return merge(state, {focused: false})
         }
-        case "INPUT": {
-            const number = Number(action.text);
-            if (!Number.isNaN(number)) {
-                return Object.assign({}, state, {
-                    value: number,
-                })
+        case "DOM_INPUT": {
+            const number = Number(action.text)
+            if (Number.isNaN(number)) {
+                return state
+            }
+            else {
+                return merge(state, {value: number})
             }
         }
+        default: return state
     }
-    return state
 }
-
-const store = createStore(reducer)
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const input = document.querySelectorAll(".common-donation_amount")[0]
 
-    store.subscribe(() => {
-        const {value, focused} = store.getState();
-        if (focused) {
-            input.value = value
+    Array.from(document.querySelectorAll(".common-donation")).forEach((form) => {
+        const input = form.querySelectorAll(".common-donation_amount")[0]
+        const button = form.querySelectorAll(".common-donation_donate-button")[0]
+
+        // Configure rendering
+        const store = createStore(donationFormReducer)
+        const render = () => {
+            const {value, focused} = store.getState()
+            if (focused) {
+                input.value = value
+            }
+            else {
+                input.value = value + " ₽"
+            }
+            button.disabled = !(value > 0)
         }
-        else {
-            input.value = value + " ₽"
-        }
-    })
+        store.subscribe(render)
+        render()
 
-    input.addEventListener("input", (e) => {
-        store.dispatch({
-            type: "INPUT",
-            text: e.target.value,
-        })
-    })
-
-    input.addEventListener("focus", (_e) => {
-        store.dispatch({
-            type: "FOCUS",
-        })
-    })
-
-    input.addEventListener("blur", (_e) => {
-        store.dispatch({
-            type: "BLUR",
-        })
+        // Bind some events to store dispatching
+        bindEvents(input, ["input", "focus", "blur"], store)
     })
 })
