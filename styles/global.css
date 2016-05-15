@@ -1,8 +1,11 @@
 /*
     Global styles
 */
-html {
+html, * {
     font-family: 'Open Sans', 'PT Sans', sans-serif;
+}
+
+html {
     font-size: 18px;
     font-weight: 300;
     color: #2c2c2c;
