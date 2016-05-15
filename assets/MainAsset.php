@@ -8,7 +8,8 @@ class MainAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+        'css/global.css',
+        'css/layout.css',
         'css/main.css',
     ];
     public $js = [
