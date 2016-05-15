@@ -31,15 +31,22 @@ MainAsset::register($this);
                 <header class="header">
                     <img src="/images/logo.png"/>
 
-                    <div class="header_social-networks">
-                        <div class="header_social-networks_title">
-                            Мы в социальных сетях
+                    <div class="header_right">
+                        <div class="header_languages">
+                            <div class="header_languages-item">Ru</div>
+                            <div class="header_languages-item">En</div>
+                            <div class="header_languages-item">Es</div>
                         </div>
-                        <div class="social-networks">
-                            <i class="fa fa-facebook social-networks_item" aria-hidden="true"></i>
-                            <i class="fa fa-twitter social-networks_item" aria-hidden="true"></i>
-                            <i class="fa fa-instagram social-networks_item" aria-hidden="true"></i>
-                            <i class="fa fa-vk social-networks_item" aria-hidden="true"></i>
+                        <div class="header_social-networks">
+                            <div class="header_social-networks_title">
+                                Мы в социальных сетях
+                            </div>
+                            <div class="social-networks">
+                                <i class="fa fa-facebook social-networks_item" aria-hidden="true"></i>
+                                <i class="fa fa-twitter social-networks_item" aria-hidden="true"></i>
+                                <i class="fa fa-instagram social-networks_item" aria-hidden="true"></i>
+                                <i class="fa fa-vk social-networks_item" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
                 </header>

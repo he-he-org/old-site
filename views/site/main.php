@@ -26,7 +26,7 @@ $this->title = 'Health & Help - ' . $pageName;
             помочь вылечить человека
         </p>
     </div>
-    <div class="row_block-5 column main-center">
+    <div class="row_block-5">
         <div class="common-donation">
             <div class="common-donation_top">
                 <form class="common-donation_form" action="https://money.yandex.ru/quickpay/confirm.xml">

@@ -1,0 +1,65 @@
+/*
+    Global styles
+*/
+html {
+    font-family: 'Open Sans', 'PT Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: #2c2c2c;
+}
+
+a {
+    color: #2c2c2c;
+}
+
+h1 {
+    font-size: 34px;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+h2 {
+    font-weight: 300;
+    font-size: 30px;
+}
+
+input, button, textarea {
+    outline: none;
+    min-width: 0;
+}
+
+button {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 300;
+    background: white;
+}
+
+/* Grid */
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row_block {
+    flex: 1;
+}
+
+.row_block-1 {flex-basis: 60px;}
+.row_block-2 {flex-basis: 160px;}
+.row_block-3 {flex-basis: 260px;}
+.row_block-4 {flex-basis: 360px;}
+.row_block-5 {flex-basis: 460px;}
+.row_block-6 {flex-basis: 560px;}
+.row_block-7 {flex-basis: 660px;}
+.row_block-8 {flex-basis: 760px;}
+.row_block-9 {flex-basis: 860px;}
+.row_block-10 {flex-basis: 960px;}
+.row_block-11 {flex-basis: 1060px;}
+.row_block-12 {flex-basis: 1160px;}
+
+.flex {
+    display: flex;
+}
