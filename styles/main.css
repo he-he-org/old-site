@@ -1,6 +1,7 @@
 .common-donation {
     display: flex;
     flex-direction: column;
+    padding-top: 15px;
 
     &_top, &_middle, &_bottom {
         display: flex;
@@ -40,6 +41,8 @@
         border-color: #6fd035;
         color: white;
         margin-left: 2px;
+        font-weight: 600;
+        font-size: 18px;
     }
 
     &_donate-button:disabled {
