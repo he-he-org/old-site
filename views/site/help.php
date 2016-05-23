@@ -56,42 +56,55 @@ HelpAsset::register($this);
             <div class="packages_item package">
                 <div class="package_title">Минимальный</div>
                 <div class="package_desc">Бинты, пластыри, парацетамол, анальгин</div>
-                <div class="package_button"><button>Отправить 500 Р</button></div>
+                <div class="package_button"><button class="send-button">Отправить 500 Р</button></div>
             </div>
             <div class="packages_item package">
                 <div class="package_title">Максимальный</div>
                 <div class="package_desc">Бинты, пластыри, парацетамол, анальгин, фуразолидон, парацетамол,
                     азитромицин, линкомицин, тавегил, дексаметазон, драмина, кетанов, нимика, но-шпа</div>
-                <div class="package_button"><button>Отправить 2000 Р</button></div>
+                <div class="package_button"><button class="send-button">Отправить 2000 Р</button></div>
             </div>
             <div class="packages_item package">
                 <div class="package_title">Средний</div>
                 <div class="package_desc">Тавигил, немазол, но-шпа, дексаметазон</div>
-                <div class="package_button"><button>Отправить 1000 Р</button></div>
+                <div class="package_button"><button class="send-button">Отправить 1000 Р</button></div>
             </div>
         </div>
 
-        <h3>Если хотите самостоятельно купить препараты и отправить в Гватемалу</h3>
-        <div>Есть несколько вариантов отправлений</div>
-        <ol>
-            <li>Готовые наборы с AliExpress;</li>
-            <li>Почтой РФ;</li>
-            <li>Почтой СНГ;</li>
-            <li>Курьерские службы.</li>
-        </ol>
+        <div class="row content-block">
+            <div class="row_block-7">
+                <h3>Если хотите самостоятельно купить препараты и отправить в Гватемалу</h3>
+                <div>Есть несколько вариантов отправлений</div>
+                <ol>
+                    <li><a href="#">Готовые наборы с AliExpress</a>;</li>
+                    <li><a href="#">Почтой РФ</a>;</li>
+                    <li><a href="#">Почтой СНГ</a>;</li>
+                    <li><a href="#">Курьерские службы</a>.</li>
+                </ol>
 
-        <h3>Полный список необходимых медикаментв</h3>
-        <button>Отправить 80 Р</button>
-        <h4>Перевязка и расходные материалы</h4>
-        <div class="check-item"><label><input type="checkbox">Бинт стерильный 1.6 м x 1 м</label><span>30 ₽</span></div>
-        <div class="check-item"><label><input type="checkbox">Бинт стерильный 1.5 м x 1 м</label><span>12 ₽</span></div>
-        <div class="check-item"><label><input type="checkbox">Салфетки кровоостанавливающие в упаковках по 7 штук</label><span>90 ₽</span></div>
+            </div>
+        </div>
 
-        <h4>Медицинский препараты</h4>
-        <div class="check-item"><label><input type="checkbox">Анальгин в таблетках</label><span>40 ₽</span></div>
-        <div class="check-item"><label><input type="checkbox">Анальгин в ампулах</label><span>100 ₽</span></div>
-        <div class="check-item"><label><input type="checkbox">Парацетамол</label><span>40 ₽</span></div>
-        <div class="check-item"><label><input type="checkbox">Фуразолидон</label><span>120 ₽</span></div>
+        <div class="row content-block">
+            <div class="row_block-6">
+                <h3>Полный список необходимых медикаментв</h3>
+                <h4>Перевязка и расходные материалы</h4>
+                <div class="check-item"><label><input type="checkbox">Бинт стерильный 1.6 м x 1 м</label><span>30 ₽</span></div>
+                <div class="check-item"><label><input type="checkbox">Бинт стерильный 1.5 м x 1 м</label><span>12 ₽</span></div>
+                <div class="check-item"><label><input type="checkbox">Салфетки кровоостанавливающие в упаковках по 7 штук</label><span>90 ₽</span></div>
+
+                <h4>Медицинский препараты</h4>
+                <div class="check-item"><label><input type="checkbox">Анальгин в таблетках</label><span>40 ₽</span></div>
+                <div class="check-item"><label><input type="checkbox">Анальгин в ампулах</label><span>100 ₽</span></div>
+                <div class="check-item"><label><input type="checkbox">Парацетамол</label><span>40 ₽</span></div>
+                <div class="check-item"><label><input type="checkbox">Фуразолидон</label><span>120 ₽</span></div>
+            </div>
+            <div class="row_block-3 column">
+                <button class="send-button">Отправить 80 Р</button>
+            </div>
+        </div>
+
+
     </div>
 
 </div>
