@@ -2,7 +2,7 @@
 
 use app\widgets\main\TeamMemberWidget;
 use app\widgets\main\SpecialProject;
-
+use app\assets\MainAsset;
 
 //
 // TODO: update localization algorythm
@@ -14,6 +14,8 @@ if (Yii::$app->language == 'ru-RU') {
 }
 
 $this->title = 'Health & Help - ' . $pageName;
+
+MainAsset::register($this);
 
 ?>
 <div class="row intro-row">

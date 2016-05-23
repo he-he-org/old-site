@@ -3,15 +3,15 @@
 namespace app\assets;
 use yii\web\AssetBundle;
 
-class MainAsset extends AssetBundle
+class HelpAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/main.css',
+        'css/help.css',
     ];
     public $js = [
-        'js/main.js',
+        'js/help.js',
     ];
     public $depends = [
     ];

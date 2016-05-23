@@ -6,7 +6,7 @@ html, * {
 }
 
 html {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 300;
     color: #2c2c2c;
 }
@@ -26,6 +26,17 @@ h2 {
     font-weight: 300;
     font-size: 30px;
 }
+
+h3 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
 
 input, button, textarea {
     outline: none;
