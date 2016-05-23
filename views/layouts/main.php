@@ -4,12 +4,12 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use app\assets\MainAsset;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
+use yii\helpers\Url;
 
-AppAsset::register($this);
+MainAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -17,62 +17,97 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<?php $this->beginBody() ?>
+    <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
+    <main>
+        <div class="layout-container">
+            <div class="layout-fields">
+                <header class="layout-header">
+                    <img src="/images/logo.png"/>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
-    </div>
-</div>
+                    <div class="layout-header_right">
+                        <div class="layout-header_languages">
+                            <div class="layout-header_languages-item">Ru</div>
+                            <div class="layout-header_languages-item">En</div>
+                            <div class="layout-header_languages-item">Es</div>
+                        </div>
+                        <div class="layout-header_social-networks">
+                            <div class="layout-header_social-networks_title">
+                                Мы в социальных сетях
+                            </div>
+                            <div class="layout-social-networks">
+                                <i class="fa fa-facebook layout-social-networks_item" aria-hidden="true"></i>
+                                <i class="fa fa-twitter layout-social-networks_item" aria-hidden="true"></i>
+                                <i class="fa fa-instagram layout-social-networks_item" aria-hidden="true"></i>
+                                <i class="fa fa-vk layout-social-networks_item" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </header>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+                <div class="row layout-menu-row">
+                    <div class="layout-navigation-menu row_block-8">
+                        <a class="layout-navigation-menu_item layout-navigation-menu_item--active" href="<?=Url::to(['/main'])?>">О нас</a>
+                        <a class="layout-navigation-menu_item" href="<?=Url::to(['/help'])?>">Помочь проекту</a>
+                        <a class="layout-navigation-menu_item" href="<?=Url::to(['/volunteers'])?>">Стать волонтером</a>
+                        <a class="layout-navigation-menu_item" href="<?=Url::to(['/news'])?>">Новости</a>
+                        <a class="layout-navigation-menu_item" href="<?=Url::to(['/contacts'])?>">Контакты</a>
+                    </div>
+                    <div class="layout-search"><i class="fa fa-search" aria-hidden="true"></i> <input placeholder="Поиск..." /></div>
+                </div>
+                <div class="layout-content">
+                    <?= $content ?>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="layout-footer">
+            <div class="layout-fields">
+                <div class="row">
+                    <div class="layout-footer_links-block row_block-3">
+                        <div class="layout-footer_links-block_header">Задачи</div>
+                        <div class="layout-footer_links-block_item">Строительство клиники</div>
+                        <div class="layout-footer_links-block_item">Медикаменты</div>
+                        <div class="layout-footer_links-block_item">Продукты питания</div>
+                        <div class="layout-footer_links-block_item">Строительство водопровода</div>
+                    </div>
+                    <div class="layout-footer_links-block row_block-3">
+                        <div class="layout-footer_links-block_header">О проекте</div>
+                        <div class="layout-footer_links-block_item">Новости</div>
+                        <div class="layout-footer_links-block_item">Наши спецпроекты</div>
+                        <div class="layout-footer_links-block_item">Команда проекта</div>
+                        <div class="layout-footer_links-block_item">История создания</div>
+                        <div class="layout-footer_links-block_item">На что мы тратим деньги</div>
+                    </div>
+                    <div class="layout-footer_links-block row_block-3">
+                        <div class="layout-footer_links-block_header">Как помочь</div>
+                        <div class="layout-footer_links-block_item">Внести пожертвование</div>
+                        <div class="layout-footer_links-block_item">Стать волонтером</div>
+                        <div class="layout-footer_links-block_item">Отправить посылку</div>
+                        <div class="layout-footer_links-block_item">Рассказать в соцсетях</div>
+                        <div class="layout-footer_links-block_item">Написать нам</div>
+                    </div>
+                    <div class="row_block-3">
+                        <div class="layout-social-networks">
+                            <i class="fa fa-facebook layout-social-networks_item" aria-hidden="true"></i>
+                            <i class="fa fa-twitter layout-social-networks_item" aria-hidden="true"></i>
+                            <i class="fa fa-instagram layout-social-networks_item" aria-hidden="true"></i>
+                            <i class="fa fa-vk layout-social-networks_item" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
-
-<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>

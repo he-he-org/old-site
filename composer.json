@@ -35,7 +35,9 @@
         "post-update-cmd": [
             "chmod 777 runtime",
             "chmod 777 web/assets",
-            "chmod 755 yii"
+            "chmod 755 yii",
+			"npm install",
+            "gulp"
         ]
     },
     "extra": {

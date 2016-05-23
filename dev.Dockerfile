@@ -7,7 +7,7 @@
 # where:
 #  * IMAGE_NAME - name for new image
 #
-# For example: docker build -f dev.Dockerfile -t hehe.
+# For example: docker build -f dev.Dockerfile -t hehe .
 #
 # To run this image:
 #
@@ -30,15 +30,18 @@ WORKDIR /var/www/site
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y apache2 php5 git wget php5-imagick
+    apt-get install -y apache2 php5 git wget php5-imagick curl && \
+    apt-get install -y vim httpie # Usefull apps for development
 
 # Install composer
 RUN wget https://getcomposer.org/download/1.0.2/composer.phar && \
     chmod a+x composer.phar && \
     mv composer.phar /usr/local/bin/composer
 
-# Install usefull apps
-RUN apt-get install -y vim httpie
+# Install node, npm and gulp
+RUN curl -sL https://deb.nodesource.com/setup_5.x | bash - && \
+    apt-get install -y nodejs && \
+    npm i -g gulp
 
 # Configure php
 RUN php5enmod imagick
@@ -52,9 +55,14 @@ RUN echo '\
             Options Indexes FollowSymLinks\n\
             AllowOverride All\n\
             Require all granted\n\
+            RewriteEngine on\n\
+            RewriteCond %{REQUEST_FILENAME} !-f\n\
+            RewriteCond %{REQUEST_FILENAME} !-d\n\
+            RewriteRule . index.php\n\
         </Directory>\n\
     </VirtualHost>'\
     >> /etc/apache2/sites-enabled/hehe.conf && \
+    a2enmod rewrite && \
     rm /etc/apache2/sites-enabled/000-default.conf && \
     echo 'ServerName localhost' >> /etc/apache2/apache2.conf && \
     usermod -u 1000 www-data

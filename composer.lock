@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ee20ec53157fa757030abfe6f7bff797",
+    "hash": "9d64dc3adfb1a9762bfbd79e683fa39e",
     "content-hash": "06869dda4dadfad3a121ba18baa7d18c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
-            "version": "v3.3.6",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "81df608a40bf0629a1dc08e584849bb1e43e0b7a"
+                "reference": "16b48259a62f576e52c903c476bd42b90ab22482"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/81df608a40bf0629a1dc08e584849bb1e43e0b7a",
-                "reference": "81df608a40bf0629a1dc08e584849bb1e43e0b7a",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/16b48259a62f576e52c903c476bd42b90ab22482",
+                "reference": "16b48259a62f576e52c903c476bd42b90ab22482",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/jquery": ">=1.9.1,<=2"
+                "bower-asset/jquery": ">=1.9.1"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -58,36 +58,22 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "1.11.3",
+            "version": "2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "1472290917f17af05e98007136096784f9051fab"
+                "reference": "af22a351b2ea5801ffb1695abb3bb34d5bed9198"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/1472290917f17af05e98007136096784f9051fab",
-                "reference": "1472290917f17af05e98007136096784f9051fab",
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/af22a351b2ea5801ffb1695abb3bb34d5bed9198",
+                "reference": "af22a351b2ea5801ffb1695abb3bb34d5bed9198",
                 "shasum": ""
-            },
-            "require-dev": {
-                "bower-asset/qunit": "1.14.0",
-                "bower-asset/requirejs": "2.1.10",
-                "bower-asset/sinon": "1.8.1",
-                "bower-asset/sizzle": "2.1.1-patch2"
             },
             "type": "bower-asset-library",
             "extra": {
                 "bower-asset-main": "dist/jquery.js",
                 "bower-asset-ignore": [
-                    "**/.*",
-                    "build",
-                    "dist/cdn",
-                    "speed",
-                    "test",
-                    "*.md",
-                    "AUTHORS.txt",
-                    "Gruntfile.js",
                     "package.json"
                 ]
             },
@@ -95,6 +81,7 @@
                 "MIT"
             ],
             "keywords": [
+                "browser",
                 "javascript",
                 "jquery",
                 "library"
@@ -176,16 +163,16 @@
         },
         {
             "name": "bower-asset/yii2-pjax",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/jquery-pjax.git",
-                "reference": "6818718408086db6bdcf33649cecb86b6b4f9b67"
+                "reference": "60728da6ade5879e807a49ce59ef9a72039b8978"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/6818718408086db6bdcf33649cecb86b6b4f9b67",
-                "reference": "6818718408086db6bdcf33649cecb86b6b4f9b67",
+                "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/60728da6ade5879e807a49ce59ef9a72039b8978",
+                "reference": "60728da6ade5879e807a49ce59ef9a72039b8978",
                 "shasum": ""
             },
             "require": {
@@ -198,6 +185,7 @@
                     ".travis.yml",
                     "Gemfile",
                     "Gemfile.lock",
+                    "CONTRIBUTING.md",
                     "vendor/",
                     "script/",
                     "test/"
@@ -370,12 +358,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "70c7fe5273719f8566a34c904125b94e9c508ad0"
+                "reference": "b70f93d91920e239dcb87609fc2e84c575d1752a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/70c7fe5273719f8566a34c904125b94e9c508ad0",
-                "reference": "70c7fe5273719f8566a34c904125b94e9c508ad0",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/b70f93d91920e239dcb87609fc2e84c575d1752a",
+                "reference": "b70f93d91920e239dcb87609fc2e84c575d1752a",
                 "shasum": ""
             },
             "require": {
@@ -456,7 +444,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-05-01 02:50:18"
+            "time": "2016-05-07 16:38:07"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -640,12 +628,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "1c33e894fbbad6cf65bd42871719cd33227ed6a7"
+                "reference": "120198f907231348a29cbcb362ec4d41ea22c1dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/1c33e894fbbad6cf65bd42871719cd33227ed6a7",
-                "reference": "1c33e894fbbad6cf65bd42871719cd33227ed6a7",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/120198f907231348a29cbcb362ec4d41ea22c1dc",
+                "reference": "120198f907231348a29cbcb362ec4d41ea22c1dc",
                 "shasum": ""
             },
             "require": {
@@ -682,7 +670,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-04-13 06:45:05"
+            "time": "2016-05-02 21:13:20"
         },
         {
             "name": "phpspec/php-diff",
@@ -867,12 +855,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "70edab5a7938b5bf4b5dc3ad1e1c3ce673552f48"
+                "reference": "6777f007457b4f18597d03ac707581e59a3084b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/70edab5a7938b5bf4b5dc3ad1e1c3ce673552f48",
-                "reference": "70edab5a7938b5bf4b5dc3ad1e1c3ce673552f48",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/6777f007457b4f18597d03ac707581e59a3084b6",
+                "reference": "6777f007457b4f18597d03ac707581e59a3084b6",
                 "shasum": ""
             },
             "require": {
@@ -912,7 +900,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2016-04-14 16:29:07"
+            "time": "2016-04-30 16:12:40"
         }
     ],
     "aliases": [],
