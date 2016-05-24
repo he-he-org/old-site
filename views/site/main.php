@@ -76,7 +76,7 @@ MainAsset::register($this);
 </div>
 <div class="row">
     <?= TeamMemberWidget::widget(['name' => 'Лариса Мельникова', 'role' => 'Менеджер']) ?>
-    <?= TeamMemberWidget::widget(['name' => 'Кристина Башарова', 'role' => 'Менеджер продукта']) ?>
+    <?= TeamMemberWidget::widget(['name' => 'Карина Башарова', 'role' => 'Менеджер продукта']) ?>
     <?= TeamMemberWidget::widget(['name' => 'Михаил Никифоров', 'role' => 'Менеджер']) ?>
     <?= TeamMemberWidget::widget(['name' => 'Николай Мавренков', 'role' => 'Веб-разработчик']) ?>
     <?= TeamMemberWidget::widget(['name' => 'Анна Дудко', 'role' => 'Менеджер']) ?>
