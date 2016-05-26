@@ -21,15 +21,15 @@ HelpAsset::register($this);
 <div class="row">
     <div class="row_block-12 help-options">
         <div class="help-options_option help-options_option--active">
-            <div class="help-options_icon"><img src="/images/card.png"/></div>
+            <div class="help-options_icon"><img src="/images/help/shipping.svg"/></div>
             <div class="help-options_title">Отправить посылку</div>
         </div>
         <div class="help-options_option">
-            <div class="help-options_icon"><img src="/images/card.png"/></div>
+            <div class="help-options_icon"><img src="/images/help/card.svg"/></div>
             <div class="help-options_title">Сделать пожертвование</div>
         </div>
         <div class="help-options_option">
-            <div class="help-options_icon"><img src="/images/card.png"/></div>
+            <div class="help-options_icon"><img src="/images/help/user.svg"/></div>
             <div class="help-options_title">Стать волонтером</div>
         </div>
     </div>
