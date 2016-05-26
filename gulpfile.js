@@ -35,6 +35,9 @@ function onError(e) {
     })
 }
 
+const scriptsEntryPoints = settings.scripts.entryPoints.map(x => ({from: `entry-${x}.js`, to: `${x}.js`}));
+const cssEntryPoints = settings.styles.entryPoints.map(x => ({from: settings.styles.src + `/entry-${x}.css`, to: settings.styles.dest +`/${x}.css`}));
+
 /*
  *
  * PRODUCTION TASKS
@@ -60,7 +63,7 @@ gulp.task("scripts:vendor", function () {
         .on("error", onError)
         .pipe(streamify(uglify()))
         .on("error", onError)
-        .pipe(gulp.dest(settings.dest.scripts))
+        .pipe(gulp.dest(settings.scripts.dest))
         .on("error", onError)
 })
 
@@ -90,15 +93,15 @@ gulp.task("scripts", function () {
             .on("error", onError)
             .pipe(streamify(uglify()))
             .on("error", onError)
-            .pipe(gulp.dest(settings.dest.scripts))
+            .pipe(gulp.dest(settings.scripts.dest))
             .on("error", onError)
     }
 
-    return merge(settings.entryPoints.map(makeBundle))
+    return merge(scriptsEntryPoints.map(makeBundle))
 })
 
 gulp.task("styles", function () {
-    var files = settings.src.styles + "/**.css"
+    var files = settings.styles.src + "/**.css"
 
     var plugins = [
         require("postcss-nested"),
@@ -107,11 +110,11 @@ gulp.task("styles", function () {
     ];
     return gulp.src(files)
         .pipe(postcss(plugins))
-        .pipe(gulp.dest(settings.dest.styles))
+        .pipe(gulp.dest(settings.styles.dest))
 })
 
 gulp.task('lint', function () {
-    return gulp.src(settings.src.scripts + '/**').pipe(eslint())
+    return gulp.src(settings.scripts.src + '/**').pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failOnError())
 });
@@ -121,9 +124,9 @@ gulp.task('lint-n-fix', function () {
         return file.eslint != null && file.eslint.fixed
     }
 
-    return gulp.src(settings.src.js + '/**.js').pipe(eslint({fix: true}))
+    return gulp.src(settings.scripts.src + '/**.js').pipe(eslint({fix: true}))
         .pipe(eslint.format())
-        .pipe(gulpIf(isFixed, gulp.dest(settings.src.js)))
+        .pipe(gulpIf(isFixed, gulp.dest(settings.scripts.src)))
 });
 
 
@@ -154,7 +157,7 @@ gulp.task("debug:scripts:vendor", function () {
             .on("error", onError)
             .pipe(source("vendor.js"))
             .on("error", onError)
-            .pipe(gulp.dest(settings.dest.scripts))
+            .pipe(gulp.dest(settings.scripts.dest))
             .on("error", onError)
     }
 
@@ -173,7 +176,7 @@ gulp.task("debug:scripts:vendor", function () {
 
 gulp.task("debug:scripts", function () {
     function makeBundle(entryPoint) {
-        var bundler = browserify(settings.src.scripts + "/" + entryPoint.from, {
+        var bundler = browserify(settings.scripts.src + "/" + entryPoint.from, {
             debug: true,
             cache: {},
             packageCache: {},
@@ -194,7 +197,7 @@ gulp.task("debug:scripts", function () {
                 .on("error", onError)
                 .pipe(source(entryPoint.to))
                 .on("error", onError)
-                .pipe(gulp.dest(settings.dest.scripts))
+                .pipe(gulp.dest(settings.scripts.dest))
                 .on("error", onError)
         }
 
@@ -210,33 +213,39 @@ gulp.task("debug:scripts", function () {
         return rebundle()
     }
 
-    return merge(settings.entryPoints.map(makeBundle))
+    return merge(scriptsEntryPoints.map(makeBundle))
 })
 
 gulp.task("debug:styles", function () {
-    var files = settings.src.styles + "/**.css"
+    var files = settings.styles.src + "/**.css"
     var plugins = [
+        require("postcss-import"),
         require("postcss-nested"),
-        require("postcss-simple-vars")
+        require("postcss-simple-vars"),
     ];
 
-    function build() {
-        return gulp.src(files)
-            .pipe(postcss(plugins))
-            .on('error', onError)
-            .pipe(gulp.dest(settings.dest.styles))
+    function bundle(entryPoint) {
+        function build() {
+            return gulp.src(entryPoint.from)
+                .pipe(postcss(plugins))
+                .on('error', onError)
+                .pipe(rename(entryPoint.to))
+                .on('error', onError)
+                .pipe(gulp.dest("."))
+        }
+        build()
+        var watcher = gulp.watch(settings.styles.src + "/**.css");
+        watcher.on('change', function(event) {
+            gutil.log('File ' + event.path + ' was ' + event.type + ', rebuilding "'+entryPoint.from+'"...');
+            var start = Date.now()
+            build().on('end', function() {
+                gutil.log("Rebuilding styles... Done! Time: " + + (Date.now() - start))
+            })
+        });
+        return watcher
     }
 
-    build()
-    var watcher = gulp.watch(files);
-    watcher.on('change', function(event) {
-        gutil.log('File ' + event.path + ' was ' + event.type + ', rebuilding styles...');
-        var start = Date.now()
-        build().on('end', function() {
-            gutil.log("Rebuilding styles... Done! Time: " + + (Date.now() - start))
-        })
-    });
-    return watcher
+    return cssEntryPoints.forEach(bundle)
 })
 
 gulp.task("browser-sync", function(){

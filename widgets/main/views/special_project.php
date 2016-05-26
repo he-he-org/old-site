@@ -1,7 +1,3 @@
-<?php
-use app\widgets\main\PersonWidget;
-?>
-
 <div class="special-project special-project--<?= $modifier ?>">
     <div class="special-project_top">
         <div class="special-project_left">

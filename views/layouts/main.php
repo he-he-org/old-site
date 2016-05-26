@@ -8,6 +8,7 @@ use app\assets\AppAsset;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Url;
+use app\widgets\layout\MainMenu;
 
 AppAsset::register($this);
 ?>
@@ -52,13 +53,13 @@ AppAsset::register($this);
                 </header>
 
                 <div class="row layout-menu-row">
-                    <div class="layout-navigation-menu row_block-8">
-                        <a class="layout-navigation-menu_item layout-navigation-menu_item--active" href="<?=Url::to(['/main'])?>">О нас</a>
-                        <a class="layout-navigation-menu_item" href="<?=Url::to(['/help'])?>">Помочь проекту</a>
-                        <a class="layout-navigation-menu_item" href="<?=Url::to(['/volunteers'])?>">Стать волонтером</a>
-                        <a class="layout-navigation-menu_item" href="<?=Url::to(['/news'])?>">Новости</a>
-                        <a class="layout-navigation-menu_item" href="<?=Url::to(['/contacts'])?>">Контакты</a>
-                    </div>
+                    <?= MainMenu::widget(['items' => [
+                        ['url' => '/main', 'title' => 'О нас'],
+                        ['url' => '/help', 'title' => 'Помочь проекту'],
+                        ['url' => '/volunteers', 'title' => 'Стать волонтером'],
+                        ['url' => '/news', 'title' => 'Новости'],
+                        ['url' => '/contacts', 'title' => 'Контакты'],
+                    ]]) ?>
                     <div class="layout-search"><i class="fa fa-search" aria-hidden="true"></i> <input placeholder="Поиск..." /></div>
                 </div>
                 <div class="layout-content">

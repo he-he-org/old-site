@@ -27,29 +27,22 @@
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "node-notifier": "^4.5.0",
+    "postcss-import": "^8.1.2",
     "postcss-nested": "^1.0.0",
     "postcss-simple-vars": "^1.2.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   },
   "gulp": {
-    "src": {
-      "scripts": "./js",
-      "styles": "./styles"
+    "scripts": {
+      "src": "./js",
+      "dest": "./web/js",
+      "entryPoints": ["main", "help"]
     },
-    "dest": {
-      "scripts": "./web/js",
-      "styles": "./web/css"
-    },
-    "entryPoints": [
-      {
-        "from": "page-main.js",
-        "to": "main.js"
-      },
-      {
-        "from": "page-help.js",
-        "to": "help.js"
-      }
-    ]
+    "styles": {
+      "src": "./styles",
+      "dest": "./web/css",
+      "entryPoints": ["main", "help", "common"]
+    }
   }
 }

@@ -115,7 +115,7 @@ li {
 .check-item {
     display: flex;
     justify-content: space-between;
-    line-height: 30px;
+    margin: 0.5rem 0;
 
     > label {
         display: flex;

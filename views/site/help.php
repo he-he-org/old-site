@@ -1,7 +1,5 @@
 <?php
 
-use app\widgets\main\TeamMemberWidget;
-use app\widgets\main\SpecialProject;
 
 use app\assets\HelpAsset;
 
@@ -50,8 +48,8 @@ HelpAsset::register($this);
     </div>
     <div class="row_block-9">
         <h3>Готовые наборы</h3>
-        <div>Включают в себя самое необходимое на текущий момент</div>
-        <div>Пожертвование пойдет на закупку и отправку препаратов</div>
+        <p>Включают в себя самое необходимое на текущий момент</p>
+        <p>Пожертвование пойдет на закупку и отправку препаратов</p>
         <div class="packages">
             <div class="packages_item package">
                 <div class="package_title">Минимальный</div>
@@ -74,7 +72,7 @@ HelpAsset::register($this);
         <div class="row content-block">
             <div class="row_block-7">
                 <h3>Если хотите самостоятельно купить препараты и отправить в Гватемалу</h3>
-                <div>Есть несколько вариантов отправлений</div>
+                <p>Есть несколько вариантов отправлений</p>
                 <ol>
                     <li><a href="#">Готовые наборы с AliExpress</a>;</li>
                     <li><a href="#">Почтой РФ</a>;</li>

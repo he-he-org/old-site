@@ -164,6 +164,7 @@
         font-size: 1.25rem;
         font-weight: bold;
         text-decoration: underline;
+        padding-bottom: 30px;
     }
 
     &_donate {
