@@ -14,5 +14,6 @@ class MainAsset extends AssetBundle
         'js/main.js',
     ];
     public $depends = [
+        'app\assets\AppAsset'
     ];
 }

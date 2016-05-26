@@ -14,5 +14,6 @@ class HelpAsset extends AssetBundle
         'js/help.js',
     ];
     public $depends = [
+        'app\assets\AppAsset'
     ];
 }
