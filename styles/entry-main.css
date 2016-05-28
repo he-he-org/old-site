@@ -111,6 +111,11 @@
     font-weight: 600;
     display: flex;
     justify-content: flex-end;
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
 }
 
 .special-project {

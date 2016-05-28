@@ -13,7 +13,12 @@ html {
 }
 
 a {
-    color: #2c2c2c;
+    color: #0084F1;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 h1 {
@@ -47,6 +52,7 @@ p {
 
 ol {
     padding-left: 0;
+    list-style-position: inside;
 }
 
 input, button, textarea {

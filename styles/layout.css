@@ -99,12 +99,16 @@ main {
             flex-direction: column;
             justify-content: center;
             padding: 0 1rem;
-            text-decoration: none;
             font-size: 18px;
+            color: black;
 
             &--active {
                 border-bottom: 4px solid #ff193f;
                 font-weight: 600;
+            }
+
+            &, &:hover {
+                text-decoration: none;
             }
         }
     }

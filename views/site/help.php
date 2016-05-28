@@ -3,6 +3,9 @@
 
 use app\assets\HelpAsset;
 
+use app\widgets\help\CategoryMenu;
+use app\widgets\help\PreparedPackage;
+
 //
 // TODO: update localization algorythm
 // NOTE! See https://github.com/samdark/yii2-cookbook/blob/master/book/i18n-selecting-application-language.md
@@ -37,36 +40,42 @@ HelpAsset::register($this);
 
 <div class="row menu-and-content">
     <div class="row_block-3">
-        <div class="category-menu">
-            <div class="category-menu_item category-menu_item--active">Медикаменты</div>
-            <div class="category-menu_item">Печатные материалы</div>
-            <div class="category-menu_item">Посуда, хозяйство</div>
-            <div class="category-menu_item">Белье, текстиль</div>
-            <div class="category-menu_item">Одежда, обувь</div>
-            <div class="category-menu_item">Кожа, гигиена</div>
-        </div>
+        <?= CategoryMenu::widget(['items' => [
+            ['title' => 'Медикаменты', 'active' => true],
+            ['title' => 'Печатные материалы'],
+            ['title' => 'Посуда, хозяйство'],
+            ['title' => 'Белье, текстиль'],
+            ['title' => 'Одежда, обувь'],
+            ['title' => 'Кожа, гигиена'],
+            ['title' => 'Техника'],
+            ['title' => 'Музыка'],
+            ['title' => 'Детям'],
+            ['title' => 'Еда, напитки'],
+            ['title' => 'Книги'],
+            ['title' => 'Разное'],
+        ]]) ?>
     </div>
     <div class="row_block-9">
         <h3>Готовые наборы</h3>
         <p>Включают в себя самое необходимое на текущий момент</p>
         <p>Пожертвование пойдет на закупку и отправку препаратов</p>
         <div class="packages">
-            <div class="packages_item package">
-                <div class="package_title">Минимальный</div>
-                <div class="package_desc">Бинты, пластыри, парацетамол, анальгин</div>
-                <div class="package_button"><button class="send-button">Отправить 500 Р</button></div>
-            </div>
-            <div class="packages_item package">
-                <div class="package_title">Максимальный</div>
-                <div class="package_desc">Бинты, пластыри, парацетамол, анальгин, фуразолидон, парацетамол,
-                    азитромицин, линкомицин, тавегил, дексаметазон, драмина, кетанов, нимика, но-шпа</div>
-                <div class="package_button"><button class="send-button">Отправить 2000 Р</button></div>
-            </div>
-            <div class="packages_item package">
-                <div class="package_title">Средний</div>
-                <div class="package_desc">Тавигил, немазол, но-шпа, дексаметазон</div>
-                <div class="package_button"><button class="send-button">Отправить 1000 Р</button></div>
-            </div>
+            <?= PreparedPackage::widget([
+                'title' => 'Минимальный',
+                'desc' => 'Бинты, пластыри, парацетамол, анальгин',
+                'cost' => '500',
+            ]) ?>
+            <?= PreparedPackage::widget([
+                'title' => 'Максимальный',
+                'desc' => 'Бинты, пластыри, парацетамол, анальгин, фуразолидон, парацетамол,
+                    азитромицин, линкомицин, тавегил, дексаметазон, драмина, кетанов, нимика, но-шпа',
+                'cost' => '2000',
+            ]) ?>
+            <?= PreparedPackage::widget([
+                'title' => 'Средний',
+                'desc' => 'Тавигил, немазол, но-шпа, дексаметазон',
+                'cost' => '1000',
+            ]) ?>
         </div>
 
         <div class="row content-block">
