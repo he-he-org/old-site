@@ -1,10 +1,13 @@
 <?php
 use yii\helpers\Url;
+use app\helpers\RouteHelper;
+
 ?>
 
 <div class="category-menu">
     <?php foreach ($items as $item) { ?>
-        <a href="<?= Url::to($item['url']) ?>" class="category-menu_item<?= ('/'.Yii::$app->request->pathinfo === Url::to($item['url'])) ? ' category-menu_item--active' : '' ?>">
+        <?php $isActive = RouteHelper::getSection(Yii::$app->request->pathinfo, 'pharmacy') ===  RouteHelper::getSection(Url::toRoute($item['url']), 'pharmacy') ?>
+        <a href="<?= Url::toRoute($item['url']) ?>" class="category-menu_item<?= $isActive ? ' category-menu_item--active' : '' ?>">
             <?= $item['title'] ?>
         </a>
     <?php } ?>

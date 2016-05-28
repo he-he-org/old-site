@@ -42,8 +42,8 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<action>' => 'site/<action>',
-                '<action>/<section>' => 'site/<action>',
+                '<page>' => 'site/<page>',
+                '<page>/<section>' => 'site/<page>',
             ],
         ],
         'assetManager' => [

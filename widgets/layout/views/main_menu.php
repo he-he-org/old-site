@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Url;
+use app\helpers\RouteHelper;
 
 function startsWith($str, $prefix) {
     return $prefix === "" || strrpos($str, $prefix, -strlen($str)) !== false;
@@ -9,6 +10,7 @@ function startsWith($str, $prefix) {
 
 <div class="layout-navigation-menu row_block-8">
     <?php foreach ($items as $item) { ?>
-        <a class="layout-navigation-menu_item <?= startsWith('/'.Yii::$app->request->pathinfo, Url::to([$item['url']])) ? 'layout-navigation-menu_item--active' : ''?>" href="<?=Url::to([$item['url']])?>"><?= $item['title'] ?></a>
+        <?php $isActive = RouteHelper::getPage(Yii::$app->request->pathinfo, 'main') ===  RouteHelper::getPage(Url::toRoute([$item['url']])) ?>
+        <a class="layout-navigation-menu_item <?= $isActive ? 'layout-navigation-menu_item--active' : ''?>" href="<?=Url::toRoute([$item['url']])?>"><?= $item['title'] ?></a>
     <?php } ?>
 </div>
