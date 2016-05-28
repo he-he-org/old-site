@@ -40,19 +40,20 @@ HelpAsset::register($this);
 
 <div class="row menu-and-content">
     <div class="row_block-3">
+        <!-- todo: make a proper translation -->
         <?= CategoryMenu::widget(['items' => [
-            ['title' => 'Медикаменты', 'active' => true],
-            ['title' => 'Печатные материалы'],
-            ['title' => 'Посуда, хозяйство'],
-            ['title' => 'Белье, текстиль'],
-            ['title' => 'Одежда, обувь'],
-            ['title' => 'Кожа, гигиена'],
-            ['title' => 'Техника'],
-            ['title' => 'Музыка'],
-            ['title' => 'Детям'],
-            ['title' => 'Еда, напитки'],
-            ['title' => 'Книги'],
-            ['title' => 'Разное'],
+            ['title' => 'Медикаменты', 'url' => ['help/pharmacy']],
+            ['title' => 'Печатные материалы', 'url' => ['help/press']],
+            ['title' => 'Посуда, хозяйство', 'url' => ['help/tableware']],
+            ['title' => 'Белье, текстиль', 'url' => ['help/linen']],
+            ['title' => 'Одежда, обувь', 'url' => ['help/clothes']],
+            ['title' => 'Кожа, гигиена', 'url' => ['help/hygiene']],
+            ['title' => 'Техника', 'url' => ['help/tech']],
+            ['title' => 'Музыка', 'url' => ['help/music']],
+            ['title' => 'Детям', 'url' => ['help/children']],
+            ['title' => 'Еда, напитки', 'url' => ['help/food']],
+            ['title' => 'Книги', 'url' => ['help/books']],
+            ['title' => 'Разное', 'url' => ['help/misc']],
         ]]) ?>
     </div>
     <div class="row_block-9">

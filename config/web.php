@@ -43,6 +43,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '<action>' => 'site/<action>',
+                '<action>/<section>' => 'site/<action>',
             ],
         ],
         'assetManager' => [
