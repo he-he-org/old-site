@@ -70,7 +70,7 @@ gulp.task("scripts:vendor", function () {
 
 gulp.task("scripts", function () {
     function makeBundle(entryPoint) {
-        var bundler = browserify(settings.src.scripts + "/" + entryPoint.from, {
+        var bundler = browserify(settings.scripts.src + "/" + entryPoint.from, {
             debug: false,
             cache: {},
             packageCache: {},
@@ -101,16 +101,36 @@ gulp.task("scripts", function () {
 })
 
 gulp.task("styles", function () {
-    var files = settings.styles.src + "/**.css"
-
     var plugins = [
+        require("postcss-import"),
         require("postcss-nested"),
         require("postcss-simple-vars"),
         require("autoprefixer")({browsers: ["last 2 versions"]}),
+        require("cssnano"),
     ];
-    return gulp.src(files)
-        .pipe(postcss(plugins))
-        .pipe(gulp.dest(settings.styles.dest))
+
+    function bundle(entryPoint) {
+        function build() {
+            return gulp.src(entryPoint.from)
+                .pipe(postcss(plugins))
+                .on('error', onError)
+                .pipe(rename(entryPoint.to))
+                .on('error', onError)
+                .pipe(gulp.dest("."))
+        }
+        build()
+        var watcher = gulp.watch(settings.styles.src + "/**.css");
+        watcher.on('change', function(event) {
+            gutil.log('File ' + event.path + ' was ' + event.type + ', rebuilding "'+entryPoint.from+'"...');
+            var start = Date.now()
+            build().on('end', function() {
+                gutil.log("Rebuilding styles... Done! Time: " + + (Date.now() - start))
+            })
+        });
+        return watcher
+    }
+
+    return cssEntryPoints.forEach(bundle)
 })
 
 gulp.task('lint', function () {
@@ -217,7 +237,6 @@ gulp.task("debug:scripts", function () {
 })
 
 gulp.task("debug:styles", function () {
-    var files = settings.styles.src + "/**.css"
     var plugins = [
         require("postcss-import"),
         require("postcss-nested"),

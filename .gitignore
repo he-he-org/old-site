@@ -38,7 +38,3 @@ phpunit.phar
 
 # ignode node modules
 /node_modules
-
-# ignore react builds
-/web/css/*.css
-/web/js/*.js

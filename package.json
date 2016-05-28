@@ -16,6 +16,7 @@
     "babelify": "^7.3.0",
     "browser-sync": "^2.12.5",
     "browserify": "^13.0.0",
+    "cssnano": "^3.6.2",
     "gulp": "^3.9.1",
     "gulp-envify": "^1.0.0",
     "gulp-eslint": "^2.0.0",
@@ -37,12 +38,19 @@
     "scripts": {
       "src": "./js",
       "dest": "./web/js",
-      "entryPoints": ["main", "help"]
+      "entryPoints": [
+        "main",
+        "help"
+      ]
     },
     "styles": {
       "src": "./styles",
       "dest": "./web/css",
-      "entryPoints": ["main", "help", "common"]
+      "entryPoints": [
+        "main",
+        "help",
+        "common"
+      ]
     }
   }
 }
