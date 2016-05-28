@@ -115,30 +115,115 @@ HelpAsset::register($this);
             </div>
         <?php } else if ($section === 'press') { ?>
             <h3>Печатные материалы</h3>
-        <?php } else if ($section === 'pharmacy') { ?>
-            <h3>Медикаменты</h3>
-        <?php } else if ($section === 'press') { ?>
-            <h3>Печатные материалы</h3>
+            <div class="check-item">футболки с нашим лого</div>
+            <div class="check-item">хирургические рубашки с нашим лого</div>
+            <div class="check-item">халаты с нашим лого</div>
+            <div class="check-item">отдельно лого (нашивки)</div>
+            <div class="check-item">наклейки с нашим лого</div>
         <?php } else if ($section === 'tableware') { ?>
             <h3>Посуда, хозяйство</h3>
+            <div class="check-item">посуда из твердого пластика/алюминия</div>
+            <div class="check-item">пластиковые контейнеры</div>
+            <div class="check-item">коробки из пластика/твердого картона (аля икея)</div>
+            <div class="check-item">умывальник</div>
+            <div class="check-item">вешалки</div>
+            <div class="check-item">прищепки</div>
+            <div class="check-item">надувные кровати-матрацы (лучше полуторные)</div>
         <?php } else if ($section === 'linen') { ?>
             <h3>Белье, текстиль</h3>
+            <div class="check-item">постельное белье на 2-х спальные/ односпальные кровати</div>
+            <div class="check-item">тряпичные мешки</div>
+            <div class="check-item">полотенца</div>
+            <div class="check-item">прихватки</div>
+            <div class="check-item">скатерти</div>
+            <div class="check-item">половички</div>
+            <div class="check-item">веревки/канат/бельевая/трос</div>
         <?php } else if ($section === 'clothes') { ?>
             <h3>Одежда, обувь</h3>
+            <div class="check-item">резиновые сапоги</div>
+            <div class="check-item">рюкзаки разных размеров</div>
+            <div class="check-item">носки</div>
+            <div class="check-item">перчатки рабочие</div>
         <?php } else if ($section === 'hygiene') { ?>
             <h3>Кожа, гигиена</h3>
+            <div class="check-item">солнцезащитный крем</div>
+            <div class="check-item">крем от комаров</div>
+            <div class="check-item">мыло</div>
         <?php } else if ($section === 'tech') { ?>
             <h3>Техника</h3>
+            <div class="check-item">проектор</div>
+            <div class="check-item">фотокамера</div>
+            <div class="check-item">видеокамера</div>
+            <div class="check-item">принтер</div>
         <?php } else if ($section === 'music') { ?>
             <h3>Музыка</h3>
+            <div class="check-item">губная гармошка</div>
+            <div class="check-item">гармошка</div>
+            <div class="check-item">флейта</div>
+            <div class="check-item">гавайская гитара</div>
+            <div class="check-item">балалайка</div>
+            <div class="check-item">ксилофон</div>
+            <div class="check-item">бубен</div>
+            <div class="check-item">тамбурин</div>
         <?php } else if ($section === 'children') { ?>
             <h3>Детям</h3>
+            <div class="check-item">учебники английского/русского языков</div>
+            <div class="check-item">детские книжки с картинками</div>
+            <div class="check-item">расскраски</div>
+            <div class="check-item">цветные карандаши</div>
+            <div class="check-item">мелки</div>
+            <div class="check-item">пластилин</div>
+            <div class="check-item">краски</div>
+            <div class="check-item">фломастеры</div>
+            <div class="check-item">настольные игры</div>
+            <div class="check-item">детские игрушки-погремушки</div>
         <?php } else if ($section === 'food') { ?>
             <h3>Еда, напитки</h3>
+            <div class="check-item">сухое молоко</div>
+            <div class="check-item">шоколад</div>
+            <div class="check-item">гематоген</div>
+            <div class="check-item">мука цельнозерновая</div>
+            <div class="check-item">дрожжи</div>
+            <div class="check-item">ванилин</div>
+            <div class="check-item">сода</div>
+            <div class="check-item">манка</div>
+            <div class="check-item">гречка</div>
+            <div class="check-item">пшенка</div>
+            <div class="check-item">макароны</div>
+            <div class="check-item">сгущенка</div>
+            <div class="check-item">кубики бульонные</div>
+            <div class="check-item">сгущенка</div>
+            <div class="check-item">тущенка</div>
+            <div class="check-item">рыбные консервы</div>
+            <div class="check-item">козинаки</div>
+            <div class="check-item">халва</div>
+            <div class="check-item">печенье/пряники</div>
+            <div class="check-item">изюм/курага/чернослив</div>
+            <div class="check-item">орехи</div>
+            <div class="check-item">мед</div>
+            <div class="check-item">чай</div>
+            <div class="check-item">кисель</div>
+            <div class="check-item">пудинги в пакетах</div>
         <?php } else if ($section === 'books') { ?>
             <h3>Книги</h3>
+            <div class="check-item">книги по медицине на испанском/английском языках</div>
+            <div class="check-item">атласы медицинские</div>
+            <div class="check-item">муляжи медицинские</div>
+            <div class="check-item">манекены</div>
+            <div class="check-item">детское питание</div>
+            <div class="check-item">детские смеси</div>
+            <div class="check-item">перчатки медицинские</div>
+            <div class="check-item">тест-полоски для анализа мочи</div>
+            <div class="check-item">катетеры урологические CH16/18</div>
+            <div class="check-item">ортопедические шины (запястье, рука и другие)</div>
+            <div class="check-item">тесты на беременность</div>
+            <div class="check-item">тест-полоски для глюкометров (аку)</div>
+            <div class="check-item">компрессионные чулки</div>
         <?php } else if ($section === 'misc') { ?>
             <h3>Разное</h3>
+            <div class="check-item">кисточки малярные</div>
+            <div class="check-item">мотивы русской культуры (матрешки/орнаменты/баба на чайник/утварь)</div>
+            <div class="check-item">семена газонной травы</div>
         <?php } ?>
 
 
