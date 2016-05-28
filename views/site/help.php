@@ -114,7 +114,7 @@ HelpAsset::register($this);
                 </div>
             </div>
         <?php } else if ($section === 'press') { ?>
-            <h3>Готовые наборы</h3>
+            <h3>Печатные материалы</h3>
         <?php } else if ($section === 'pharmacy') { ?>
             <h3>Медикаменты</h3>
         <?php } else if ($section === 'press') { ?>
