@@ -106,31 +106,19 @@ gulp.task("styles", function () {
         require("postcss-nested"),
         require("postcss-simple-vars"),
         require("autoprefixer")({browsers: ["last 2 versions"]}),
-        require("cssnano"),
+        require("cssnano")({browsers: ["last 2 versions"]}),
     ];
 
     function bundle(entryPoint) {
-        function build() {
-            return gulp.src(entryPoint.from)
-                .pipe(postcss(plugins))
-                .on('error', onError)
-                .pipe(rename(entryPoint.to))
-                .on('error', onError)
-                .pipe(gulp.dest("."))
-        }
-        build()
-        var watcher = gulp.watch(settings.styles.src + "/**.css");
-        watcher.on('change', function(event) {
-            gutil.log('File ' + event.path + ' was ' + event.type + ', rebuilding "'+entryPoint.from+'"...');
-            var start = Date.now()
-            build().on('end', function() {
-                gutil.log("Rebuilding styles... Done! Time: " + + (Date.now() - start))
-            })
-        });
-        return watcher
+        return gulp.src(entryPoint.from)
+            .pipe(postcss(plugins))
+            .on('error', onError)
+            .pipe(rename(entryPoint.to))
+            .on('error', onError)
+            .pipe(gulp.dest("."))
     }
 
-    return cssEntryPoints.forEach(bundle)
+    return merge(cssEntryPoints.map(bundle))
 })
 
 gulp.task('lint', function () {
