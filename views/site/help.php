@@ -80,7 +80,7 @@ HelpAsset::register($this);
         </div>
 
         <div class="row content-block">
-            <div class="row_block-7">
+            <div class="row_block-6">
                 <h3>Если хотите самостоятельно купить препараты и отправить в Гватемалу</h3>
                 <p>Есть несколько вариантов отправлений</p>
                 <ol>
@@ -97,18 +97,15 @@ HelpAsset::register($this);
             <div class="row_block-6">
                 <h3>Полный список необходимых медикаментв</h3>
                 <h4>Перевязка и расходные материалы</h4>
-                <div class="check-item"><label><input type="checkbox">Бинт стерильный 1.6 м x 1 м</label><span>30 ₽</span></div>
-                <div class="check-item"><label><input type="checkbox">Бинт стерильный 1.5 м x 1 м</label><span>12 ₽</span></div>
-                <div class="check-item"><label><input type="checkbox">Салфетки кровоостанавливающие в упаковках по 7 штук</label><span>90 ₽</span></div>
+                <div class="check-item"><span>Бинт стерильный 1.6 м x 1 м</span><span>30 &#8381;</span></div>
+                <div class="check-item"><span>Бинт стерильный 1.5 м x 1 м</span><span>12 &#8381;</span></div>
+                <div class="check-item"><span>Салфетки кровоостанавливающие в упаковках по 7 штук</span><span>90 &#8381;</span></div>
 
                 <h4>Медицинский препараты</h4>
-                <div class="check-item"><label><input type="checkbox">Анальгин в таблетках</label><span>40 ₽</span></div>
-                <div class="check-item"><label><input type="checkbox">Анальгин в ампулах</label><span>100 ₽</span></div>
-                <div class="check-item"><label><input type="checkbox">Парацетамол</label><span>40 ₽</span></div>
-                <div class="check-item"><label><input type="checkbox">Фуразолидон</label><span>120 ₽</span></div>
-            </div>
-            <div class="row_block-3 column">
-                <button class="send-button">Отправить 80 Р</button>
+                <div class="check-item"><span>Анальгин в таблетках</span><span>40 &#8381;</span></div>
+                <div class="check-item"><span>Анальгин в ампулах</span><span>100 &#8381;</span></div>
+                <div class="check-item"><span>Парацетамол</span><span>40 &#8381;</span></div>
+                <div class="check-item"><span>Фуразолидон</span><span>120 &#8381;</span></div>
             </div>
         </div>
 
