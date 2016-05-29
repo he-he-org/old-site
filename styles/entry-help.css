@@ -92,7 +92,7 @@ li {
     justify-content: space-between;
 
     &_title {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 600;
         display: flex;
         justify-content: center;
