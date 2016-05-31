@@ -75,12 +75,10 @@ MainAsset::register($this);
     <div class="row_block-12 uk-button uk-button-success all-team-link"><a href="#">Вся команда</a></div>
 </div>
 <div class="row">
-    <?= TeamMemberWidget::widget(['name' => 'Лариса Мельникова', 'role' => 'Менеджер']) ?>
-    <?= TeamMemberWidget::widget(['name' => 'Карина Башарова', 'role' => 'Менеджер продукта']) ?>
-    <?= TeamMemberWidget::widget(['name' => 'Михаил Никифоров', 'role' => 'Менеджер']) ?>
-    <?= TeamMemberWidget::widget(['name' => 'Николай Мавренков', 'role' => 'Веб-разработчик']) ?>
-    <?= TeamMemberWidget::widget(['name' => 'Анна Дудко', 'role' => 'Менеджер']) ?>
-    <?= TeamMemberWidget::widget(['name' => 'Полина Стародубцева', 'role' => 'Главный управляющий проектами']) ?>
+    <?php shuffle($people) ?>
+    <?php foreach (array_slice($people, 0, 6) as $member ) {?>
+        <?= TeamMemberWidget::widget($member) ?>
+    <?php } ?>
 </div>
 <div class="row">
     <h2>Наши спецпроекты</h2>
