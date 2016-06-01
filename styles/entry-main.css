@@ -92,6 +92,10 @@
     align-items: flex-start;
 }
 
+.team-row {
+    padding-bottom: 50px;
+}
+
 .team-member {
     &_name {
         font-weight: 600;
@@ -106,7 +110,7 @@
     }
 }
 
-.all-team-link {
+.all-members-link-row {
     margin: 20px 0;
     font-weight: 600;
     display: flex;
@@ -116,6 +120,12 @@
         color: black;
         text-decoration: underline;
     }
+}
+
+.special-projects-title-row {
+    padding-bottom: 50px;
+    font-weight: 300;
+    font-size: 30px;
 }
 
 .special-project {
@@ -141,6 +151,14 @@
 
     &_right {
         flex-basis: 300px;
+    }
+
+    &_title {
+        font-size: 41px;
+    }
+
+    &_description {
+        margin: 35px 0;
     }
 
     &_news-list {

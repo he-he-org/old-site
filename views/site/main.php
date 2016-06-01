@@ -71,18 +71,16 @@ MainAsset::register($this);
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="row_block-12 uk-button uk-button-success all-team-link"><a href="#">Вся команда</a></div>
+<div class="row  all-members-link-row">
+    <a href="#">Вся команда</a>
 </div>
-<div class="row">
+<div class="row team-row">
     <?php shuffle($people) ?>
     <?php foreach (array_slice($people, 0, 6) as $member ) {?>
         <?= TeamMemberWidget::widget($member) ?>
     <?php } ?>
 </div>
-<div class="row">
-    <h2>Наши спецпроекты</h2>
-</div>
+<div class="row special-projects-title-row">Наши спецпроекты</div>
 <div class="row">
     <?= SpecialProject::widget([
         'title' => 'Cтроительство клиники',

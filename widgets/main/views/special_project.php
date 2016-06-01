@@ -1,8 +1,8 @@
 <div class="special-project special-project--<?= $modifier ?>">
     <div class="special-project_top">
         <div class="special-project_left">
-            <h1><?= $title ?></h1>
-            <p><?= $desc ?></p>
+            <h1 class="special-project_title"><?= $title ?></h1>
+            <p class="special-project_description"><?= $desc ?></p>
         </div>
         <div class="special-project_right">
             <div class="special-project_news">
