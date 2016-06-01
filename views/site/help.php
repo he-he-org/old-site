@@ -62,7 +62,7 @@ HelpAsset::register($this);
 
         <?php if ($section === 'pharmacy') { ?>
 
-            <h3>Готовые наборы</h3>
+            <h1>Готовые наборы</h1>
             <p>Включают в себя самое необходимое на текущий момент</p>
             <p>Пожертвование пойдет на закупку и отправку препаратов</p>
             <div class="packages">
@@ -86,7 +86,7 @@ HelpAsset::register($this);
 
             <div class="row content-block">
                 <div class="row_block-6">
-                    <h3>Если хотите самостоятельно купить препараты и отправить в Гватемалу</h3>
+                    <h1>Если хотите самостоятельно купить препараты и отправить в Гватемалу</h1>
                     <p>Есть несколько вариантов отправлений</p>
                     <ol>
                         <li><a href="#">Готовые наборы с AliExpress</a>;</li>
@@ -100,13 +100,13 @@ HelpAsset::register($this);
 
             <div class="row content-block">
                 <div class="row_block-6">
-                    <h3>Полный список необходимых медикаментв</h3>
-                    <h4>Перевязка и расходные материалы</h4>
+                    <h1>Полный список необходимых медикаментв</h1>
+                    <h2>Перевязка и расходные материалы</h2>
                     <div class="check-item"><span>Бинт стерильный 1.6 м x 1 м</span><span>30 &#8381;</span></div>
                     <div class="check-item"><span>Бинт стерильный 1.5 м x 1 м</span><span>12 &#8381;</span></div>
                     <div class="check-item"><span>Салфетки кровоостанавливающие в упаковках по 7 штук</span><span>90 &#8381;</span></div>
 
-                    <h4>Медицинский препараты</h4>
+                    <h2>Медицинский препараты</h2>
                     <div class="check-item"><span>Анальгин в таблетках</span><span>40 &#8381;</span></div>
                     <div class="check-item"><span>Анальгин в ампулах</span><span>100 &#8381;</span></div>
                     <div class="check-item"><span>Парацетамол</span><span>40 &#8381;</span></div>
@@ -114,14 +114,14 @@ HelpAsset::register($this);
                 </div>
             </div>
         <?php } else if ($section === 'press') { ?>
-            <h3>Печатные материалы</h3>
+            <h1>Печатные материалы</h1>
             <div class="check-item">футболки с нашим лого</div>
             <div class="check-item">хирургические рубашки с нашим лого</div>
             <div class="check-item">халаты с нашим лого</div>
             <div class="check-item">отдельно лого (нашивки)</div>
             <div class="check-item">наклейки с нашим лого</div>
         <?php } else if ($section === 'tableware') { ?>
-            <h3>Посуда, хозяйство</h3>
+            <h1>Посуда, хозяйство</h1>
             <div class="check-item">посуда из твердого пластика/алюминия</div>
             <div class="check-item">пластиковые контейнеры</div>
             <div class="check-item">коробки из пластика/твердого картона (аля икея)</div>
@@ -130,7 +130,7 @@ HelpAsset::register($this);
             <div class="check-item">прищепки</div>
             <div class="check-item">надувные кровати-матрацы (лучше полуторные)</div>
         <?php } else if ($section === 'linen') { ?>
-            <h3>Белье, текстиль</h3>
+            <h1>Белье, текстиль</h1>
             <div class="check-item">постельное белье на 2-х спальные/ односпальные кровати</div>
             <div class="check-item">тряпичные мешки</div>
             <div class="check-item">полотенца</div>
@@ -139,24 +139,24 @@ HelpAsset::register($this);
             <div class="check-item">половички</div>
             <div class="check-item">веревки/канат/бельевая/трос</div>
         <?php } else if ($section === 'clothes') { ?>
-            <h3>Одежда, обувь</h3>
+            <h1>Одежда, обувь</h1>
             <div class="check-item">резиновые сапоги</div>
             <div class="check-item">рюкзаки разных размеров</div>
             <div class="check-item">носки</div>
             <div class="check-item">перчатки рабочие</div>
         <?php } else if ($section === 'hygiene') { ?>
-            <h3>Кожа, гигиена</h3>
+            <h1>Кожа, гигиена</h1>
             <div class="check-item">солнцезащитный крем</div>
             <div class="check-item">крем от комаров</div>
             <div class="check-item">мыло</div>
         <?php } else if ($section === 'tech') { ?>
-            <h3>Техника</h3>
+            <h1>Техника</h1>
             <div class="check-item">проектор</div>
             <div class="check-item">фотокамера</div>
             <div class="check-item">видеокамера</div>
             <div class="check-item">принтер</div>
         <?php } else if ($section === 'music') { ?>
-            <h3>Музыка</h3>
+            <h1>Музыка</h1>
             <div class="check-item">губная гармошка</div>
             <div class="check-item">гармошка</div>
             <div class="check-item">флейта</div>
@@ -166,7 +166,7 @@ HelpAsset::register($this);
             <div class="check-item">бубен</div>
             <div class="check-item">тамбурин</div>
         <?php } else if ($section === 'children') { ?>
-            <h3>Детям</h3>
+            <h1>Детям</h1>
             <div class="check-item">учебники английского/русского языков</div>
             <div class="check-item">детские книжки с картинками</div>
             <div class="check-item">расскраски</div>
@@ -178,7 +178,7 @@ HelpAsset::register($this);
             <div class="check-item">настольные игры</div>
             <div class="check-item">детские игрушки-погремушки</div>
         <?php } else if ($section === 'food') { ?>
-            <h3>Еда, напитки</h3>
+            <h1>Еда, напитки</h1>
             <div class="check-item">сухое молоко</div>
             <div class="check-item">шоколад</div>
             <div class="check-item">гематоген</div>
@@ -205,7 +205,7 @@ HelpAsset::register($this);
             <div class="check-item">кисель</div>
             <div class="check-item">пудинги в пакетах</div>
         <?php } else if ($section === 'books') { ?>
-            <h3>Книги</h3>
+            <h1>Книги</h1>
             <div class="check-item">книги по медицине на испанском/английском языках</div>
             <div class="check-item">атласы медицинские</div>
             <div class="check-item">муляжи медицинские</div>
@@ -220,7 +220,7 @@ HelpAsset::register($this);
             <div class="check-item">тест-полоски для глюкометров (аку)</div>
             <div class="check-item">компрессионные чулки</div>
         <?php } else if ($section === 'misc') { ?>
-            <h3>Разное</h3>
+            <h1>Разное</h1>
             <div class="check-item">кисточки малярные</div>
             <div class="check-item">мотивы русской культуры (матрешки/орнаменты/баба на чайник/утварь)</div>
             <div class="check-item">семена газонной травы</div>
