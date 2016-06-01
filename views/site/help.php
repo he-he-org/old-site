@@ -100,13 +100,13 @@ HelpAsset::register($this);
 
             <div class="row content-block">
                 <div class="row_block-6">
-                    <h1>Полный список необходимых медикаментв</h1>
-                    <h2>Перевязка и расходные материалы</h2>
+                    <h2>Полный список необходимых медикаментв</h2>
+                    <h4>Перевязка и расходные материалы</h4>
                     <div class="check-item"><span>Бинт стерильный 1.6 м x 1 м</span><span>30 &#8381;</span></div>
                     <div class="check-item"><span>Бинт стерильный 1.5 м x 1 м</span><span>12 &#8381;</span></div>
                     <div class="check-item"><span>Салфетки кровоостанавливающие в упаковках по 7 штук</span><span>90 &#8381;</span></div>
 
-                    <h2>Медицинский препараты</h2>
+                    <h4>Медицинский препараты</h4>
                     <div class="check-item"><span>Анальгин в таблетках</span><span>40 &#8381;</span></div>
                     <div class="check-item"><span>Анальгин в ампулах</span><span>100 &#8381;</span></div>
                     <div class="check-item"><span>Парацетамол</span><span>40 &#8381;</span></div>
