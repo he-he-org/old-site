@@ -30,9 +30,9 @@ WORKDIR /var/www/site
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y apache2 php5 git wget php5-imagick curl && \
+    apt-get install -y apache2 php5 php5-mysql php5-imagick && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server && \
-    apt-get install -y vim httpie # Usefull apps for development
+    apt-get install -y git wget curl vim httpie # Usefull apps for development
 
 # Install composer
 RUN wget https://getcomposer.org/download/1.0.2/composer.phar && \
@@ -76,14 +76,24 @@ RUN sed -i 's/APACHE_RUN_USER=www-data/APACHE_RUN_USER=docker/g' /etc/apache2/en
     rm /etc/apache2/sites-enabled/000-default.conf && \
     echo 'ServerName localhost' >> /etc/apache2/apache2.conf
 
+# Confiture yii
+RUN ln -s /var/www/site/yii /usr/local/bin/yii
+
 # Configure composer
 RUN composer global require "fxp/composer-asset-plugin:~1.1.1"
 
 # Start apache, initialize mysql directory and run bash
 CMD service apache2 start && \
-    bash -c 'if [[ ! -e /var/www/site/dbdata ]]; then echo "### Initialize db ###"; \
+    bash -c 'if [[ ! -e /var/www/site/dbdata ]]; then echo "### Initialize db ###" && \
         mkdir /var/www/site/dbdata; \
         mysql_install_db; \
+        mysqld_safe & \
+        while ! mysqladmin status >/dev/null 2>&1 ; do \
+            echo "Wait for mysql..."; \
+            sleep 1; \
+        done && \
+        echo "create database hehe" | mysql; \
+    else \
+        mysqld_safe & \
     fi' && \
-    mysqld_safe & \
     bash
