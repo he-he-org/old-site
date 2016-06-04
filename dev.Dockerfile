@@ -11,10 +11,10 @@
 #
 # To run this image:
 #
-# > docker run -it -p <PORT>:80 -v <PATH>:/var/www/site <IMAGE_NAME>
+# > docker run -it -p <PORT>:80 -v <REPO_PATH>:/var/www/site <IMAGE_NAME>
 #
 # where:
-#  * PATH - path to repository on host machine
+#  * REPO_PATH - path to repository on host machine
 #  * PORT - port for Apache on host machine
 #  * IMAGE_NAME - image name, used for this Dockerfile when build
 #
@@ -31,6 +31,7 @@ WORKDIR /var/www/site
 # Install dependencies
 RUN apt-get update && \
     apt-get install -y apache2 php5 git wget php5-imagick curl && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server && \
     apt-get install -y vim httpie # Usefull apps for development
 
 # Install composer
@@ -43,11 +44,20 @@ RUN curl -sL https://deb.nodesource.com/setup_5.x | bash - && \
     apt-get install -y nodejs && \
     npm i -g gulp
 
+# Make user with write rights for mounted folders
+RUN useradd -r -g staff -u 1000 docker
+
 # Configure php
 RUN php5enmod imagick
 
+# Configure mysql
+RUN sed -i 's/user\s*=\s*mysql/user\t=\troot/g' /etc/mysql/mysql.conf.d/mysqld.cnf && \
+    sed -i 's/datadir\s*=\s*\/var\/lib\/mysql/datadir\t=\t\/var\/www\/site\/dbdata/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+
 # Configure apache
-RUN echo '\
+RUN sed -i 's/APACHE_RUN_USER=www-data/APACHE_RUN_USER=docker/g' /etc/apache2/envvars && \
+    sed -i 's/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=staff/g' /etc/apache2/envvars && \
+    echo '\
     <VirtualHost *:80>\n\
         ServerName hehe.lc\n\
         DocumentRoot "/var/www/site/web"\n\
@@ -64,11 +74,16 @@ RUN echo '\
     >> /etc/apache2/sites-enabled/hehe.conf && \
     a2enmod rewrite && \
     rm /etc/apache2/sites-enabled/000-default.conf && \
-    echo 'ServerName localhost' >> /etc/apache2/apache2.conf && \
-    usermod -u 1000 www-data
+    echo 'ServerName localhost' >> /etc/apache2/apache2.conf
 
 # Configure composer
 RUN composer global require "fxp/composer-asset-plugin:~1.1.1"
 
-# Start apache and run bash
-CMD service apache2 start && bash
+# Start apache, initialize mysql directory and run bash
+CMD service apache2 start && \
+    bash -c 'if [[ ! -e /var/www/site/dbdata ]]; then echo "### Initialize db ###"; \
+        mkdir /var/www/site/dbdata; \
+        mysql_install_db; \
+    fi' && \
+    mysqld_safe & \
+    bash

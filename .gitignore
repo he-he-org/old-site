@@ -38,3 +38,6 @@ phpunit.phar
 
 # ignode node modules
 /node_modules
+
+# ignore database files folder
+dbdata
