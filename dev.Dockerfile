@@ -92,7 +92,7 @@ CMD service apache2 start && \
             echo "Wait for mysql..."; \
             sleep 1; \
         done && \
-        echo "create database hehe" | mysql; \
+        echo "create database hehe DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;" | mysql; \
     else \
         mysqld_safe & \
     fi' && \

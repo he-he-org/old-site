@@ -41,3 +41,5 @@ phpunit.phar
 
 # ignore database files folder
 dbdata
+
+env.ini
