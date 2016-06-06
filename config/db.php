@@ -1,5 +1,5 @@
 <?php
-$config = parse_ini_file(Yii::$app->basePath . 'env.ini', true);
+$config = parse_ini_file(__DIR__ . '/../env.ini', true);
 
 return [
     'class' => 'yii\db\Connection',
