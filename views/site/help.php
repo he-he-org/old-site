@@ -43,18 +43,18 @@ HelpAsset::register($this);
     <div class="row_block-3">
         <!-- todo: make a proper translation -->
         <?= CategoryMenu::widget(['items' => [
-            ['title' => 'Медикаменты', 'url' => 'help/pharmacy'],
-            ['title' => 'Печатные материалы', 'url' => 'help/press'],
-            ['title' => 'Посуда, хозяйство', 'url' => 'help/tableware'],
-            ['title' => 'Белье, текстиль', 'url' => 'help/linen'],
-            ['title' => 'Одежда, обувь', 'url' => 'help/clothes'],
-            ['title' => 'Кожа, гигиена', 'url' => 'help/hygiene'],
-            ['title' => 'Техника', 'url' => 'help/tech'],
-            ['title' => 'Музыка', 'url' => 'help/music'],
-            ['title' => 'Детям', 'url' => 'help/children'],
-            ['title' => 'Еда, напитки', 'url' => 'help/food'],
-            ['title' => 'Книги', 'url' => 'help/books'],
-            ['title' => 'Разное', 'url' => 'help/misc'],
+            ['title' => 'Медикаменты', 'section' => 'pharmacy'],
+            ['title' => 'Печатные материалы', 'section' => 'press'],
+            ['title' => 'Посуда, хозяйство', 'section' => 'tableware'],
+            ['title' => 'Белье, текстиль', 'section' => 'linen'],
+            ['title' => 'Одежда, обувь', 'section' => 'clothes'],
+            ['title' => 'Кожа, гигиена', 'section' => 'hygiene'],
+            ['title' => 'Техника', 'section' => 'tech'],
+            ['title' => 'Музыка', 'section' => 'music'],
+            ['title' => 'Детям', 'section' => 'children'],
+            ['title' => 'Еда, напитки', 'section' => 'food'],
+            ['title' => 'Книги', 'section' => 'books'],
+            ['title' => 'Разное', 'section' => 'misc'],
         ]]) ?>
     </div>
     <div class="row_block-9">

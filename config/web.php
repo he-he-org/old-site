@@ -9,6 +9,7 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'class' => 'app\components\LangRequest',
             'cookieValidationKey' => 'dP2rUYAXX50oCRVqQ3p4yGNggvfFLVti',
         ],
         'cache' => [
@@ -33,17 +34,18 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning', 'info', 'trace'],
                 ],
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
         'urlManager' => [
+            'class' => 'app\components\LangUrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<page>' => 'site/<page>',
                 '<page>/<section>' => 'site/<page>',
+                '<page>' => 'site/<page>',
             ],
         ],
         'assetManager' => [
@@ -60,8 +62,18 @@ $config = [
 
             ],
         ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'app\components\MysqlMessageSource',
+                ],
+            ],
+        ],
+
+
     ],
     'params' => $params,
+    'sourceLanguage'=>'00',
     'language' => 'ru-RU',
 ];
 

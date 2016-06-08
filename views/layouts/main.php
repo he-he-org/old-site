@@ -54,11 +54,11 @@ AppAsset::register($this);
 
                 <div class="row layout-menu-row">
                     <?= MainMenu::widget(['items' => [
-                        ['url' => '/main', 'title' => 'О нас'],
-                        ['url' => '/help', 'title' => 'Помочь проекту'],
-                        ['url' => '/volunteers', 'title' => 'Стать волонтером'],
-                        ['url' => '/news', 'title' => 'Новости'],
-                        ['url' => '/contacts', 'title' => 'Контакты'],
+                        ['page' => 'main', 'title' => 'layout/main-menu/about_us'],
+                        ['page' => 'help', 'title' => 'layout/main-menu/help'],
+                        ['page' => 'volunteers', 'title' => 'layout/main-menu/volunteers'],
+                        ['page' => 'news', 'title' => 'layout/main-menu/news'],
+                        ['page' => 'contacts', 'title' => 'layout/main-menu/contacts'],
                     ]]) ?>
                     <div class="layout-search"><i class="fa fa-search" aria-hidden="true"></i> <input placeholder="Поиск..." /></div>
                 </div>
