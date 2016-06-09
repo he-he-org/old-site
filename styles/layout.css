@@ -60,6 +60,9 @@ main {
 
         &_languages-item {
             margin-left: 37px;
+            > a {
+                color: #686767;
+            }
         }
 
 

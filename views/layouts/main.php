@@ -34,9 +34,9 @@ AppAsset::register($this);
 
                     <div class="layout-header_right">
                         <div class="layout-header_languages">
-                            <div class="layout-header_languages-item">Ru</div>
-                            <div class="layout-header_languages-item">En</div>
-                            <div class="layout-header_languages-item">Es</div>
+                            <div class="layout-header_languages-item"><a href='<?= Url::toRoute([Yii::$app->request->getPage(), 'section' => Yii::$app->request->getSection(), 'lang' => 'ru']) ?>'>Ru</a></div>
+                            <div class="layout-header_languages-item"><a href='<?= Url::toRoute([Yii::$app->request->getPage(), 'section' => Yii::$app->request->getSection(), 'lang' => 'en']) ?>'>En</a></div>
+                            <div class="layout-header_languages-item"><a href='<?= Url::toRoute([Yii::$app->request->getPage(), 'section' => Yii::$app->request->getSection(), 'lang' => 'es']) ?>'>Es</a></div>
                         </div>
                         <div class="layout-header_social-networks">
                             <div class="layout-header_social-networks_title">
