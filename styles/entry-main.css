@@ -28,7 +28,7 @@
     }
 
     &_amount {
-        border: 4px solid #6fd035;
+        border: 4px solid #ffed49;
         color: #4d4d4d;
         font-size: 30px;
         font-weight: 600;
@@ -37,9 +37,9 @@
     }
 
     &_donate-button {
-        background: #6fd035;
-        border-color: #6fd035;
-        color: white;
+        background: #ffed49;
+        border-color: #ffed49;
+        color: #2c2c2c;
         margin-left: 2px;
         font-weight: 600;
         font-size: 18px;
