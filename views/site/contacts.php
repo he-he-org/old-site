@@ -1,7 +1,6 @@
 <?php
 
-use app\widgets\main\TeamMemberWidget;
-use app\widgets\main\SpecialProject;
+use app\assets\ContactsAsset;
 
 
 //
@@ -15,6 +14,65 @@ if (Yii::$app->language == 'ru-RU') {
 
 $this->title = 'Health & Help - ' . $pageName;
 
+ContactsAsset::register($this);
+
+
 ?>
 
-<p> Погодите, контакты делаем... </p>
+<h1>Контакты</h1>
+
+<?php $items = [
+    ['title' => 'Наша почта', 'value' => 'mailbox@he-he.org'],
+]?>
+
+<?php foreach($items as $item) {?>
+    <p class="email">
+        <span class="email_title"><?= $item['title'] ?></span>
+        <span class="email_value"><?= $item['value'] ?></span>
+    </p>
+<?php } ?>
+
+
+<h2>Ответим быстрее, если отправите письмо на почту по тематике:</h2>
+
+
+<?php $items = [
+    ['title' => 'Перевод пожертвований', 'value' => 'donation@he-he.org'],
+    ['title' => 'Отправка посылок', 'value' => 'parcel@he-he.org'],
+    ['title' => 'Спонсорская помощь', 'value' => 'sponsorship@he-he.org'],
+    ['title' => 'Волонтерство', 'value' => 'volunteer@he-he.org'],
+    ['title' => 'Сотрудничество со СМИ', 'value' => 'media@he-he.org'],
+    ['title' => 'Партнерство', 'value' => 'partners@he-he.org'],
+]?>
+
+<?php foreach($items as $item) {?>
+    <p class="email">
+        <span class="email_title"><?= $item['title'] ?></span>
+        <span class="email_value"><?= $item['value'] ?></span>
+    </p>
+<?php } ?>
+
+
+<h2>Связаться с участниками команды можно следующим образом:</h2>
+
+
+<?php $items = [
+    ['title' => 'Виктория Валикова (ru)', 'value' => 'viktoriya.valikova@gmail.com'],
+    ['title' => 'Сергио Оттониель Кастийо Мендоза (esp, en)', 'value' => 'sergiocastillomed@outlook.com'],
+    ['title' => 'Карина Башарова (ru)', 'value' => 'kr.basharova@gmail.com'],
+    ['title' => 'Михаил Никифоров (en, ru)', 'value' => 'nimimi@yandex.ru'],
+    ['title' => 'Лариса Мельникова (en, ru)', 'value' => 'larisa.v.melnikova@gmail.com'],
+]?>
+
+<?php foreach($items as $item) {?>
+    <p class="email">
+        <span class="email_title"><?= $item['title'] ?></span>
+        <span class="email_value"><?= $item['value'] ?></span>
+    </p>
+<?php } ?>
+
+
+
+
+
+

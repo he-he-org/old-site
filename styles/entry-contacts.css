@@ -1,0 +1,12 @@
+.email {
+    display: flex;
+
+    &_title {
+        flex-basis: 300px;
+    }
+
+    &_value {
+
+    }
+
+}
