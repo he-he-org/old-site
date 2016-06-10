@@ -27,8 +27,11 @@ ContactsAsset::register($this);
 
 <?php foreach($items as $item) {?>
     <p class="email">
-        <span class="email_title"><?= $item['title'] ?></span>
-        <span class="email_value"><?= $item['value'] ?></span>
+        <span class="email_title">
+            <span class="text"><?= $item['title'] ?></span>
+            <span  class="fill">...........................................................................................................................</span>
+        </span>
+        <span class="email_value"><a href="mailto:<?= $item['value'] ?>"><?= $item['value'] ?></a></span>
     </p>
 <?php } ?>
 
@@ -47,8 +50,11 @@ ContactsAsset::register($this);
 
 <?php foreach($items as $item) {?>
     <p class="email">
-        <span class="email_title"><?= $item['title'] ?></span>
-        <span class="email_value"><?= $item['value'] ?></span>
+        <span class="email_title">
+            <span class="text"><?= $item['title'] ?></span>
+            <span  class="fill">...........................................................................................................................</span>
+        </span>
+        <span class="email_value"><a href="mailto:<?= $item['value'] ?>"><?= $item['value'] ?></a></span>
     </p>
 <?php } ?>
 
@@ -58,7 +64,7 @@ ContactsAsset::register($this);
 
 <?php $items = [
     ['title' => 'Виктория Валикова (ru)', 'value' => 'viktoriya.valikova@gmail.com'],
-    ['title' => 'Сергио Оттониель Кастийо Мендоза (esp, en)', 'value' => 'sergiocastillomed@outlook.com'],
+    ['title' => 'Сергио Оттониель<br/> Кастийо Мендоза (esp, en)', 'value' => 'sergiocastillomed@outlook.com'],
     ['title' => 'Карина Башарова (ru)', 'value' => 'kr.basharova@gmail.com'],
     ['title' => 'Михаил Никифоров (en, ru)', 'value' => 'nimimi@yandex.ru'],
     ['title' => 'Лариса Мельникова (en, ru)', 'value' => 'larisa.v.melnikova@gmail.com'],
@@ -66,8 +72,11 @@ ContactsAsset::register($this);
 
 <?php foreach($items as $item) {?>
     <p class="email">
-        <span class="email_title"><?= $item['title'] ?></span>
-        <span class="email_value"><?= $item['value'] ?></span>
+        <span class="email_title">
+            <span class="text"><?= $item['title'] ?></span>
+            <span  class="fill">...........................................................................................................................</span>
+        </span>
+        <span class="email_value"><a href="mailto:<?= $item['value'] ?>"><?= $item['value'] ?></a></span>
     </p>
 <?php } ?>
 

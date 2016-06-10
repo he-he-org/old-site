@@ -1,1 +1,1 @@
-.email{display:-ms-flexbox;display:flex}.email_title{-ms-flex-preferred-size:300px;flex-basis:300px}
+.email,.email_title{display:-ms-flexbox;display:flex}.email_title{width:400px}.email_title .text{white-space:nowrap}.email_title .fill{overflow:hidden;color:#c7c7c7;font-weight:300}.email_title .fill,.email_value{display:-ms-flexbox;display:flex;-ms-flex-align:end;align-items:flex-end}

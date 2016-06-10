@@ -2,11 +2,25 @@
     display: flex;
 
     &_title {
-        flex-basis: 300px;
+        width: 400px;
+        display: flex;
+
+        .text {
+            white-space: nowrap;
+        }
+
+        .fill {
+            overflow: hidden;
+            display: flex;
+            color: #c7c7c7;
+            font-weight: 300;
+            align-items: flex-end;
+        }
     }
 
     &_value {
-
+        display: flex;
+        align-items: flex-end;
     }
 
 }
