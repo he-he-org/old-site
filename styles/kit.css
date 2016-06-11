@@ -1,34 +1,86 @@
-h1, h2, h3 {
+h1, h2 {
 	font-weight: 700;
 	line-height: 1.5rem;
-	margin-bottom: 20px;
 }
 
 h1 {
-	font-size: 30px;
+	font-size: 1.85rem;
 	letter-spacing: 0.06rem;
+
+	&:not(:first-child) {
+		margin-top: 2rem;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 1.5rem;
+	}
 }
 
 h2 {
-	font-size: 25px;
+	font-size: 1.55rem;
+
+	&:not(:first-child) {
+		margin-top: 2rem;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 1.5rem;
+	}
 }
 
 h3 {
 	font-size: 20px;
+	font-weight: 600;
+
+	&:not(:first-child) {
+		margin-top: 2rem;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 1.5rem;
+	}
 }
 
 h4 {
-	font-size: 18px;
+	font-size: 1.11rem;
 	font-weight: 600;
-	margin-bottom: 20px;
-	margin-top: 35px;
+
+	&:not(:first-child) {
+		margin-top: 1.5rem;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 1rem;
+	}
 }
 
 h5 {
-	font-size: 16px;
+	font-size: 1rem;
 	font-weight: 600;
 	line-height: 1;
+
+	&:not(:first-child) {
+		margin-top: 1rem;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 1rem;
+	}
 }
+
+h6 {
+	font-size: 0.75rem;
+	font-weight: 600;
+
+	&:not(:first-child) {
+		margin-top: 1rem;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 1rem;
+	}
+}
+
 
 a {
 	color: #0084F1;
@@ -39,24 +91,63 @@ a {
 	}
 }
 
+p, ul, ul {
+	&:not(:first-child) {
+		margin-top: 1rem;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 1rem;
+	}
+}
+
 p {
 	line-height: 1.75rem;
 }
 
+ul {
+	list-style-type: none;
+
+	> li {
+		display: flex;
+		align-items: baseline;
+
+		&:before {
+			content: '\2014';
+			margin-right: 0.45rem;
+		}
+	}
+}
+
+
 ol {
-	list-style-position: inside;
+	padding-left: 0;
+	margin-left: 0;
+	list-style-type: none;
 
-	line-height: 20px;
-	margin-bottom: 10px;
+	li {
+		counter-increment: ol-counter;
+		display: flex;
+		align-items: baseline;
 
-	li:last-child {
-		margin-bottom: 35px;
+		&::before {
+			content: counter(ol-counter) ". ";
+			margin-right: 0.6rem;
+		}
 	}
+}
 
-	&.long {
-		line-height: 20px;
-		margin-bottom: 15px;
+
+li {
+	&:not(:first-child) {
+		margin-top: 0.5rem;
 	}
+}
+
+blockquote {
+	margin-top: 1.5rem;
+	border-left: 4px solid #ff193f;
+	padding: 1rem;
 }
 
 input, button, textarea {
