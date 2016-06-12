@@ -64,8 +64,12 @@ $config = [
         ],
         'i18n' => [
             'translations' => [
-                'app*' => [
+                'strings*' => [
                     'class' => 'app\components\MysqlMessageSource',
+                ],
+                'texts*' => [
+                    'class' => 'app\components\MysqlTextsMessageSource',
+                    'rootScope' => 'texts'
                 ],
             ],
         ],

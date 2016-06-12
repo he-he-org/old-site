@@ -12,7 +12,7 @@ function startsWith($str, $prefix) {
     <?php foreach ($items as $item) { ?>
         <?php $isActive = Yii::$app->request->getPage('main') === $item['page'] ?>
         <a class="layout-navigation-menu_item <?= $isActive ? 'layout-navigation-menu_item--active' : ''?>" href="<?= Url::toRoute([$item['page']])?>">
-            <?= \Yii::t('app', $item['title']) ?>
+            <?= \Yii::t('strings', $item['title']) ?>
         </a>
     <?php } ?>
 </div>
