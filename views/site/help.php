@@ -62,9 +62,8 @@ HelpAsset::register($this);
 
         <?php if ($section === 'pharmacy') { ?>
 
-            <h1>Готовые наборы</h1>
-            <p>Включают в себя самое необходимое на текущий момент</p>
-            <p>Пожертвование пойдет на закупку и отправку препаратов</p>
+            <?= Yii::t('texts/help', 'help/pharmacy/part1') ?>
+
             <div class="packages">
                 <?= PreparedPackage::widget([
                     'title' => 'Минимальный',
@@ -86,31 +85,9 @@ HelpAsset::register($this);
 
             <div class="row content-block">
                 <div class="row_block-6">
-                    <h2>Если хотите самостоятельно купить препараты и отправить в Гватемалу</h2>
-                    <p>Есть несколько вариантов отправлений</p>
-                    <ol>
-                        <li><a href="#">Готовые наборы с AliExpress</a>;</li>
-                        <li><a href="#">Почтой РФ</a>;</li>
-                        <li><a href="#">Почтой СНГ</a>;</li>
-                        <li><a href="#">Курьерские службы</a>.</li>
-                    </ol>
 
-                </div>
-            </div>
+                    <?= Yii::t('texts/help', 'help/pharmacy/part2') ?>
 
-            <div class="row content-block">
-                <div class="row_block-6">
-                    <h2>Полный список необходимых медикаментв</h2>
-                    <h4>Перевязка и расходные материалы</h4>
-                    <div class="check-item"><span>Бинт стерильный 1.6 м x 1 м</span><span>30 &#8381;</span></div>
-                    <div class="check-item"><span>Бинт стерильный 1.5 м x 1 м</span><span>12 &#8381;</span></div>
-                    <div class="check-item"><span>Салфетки кровоостанавливающие в упаковках по 7 штук</span><span>90 &#8381;</span></div>
-
-                    <h4>Медицинский препараты</h4>
-                    <div class="check-item"><span>Анальгин в таблетках</span><span>40 &#8381;</span></div>
-                    <div class="check-item"><span>Анальгин в ампулах</span><span>100 &#8381;</span></div>
-                    <div class="check-item"><span>Парацетамол</span><span>40 &#8381;</span></div>
-                    <div class="check-item"><span>Фуразолидон</span><span>120 &#8381;</span></div>
                 </div>
             </div>
         <?php } else if ($section === 'press') { ?>

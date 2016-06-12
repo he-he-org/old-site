@@ -10,13 +10,11 @@ class MysqlTextsMessageSource extends MessageSource
 
     protected function loadMessages($category, $language)
     {
-        $parser = new \cebe\markdown\Markdown();
+        $parser = new ExtMarkdown();
 
 
         $query = TranslationText::find()
-            ->where([
-                'lang' => $language
-            ]);
+            ->select(['name', $language]);
 
         $rootScopePrefix = $this->rootScope . '/';
         if (substr($category, 0, strlen($rootScopePrefix)) == $rootScopePrefix) {
@@ -28,7 +26,7 @@ class MysqlTextsMessageSource extends MessageSource
         $translations = [];
 
         foreach($allTranslations as $translation) {
-            $translations[$translation['name']] = $parser->parse($translation['value']); //todo: strip HTML codes?
+            $translations[$translation['name']] = $parser->parse($translation[$language]); //todo: strip HTML codes?
         }
 
         return $translations;
