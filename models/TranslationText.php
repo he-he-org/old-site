@@ -10,19 +10,4 @@ class TranslationText extends ActiveRecord
         return 'i18n_texts';
     }
 
-    public static function translate($name, $lang) {
-        $translation = TranslationString::find()
-            ->where([
-                'name' => $name,
-                'lang' => $lang
-            ])
-            ->one();
-
-        if ($translation) {
-            return $translation['value'];
-        }
-        else {
-            return $name;
-        }
-    }
 }

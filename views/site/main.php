@@ -75,8 +75,8 @@ MainAsset::register($this);
     <a href="#">Вся команда</a>
 </div>
 <div class="row team-row">
-    <?php shuffle($people) ?>
-    <?php foreach (array_slice($people, 0, 6) as $member ) {?>
+    <?php shuffle($members) ?>
+    <?php foreach (array_slice($members, 0, 6) as $member ) {?>
         <?= TeamMemberWidget::widget($member) ?>
     <?php } ?>
 </div>

@@ -9,14 +9,12 @@ class MysqlMessageSource extends MessageSource
     protected function loadMessages($category, $language)
     {
         $allTranslations = TranslationString::find()
-            ->where([
-                'lang' => $language
-            ])
+            ->select(['name', $language])
             ->all();
         $translations = [];
 
         foreach($allTranslations as $translation) {
-            $translations[$translation['name']] = $translation['value'];
+            $translations[$translation['name']] = $translation[$language];
         }
 
         return $translations;

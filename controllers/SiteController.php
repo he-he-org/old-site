@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Member;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -26,10 +27,20 @@ class SiteController extends Controller
     {
         $this->layout = 'main';
 
-        $people = Yii::$app->db->createCommand("select * from members")->queryAll();
+        $members = array_map(function ($member) {
+            return [
+                'name' => $member['name'][Yii::$app->language],
+                'role' => $member['role'][Yii::$app->language],
+                'vk' => $member['vk'],
+                'fb' => $member['fb'],
+                'photo_url' => $member['photo_url'],
+                'email' => $member['email'],
+                'linked_in' => $member['linked_in'],
+            ];
+        }, Member::find()->all());
 
         return $this->render('main', [
-            'people' => $people
+            'members' => $members
         ]);
     }
 
