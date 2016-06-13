@@ -16,10 +16,28 @@
         </div>
     </div>
     <div class="special-project_bottom">
-        <div class="special-project_donate">
+        <form class="special-project_donate" action="https://money.yandex.ru/quickpay/confirm.xml">
+            <!-- Получатель (тестовый кошелек): --> <input type="hidden" name="receiver" value="410012927511965" />
+            <!-- Название перевода на странице подтверждения: --> <input type="hidden" name="formcomment" value="Проект «Health &amp; Help»: пожертвование на специальный проект «<?= $title ?>»" />
+            <!-- Название перевода в истории отправителя: --> <input type="hidden" name="short-dest" value="Проект «Health &amp; Help»" />
+            <!-- Тип транзакции: --> <input type="hidden" name="quickpay-form" value="donate" />
+            <!-- Назначение платежа: --> <input type="hidden" name="targets" value="Проект «Health &amp; Help»" />
+            <!-- Способ оплаты: --> <input type="hidden" readonly="readonly" name="paymentType" value="PC" data-type="string" />
+
+            <!-- Сумма: --> <input type="hidden" readonly="readonly" name="sum" value="" data-type="number" />
+
+            <!-- Метка перевода (внутренний id приложения):  <input type="hidden" name="label" value="-1" />-->
+            <!-- Комментарий отправителя перевода: <input type="hidden" name="comment" value="-1" />-->
+            <!-- Обратный адрес: <input type="hidden" name="successURL" value="http://new.he-he.org/site/donation_done" data-type="text" />-->
+            <!-- Запрос ФИО отправителя:  <input type="hidden" name="need-fio" value="true" />-->
+            <!-- Запрос email отправителя: <input type="hidden" name="need-email" value="true" />-->
+            <!-- Запрос телефона отправителя: <input type="hidden" name="need-phone" value="true" />-->
+            <!-- Запрос адреса отправителя: <input type="hidden" name="need-address" value="true" />-->
+
             <input value="1 000 ₽" class="special-project_donate-amount"/>
+
             <button class="special-project_donate-button">Пожертвовать</button>
-        </div>
+        </form>
         <div class="special-project_links">
             <button class="special-project_link-button">Как помочь</button>
             <button class="special-project_link-button">План развития</button>

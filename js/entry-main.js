@@ -60,4 +60,27 @@ document.addEventListener("DOMContentLoaded", () => {
         // Bind some events to store dispatching
         bindEvents(input, ["input", "focus", "blur"], store)
     })
+
+    Array.from(document.querySelectorAll(".special-project_donate")).forEach((form) => {
+        const input = form.querySelector(".special-project_donate-amount")
+        const button = form.querySelector(".special-project_donate-button")
+
+        const sumInput = form.querySelector("input[name=sum]")
+
+        // Configure rendering
+        const store = createStore(donationFormReducer)
+        const render = () => {
+            const {value, focused} = store.getState()
+
+            // Update view
+            input.value = value + (!focused ? " ₽" : "")
+            button.disabled = !(value > 0)
+            sumInput.value = value
+        }
+        store.subscribe(render)
+        render()
+
+        // Bind some events to store dispatching
+        bindEvents(input, ["input", "focus", "blur"], store)
+    })
 })
