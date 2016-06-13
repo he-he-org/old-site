@@ -29,6 +29,6 @@ class ExtMarkdown extends \cebe\markdown\GithubMarkdown
         $parts = array_map(function($value) {  return trim($value); }, $parts);
         $parts = array_filter($parts, function($value) {  return $value !== ''; });
         $parts = array_map(function($value) {  return '<span>' . $value . '</span>'; }, $parts);
-        return "<div class='row'>" . join('', $parts) . "</div>";
+        return "<p class='row'>" . join('', $parts) . "</p>";
     }
 }
