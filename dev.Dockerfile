@@ -26,6 +26,11 @@ MAINTAINER Nikolai Mavrenkov <koluch@koluch.ru>
 
 EXPOSE 80
 
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
 WORKDIR /var/www/site
 
 # Install dependencies
@@ -81,6 +86,8 @@ RUN ln -s /var/www/site/yii /usr/local/bin/yii
 
 # Configure composer
 RUN composer global require "fxp/composer-asset-plugin:~1.1.1"
+
+
 
 # Start apache, initialize mysql directory and run bash
 CMD service apache2 start && \
