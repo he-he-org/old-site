@@ -27,6 +27,10 @@ class SiteController extends Controller
     {
         $this->layout = 'main';
 
+        $members = Member::find()
+            ->with(['name', 'role'])
+            ->all();
+
         $members = array_map(function ($member) {
             return [
                 'name' => $member['name'][Yii::$app->language],
@@ -37,9 +41,7 @@ class SiteController extends Controller
                 'email' => $member['email'],
                 'linked_in' => $member['linked_in'],
             ];
-        }, Member::find()
-            ->with(['name', 'role'])
-            ->all());
+        }, $members);
 
         return $this->render('main', [
             'members' => $members

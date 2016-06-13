@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Url;
 use app\widgets\layout\MainMenu;
+use app\widgets\layout\LanguageSwitcher;
 
 AppAsset::register($this);
 ?>
@@ -33,20 +34,20 @@ AppAsset::register($this);
                     <img src="/images/logo.png"/>
 
                     <div class="layout-header_right">
-                        <div class="layout-header_languages">
-                            <div class="layout-header_languages-item"><a href='<?= Url::toRoute([Yii::$app->request->getPage(), 'section' => Yii::$app->request->getSection(), 'lang' => 'ru']) ?>'>Ru</a></div>
-                            <div class="layout-header_languages-item"><a href='<?= Url::toRoute([Yii::$app->request->getPage(), 'section' => Yii::$app->request->getSection(), 'lang' => 'en']) ?>'>En</a></div>
-                            <div class="layout-header_languages-item"><a href='<?= Url::toRoute([Yii::$app->request->getPage(), 'section' => Yii::$app->request->getSection(), 'lang' => 'es']) ?>'>Es</a></div>
-                        </div>
+                        <?= LanguageSwitcher::widget(['items' => [
+                            ['title' => 'Ru', 'lang' => 'ru'],
+                            ['title' => 'En', 'lang' => 'en'],
+                            ['title' => 'Es', 'lang' => 'es'],
+                        ]]) ?>
                         <div class="layout-header_social-networks">
                             <div class="layout-header_social-networks_title">
                                 Мы в социальных сетях
                             </div>
                             <div class="layout-social-networks">
-                                <i class="fa fa-facebook layout-social-networks_item" aria-hidden="true"></i>
-                                <i class="fa fa-twitter layout-social-networks_item" aria-hidden="true"></i>
-                                <i class="fa fa-instagram layout-social-networks_item" aria-hidden="true"></i>
-                                <i class="fa fa-vk layout-social-networks_item" aria-hidden="true"></i>
+                                <a href="https://www.facebook.com/healthandhelporg/" class="fa fa-facebook layout-social-networks_item" aria-hidden="true"></a>
+                                <a href="https://twitter.com/heheorg" class="fa fa-twitter layout-social-networks_item" aria-hidden="true"></a>
+                                <a href="https://www.instagram.com/health2help" class="fa fa-instagram layout-social-networks_item" aria-hidden="true"></a>
+                                <a href="http://vk.com/heandhe" class="fa fa-vk layout-social-networks_item" aria-hidden="true"></a>
                             </div>
                         </div>
                     </div>
@@ -97,10 +98,10 @@ AppAsset::register($this);
                     </div>
                     <div class="row_block-3">
                         <div class="layout-social-networks">
-                            <i class="fa fa-facebook layout-social-networks_item" aria-hidden="true"></i>
-                            <i class="fa fa-twitter layout-social-networks_item" aria-hidden="true"></i>
-                            <i class="fa fa-instagram layout-social-networks_item" aria-hidden="true"></i>
-                            <i class="fa fa-vk layout-social-networks_item" aria-hidden="true"></i>
+                            <a href="https://www.facebook.com/healthandhelporg/" class="fa fa-facebook layout-social-networks_item" aria-hidden="true"></a>
+                            <a href="https://twitter.com/heheorg" class="fa fa-twitter layout-social-networks_item" aria-hidden="true"></a>
+                            <a href="https://www.instagram.com/health2help" class="fa fa-instagram layout-social-networks_item" aria-hidden="true"></a>
+                            <a href="http://vk.com/heandhe" class="fa fa-vk layout-social-networks_item" aria-hidden="true"></a>
                         </div>
                     </div>
                 </div>
