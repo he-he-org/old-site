@@ -37,7 +37,9 @@ class SiteController extends Controller
                 'email' => $member['email'],
                 'linked_in' => $member['linked_in'],
             ];
-        }, Member::find()->all());
+        }, Member::find()
+            ->with(['name', 'role'])
+            ->all());
 
         return $this->render('main', [
             'members' => $members

@@ -22,7 +22,7 @@ class MysqlTextsMessageSource extends MessageSource
             $query->andWhere('scope like :scope', ['scope' => "$category%"]);
         }
 
-        $allTranslations = $query->all();
+        $allTranslations = $query->asArray()->all();
         $translations = [];
 
         foreach($allTranslations as $translation) {

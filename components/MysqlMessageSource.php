@@ -10,6 +10,7 @@ class MysqlMessageSource extends MessageSource
     {
         $allTranslations = TranslationString::find()
             ->select(['name', $language])
+            ->asArray()
             ->all();
         $translations = [];
 
