@@ -11,6 +11,9 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'class' => 'app\components\LangRequest',
             'cookieValidationKey' => 'dP2rUYAXX50oCRVqQ3p4yGNggvfFLVti',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -44,6 +47,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'translation-string'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'member'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'test'],
                 '<page>/<section>' => 'site/<page>',
                 '<page>' => 'site/<page>',
             ],

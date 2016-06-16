@@ -5,6 +5,11 @@ use yii\db\ActiveRecord;
 
 class Member extends ActiveRecord
 {
+    public function extraFields()
+    {
+        return ['name', 'role'];
+    }
+
     public static function tableName()
     {
         return 'members';

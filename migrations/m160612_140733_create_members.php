@@ -108,6 +108,22 @@ class m160612_140733_create_members extends Migration
             'role_id' => $this->integer()->notNull(),
         ]);
 
+        $this->addForeignKey(
+            'fk-members-name_id',
+            'members',
+            'name_id',
+            'i18n_strings',
+            'id'
+        );
+
+        $this->addForeignKey(
+            'fk-members-role_id',
+            'members',
+            'role_id',
+            'i18n_strings',
+            'id'
+        );
+
 
         foreach($data as $member) {
             $this->insert('i18n_strings', ['ru-RU' => $member['name'], 'en-US' => $member['name'], 'es-ES' => $member['name']]);
