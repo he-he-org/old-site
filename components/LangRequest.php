@@ -48,7 +48,17 @@ class LangRequest extends Request
             return $default;
         }
         else {
-            return $parts[1];
+            return join("/", array_slice($parts, 1));
+        }
+    }
+
+    public function getSectionPart($i, $default = '') {
+        $parts = array_slice(explode('/', $this->pathinfo), 1);
+        if (count($parts) > $i && $parts[$i] !== '') {
+            return $parts[$i];
+        }
+        else {
+            return $default;
         }
     }
 

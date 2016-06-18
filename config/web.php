@@ -50,7 +50,7 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'translation-string'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'translation-text'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'member'],
-                '<page>/<section>' => 'site/<page>',
+                '<page>/<section:.*>' => 'site/<page>',
                 '<page>' => 'site/<page>',
             ],
         ],
