@@ -19,6 +19,7 @@ html {
     justify-content: space-between;
 }
 
+
 .column {
     display: flex;
     flex-direction: column;
@@ -26,20 +27,22 @@ html {
 
 .row_block {
     flex: 1;
+
+    &-1 {flex-basis: 60px;}
+    &-2 {flex-basis: 160px;}
+    &-3 {flex-basis: 260px;}
+    &-4 {flex-basis: 360px;}
+    &-5 {flex-basis: 460px;}
+    &-6 {flex-basis: 560px;}
+    &-7 {flex-basis: 660px;}
+    &-8 {flex-basis: 760px;}
+    &-9 {flex-basis: 860px;}
+    &-10 {flex-basis: 960px;}
+    &-11 {flex-basis: 1060px;}
+    &-12 {flex-basis: 1160px;}
 }
 
-.row_block-1 {flex-basis: 60px;}
-.row_block-2 {flex-basis: 160px;}
-.row_block-3 {flex-basis: 260px;}
-.row_block-4 {flex-basis: 360px;}
-.row_block-5 {flex-basis: 460px;}
-.row_block-6 {flex-basis: 560px;}
-.row_block-7 {flex-basis: 660px;}
-.row_block-8 {flex-basis: 760px;}
-.row_block-9 {flex-basis: 860px;}
-.row_block-10 {flex-basis: 960px;}
-.row_block-11 {flex-basis: 1060px;}
-.row_block-12 {flex-basis: 1160px;}
+
 
 .flex {
     display: flex;

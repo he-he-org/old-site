@@ -28,21 +28,16 @@ HelpAsset::register($this);
 
 <?php $mainSection = Yii::$app->request->getSectionPart(0, 'package') ?>
 
-<div class="row menu-and-content">
+<?php if ($mainSection === 'package') { ?>
 
+    <?php include("help/package.php") ?>
 
-    <?php if ($mainSection === 'package') { ?>
+<?php } else if ($mainSection === 'donate') { ?>
 
-        <?php include("help/package.php") ?>
+    <?php include("help/donate.php") ?>
 
-    <?php } else if ($mainSection === 'donate') { ?>
+<?php } else if ($mainSection === 'volunteer') { ?>
 
-        <?php include("help/donate.php") ?>
+    <?php include("help/volunteer.php") ?>
 
-    <?php } else if ($mainSection === 'volunteer') { ?>
-
-        <?php include("help/volunteer.php") ?>
-
-    <?php } ?>
-
-</div>
+<?php } ?>
