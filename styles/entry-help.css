@@ -153,6 +153,8 @@ li {
         line-height:  2rem;
         font-weight: 600;
         border-bottom: 4px solid transparent;
+        user-select: none;
+        cursor: pointer;
 
         &--active {
             border-bottom-color: #fa5555;
@@ -165,7 +167,23 @@ li {
 
     &_amount {
         font-size: 3.125rem;
+        padding: 1rem 0;
         font-weight: bold;
+    }
+
+    &_amount-input {
+        display: flex;
+        align-items: center;
+
+        &, & input {
+            font-weight: bold;
+            font-size: 3.125rem;
+        }
+
+        input {
+            height: 3.125rem;
+            min-width: calc(1.95rem * 4);
+        }
     }
 
     &_fee {
@@ -180,6 +198,10 @@ li {
         background: #fa5555;
         color: white;
         margin-bottom: -2rem;
+
+        &:disabled {
+            color: rgba(255, 255, 255, 0.5);
+        }
     }
 
 }
