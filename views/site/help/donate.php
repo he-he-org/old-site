@@ -30,12 +30,30 @@
         <input type="hidden" readonly="readonly" name="sum" value="" data-type="number" data-role="hidden-sum" />
     </form>
 
-    <div class="section-donate-info row_block-5">
-        <div class="section-donate-info_amount">500 ₽</div>
-        <div class="section-donate-info_title">Для них</div>
-        <div class="section-donate-info_desc">Две упаковки Но-шпы, чтобы облегчить боль нескольким людям</div>
-        <div class="section-donate-info_title">Для вас</div>
-        <div class="section-donate-info_desc">Один поход в кино</div>
+    <div class="section-donate-info row_block-5" date-role="info">
+        <div  class="section-donate-info_block hidden" date-value="300">
+            <div class="section-donate-info_amount">300 ₽</div>
+            <div class="section-donate-info_title">Для них</div>
+            <div class="section-donate-info_desc">Две упаковки Но-шпы, чтобы облегчить боль нескольким людям</div>
+            <div class="section-donate-info_title">Для вас</div>
+            <div class="section-donate-info_desc">Один поход в кино</div>
+        </div>
+        <div  class="section-donate-info_block" date-value="500">
+            <div class="section-donate-info_amount">500 ₽</div>
+            <div class="section-donate-info_title">Для них</div>
+            <div class="section-donate-info_desc">Две упаковки Но-шпы, чтобы облегчить боль нескольким людям</div>
+            <div class="section-donate-info_title">Для вас</div>
+            <div class="section-donate-info_desc">Один поход в кино</div>
+        </div>
+        <div  class="section-donate-info_block hidden" date-value="1000">
+            <div class="section-donate-info_amount">1000 ₽</div>
+            <div class="section-donate-info_title">Для них</div>
+            <div class="section-donate-info_desc">Две упаковки Но-шпы, чтобы облегчить боль нескольким людям</div>
+            <div class="section-donate-info_title">Для вас</div>
+            <div class="section-donate-info_desc">Один поход в кино</div>
+        </div>
+        <div  class="section-donate-info_block hidden" date-value="free">
+        </div>
     </div>
 
 </div>

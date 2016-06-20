@@ -103,6 +103,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
             get(form, "[data-role=hidden-sum]").value = amount
             get(form, "[data-role=hidden-paymentType]").value = paymentType
+
+
+            find(".section-donate-info").forEach((info) => {
+                find(info, ".section-donate-info_block").forEach((div) => {
+                    if (div.getAttribute("date-value") === amountOption) {
+                        div.classList.remove("hidden")
+                    }
+                    else {
+                        div.classList.add("hidden")
+                    }
+                })
+            })
         }
         renderer()
         store.subscribe(renderer)
