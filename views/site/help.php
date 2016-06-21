@@ -37,8 +37,4 @@ HelpAsset::register($this);
 
     <?php include("help/donate.php") ?>
 
-<?php } else if ($mainSection === 'volunteer') { ?>
-
-    <?php include("help/volunteer.php") ?>
-
 <?php } ?>

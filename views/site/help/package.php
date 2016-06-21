@@ -4,7 +4,7 @@ use app\widgets\help\CategoryMenu;
 use app\widgets\help\PreparedPackage;
 
 ?>
-<div class="row content">
+<div class="row row--separate">
     <div class="row_block-3">
         <!-- todo: make a proper translation -->
         <?= CategoryMenu::widget(['items' => [
@@ -47,7 +47,7 @@ use app\widgets\help\PreparedPackage;
                 ]) ?>
             </div>
 
-            <div class="row content-block">
+            <div class="row row--separate">
                 <div class="row_block-6">
 
                     <?= Yii::t('texts/help', 'help/pharmacy/part2') ?>

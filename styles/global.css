@@ -17,6 +17,10 @@ html {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    &--separate {
+        margin-top: 50px;
+    }
 }
 
 
