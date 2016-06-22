@@ -37,4 +37,8 @@ HelpAsset::register($this);
 
     <?php include("help/donate.php") ?>
 
+<?php } else if ($mainSection === 'russian-post') { ?>
+
+    <?php include("help/russian-post.php") ?>
+
 <?php } ?>
