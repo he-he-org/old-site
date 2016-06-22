@@ -4,7 +4,7 @@ use app\widgets\help\CategoryMenu;
 use app\widgets\help\PreparedPackage;
 
 ?>
-<div class="row row--separate">
+<div class="row">
     <div class="row_block-3">
         <!-- todo: make a proper translation -->
         <?= CategoryMenu::widget(['items' => [

@@ -1,6 +1,6 @@
 h1, h2 {
 	font-weight: 700;
-	line-height: 2.5rem;
+	line-height: 2.25rem;
 }
 
 h1 {
@@ -91,11 +91,7 @@ a {
 	}
 }
 
-p, ul, ul {
-	&:not(:first-child) {
-		margin-top: 1rem;
-	}
-
+p, ul, ol {
 	&:not(:last-child) {
 		margin-bottom: 1rem;
 	}

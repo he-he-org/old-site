@@ -21,6 +21,10 @@ html {
     &--separate {
         margin-top: 50px;
     }
+
+    &--separate-bottom {
+        margin-bottom: 50px;
+    }
 }
 
 

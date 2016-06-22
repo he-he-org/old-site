@@ -1,3 +1,7 @@
+.content {
+    padding-top: 50px;
+}
+
 .common-donation {
     display: flex;
     flex-direction: column;

@@ -17,7 +17,7 @@ HelpAsset::register($this);
 ?>
 
 
-<div class="row">
+<div class="row row--separate-bottom">
     <div class="row_block-12">
         <?= HelpOptions::widget(['items' => [
             ['title' => 'Отправить посылку', 'section' => 'package', 'icon_url' => '/images/help/shipping.svg'],

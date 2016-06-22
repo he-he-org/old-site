@@ -7,6 +7,10 @@
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
+
+    &--centered {
+        justify-content: space-around;
+    }
 }
 
 .feature {
@@ -15,16 +19,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 230px;
 
     &_content {
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 230px;
-        margin: 30px 0;
     }
 
     &_text {
         text-align: center;
+        margin-top: 0.5rem;
     }
 }

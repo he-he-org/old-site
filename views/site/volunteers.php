@@ -28,6 +28,11 @@ VolunteersAsset::register($this);
         <div class="feature"><div class="feature_content"><img class="feature_img" src="/images/no_image.png"/><div class="feature_text" >Уметь хорошо выполнять свою работу</div></div></div>
         <div class="feature"><div class="feature_content"><img class="feature_img" src="/images/no_image.png"/><div class="feature_text" >Уважать чужую культуру, расу, религию и ценности</div></div></div>
         <div class="feature"><div class="feature_content"><img class="feature_img" src="/images/no_image.png"/><div class="feature_text" >Придерживаться высоких моральных ценностей</div></div></div>
+    </div>
+</div>
+
+<div class="row row--separate">
+    <div class="row_block-12 features-block features-block--centered">
         <div class="feature"><div class="feature_content"><img class="feature_img" src="/images/no_image.png"/><div class="feature_text">Сделать плановые прививки, от гепатита А, В, брюшного тифа и бешенства</div></div></div>
         <div class="feature"><div class="feature_content"><img class="feature_img" src="/images/no_image.png"/><div class="feature_text">Оплатить проезд и дорожные расходы</div></div></div>
         <div class="feature"><div class="feature_content"><img class="feature_img" src="/images/no_image.png"/><div class="feature_text">Внести взнос в 600$ на покупку лекарств, расходных материалов для клиники и медицинских бригад</div></div></div>
