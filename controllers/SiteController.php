@@ -63,7 +63,34 @@ class SiteController extends Controller
     public function actionNews()
     {
         $this->layout = 'main';
-        return $this->render('news');
+        $news = [
+            [
+                'id' => 1,
+                'date' => 1467318954,
+                'title' => 'Расскажите о нас',
+                'text' => 'Информация решает самые сложные вопросы, ведь «кто владеет информацией, владеет миром». В ваших силах овладеть миром. Подумайте сами: ведь это же прекрасно, когда мир держат в руках люди, которые стремятся помочь другим! ',
+                'image_url' => '/images/news_item_1.png',
+                'tags' => ['строительство', 'финансы'],
+            ],
+            [
+                'id' => 1,
+                'date' => 1466112954,
+                'title' => 'The standard Lorem Ipsum passage',
+                'text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                'image_url' => '/images/news_item_1.png',
+                'tags' => ['строительство', 'финансы'],
+            ]
+        ];
+        $tags = [
+            'Строительство',
+            'Спонсоры',
+            'Медикаменты',
+            'Финансы',
+        ];
+        return $this->render('news', [
+            'news' => $news,
+            'tags' => $tags,
+        ]);
     }
 
     public function actionContacts()

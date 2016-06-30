@@ -1,0 +1,58 @@
+.item {
+    display: flex;
+    padding-bottom: 4rem;
+
+    &_info {
+        padding-left: 1rem;
+    }
+
+    &_date {
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+        color: #7b7b7b;
+    }
+
+    &_title {
+        font-size: 1.5625rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    &_text {
+        margin-bottom: 2rem;
+        line-height: 1.6rem;
+    }
+
+    &_tags {
+        font-size: 0.9rem;
+        color:  #7b7b7b;
+    }
+
+    &_tag {
+        display: inline;
+
+        &:not(:last-child):after {
+            content: ',';
+        }
+    }
+}
+
+.tags {
+    &_title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-top: 0.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    &_tag {
+        margin-bottom: 1.25rem;
+        border-left: 4px solid #cccccc;
+        padding-left: 12px;
+        margin-left: -12px;
+    }
+
+    &_tag--active {
+        border-left-color: #f5122c;
+    }
+}

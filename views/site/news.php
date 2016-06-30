@@ -1,13 +1,8 @@
 <?php
 
-use app\widgets\main\TeamMemberWidget;
-use app\widgets\main\SpecialProject;
+use app\assets\NewsAsset;
 
 
-//
-// TODO: update localization algorythm
-// NOTE! See https://github.com/samdark/yii2-cookbook/blob/master/book/i18n-selecting-application-language.md
-//
 $pageName = 'News';
 if (Yii::$app->language == 'ru-RU') {
     $pageName = 'Новости';
@@ -15,9 +10,33 @@ if (Yii::$app->language == 'ru-RU') {
 
 $this->title = 'Health & Help - ' . $pageName;
 
+NewsAsset::register($this);
+
 ?>
 
-<h1> В Братске поймали "человека-паука" </h1>
-<p> Жители Братска поймали с поличным вора, который промышлял велосипедами, хранящимися на балконе.
-Злоумышленник ловко забирался на нужный этаж по водосточным трубам и решеткам на окнах и столь же
-ловко спускался с добычей. </p>
+<div class="row">
+    <div class="row_block-9">
+        <?php foreach ($news as $item) { ?>
+            <div class="item">
+                <div class="item_image"><img src="<?= $item['image_url'] ?>"/> </div>
+                <div class="item_info">
+                    <div class="item_date"><?= date('d.m.Y', $item['date']) ?></div>
+                    <div class="item_title"><?= $item['title'] ?></div>
+                    <div class="item_text"><?= $item['text'] ?></div>
+                    <div class="item_tags">Теги:
+                        <?php foreach ($item['tags'] as $tag) { ?>
+                            <div class="item_tag"><?= $tag ?></div>
+                        <?php }?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+    <div class="row_block-2 tags">
+        <div class="tags_title">Теги</div>
+        <?php foreach ($tags as $tag) { ?>
+            <div class="tags_tag"><?= $tag ?></div>
+        <?php } ?>
+    </div>
+</div>
+
