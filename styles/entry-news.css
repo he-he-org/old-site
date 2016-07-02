@@ -30,11 +30,17 @@
 
     &_tag {
         display: inline;
+        color: #2a2a2a;
 
         &:not(:last-child):after {
             content: ',';
         }
+
+        &--active {
+            font-weight: bold;
+        }
     }
+
 }
 
 .tags {
@@ -46,13 +52,16 @@
     }
 
     &_tag {
+        color: #2a2a2a;
+        display: block;
         margin-bottom: 1.25rem;
         border-left: 4px solid #cccccc;
         padding-left: 12px;
         margin-left: -12px;
+
+        &--active {
+            border-left-color: #f5122c;
+        }
     }
 
-    &_tag--active {
-        border-left-color: #f5122c;
-    }
 }

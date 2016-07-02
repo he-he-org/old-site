@@ -14,7 +14,7 @@ class m160611_103729_create_i18n_texts extends Migration
     {
         $this->createTable('i18n_texts', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(100)->notNull(),
+            'name' => $this->string(100),
             'scope' => $this->string(100),
             'en-US' => $this->text(),
             'ru-RU' => $this->text(),

@@ -1,6 +1,7 @@
 <?php
 
 use app\assets\NewsAsset;
+use yii\helpers\Url;
 
 
 $pageName = 'News';
@@ -11,6 +12,8 @@ if (Yii::$app->language == 'ru-RU') {
 $this->title = 'Health & Help - ' . $pageName;
 
 NewsAsset::register($this);
+
+$tag_param = intval(Yii::$app->getRequest()->getQueryParam('tag'))
 
 ?>
 
@@ -25,7 +28,9 @@ NewsAsset::register($this);
                     <div class="item_text"><?= $item['text'] ?></div>
                     <div class="item_tags">Теги:
                         <?php foreach ($item['tags'] as $tag) { ?>
-                            <div class="item_tag"><?= $tag ?></div>
+                            <a class="item_tag <?= $tag_param === $tag['id'] ? 'item_tag--active' : '' ?>"
+                               href="<?= Url::toRoute(['/news', 'tag' => $tag['id']]) ?>"><?= $tag['title'] ?>
+                            </a>
                         <?php }?>
                     </div>
                 </div>
@@ -35,7 +40,11 @@ NewsAsset::register($this);
     <div class="row_block-2 tags">
         <div class="tags_title">Теги</div>
         <?php foreach ($tags as $tag) { ?>
-            <div class="tags_tag"><?= $tag ?></div>
+            <a class="tags_tag <?= $tag_param === $tag['id'] ? 'tags_tag--active' : '' ?>"
+               href="<?= Url::toRoute(['/news', 'tag' => $tag['id']]) ?>"
+               >
+                <?= $tag['title'] ?>
+            </a>
         <?php } ?>
     </div>
 </div>

@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\Member;
+use app\models\News;
+use app\models\NewsTag;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -63,30 +65,46 @@ class SiteController extends Controller
     public function actionNews()
     {
         $this->layout = 'main';
-        $news = [
-            [
-                'id' => 1,
-                'date' => 1467318954,
-                'title' => 'Расскажите о нас',
-                'text' => 'Информация решает самые сложные вопросы, ведь «кто владеет информацией, владеет миром». В ваших силах овладеть миром. Подумайте сами: ведь это же прекрасно, когда мир держат в руках люди, которые стремятся помочь другим! ',
-                'image_url' => '/images/news_item_1.png',
-                'tags' => ['строительство', 'финансы'],
-            ],
-            [
-                'id' => 1,
-                'date' => 1466112954,
-                'title' => 'The standard Lorem Ipsum passage',
-                'text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                'image_url' => '/images/news_item_1.png',
-                'tags' => ['строительство', 'финансы'],
-            ]
-        ];
-        $tags = [
-            'Строительство',
-            'Спонсоры',
-            'Медикаменты',
-            'Финансы',
-        ];
+
+        $newsQuery = News::find()->with(['title', 'text']);
+
+        $tagParam = Yii::$app->getRequest()->getQueryParam('tag');
+        if ($tagParam) {
+            $tagParam = intval($tagParam);
+            $newsQuery
+                ->joinWith('tags as tags')
+                ->where(['tags.id' => $tagParam]);
+        }
+        $news = $newsQuery->all();
+
+        $news = array_map(function ($item) {
+            return [
+                'id' => $item['id'],
+                'date' => strtotime($item['date']), //todo: bad, need to move it somewhere
+                'title' => $item['title'][Yii::$app->language],
+                'text' => $item['text'][Yii::$app->language],
+                'image_url' => $item['image_url'],
+                'tags' => array_map(function($tag) {
+                    return [
+                        'id' => $tag['id'],
+                        'title' => $tag['title'][Yii::$app->language],
+                    ];
+                }, $item['tags']),
+            ];
+        }, $news);
+
+        $tags = NewsTag::find()
+            ->with(['title'])
+            ->joinWith('news', true, $joinType = 'INNER JOIN' )
+            ->all();
+        $tags = array_map(function($tag) {
+            return [
+                'id' => $tag['id'],
+                'title' => $tag['title'][Yii::$app->language],
+                'news' => $tag['news'],
+            ];
+        }, $tags);
+
         return $this->render('news', [
             'news' => $news,
             'tags' => $tags,
