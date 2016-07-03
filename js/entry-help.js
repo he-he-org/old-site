@@ -137,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Left menu bar
 const STICKY_MARGIN = 5
+
 document.addEventListener("DOMContentLoaded", () => {
     [...document.querySelectorAll(".category-menu")].forEach((menu) => {
         // Highlight current item
@@ -156,12 +157,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Make sticky menu
         const body = menu.querySelector(".category-menu_body")
+
         const checkSticky = () => {
             const bodyRect = document.body.getBoundingClientRect()
             const menuRect = menu.getBoundingClientRect()
             const pos = menuRect.top - bodyRect.top
 
-            const dif = Math.max(document.body.scrollTop - pos + STICKY_MARGIN, 0)
+            const bodyScroll = window.pageYOffset
+                || document.documentElement.scrollTop
+                || document.body.scrollTop || 0
+
+            const dif = Math.max(bodyScroll - pos + STICKY_MARGIN, 0)
+
             body.style.top = `${dif}px`
         }
         document.addEventListener("scroll", checkSticky)

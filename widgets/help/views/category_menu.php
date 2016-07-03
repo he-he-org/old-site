@@ -13,4 +13,7 @@ use app\helpers\RouteHelper;
             </a>
         <?php } ?>
     </div>
+
+    <!-- Fix for sticky menu in Chrome, so it doesn't witch. I dont know how it works O_o -->
+    <div style="position: fixed; right: 0;bottom: 0;"></div>
 </div>
