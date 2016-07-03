@@ -31,7 +31,7 @@ AppAsset::register($this);
         <div class="layout-container">
             <div class="layout-fields">
                 <header class="layout-header">
-                    <img src="/images/logo.png"/>
+                    <a href="<?= Url::toRoute(["/"]) ?>"><img src="/images/logo.png"/></a>
 
                     <div class="layout-header_right">
                         <?= LanguageSwitcher::widget(['items' => [
@@ -55,7 +55,7 @@ AppAsset::register($this);
 
                 <div class="row layout-menu-row">
                     <?= MainMenu::widget(['items' => [
-                        ['page' => 'main', 'title' => 'layout/main-menu/about_us'],
+                        ['page' => 'about', 'title' => 'layout/main-menu/about_us'],
                         ['page' => 'help', 'title' => 'layout/main-menu/help'],
                         ['page' => 'volunteers', 'title' => 'layout/main-menu/volunteers'],
                         ['page' => 'news', 'title' => 'layout/main-menu/news'],

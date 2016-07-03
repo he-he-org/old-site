@@ -56,6 +56,12 @@ class SiteController extends Controller
         return $this->render('help');
     }
 
+    public function actionAbout()
+    {
+        $this->layout = 'main';
+        return $this->render('about');
+    }
+
     public function actionVolunteers()
     {
         $this->layout = 'main';
