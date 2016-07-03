@@ -23,9 +23,8 @@ use app\widgets\help\PreparedPackage;
         ]]) ?>
     </div>
     <div class="row_block-9">
-        <?php $subSection = Yii::$app->request->getSectionPart(1, 'pharmacy') ?>
-        <?php if ($subSection === 'pharmacy') { ?>
 
+            <span  id="pharmacy"/>
             <?= Yii::t('texts/help', 'help/pharmacy/part1') ?>
 
             <div class="packages">
@@ -54,15 +53,15 @@ use app\widgets\help\PreparedPackage;
 
                 </div>
             </div>
-        <?php } else if ($subSection === 'press') { ?>
-            <h1>Печатные материалы</h1>
+
+            <h1 id="press">Печатные материалы</h1>
             <div class="check-item">футболки с нашим лого</div>
             <div class="check-item">хирургические рубашки с нашим лого</div>
             <div class="check-item">халаты с нашим лого</div>
             <div class="check-item">отдельно лого (нашивки)</div>
             <div class="check-item">наклейки с нашим лого</div>
-        <?php } else if ($subSection === 'tableware') { ?>
-            <h1>Посуда, хозяйство</h1>
+
+            <h1 id="tableware">Посуда, хозяйство</h1>
             <div class="check-item">посуда из твердого пластика/алюминия</div>
             <div class="check-item">пластиковые контейнеры</div>
             <div class="check-item">коробки из пластика/твердого картона (аля икея)</div>
@@ -70,8 +69,8 @@ use app\widgets\help\PreparedPackage;
             <div class="check-item">вешалки</div>
             <div class="check-item">прищепки</div>
             <div class="check-item">надувные кровати-матрацы (лучше полуторные)</div>
-        <?php } else if ($subSection === 'linen') { ?>
-            <h1>Белье, текстиль</h1>
+
+            <h1 id="linen">Белье, текстиль</h1>
             <div class="check-item">постельное белье на 2-х спальные/ односпальные кровати</div>
             <div class="check-item">тряпичные мешки</div>
             <div class="check-item">полотенца</div>
@@ -79,25 +78,25 @@ use app\widgets\help\PreparedPackage;
             <div class="check-item">скатерти</div>
             <div class="check-item">половички</div>
             <div class="check-item">веревки/канат/бельевая/трос</div>
-        <?php } else if ($subSection === 'clothes') { ?>
-            <h1>Одежда, обувь</h1>
+
+            <h1 id="clothes">Одежда, обувь</h1>
             <div class="check-item">резиновые сапоги</div>
             <div class="check-item">рюкзаки разных размеров</div>
             <div class="check-item">носки</div>
             <div class="check-item">перчатки рабочие</div>
-        <?php } else if ($subSection === 'hygiene') { ?>
-            <h1>Кожа, гигиена</h1>
+
+            <h1 id="hygiene">Кожа, гигиена</h1>
             <div class="check-item">солнцезащитный крем</div>
             <div class="check-item">крем от комаров</div>
             <div class="check-item">мыло</div>
-        <?php } else if ($subSection === 'tech') { ?>
-            <h1>Техника</h1>
+
+            <h1 id="tech">Техника</h1>
             <div class="check-item">проектор</div>
             <div class="check-item">фотокамера</div>
             <div class="check-item">видеокамера</div>
             <div class="check-item">принтер</div>
-        <?php } else if ($subSection === 'music') { ?>
-            <h1>Музыка</h1>
+
+            <h1 id="music">Музыка</h1>
             <div class="check-item">губная гармошка</div>
             <div class="check-item">гармошка</div>
             <div class="check-item">флейта</div>
@@ -106,8 +105,8 @@ use app\widgets\help\PreparedPackage;
             <div class="check-item">ксилофон</div>
             <div class="check-item">бубен</div>
             <div class="check-item">тамбурин</div>
-        <?php } else if ($subSection === 'children') { ?>
-            <h1>Детям</h1>
+
+            <h1 id="children">Детям</h1>
             <div class="check-item">учебники английского/русского языков</div>
             <div class="check-item">детские книжки с картинками</div>
             <div class="check-item">расскраски</div>
@@ -118,8 +117,8 @@ use app\widgets\help\PreparedPackage;
             <div class="check-item">фломастеры</div>
             <div class="check-item">настольные игры</div>
             <div class="check-item">детские игрушки-погремушки</div>
-        <?php } else if ($subSection === 'food') { ?>
-            <h1>Еда, напитки</h1>
+
+            <h1 id="food">Еда, напитки</h1>
             <div class="check-item">сухое молоко</div>
             <div class="check-item">шоколад</div>
             <div class="check-item">гематоген</div>
@@ -145,8 +144,8 @@ use app\widgets\help\PreparedPackage;
             <div class="check-item">чай</div>
             <div class="check-item">кисель</div>
             <div class="check-item">пудинги в пакетах</div>
-        <?php } else if ($subSection === 'books') { ?>
-            <h1>Книги</h1>
+
+            <h1 id="books">Книги</h1>
             <div class="check-item">книги по медицине на испанском/английском языках</div>
             <div class="check-item">атласы медицинские</div>
             <div class="check-item">муляжи медицинские</div>
@@ -160,11 +159,12 @@ use app\widgets\help\PreparedPackage;
             <div class="check-item">тесты на беременность</div>
             <div class="check-item">тест-полоски для глюкометров (аку)</div>
             <div class="check-item">компрессионные чулки</div>
-        <?php } else if ($subSection === 'misc') { ?>
-            <h1>Разное</h1>
+
+            <h1 id="misc">Разное</h1>
             <div class="check-item">кисточки малярные</div>
             <div class="check-item">мотивы русской культуры (матрешки/орнаменты/баба на чайник/утварь)</div>
             <div class="check-item">семена газонной травы</div>
-        <?php } ?>
+
+
     </div>
 </div>

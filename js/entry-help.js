@@ -134,3 +134,37 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     })
 })
+
+// Left menu bar
+const STICKY_MARGIN = 5
+document.addEventListener("DOMContentLoaded", () => {
+    [...document.querySelectorAll(".category-menu")].forEach((menu) => {
+        // Highlight current item
+        const highlightItems = () => {
+            [...menu.querySelectorAll(".category-menu_item")].forEach((item) => {
+                const url = new URL(item.getAttribute("href"), window.location)
+                if (url.href === location.href) {
+                    item.classList.add("category-menu_item--active")
+                }
+                else {
+                    item.classList.remove("category-menu_item--active")
+                }
+            })
+        }
+        window.addEventListener("hashchange", highlightItems, false)
+        highlightItems()
+
+        // Make sticky menu
+        const body = menu.querySelector(".category-menu_body")
+        const checkSticky = () => {
+            const bodyRect = document.body.getBoundingClientRect()
+            const menuRect = menu.getBoundingClientRect()
+            const pos = menuRect.top - bodyRect.top
+
+            const dif = Math.max(document.body.scrollTop - pos + STICKY_MARGIN, 0)
+            body.style.top = `${dif}px`
+        }
+        document.addEventListener("scroll", checkSticky)
+        checkSticky()
+    })
+})
