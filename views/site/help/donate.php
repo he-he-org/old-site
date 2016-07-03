@@ -34,23 +34,32 @@
         <div  class="section-donate-info_block hidden" date-value="300">
             <div class="section-donate-info_amount">300 ₽</div>
             <div class="section-donate-info_title">Для них</div>
-            <div class="section-donate-info_desc">Две упаковки Но-шпы, чтобы облегчить боль нескольким людям</div>
+            <div class="section-donate-info_desc">Обработка ран и антибиотикопрофилактика для двух пациентов</div>
             <div class="section-donate-info_title">Для вас</div>
-            <div class="section-donate-info_desc">Один поход в кино</div>
+            <div class="section-donate-info_desc">Одна поездка на такси</div>
         </div>
         <div  class="section-donate-info_block" date-value="500">
             <div class="section-donate-info_amount">500 ₽</div>
             <div class="section-donate-info_title">Для них</div>
-            <div class="section-donate-info_desc">Две упаковки Но-шпы, чтобы облегчить боль нескольким людям</div>
+            <div class="section-donate-info_desc">Проверка 75 пациентов на паразитарные инфекции</div>
             <div class="section-donate-info_title">Для вас</div>
             <div class="section-donate-info_desc">Один поход в кино</div>
         </div>
         <div  class="section-donate-info_block hidden" date-value="1000">
             <div class="section-donate-info_amount">1000 ₽</div>
             <div class="section-donate-info_title">Для них</div>
-            <div class="section-donate-info_desc">Две упаковки Но-шпы, чтобы облегчить боль нескольким людям</div>
+            <div class="section-donate-info_desc">
+                <?php
+                    $arr = [
+                        'Проверка шестнадцати пациентов на туберкулез',
+                        'Установка внутриматочных спиралей трем женщинам',
+                        'Поддерживающие лекарства на месяц для пяти больных диабетом',
+                    ]
+                ?>
+                <?= $arr[array_rand($arr)]?>
+            </div>
             <div class="section-donate-info_title">Для вас</div>
-            <div class="section-donate-info_desc">Один поход в кино</div>
+            <div class="section-donate-info_desc">Один поход в кафе</div>
         </div>
         <div  class="section-donate-info_block hidden" date-value="free">
         </div>
