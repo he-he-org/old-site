@@ -18,7 +18,7 @@
 #  * PORT - port for Apache on host machine
 #  * IMAGE_NAME - image name, used for this Dockerfile when build
 #
-# For example: docker run -it -p 3000:80 -v $(pwd):/var/www/site hehe
+# For example: docker run -it -p 3000:3000 -p 8080:80 -v $(pwd):/var/www/site hehe
 
 FROM ubuntu:15.04
 
