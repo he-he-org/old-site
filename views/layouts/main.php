@@ -85,7 +85,7 @@ AppAsset::register($this);
                         <div class="layout-footer_links-block_item">Новости</div>
                         <div class="layout-footer_links-block_item">Наши спецпроекты</div>
                         <div class="layout-footer_links-block_item">Команда проекта</div>
-                        <div class="layout-footer_links-block_item">История создания</div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['about']) ?>">История создания</a></div>
                         <div class="layout-footer_links-block_item">На что мы тратим деньги</div>
                     </div>
                     <div class="layout-footer_links-block row_block-3">

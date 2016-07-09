@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\ExtMarkdown;
 use app\models\Member;
 use app\models\News;
 use app\models\NewsTag;
@@ -70,6 +71,8 @@ class SiteController extends Controller
 
     public function actionNews()
     {
+        $parser = new ExtMarkdown();
+
         $this->layout = 'main';
 
         $newsQuery = News::find()->with(['title', 'text']);
@@ -83,12 +86,13 @@ class SiteController extends Controller
         }
         $news = $newsQuery->all();
 
-        $news = array_map(function ($item) {
+        $news = array_map(function ($item) use ($parser) {
+
             return [
                 'id' => $item['id'],
                 'date' => strtotime($item['date']), //todo: bad, need to move it somewhere
                 'title' => $item['title'][Yii::$app->language],
-                'text' => $item['text'][Yii::$app->language],
+                'text' => $parser->parse($item['text'][Yii::$app->language]),  //todo: bad, need to move it somewhere
                 'image_url' => $item['image_url'],
                 'tags' => array_map(function($tag) {
                     return [

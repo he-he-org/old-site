@@ -24,7 +24,7 @@ VolunteersAsset::register($this);
 
 <div class="row row--separate">
     <div class="row_block-12 features-block">
-        <div class="feature"><div class="feature_content"><img class="feature_img" src="/images/no_image.png"/><div class="feature_text" >Упорно и бесплатно работать,чтобы изменить жизнь людей к лучшему</div></div></div>
+        <div class="feature"><div class="feature_content"><img class="feature_img" src="/images/no_image.png"/><div class="feature_text" >Упорно и бесплатно работать, чтобы изменить жизнь людей к лучшему</div></div></div>
         <div class="feature"><div class="feature_content"><img class="feature_img" src="/images/no_image.png"/><div class="feature_text" >Уметь хорошо выполнять свою работу</div></div></div>
         <div class="feature"><div class="feature_content"><img class="feature_img" src="/images/no_image.png"/><div class="feature_text" >Уважать чужую культуру, расу, религию и ценности</div></div></div>
         <div class="feature"><div class="feature_content"><img class="feature_img" src="/images/no_image.png"/><div class="feature_text" >Придерживаться высоких моральных ценностей</div></div></div>

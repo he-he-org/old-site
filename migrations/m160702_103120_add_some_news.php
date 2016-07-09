@@ -1,19 +1,10 @@
 <?php
 
+use app\migrations\ExtMigration;
 use yii\db\Migration;
 
-class m160702_103120_add_some_news extends Migration
+class m160702_103120_add_some_news extends ExtMigration
 {
-    public function makeString($ru = null, $en = null, $es = null) {
-        $this->insert('i18n_strings', ['ru-RU' => $ru, 'en-US' => $en, 'es-ES' => $es]);
-        return $this->getDb()->getLastInsertID();
-    }
-
-    public function makeText($ru = null, $en = null, $es = null) {
-        $this->insert('i18n_texts', ['ru-RU' => $ru, 'en-US' => $en, 'es-ES' => $es]);
-        return $this->getDb()->getLastInsertID();
-    }
-
     public function safeUp()
     {
         // Insert tags

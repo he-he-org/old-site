@@ -47,6 +47,7 @@
       "src": "./styles",
       "dest": "./web/css",
       "entryPoints": [
+        "about",
         "main",
         "help",
         "common",
