@@ -2,14 +2,18 @@
     padding-bottom: 2rem;
 }
 
+.features {
+    margin: 6rem 0;
+}
+
 .features-block {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
 
-    &--centered {
-        justify-content: space-around;
+    &--left {
+        justify-content: flex-start;
     }
 }
 
@@ -18,17 +22,17 @@
     flex-basis: 25%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    max-width: 230px;
+    align-items: flex-start;
+    max-width: 25%;
 
     &_content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    &_text {
-        text-align: center;
-        margin-top: 0.5rem;
+        border-left: 4px solid #d9d9d9;
+        padding-left: 0.75rem;
     }
 }
+
+.features-separator {
+    border-top: 1px solid #e6e6e6;
+    margin-top: 9rem;
+}
+
