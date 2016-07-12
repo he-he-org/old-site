@@ -53,7 +53,8 @@
         "common",
         "contacts",
         "volunteers",
-        "news"
+        "news",
+        "team"
       ]
     }
   }

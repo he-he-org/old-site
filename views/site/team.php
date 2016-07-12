@@ -1,9 +1,8 @@
 <?php
 
+use app\assets\TeamAsset;
 use app\widgets\main\TeamMemberWidget;
 use app\widgets\main\SpecialProject;
-use app\assets\MainAsset;
-use yii\helpers\Url;
 
 //
 // TODO: update localization algorythm
@@ -11,22 +10,21 @@ use yii\helpers\Url;
 //
 $pageName = 'Main';
 if (Yii::$app->language == 'ru-RU') {
-    $pageName = 'Главная';
+    $pageName = 'Вся команда';
 }
 
 $this->title = 'Health & Help - ' . $pageName;
 
-MainAsset::register($this);
+TeamAsset::register($this);
 
 ?>
 <div class="row intro-row">
     <div class="row_block-6 intro">
-        <h1>Благотворительный проект</h1>
+        <h1>Вся команда</h1>
         <p>
-            В проекте Health&Help почти сотня людей объединилась для того, чтобы дать гватемальским индейцам
-            Майя доступ к базовой медицинской помощи. Работаем, чтобы помогать людям, а для покупки
-            лекарств, расходных материалов и оборудования нам нужна ваша помощь. Даже сто рублей могут
-            помочь вылечить человека
+            В проекте участвует почти сто человек, и некоторые из них постоянно работают над проектом — координируют 
+            работу волонтеров, руководят спецпроектами, управляют расходами и лечат людей. Мы благодарны каждому за 
+            помощь и участие.
         </p>
     </div>
     <div class="row_block-5">
@@ -72,38 +70,11 @@ MainAsset::register($this);
         </div>
     </div>
 </div>
-<div class="row  all-members-link-row">
-    <a href="<?= Url::toRoute(['team']) ?>">Вся команда</a>
-</div>
-<div class="row team-row">
-    <?php shuffle($members) ?>
-    <?php foreach (array_slice($members, 0, 6) as $member ) {?>
-        <?= TeamMemberWidget::widget($member) ?>
-    <?php } ?>
-</div>
-<div class="row special-projects-title-row">Наши спецпроекты</div>
-<div class="row">
-    <?= SpecialProject::widget([
-        'title' => 'Cтроительство клиники',
-        'modifier' => 'green',
-        'desc' => 'В округе нет чистой воды, пригодной для питья, нам необходимо создать  водопровод и очистные сооружения.',
-        'news' => [
-            'Готов фундамент для здания клиники',
-            'Доставлено 350 упаковок лекарств',
-            'Вылечено пятеро детей',
-            'В спонсоры вошел Сбербанк',
-        ]
-    ]) ?>
-</div>
-<div class="row">
-    <?= SpecialProject::widget([
-        'title' => 'Гуманитарная помощь',
-        'modifier' => 'blue',
-        'desc' => 'Медикаменты, продукты, одежда. Мы хотим обеспечить максимальное количество людей хотя бы минимальным количество еды.',
-        'news' => [
-            'Готов фундамент для здания клиники',
-            'Доставлено 350 упаковок лекарств',
-            'В спонсоры вошел Сбербанк',
-        ]
-    ]) ?>
-</div>
+<?php shuffle($members) ?>
+<?php for ($i = 0; $i < count($members); $i+=6) { ?>
+    <div class="row team-row">
+        <?php foreach (array_slice($members, $i, 6) as $member ) {?>
+            <?= TeamMemberWidget::widget($member) ?>
+        <?php } ?>
+    </div>
+<?php } ?>
