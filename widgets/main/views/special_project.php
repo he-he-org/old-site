@@ -8,14 +8,16 @@ use yii\helpers\Url;
             <p class="special-project_description"><?= $desc ?></p>
         </div>
         <div class="special-project_right">
-            <div class="special-project_news">
-                <a class="special-project_news-header" href="<?= Url::toRoute(["news", "tag" => $news_tag_id]) ?>">Новости</a>
-                <ol class="special-project_news-list">
-                    <?php foreach ($news as $news_item) { ?>
-                        <li class="special-project_news-item"><?= $news_item ?></li>
-                    <?php } ?>
-                </ol>
-            </div>
+            <?php if (count($news) > 0) { ?>
+                <div class="special-project_news">
+                    <a class="special-project_news-header" href="<?= Url::toRoute(["news", "tag" => $news_tag_id]) ?>">Новости</a>
+                    <ol class="special-project_news-list">
+                        <?php foreach ($news as $news_item) { ?>
+                            <li class="special-project_news-item"><?= $news_item ?></li>
+                        <?php } ?>
+                    </ol>
+                </div>
+            <?php } ?>
         </div>
     </div>
     <div class="special-project_bottom">

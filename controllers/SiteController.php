@@ -51,47 +51,39 @@ class SiteController extends Controller
                 'modifier' => 'green',
                 'desc' => 'Собираем средства на второй этап строительства клиники и организацию регулярных выездов мобильных бригад',
                 'details_url' => 'https://www.generosity.com/medical-fundraising/let-s-build-a-clinic-for-locals-in-guatemala',
-                'news_tag_id' => 5,
-                'news' => [
-                    'Готов фундамент для здания клиники',
-                    'Доставлено 350 упаковок лекарств',
-                    'Вылечено пятеро детей',
-                    'В спонсоры вошел Сбербанк',
-                ]
+                'news_tag_id' => 'краудфандинг 2',
             ],
             [
                 'title' => 'Очки для индейцев Майя',
                 'modifier' => 'blue',
                 'desc' => 'Твои старые очки помогут гватемальцу вернуться к работе и спасти свою семью от бедности',
-                'news_tag_id' => 5,
-                'news' => [
-                    'Готов фундамент для здания клиники',
-                    'Доставлено 350 упаковок лекарств',
-                    'В спонсоры вошел Сбербанк',
-                ]
+                'news_tag_id' => 'офтальмологическая программа',
             ],
             [
                 'title' => 'Мобильные бригады',
                 'modifier' => 'red',
                 'desc' => 'Мы регулярно берем лекарства и инструменты, садимся в наш пикап и едем лечить людей из отдаленных поселений',
-                'news_tag_id' => 5,
-                'news' => [
-                    'Готов фундамент для здания клиники',
-                    'Доставлено 350 упаковок лекарств',
-                    'В спонсоры вошел Сбербанк',
-                ]
+                'news_tag_id' => 'мобильные бригады',
             ]
         ];
 
         $parser = new ExtMarkdown();
         $specialProjects = array_map(function($specialProject) use ($parser) {
-            $news = NewsTag::findOne(['id' => $specialProject['news_tag_id']])->getNews()->all();
-            $news = array_map(function($item) use ($parser){
-                return $item['title'][Yii::$app->language];
-            }, $news);
+            $tag = NewsTag::find()->joinWith('title t')->where(['t.ru-RU' => $specialProject['news_tag_id']])->one();
+            
+            if ($tag !== null) {
+                $news = $tag->getNews()->orderBy(['date' => SORT_DESC])->limit(4)->all();
+                $news = array_map(function($item) use ($parser){
+                    return $item['title'][Yii::$app->language];
+                }, $news);
+            }
+            else {
+                $news = [];
+            }
 
             return array_replace([], $specialProject, [
                 'news' => $news,
+                'news_tag_id' => $tag['id'],
             ]);
         }, $specialProjects);
         
@@ -151,8 +143,9 @@ class SiteController extends Controller
 
         $this->layout = 'main';
 
-        $newsQuery = News::find()->with(['title', 'text']);
-
+        $newsQuery = News::find()
+            ->with(['title', 'text'])
+            ->orderBy(['date' => SORT_DESC]);
         $tagParam = Yii::$app->getRequest()->getQueryParam('tag');
         if ($tagParam) {
             $tagParam = intval($tagParam);

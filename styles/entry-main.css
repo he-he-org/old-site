@@ -136,6 +136,7 @@
     justify-content: space-between;
     margin-bottom: 30px;
     flex: 1;
+    min-height: 250px;
 
     &_top {
         display: flex;
