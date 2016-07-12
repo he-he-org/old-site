@@ -47,6 +47,7 @@ class SiteController extends Controller
 
         $specialProjects = [
             [
+                'anchor' => 'crowdfunding-2',
                 'title' => 'Строительство клиники',
                 'modifier' => 'green',
                 'desc' => 'Собираем средства на второй этап строительства клиники и организацию регулярных выездов мобильных бригад',
@@ -54,12 +55,14 @@ class SiteController extends Controller
                 'news_tag_id' => 'краудфандинг 2',
             ],
             [
+                'anchor' => 'eye-care',
                 'title' => 'Очки для индейцев Майя',
                 'modifier' => 'blue',
                 'desc' => 'Твои старые очки помогут гватемальцу вернуться к работе и спасти свою семью от бедности',
                 'news_tag_id' => 'офтальмологическая программа',
             ],
             [
+                'anchor' => 'mobile-teams',
                 'title' => 'Мобильные бригады',
                 'modifier' => 'red',
                 'desc' => 'Мы регулярно берем лекарства и инструменты, садимся в наш пикап и едем лечить людей из отдаленных поселений',

@@ -61,7 +61,6 @@ AppAsset::register($this);
                         ['page' => 'news', 'title' => 'layout/main-menu/news'],
                         ['page' => 'contacts', 'title' => 'layout/main-menu/contacts'],
                     ]]) ?>
-                    <div class="layout-search"><i class="fa fa-search" aria-hidden="true"></i> <input placeholder="Поиск..." /></div>
                 </div>
                 <div class="layout-content">
                     <?= $content ?>

@@ -140,6 +140,7 @@ main {
         align-items: center;
         padding: 38px;
         box-sizing: border-box;
+        margin-top: 200px;
 
         &_links-block {
             &_header {

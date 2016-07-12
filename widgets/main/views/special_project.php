@@ -1,10 +1,13 @@
 <?php
 use yii\helpers\Url;
 ?>
-<div class="special-project special-project--<?= $modifier ?>">
+<div id="<?= $anchor ?>"  class="special-project special-project--<?= $modifier ?>">
     <div class="special-project_top">
         <div class="special-project_left">
-            <h1 class="special-project_title"><?= $title ?></h1>
+            <div class="special-project_title">
+                <?= $title ?> 
+                <a class="fa fa-link special-project_anchor-link" href="#<?= $anchor ?>"  aria-hidden="true"></a>
+            </div>
             <p class="special-project_description"><?= $desc ?></p>
         </div>
         <div class="special-project_right">

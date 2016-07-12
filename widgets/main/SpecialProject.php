@@ -5,6 +5,7 @@ use yii\helpers\Html;
 
 class SpecialProject extends Widget {
 
+    public $anchor;
     public $title;
     public $desc;
     public $news;
@@ -20,6 +21,7 @@ class SpecialProject extends Widget {
     public function run()
     {
         return $this->render('special_project', [
+            'anchor' => $this->anchor,  
             'title' => $this->title,
             'desc' => $this->desc,
             'news' => $this->news,
