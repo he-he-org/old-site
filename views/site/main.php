@@ -61,8 +61,8 @@ MainAsset::register($this);
             <div class="common-donation_bottom">
                 <div class="common-donation_status">
                     <div class="common-donation_collected-title">Уже собрано</div>
-                    <div class="common-donation_collected">1 245 584 ₽</div>
-                    <div class="common-donation_boom-link"><a href="#">Проект на boomstarter</a></div>
+                    <div class="common-donation_collected">1 327 465 ₽</div>
+                    <div class="common-donation_boom-link"><a href="http://boomstarter.ru/projects/463373/stroitelstvo_kliniki_na_krayu_zemli">Проект на boomstarter</a></div>
                 </div>
                 <div class="common-donation_gateway">
                     Платеж через систему<br/>
@@ -82,28 +82,9 @@ MainAsset::register($this);
     <?php } ?>
 </div>
 <div class="row special-projects-title-row">Наши спецпроекты</div>
-<div class="row">
-    <?= SpecialProject::widget([
-        'title' => 'Cтроительство клиники',
-        'modifier' => 'green',
-        'desc' => 'В округе нет чистой воды, пригодной для питья, нам необходимо создать  водопровод и очистные сооружения.',
-        'news' => [
-            'Готов фундамент для здания клиники',
-            'Доставлено 350 упаковок лекарств',
-            'Вылечено пятеро детей',
-            'В спонсоры вошел Сбербанк',
-        ]
-    ]) ?>
-</div>
-<div class="row">
-    <?= SpecialProject::widget([
-        'title' => 'Гуманитарная помощь',
-        'modifier' => 'blue',
-        'desc' => 'Медикаменты, продукты, одежда. Мы хотим обеспечить максимальное количество людей хотя бы минимальным количество еды.',
-        'news' => [
-            'Готов фундамент для здания клиники',
-            'Доставлено 350 упаковок лекарств',
-            'В спонсоры вошел Сбербанк',
-        ]
-    ]) ?>
-</div>
+
+<?php foreach ($specialProjects as $specialProject) { ?>
+    <div class="row">
+        <?= SpecialProject::widget($specialProject) ?>
+    </div>
+<?php } ?>

@@ -9,6 +9,8 @@ class SpecialProject extends Widget {
     public $desc;
     public $news;
     public $modifier;
+    public $details_url = null;
+    public $news_tag_id;
 
     public function init()
     {
@@ -22,6 +24,8 @@ class SpecialProject extends Widget {
             'desc' => $this->desc,
             'news' => $this->news,
             'modifier' => $this->modifier,
+            'details_url' => $this->details_url,
+            'news_tag_id' => $this->news_tag_id,
         ]);
     }
 }

@@ -229,6 +229,7 @@ gulp.task("debug:styles", function () {
         require("postcss-import"),
         require("postcss-nested"),
         require("postcss-simple-vars"),
+        require("autoprefixer")({browsers: ["last 1 Chrome versions"]}),
     ];
 
     function bundle(entryPoint) {
