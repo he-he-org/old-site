@@ -102,7 +102,6 @@ li {
     &_desc {
         text-align: center;
         margin: 20px 0;
-        flex: 1;
     }
 
     &_button {
