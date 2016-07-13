@@ -195,7 +195,6 @@
     &_news-item {
         margin-bottom: 25px;
         counter-increment: news-counter;
-        text-indent: -25px;
         display: flex;
 
         &::before {
