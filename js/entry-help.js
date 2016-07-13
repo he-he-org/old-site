@@ -17,7 +17,7 @@ const find = (...attrs) => {
         selector = attrs[1]
     }
 
-    return Array.from(context.querySelectorAll(selector))
+    return [...context.querySelectorAll(selector)]
 }
 
 const get = (...attrs) => find(...attrs)[0]

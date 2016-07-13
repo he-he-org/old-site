@@ -39,7 +39,7 @@ export const bindEvents = (elements, events, store) => {
         ? events.split(" ")
         : events //todo: check for other types
 
-    const elementsArray = ("length" in elements) ? Array.from(elements) : [elements]
+    const elementsArray = ("length" in elements) ? [...elements] : [elements]
 
     elementsArray.forEach((element) => {
         eventsArray.forEach((eventType) => {
