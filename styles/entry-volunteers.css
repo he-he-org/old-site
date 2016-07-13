@@ -28,6 +28,7 @@
     &_content {
         border-left: 4px solid #d9d9d9;
         padding-left: 0.75rem;
+        width: 100%;
     }
 }
 
