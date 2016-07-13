@@ -17,7 +17,7 @@ const find = (...attrs) => {
         selector = attrs[1]
     }
 
-    return [...context.querySelectorAll(selector)]
+    return Array.prototype.slice.apply(context.querySelectorAll(selector))
 }
 
 const get = (...attrs) => find(...attrs)[0]
@@ -139,10 +139,10 @@ document.addEventListener("DOMContentLoaded", () => {
 const STICKY_MARGIN = 5
 
 document.addEventListener("DOMContentLoaded", () => {
-    [...document.querySelectorAll(".category-menu")].forEach((menu) => {
+    Array.prototype.slice.apply(document.querySelectorAll(".category-menu")).forEach((menu) => {
         // Highlight current item
         const highlightItems = () => {
-            [...menu.querySelectorAll(".category-menu_item")].forEach((item) => {
+            Array.prototype.slice.apply(menu.querySelectorAll(".category-menu_item")).forEach((item) => {
                 const url = new URL(item.getAttribute("href"), window.location)
                 if (url.href === location.href) {
                     item.classList.add("category-menu_item--active")

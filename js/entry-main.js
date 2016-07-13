@@ -29,7 +29,7 @@ const donationFormReducer = (state = initialState, action) => {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    [...document.querySelectorAll(".common-donation")].forEach((formDiv) => {
+    Array.prototype.slice.apply(document.querySelectorAll(".common-donation")).forEach((formDiv) => {
         const form = formDiv.querySelector(".common-donation_form")
 
         const tips = formDiv.querySelector(".common-donation_tips")
@@ -59,9 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Bind some events to store dispatching
         bindEvents(input, ["input", "focus", "blur"], store)
-    });
+    })
 
-    [...document.querySelectorAll(".special-project_donate")].forEach((form) => {
+    Array.prototype.slice.apply(document.querySelectorAll(".special-project_donate")).forEach((form) => {
         const input = form.querySelector(".special-project_donate-amount")
         const button = form.querySelector(".special-project_donate-button")
 
