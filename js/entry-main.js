@@ -1,3 +1,5 @@
+require("is-nan").shim()
+
 import {createStore} from "redux"
 import {bindEvents} from "./redux-dom-binding"
 import {merge} from "functional-utils"

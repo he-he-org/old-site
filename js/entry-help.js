@@ -1,3 +1,6 @@
+require("is-nan").shim()
+
+
 import {merge} from "functional-utils"
 import {createStore} from "redux"
 
