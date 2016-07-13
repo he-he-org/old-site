@@ -74,26 +74,26 @@ AppAsset::register($this);
                 <div class="row">
                     <div class="layout-footer_links-block row_block-3">
                         <div class="layout-footer_links-block_header">Задачи</div>
-                        <div class="layout-footer_links-block_item">Строительство клиники</div>
-                        <div class="layout-footer_links-block_item">Медикаменты</div>
-                        <div class="layout-footer_links-block_item">Продукты питания</div>
-                        <div class="layout-footer_links-block_item">Строительство водопровода</div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['#crowdfunding-2']) ?>">Строительство клиники</a></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/package#pharmacy']) ?>">Медикаменты</a></div> 
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/package#food']) ?>">Продукты питания</a></div>
+<!--                        <div class="layout-footer_links-block_item">Строительство водопровода</div>-->
                     </div>
                     <div class="layout-footer_links-block row_block-3">
                         <div class="layout-footer_links-block_header">О проекте</div>
-                        <div class="layout-footer_links-block_item">Новости</div>
-                        <div class="layout-footer_links-block_item">Наши спецпроекты</div>
-                        <div class="layout-footer_links-block_item">Команда проекта</div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['news']) ?>">Новости</a></div>
+<!--                        <div class="layout-footer_links-block_item">Наши спецпроекты</div>-->
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['team']) ?>">Команда проекта</a></div>
                         <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['about']) ?>">История создания</a></div>
-                        <div class="layout-footer_links-block_item">На что мы тратим деньги</div>
+<!--                        <div class="layout-footer_links-block_item">На что мы тратим деньги</div>-->
                     </div>
                     <div class="layout-footer_links-block row_block-3">
                         <div class="layout-footer_links-block_header">Как помочь</div>
-                        <div class="layout-footer_links-block_item">Внести пожертвование</div>
-                        <div class="layout-footer_links-block_item">Стать волонтером</div>
-                        <div class="layout-footer_links-block_item">Отправить посылку</div>
-                        <div class="layout-footer_links-block_item">Рассказать в соцсетях</div>
-                        <div class="layout-footer_links-block_item">Написать нам</div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/donate']) ?>">Внести пожертвование</a></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['volunteers']) ?>">Стать волонтером</a></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/package']) ?>">Отправить посылку</a></div>
+<!--                        <div class="layout-footer_links-block_item">Рассказать в соцсетях</div>-->
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['contacts']) ?>">Написать нам</a></div>
                     </div>
                     <div class="row_block-3">
                         <div class="layout-social-networks">
