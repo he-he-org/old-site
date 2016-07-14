@@ -19,12 +19,17 @@ class SiteController extends Controller
 
     public function behaviors()
     {
-        return [
-            [
+        $behaviours = [];
+
+        //todo: is this an appropriate place to disable/enable cache
+        if (!defined('YII_DEBUG')) {
+            array_push($behaviours, [
                 'class' => 'yii\filters\PageCache',
                 'duration' => 3600,
-            ],
-        ];
+            ]);
+        }
+        
+        return $behaviours;
     }    
     
     public function actions()
