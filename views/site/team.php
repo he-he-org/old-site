@@ -31,7 +31,7 @@ TeamAsset::register($this);
         <div class="common-donation">
             <div class="common-donation_top">
                 <form class="common-donation_form" action="https://money.yandex.ru/quickpay/confirm.xml">
-                    <!-- Получатель (тестовый кошелек): --> <input type="hidden" name="receiver" value="410012927511965" />
+                    <!-- Получатель (тестовый кошелек): --> <input type="hidden" name="receiver" value="410012180500847" />
                     <!-- Название перевода на странице подтверждения: --> <input type="hidden" name="formcomment" value="Проект «Health &amp; Help»" />
                     <!-- Название перевода в истории отправителя: --> <input type="hidden" name="short-dest" value="Проект «Health &amp; Help»" />
                     <!-- Тип транзакции: --> <input type="hidden" name="quickpay-form" value="donate" />
