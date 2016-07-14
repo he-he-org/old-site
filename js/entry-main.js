@@ -31,6 +31,9 @@ const donationFormReducer = (state = initialState, action) => {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    /*
+        Common donation logic
+     */
     Array.prototype.slice.apply(document.querySelectorAll(".common-donation")).forEach((formDiv) => {
         const form = formDiv.querySelector(".common-donation_form")
 
@@ -63,6 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
         bindEvents(input, ["input", "focus", "blur"], store)
     })
 
+    /*
+     Special projects logic
+     */
     Array.prototype.slice.apply(document.querySelectorAll(".special-project_donate")).forEach((form) => {
         const input = form.querySelector(".special-project_donate-amount")
         const button = form.querySelector(".special-project_donate-button")
@@ -85,4 +91,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Bind some events to store dispatching
         bindEvents(input, ["input", "focus", "blur"], store)
     })
+
+    /*
+       Shuffle team members
+     */
+    const teamRow = document.querySelector(".team-row")
+    const members = teamRow.querySelectorAll(".team-member")
+    for (let i = 0; i < members.length; ++i) {
+        teamRow.appendChild(members[Math.floor(Math.random() * members.length)])
+    }
 })

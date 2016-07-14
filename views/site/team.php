@@ -70,7 +70,6 @@ TeamAsset::register($this);
         </div>
     </div>
 </div>
-<?php shuffle($members) ?>
 <?php for ($i = 0; $i < count($members); $i+=6) { ?>
     <div class="row team-row">
         <?php foreach (array_slice($members, $i, 6) as $member ) {?>

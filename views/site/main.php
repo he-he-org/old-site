@@ -76,8 +76,7 @@ MainAsset::register($this);
     <a href="<?= Url::toRoute(['team']) ?>">Вся команда</a>
 </div>
 <div class="row team-row">
-    <?php shuffle($members) ?>
-    <?php foreach (array_slice($members, 0, 6) as $member ) {?>
+    <?php foreach ($members as $member ) {?>
         <?= TeamMemberWidget::widget($member) ?>
     <?php } ?>
 </div>
