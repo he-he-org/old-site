@@ -30,37 +30,62 @@
         <input type="hidden" readonly="readonly" name="sum" value="" data-type="number" data-role="hidden-sum" />
     </form>
 
+    
+    <?php 
+    
+    $data = [
+        [
+            'amount' => '300',
+            'for-us' => [
+                'Одна поездка на такси',
+                'Один поход в Макдональдс',
+                'Несколько пачек сигарет',
+            ],
+            'for-them' => [
+                'Обработка ран и антибиотикопрофилактика для двух пациентов',
+            ]
+        ],
+        [
+            'amount' => '500',
+            'for-us' => [
+                'Пара билетов в кино',
+                'Пара чашек кофе',
+                'Бутылка вина',
+            ],
+            'for-them' => [
+                'Проверка 75 пациентов на паразитарные инфекции',
+            ]
+        ],
+        [
+            'amount' => '1000',
+            'for-us' => [
+                'Пара билетов на квест',
+                'Пара коктейлей в баре',
+            ],
+            'for-them' => [
+                'Установка внутриматочных спиралей трем женщинам',
+                'Проверка шестнадцати пациентов на туберкулез',
+                'Поддерживающие лекарства на месяц для пяти больных диабетом',
+            ],
+        ],
+    ]
+    
+    ?>
+    
     <div class="section-donate-info row_block-5" date-role="info">
-        <div  class="section-donate-info_block hidden" date-value="300">
-            <div class="section-donate-info_amount">300 ₽</div>
-            <div class="section-donate-info_title">Для них</div>
-            <div class="section-donate-info_desc">Обработка ран и антибиотикопрофилактика для двух пациентов</div>
-            <div class="section-donate-info_title">Для вас</div>
-            <div class="section-donate-info_desc">Одна поездка на такси</div>
-        </div>
-        <div  class="section-donate-info_block" date-value="500">
-            <div class="section-donate-info_amount">500 ₽</div>
-            <div class="section-donate-info_title">Для них</div>
-            <div class="section-donate-info_desc">Проверка 75 пациентов на паразитарные инфекции</div>
-            <div class="section-donate-info_title">Для вас</div>
-            <div class="section-donate-info_desc">Один поход в кино</div>
-        </div>
-        <div  class="section-donate-info_block hidden" date-value="1000">
-            <div class="section-donate-info_amount">1000 ₽</div>
-            <div class="section-donate-info_title">Для них</div>
-            <div class="section-donate-info_desc">
-                <?php
-                    $arr = [
-                        'Проверка шестнадцати пациентов на туберкулез',
-                        'Установка внутриматочных спиралей трем женщинам',
-                        'Поддерживающие лекарства на месяц для пяти больных диабетом',
-                    ]
-                ?>
-                <?= $arr[array_rand($arr)]?>
+        
+        <?php foreach($data as $entry) {?>
+
+            <div  class="section-donate-info_block <?= $entry['amount']  !== 500 ? 'hidden' : '' ?>" date-value="<?= $entry['amount'] ?>">
+                <div class="section-donate-info_amount"><?= $entry['amount'] ?> ₽</div>
+                <div class="section-donate-info_title">Для них</div>
+                <div class="section-donate-info_desc"><?= $entry['for-us'][array_rand($entry['for-us'])] ?></div>
+                <div class="section-donate-info_title">Для вас</div>
+                <div class="section-donate-info_desc"><?= $entry['for-them'][array_rand($entry['for-them'])] ?></div>
             </div>
-            <div class="section-donate-info_title">Для вас</div>
-            <div class="section-donate-info_desc">Один поход в кафе</div>
-        </div>
+
+        <?php } ?>
+        
         <div  class="section-donate-info_block hidden" date-value="free">
         </div>
     </div>
