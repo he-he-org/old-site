@@ -17,6 +17,16 @@ class SiteController extends Controller
 {
     public $defaultAction = 'main';
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'duration' => 3600,
+            ],
+        ];
+    }    
+    
     public function actions()
     {
         return [
