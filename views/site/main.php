@@ -61,8 +61,8 @@ MainAsset::register($this);
             <div class="common-donation_bottom">
                 <div class="common-donation_status">
                     <div class="common-donation_collected-title">Уже собрано</div>
-                    <div class="common-donation_collected">1 327 465 ₽</div>
-                    <div class="common-donation_boom-link"><a href="http://boomstarter.ru/projects/463373/stroitelstvo_kliniki_na_krayu_zemli">Проект на boomstarter</a></div>
+                    <div class="common-donation_collected">1 888 676 ₽</div>
+                    <div class="common-donation_boom-link"><a href="https://www.generosity.com/medical-fundraising/let-s-build-a-clinic-for-locals-in-guatemala">Проект на Generosity</a></div>
                 </div>
                 <div class="common-donation_gateway">
                     Платеж через систему<br/>
