@@ -25,7 +25,7 @@ class SiteController extends Controller
         if (!YII_DEBUG) {
             array_push($behaviours, [
                 'class' => 'yii\filters\PageCache',
-                'duration' => 3600,
+                'duration' => 300,
                 'variations' => [
                     \Yii::$app->request->getAbsoluteUrl(),
                 ]
