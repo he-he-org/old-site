@@ -22,7 +22,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 
-    <?php if (!defined('YII_DEBUG')) { ?>
+    <?php if (!YII_DEBUG) { ?>
         <!-- Yandex.Metrika counter -->
         <script type="text/javascript">
             (function (d, w, c) {

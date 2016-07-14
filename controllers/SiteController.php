@@ -22,7 +22,7 @@ class SiteController extends Controller
         $behaviours = [];
 
         //todo: is this an appropriate place to disable/enable cache
-        if (!defined('YII_DEBUG')) {
+        if (YII_DEBUG) {
             array_push($behaviours, [
                 'class' => 'yii\filters\PageCache',
                 'duration' => 3600,
