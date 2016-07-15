@@ -55,11 +55,7 @@ class SiteController extends Controller
             return [
                 'name' => $member['name'][Yii::$app->language],
                 'role' => $member['role'][Yii::$app->language],
-                'vk' => $member['vk'],
-                'fb' => $member['fb'],
                 'photo_url' => $member['photo_url'],
-                'email' => $member['email'],
-                'linked_in' => $member['linked_in'],
             ];
         }, $members);
 

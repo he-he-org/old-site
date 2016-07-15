@@ -103,16 +103,30 @@
     &:not(:last-child) {
         margin-right: 35px;
     }
-    
+
     &_name {
+        margin: 6px 0;
         font-weight: 600;
         font-size: 16px;
-        word-spacing: 9999px; /*todo: hack to force word-wrap*/
     }
 
     &_role {
         margin-top: 6px;
-        font-size: 14px;
+        font-size: 13px;
         color: #919191;
+    }
+    
+    &_links {
+    }
+    
+    &_link {
+        margin-right: 7px;
+        font-size: 12px !important;
+        color: #BDBDBD;
+        margin-top: 6px;
+        
+        &, &:hover, &:focus, &:active, &:visited {
+            text-decoration: none;
+        }
     }
 }

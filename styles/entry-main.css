@@ -101,17 +101,30 @@
     display: none;
     
     &_name {
+        margin: 12px 0;
         font-weight: 600;
         font-size: 16px;
-        word-spacing: 9999px; /*todo: hack to force word-wrap*/
     }
 
     &_role {
         margin-top: 6px;
-        font-size: 14px;
+        font-size: 12px;
         color: #919191;
     }
 
+    &_links {
+    }
+
+    &_link {
+        margin-right: 7px;
+        font-size: 12px !important;
+        color: #BDBDBD;
+        margin-top: 6px;
+        &, &:hover, &:focus, &:active, &:visited {
+            text-decoration: none;
+        }
+    }
+    
     &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4),&:nth-child(5), &:nth-child(6) {
         display: block;
     }
