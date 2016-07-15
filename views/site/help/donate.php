@@ -1,4 +1,3 @@
-
 <div class="row content">
     <form class="section-donate-form row_block-6" action="https://money.yandex.ru/quickpay/confirm.xml">
         <div class="section-donate-form_options" data-role="payment-options">
@@ -74,14 +73,22 @@
     
     <div class="section-donate-info row_block-5" date-role="info">
         
-        <?php foreach($data as $entry) {?>
+        <?php foreach($data as $i => $entry) {?>
 
-            <div  class="section-donate-info_block <?= $entry['amount']  !== 500 ? 'hidden' : '' ?>" date-value="<?= $entry['amount'] ?>">
+            <div  class="section-donate-info_block <?= $i !== 1 ? 'hidden' : '' ?>" date-value="<?= $entry['amount'] ?>">
                 <div class="section-donate-info_amount"><?= $entry['amount'] ?> ₽</div>
                 <div class="section-donate-info_title">Для них</div>
-                <div class="section-donate-info_desc"><?= $entry['for-us'][array_rand($entry['for-us'])] ?></div>
+                <div class="section-donate-info_desc-container">
+                    <?php foreach($entry['for-us'] as $j => $value) { ?>
+                        <div class="section-donate-info_desc <?= $j !== 0 ? 'hidden' : ''?>"><?= $value ?></div>
+                    <?php } ?>
+                </div>
                 <div class="section-donate-info_title">Для вас</div>
-                <div class="section-donate-info_desc"><?= $entry['for-them'][array_rand($entry['for-them'])] ?></div>
+                <div class="section-donate-info_desc-container">
+                    <?php foreach($entry['for-them'] as $j => $value) { ?>
+                        <div class="section-donate-info_desc <?= $j !== 0 ? 'hidden' : ''?>"><?= $value ?></div>
+                    <?php } ?>
+                </div>
             </div>
 
         <?php } ?>

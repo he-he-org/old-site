@@ -115,6 +115,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                     else {
                         div.classList.add("hidden")
+
+                        find(div, ".section-donate-info_desc-container").forEach((container) => {
+                            // Show random description
+                            const descs = find(container, ".section-donate-info_desc")
+                            if (descs.length > 1) {
+                                descs.forEach((desc) => desc.classList.add("hidden"))
+                                descs[Math.floor(Math.random() * descs.length)].classList.remove("hidden")
+                            }
+                        })
                     }
                 })
             })
@@ -160,7 +169,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Make sticky menu
         const body = menu.querySelector(".category-menu_body")
-
         const checkSticky = () => {
             const bodyRect = document.body.getBoundingClientRect()
             const menuRect = menu.getBoundingClientRect()
