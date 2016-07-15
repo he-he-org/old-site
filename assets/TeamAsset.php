@@ -11,6 +11,7 @@ class TeamAsset extends AssetBundle
         'css/team.css',
     ];
     public $js = [
+        'js/team.js'
     ];
     public $depends = [
         'app\assets\AppAsset'

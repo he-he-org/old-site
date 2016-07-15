@@ -41,7 +41,8 @@
       "dest": "./web/js",
       "entryPoints": [
         "main",
-        "help"
+        "help",
+        "team"
       ]
     },
     "styles": {
