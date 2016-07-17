@@ -47,9 +47,10 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-//                ['class' => 'yii\rest\UrlRule', 'controller' => 'translation-string'],
-//                ['class' => 'yii\rest\UrlRule', 'controller' => 'translation-text'],
-//                ['class' => 'yii\rest\UrlRule', 'controller' => 'member'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'translation-string', 'prefix' => 'api'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'translation-text', 'prefix' => 'api'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'member', 'prefix' => 'api'],
+                'admin' => 'admin/main',
                 '<page>/<section:.*>' => 'site/<page>',
                 '<page>' => 'site/<page>',
             ],
