@@ -44,6 +44,16 @@ const Root = createClass({
                         {name: "email", type: "string"},
                     ],
                 },
+                {
+                    name: "news-item",
+                    attrs: [
+                        {name: "id", type: "int"},
+                        {name: "date", type: "date"},
+                        {name: "title_id", type: "int"},
+                        {name: "text_id", type: "int"},
+                        {name: "image_url", type: "string"},
+                    ],
+                },
             ],
             activeCollectionName: "translation-string",
         }

@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\components\ExtMarkdown;
 use app\models\Member;
-use app\models\News;
+use app\models\NewsItem;
 use app\models\NewsTag;
 use Yii;
 use yii\filters\AccessControl;
@@ -31,10 +31,10 @@ class SiteController extends Controller
                 ]
             ]);
         }
-        
+
         return $behaviours;
-    }    
-    
+    }
+
     public function actions()
     {
         return [
@@ -87,7 +87,7 @@ class SiteController extends Controller
         $parser = new ExtMarkdown();
         $specialProjects = array_map(function($specialProject) use ($parser) {
             $tag = NewsTag::find()->joinWith('title t')->where(['t.ru-RU' => $specialProject['news_tag_id']])->one();
-            
+
             if ($tag !== null) {
                 $news = $tag->getNews()->orderBy(['date' => SORT_DESC])->limit(4)->all();
                 $news = array_map(function($item) use ($parser){
@@ -103,7 +103,7 @@ class SiteController extends Controller
                 'news_tag_id' => $tag['id'],
             ]);
         }, $specialProjects);
-        
+
         return $this->render('main', [
             'members' => $members,
             'specialProjects' => $specialProjects,
@@ -134,7 +134,7 @@ class SiteController extends Controller
             'members' => $members
         ]);
     }
-    
+
 
     public function actionHelp()
     {
@@ -160,7 +160,7 @@ class SiteController extends Controller
 
         $this->layout = 'main';
 
-        $newsQuery = News::find()
+        $newsQuery = NewsItem::find()
             ->with(['title', 'text'])
             ->orderBy(['date' => SORT_DESC]);
         $tagParam = Yii::$app->getRequest()->getQueryParam('tag');

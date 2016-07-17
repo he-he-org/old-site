@@ -26,7 +26,7 @@ class NewsTag extends ActiveRecord
     public function getNews()
     {
         return $this
-            ->hasMany(News::className(), ['id' => 'news_id'])
+            ->hasMany(NewsItem::className(), ['id' => 'news_id'])
             ->viaTable('news_news_tags', ['news_tags_id' => 'id']);
     }
 }

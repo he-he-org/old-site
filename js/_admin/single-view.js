@@ -62,29 +62,19 @@ const SingleView = createClass({
 
         return (
             h(bem("div"),
-                h("table",
-                    h("thead",
-                        h("tr",
-                            h("th", "Name"),
-                            h("th", "Value")
+                h(bem("div#fields"), attrs.filter((x) => x.name !== "id").map((attr) => (
+                    h(bem("label#field"), {key: attr.name},
+                        h(bem("div#title"), attr.name),
+                        h(bem("div#input"),
+                            this.renderInput(record, attr)
                         )
+                    )
+                )).concat([
+                    h(bem("div#controls"), {key: "controls"},
+                        h("button", {onClick: this.save}, "Save"),
+                        h("button", {onClick: this.cancel}, "Cancel")
                     ),
-                    h("tbody", attrs.filter((x) => x.name !== "id").map((attr) => (
-                        h("tr", {key: attr.name},
-                            h("td", attr.name),
-                            h("td",
-                                this.renderInput(record, attr)
-                            )
-                        )
-                    )).concat([
-                        h("tr", {key: "controls"},
-                            h("td",
-                                h("button", {onClick: this.save}, "Save"),
-                                h("button", {onClick: this.cancel}, "Cancel")
-                            )
-                        ),
-                    ]))
-                )
+                ]))
             )
         )
     },

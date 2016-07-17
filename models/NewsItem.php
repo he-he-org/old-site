@@ -9,8 +9,15 @@ use yii\db\ActiveRecord;
 /**
  * ContactForm is the model behind the contact form.
  */
-class News extends ActiveRecord
+class NewsItem extends ActiveRecord
 {
+    public function rules()
+    {
+        return [
+            [["id", "date", "title_id", "text_id", "image_url"], "safe"]
+        ];
+    }
+
     public function extraFields()
     {
         return ['title', 'text'];

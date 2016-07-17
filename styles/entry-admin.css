@@ -62,4 +62,38 @@ table td,  table th {
     }
 }
 
+.SingleView {
+    display: flex;
+    min-width: 600px;
+    flex-direction: column;
+    align-items: stretch;
 
+    &__fields {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__field {
+        display: flex;
+        padding: 5px 10px;
+    }
+
+    &__title {
+        padding-right: 10px;
+        flex-basis: 25%;
+    }
+
+    &__input {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        flex-basis: 75%;
+    }
+
+
+    textarea {
+        min-width: 400px;
+        min-height: 200px;
+    }
+
+}

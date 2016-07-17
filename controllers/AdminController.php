@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\components\ExtMarkdown;
 use app\models\Member;
-use app\models\News;
+use app\models\NewsItem;
 use app\models\NewsTag;
 use Yii;
 use yii\filters\AccessControl;
