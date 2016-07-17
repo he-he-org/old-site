@@ -13,6 +13,13 @@ use yii\db\ActiveRecord;
 
 class NewsTag extends ActiveRecord
 {
+    public function rules()
+    {
+        return [
+            [["id","title_id"], "safe"]
+        ];
+    }
+
     public static function tableName()
     {
         return 'news_tags';

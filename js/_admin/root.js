@@ -36,6 +36,11 @@ const Root = createClass({
                     attrs: [
                         {name: "id", type: "int"},
                         {name: "name_id", type: "int"},
+                        //{name: "name", type: "manyToOne", manyToOne: {
+                        //    fromAttr: "name_id",
+                        //    toAttr: "id",
+                        //    toResource: "translation-string",
+                        //}},
                         {name: "role_id", type: "int"},
                         {name: "photo_url", type: "string"},
                         {name: "vk", type: "string"},
@@ -52,6 +57,13 @@ const Root = createClass({
                         {name: "title_id", type: "int"},
                         {name: "text_id", type: "int"},
                         {name: "image_url", type: "string"},
+                    ],
+                },
+                {
+                    name: "news-tag",
+                    attrs: [
+                        {name: "id", type: "int"},
+                        {name: "title_id", type: "int"},
                     ],
                 },
             ],

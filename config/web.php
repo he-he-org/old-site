@@ -51,6 +51,7 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'translation-text', 'prefix' => 'api'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'member', 'prefix' => 'api'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'news-item', 'prefix' => 'api'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'news-tag', 'prefix' => 'api'],
                 'admin' => 'admin/main',
                 '<page>/<section:.*>' => 'site/<page>',
                 '<page>' => 'site/<page>',
