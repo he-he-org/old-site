@@ -2,13 +2,11 @@ import {createClass} from "react"
 import {h} from "react-markup"
 import prefixer from "bem-prefixer"
 
+import { Link } from 'react-router'
+
 const bem = prefixer("Navigation")
 
 const Navigation = createClass({
-
-    select(item) {
-        this.props.onSelect(item)
-    },
 
     render() {
         const {items, activeItem} = this.props
@@ -23,9 +21,11 @@ const Navigation = createClass({
                         )
                     }
                     else {
-                        return h(bem("div#item"),
-                            {key: item.name, onClick: this.select.bind(this, item)},
-                            item.name
+                        return h(Link, {key: item.name, to: `/${item.name}`},
+                            h(bem("div#item"),
+                                {key: item.name},
+                                item.name
+                            )
                         )
                     }
                 })

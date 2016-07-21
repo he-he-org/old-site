@@ -2,14 +2,12 @@ import {createClass} from "react"
 import {h} from "react-markup"
 import rest from "rest"
 import mime from "rest/interceptor/mime"
-import {fetchCollection} from "./api"
+import {Router, Route, hashHistory} from "react-router"
 
 import Navigation from "./navigation"
 import TableView from "./table-view"
 
-const client = rest.wrap(mime)
-
-const Root = createClass({
+const App = createClass({
     getInitialState() {
         return {
             scheme: [
@@ -36,11 +34,11 @@ const Root = createClass({
                     attrs: [
                         {name: "id", type: "int"},
                         {name: "name_id", type: "int"},
-                        //{name: "name", type: "manyToOne", manyToOne: {
-                        //    fromAttr: "name_id",
-                        //    toAttr: "id",
-                        //    toResource: "translation-string",
-                        //}},
+                        {name: "name", type: "hasOne", hasOne: {
+                            fromAttr: "name_id",
+                            toAttr: "id",
+                            toResource: "translation-string",
+                        }},
                         {name: "role_id", type: "int"},
                         {name: "photo_url", type: "string"},
                         {name: "vk", type: "string"},
@@ -66,26 +64,37 @@ const Root = createClass({
                         {name: "title_id", type: "int"},
                     ],
                 },
+                {
+                    name: "news-news-tag",
+                    attrs: [
+                        {name: "id", type: "int"},
+                        {name: "news_id", type: "int"},
+                        {name: "tags_id", type: "int"},
+                    ],
+                },
             ],
-            activeCollectionName: "translation-string",
         }
     },
 
-    selectCollection(item) {
-        this.setState({
-            activeCollectionName: item.name,
-        })
-    },
-
     render() {
-        const {scheme, data, activeCollectionName} = this.state
-        const activeCollection = scheme.filter((x) => x.name === activeCollectionName)[0]
+        const {params: {collection = "translation-string"}} = this.props
+        const {scheme, data} = this.state
+        const activeCollection = scheme.filter((x) => x.name === collection)[0]
+
         return h("div",
-            h(Navigation, {items: scheme, activeItem: activeCollection, onSelect: this.selectCollection}),
+            h(Navigation, {items: scheme, activeItem: activeCollection}),
             h(TableView, {
                 scheme: activeCollection,
                 data,
             })
+        )
+    },
+})
+
+const Root = createClass({
+    render() {
+        return h(Router, {history: hashHistory},
+            h(Route, {path: "/:collection", component: App})
         )
     },
 })

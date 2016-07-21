@@ -13,6 +13,7 @@
     "react-dom": "^15.1.0",
     "react-input-autosize": "^1.0.0",
     "react-markup": "^1.0.3",
+    "react-router": "^2.6.0",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "rest": "^2.0.0"
