@@ -23,9 +23,9 @@ AppAsset::register($this);
     <?php $this->head() ?>
 
     <?php if (!YII_DEBUG) { ?>
-    <!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter38485965 = new Ya.Metrika({ id:38485965, clickmap:true, trackLinks:true, accurateTrackBounce:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/38485965" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+    <!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter36532600 = new Ya.Metrika({ id:36532600, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/36532600" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
     <?php } ?>
-    
+
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
     <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 </head>
@@ -80,7 +80,7 @@ AppAsset::register($this);
                     <div class="layout-footer_links-block row_block-3">
                         <div class="layout-footer_links-block_header">Задачи</div>
                         <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['#crowdfunding-2']) ?>">Строительство клиники</a></div>
-                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/package#pharmacy']) ?>">Медикаменты</a></div> 
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/package#pharmacy']) ?>">Медикаменты</a></div>
                         <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/package#food']) ?>">Продукты питания</a></div>
 <!--                        <div class="layout-footer_links-block_item">Строительство водопровода</div>-->
                     </div>
