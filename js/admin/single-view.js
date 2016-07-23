@@ -74,11 +74,11 @@ const SingleView = createClass({
         if (attr.type === "text") {
             return h("textarea", {
                 value: record[attr.name] === null ? "" : record[attr.name],
-                onChange: this.handleAttrChange.bind(this, attr.name),
+                onChange: this.handleAttrChange.bind(null, attr.name),
             })
         }
         else if (attr.type === "manyToOne") {
-            return h("button", {onClick: this.editLinkAttr.bind(this, attr)},
+            return h("button", {onClick: this.editLinkAttr.bind(null, attr)},
                 record[attr.name] === null ? "null" : "[" + record[attr.name].id + "]"
             )
         }
@@ -91,7 +91,7 @@ const SingleView = createClass({
             return h("input", {
                 type: "text",
                 value: record[attr.name] === null ? "" : record[attr.name],
-                onChange: this.handleAttrChange.bind(this, attr.name),
+                onChange: this.handleAttrChange.bind(null, attr.name),
             })
         }
     },
