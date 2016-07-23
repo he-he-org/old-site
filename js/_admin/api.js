@@ -2,6 +2,7 @@ import rest from "rest"
 import mime from "rest/interceptor/mime"
 import template from "rest/interceptor/template"
 import errorCode from "rest/interceptor/errorCode"
+import {merge} from "functional-utils"
 
 const client = rest
     .wrap(mime, {mime: "application/json"})
@@ -9,11 +10,25 @@ const client = rest
     .wrap(errorCode)
 
 export const fetchCollection = (collection, params = {}) => {
-    console.log("fetchCollection params", params)
+    const expand = []
+    collection.attrs.forEach((attr) => {
+        if (attr.type === "manyToOne" || attr.type === "manyToMany") {
+            expand.push(attr.name)
+        }
+    })
+
+    let extParams = params
+
+    if (expand.length > 0) {
+        extParams = merge(extParams, {
+            expand: expand.join(","),
+        })
+    }
+
     return client({
         method: "GET",
-        params,
-        path: `/api/${collection.name}s{?page}`,
+        params: extParams,
+        path: `/api/${collection.name}{?page}{&expand}`,
     }).then((result) => {
         return {
             pagination: {
@@ -28,13 +43,13 @@ export const fetchCollection = (collection, params = {}) => {
 }
 
 export const patchRecord = (collection, record) => {
-    return client({path: `/api/${collection.name}s/${record.id}`, method: "PATCH", entity: record})
+    return client({path: `/api/${collection.name}/${record.id}`, method: "PATCH", entity: record})
 }
 
 export const postRecord = (collection, record) => {
-    return client({path: `/api/${collection.name}s`, method: "POST", entity: record})
+    return client({path: `/api/${collection.name}`, method: "POST", entity: record})
 }
 
 export const deleteRecord = (collection, record) => {
-    return client({path: `/api/${collection.name}s/${record.id}`, method: "DELETE"})
+    return client({path: `/api/${collection.name}/${record.id}`, method: "DELETE"})
 }

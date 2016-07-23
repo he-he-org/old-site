@@ -20,6 +20,11 @@ class NewsTag extends ActiveRecord
         ];
     }
 
+    public function extraFields()
+    {
+        return ['news'];
+    }
+
     public static function tableName()
     {
         return 'news_tags';

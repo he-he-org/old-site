@@ -41,10 +41,19 @@ const SingleView = createClass({
     renderInput(record, attr) {
         if (attr.type === "text") {
             return h("textarea", {
-                type: "text",
                 value: record[attr.name] === null ? "" : record[attr.name],
                 onChange: this.handleAttrChange.bind(this, attr.name),
             })
+        }
+        else if (attr.type === "manyToOne") {
+            return h("button",
+                record[attr.name] === null ? "null" : "[" + record[attr.name].id + "]"
+            )
+        }
+        else if (attr.type === "manyToMany") {
+            return h("button",
+                record[attr.name] === null ? "null" : "[" + record[attr.name].map((x) => x.id).join(", ") + "]"
+            )
         }
         else {
             return h("input", {

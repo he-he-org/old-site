@@ -12,7 +12,7 @@ const App = createClass({
         return {
             scheme: [
                 {
-                    name: "translation-string",
+                    name: "translation-strings",
                     attrs: [
                         {name: "id", type: "int"},
                         {name: "en-US", type: "string"},
@@ -21,7 +21,7 @@ const App = createClass({
                     ],
                 },
                 {
-                    name: "translation-text",
+                    name: "translation-texts",
                     attrs: [
                         {name: "id", type: "int"},
                         {name: "en-US", type: "text"},
@@ -30,16 +30,21 @@ const App = createClass({
                     ],
                 },
                 {
-                    name: "member",
+                    name: "members",
                     attrs: [
                         {name: "id", type: "int"},
                         {name: "name_id", type: "int"},
-                        {name: "name", type: "hasOne", hasOne: {
+                        {name: "name", type: "manyToOne", manyToOne: {
+                            to: "translation-strings",
                             fromAttr: "name_id",
                             toAttr: "id",
-                            toResource: "translation-string",
                         }},
                         {name: "role_id", type: "int"},
+                        {name: "role", type: "manyToOne", manyToOne: {
+                            to: "translation-strings",
+                            fromAttr: "role_id",
+                            toAttr: "id",
+                        }},
                         {name: "photo_url", type: "string"},
                         {name: "vk", type: "string"},
                         {name: "fb", type: "string"},
@@ -48,28 +53,40 @@ const App = createClass({
                     ],
                 },
                 {
-                    name: "news-item",
+                    name: "news-items",
                     attrs: [
                         {name: "id", type: "int"},
                         {name: "date", type: "date"},
                         {name: "title_id", type: "int"},
                         {name: "text_id", type: "int"},
                         {name: "image_url", type: "string"},
+                        {name: "tags", type: "manyToMany", manyToMany: {
+                            via: "news-news-tags",
+                            to: "news-tag",
+                            fromAttr: "news_id",
+                            toAttr: "news_tags_id",
+                        }},
                     ],
                 },
                 {
-                    name: "news-tag",
+                    name: "news-tags",
                     attrs: [
                         {name: "id", type: "int"},
                         {name: "title_id", type: "int"},
+                        {name: "news", type: "manyToMany", manyToMany: {
+                            via: "news-news-tags",
+                            to: "news-item",
+                            fromAttr: "news_tags_id",
+                            toAttr: "news_id",
+                        }},
                     ],
                 },
                 {
-                    name: "news-news-tag",
+                    name: "news-news-tags",
                     attrs: [
                         {name: "id", type: "int"},
                         {name: "news_id", type: "int"},
-                        {name: "tags_id", type: "int"},
+                        {name: "news_tags_id", type: "int"},
                     ],
                 },
             ],
@@ -77,7 +94,7 @@ const App = createClass({
     },
 
     render() {
-        const {params: {collection = "translation-string"}} = this.props
+        const {params: {collection = "translation-strings"}} = this.props
         const {scheme, data} = this.state
         const activeCollection = scheme.filter((x) => x.name === collection)[0]
 
@@ -94,7 +111,8 @@ const App = createClass({
 const Root = createClass({
     render() {
         return h(Router, {history: hashHistory},
-            h(Route, {path: "/:collection", component: App})
+            h(Route, {path: "/:collection", component: App}),
+            h(Route, {path: "/", component: App})
         )
     },
 })

@@ -155,6 +155,21 @@ const TableView = createClass({
         )
     },
 
+    renderAttr(record, attr) {
+        if (record[attr.name] === null) {
+            return "null"
+        }
+        else if (attr.type === "manyToOne") {
+            return "[" + record[attr.name].id + "]"
+        }
+        else if (attr.type === "manyToMany") {
+            return "[" + record[attr.name].map((x) => x.id).join(", ") + "]"
+        }
+        else {
+            return record[attr.name]
+        }
+    },
+
     render() {
         const {scheme} = this.props
         const {attrs} = scheme
@@ -192,9 +207,9 @@ const TableView = createClass({
                     ),
                     h("tbody", data.map((record) => (
                         h("tr", {key: record.id},
-                            attrs.map((field) => (
-                                h("td", {key: `${record.id}-${field.name}`},
-                                    record[field.name] === null ? "null" : record[field.name])
+                            attrs.map((attr) => (
+                                h("td", {key: `${record.id}-${attr.name}`},
+                                    this.renderAttr(record, attr))
                             )).concat([
                                 h("td", {key: "controls"},
                                     h("button", {onClick: this.editRecord.bind(null, record)}, "Edit"),

@@ -20,7 +20,7 @@ class NewsItem extends ActiveRecord
 
     public function extraFields()
     {
-        return ['title', 'text'];
+        return ['title', 'text', 'tags'];
     }
 
     public static function tableName()
