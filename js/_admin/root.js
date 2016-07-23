@@ -33,13 +33,11 @@ const App = createClass({
                     name: "members",
                     attrs: [
                         {name: "id", type: "int"},
-                        {name: "name_id", type: "int"},
                         {name: "name", type: "manyToOne", manyToOne: {
                             to: "translation-strings",
                             fromAttr: "name_id",
                             toAttr: "id",
                         }},
-                        {name: "role_id", type: "int"},
                         {name: "role", type: "manyToOne", manyToOne: {
                             to: "translation-strings",
                             fromAttr: "role_id",
@@ -57,8 +55,16 @@ const App = createClass({
                     attrs: [
                         {name: "id", type: "int"},
                         {name: "date", type: "date"},
-                        {name: "title_id", type: "int"},
-                        {name: "text_id", type: "int"},
+                        {name: "title", type: "manyToOne", manyToOne: {
+                            to: "translation-strings",
+                            fromAttr: "title_id",
+                            toAttr: "id",
+                        }},
+                        {name: "text", type: "manyToOne", manyToOne: {
+                            to: "translation-texts",
+                            fromAttr: "text_id",
+                            toAttr: "id",
+                        }},
                         {name: "image_url", type: "string"},
                         {name: "tags", type: "manyToMany", manyToMany: {
                             via: "news-news-tags",
@@ -72,7 +78,11 @@ const App = createClass({
                     name: "news-tags",
                     attrs: [
                         {name: "id", type: "int"},
-                        {name: "title_id", type: "int"},
+                        {name: "title", type: "manyToOne", manyToOne: {
+                            to: "translation-strings",
+                            fromAttr: "title_id",
+                            toAttr: "id",
+                        }},
                         {name: "news", type: "manyToMany", manyToMany: {
                             via: "news-news-tags",
                             to: "news-item",
@@ -86,6 +96,16 @@ const App = createClass({
                     attrs: [
                         {name: "id", type: "int"},
                         {name: "news_id", type: "int"},
+                        {name: "newsItem", type: "manyToOne", manyToOne: {
+                            to: "news-items",
+                            fromAttr: "news_id",
+                            toAttr: "id",
+                        }},
+                        {name: "tag", type: "manyToOne", manyToOne: {
+                            to: "news-tags",
+                            fromAttr: "news_tags_id",
+                            toAttr: "id",
+                        }},
                         {name: "news_tags_id", type: "int"},
                     ],
                 },
@@ -94,14 +114,15 @@ const App = createClass({
     },
 
     render() {
-        const {params: {collection = "translation-strings"}} = this.props
+        const {params: {resource = "translation-strings"}} = this.props
         const {scheme, data} = this.state
-        const activeCollection = scheme.filter((x) => x.name === collection)[0]
+        const activeResource = scheme.filter((x) => x.name === resource)[0]
 
         return h("div",
-            h(Navigation, {items: scheme, activeItem: activeCollection}),
+            h(Navigation, {items: scheme, activeItem: activeResource}),
             h(TableView, {
-                scheme: activeCollection,
+                scheme,
+                resourceName: resource,
                 data,
             })
         )
@@ -111,7 +132,7 @@ const App = createClass({
 const Root = createClass({
     render() {
         return h(Router, {history: hashHistory},
-            h(Route, {path: "/:collection", component: App}),
+            h(Route, {path: "/:resource", component: App}),
             h(Route, {path: "/", component: App})
         )
     },

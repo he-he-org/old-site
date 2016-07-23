@@ -1,31 +1,40 @@
-import {createClass} from "react"
+import {createClass, PropTypes} from "react"
 import {h} from "react-markup"
 import prefixer from "bem-prefixer"
 import {merge} from "functional-utils"
 
+import ManyToOneModal from "./many-to-one-modal"
 const bem = prefixer("SingleView")
+
 
 const SingleView = createClass({
 
     getInitialState() {
         return {
             record: this.props.record,
+            editingLinkAttr: null,
         }
     },
+
 
     componentWillReceiveProps(props) {
         this.setState({
             record: props.record,
+            editingLink: null,
         })
     },
 
+    getResourceScheme(props = this.props) {
+        const {scheme, resourceName} = props
+        return scheme.filter((x) => x.name === resourceName)[0] //todo: use util
+    },
 
-    handleAttrChange(field, e) {
+    handleAttrChange(attr, e) {
         const {record} = this.state
 
         this.setState({
             record: merge(record, {
-                [field]: e.target.value,
+                [attr]: e.target.value,
             }),
         })
     },
@@ -38,6 +47,29 @@ const SingleView = createClass({
         this.props.onCancel()
     },
 
+    editLinkAttr(attr) {
+        this.setState({
+            editingLinkAttr: attr,
+        })
+    },
+
+    cancelEditLinkAttr() {
+        this.setState({
+            editingLinkAttr: null,
+        })
+    },
+
+    changeEditLinkAttr(newValue) {
+        const {editingLinkAttr, record} = this.state
+
+        this.setState({
+            editingLinkAttr: null,
+            record: merge(record, {
+                [editingLinkAttr.name]: newValue,
+            }),
+        })
+    },
+
     renderInput(record, attr) {
         if (attr.type === "text") {
             return h("textarea", {
@@ -46,7 +78,7 @@ const SingleView = createClass({
             })
         }
         else if (attr.type === "manyToOne") {
-            return h("button",
+            return h("button", {onClick: this.editLinkAttr.bind(this, attr)},
                 record[attr.name] === null ? "null" : "[" + record[attr.name].id + "]"
             )
         }
@@ -64,13 +96,36 @@ const SingleView = createClass({
         }
     },
 
-    render() {
+    renderEditingLinkAttrModal() {
+        const {editingLinkAttr} = this.state
         const {scheme} = this.props
+
+        if (editingLinkAttr !== null) {
+            if (editingLinkAttr.type === "manyToOne") {
+                return h(ManyToOneModal, {
+                    scheme,
+                    resourceName: editingLinkAttr[editingLinkAttr.type].to,
+                    onCancel: this.cancelEditLinkAttr,
+                    onSelect: this.changeEditLinkAttr,
+                })
+            }
+            else {
+                throw new Error("Editing for many-to-many relations is not imlemented yet")
+            }
+        }
+        else {
+            return null
+        }
+    },
+
+    render() {
         const {record} = this.state
-        const {attrs} = scheme
+        const {attrs} = this.getResourceScheme()
 
         return (
             h(bem("div"),
+                this.renderEditingLinkAttrModal(),
+
                 h(bem("div#fields"), attrs.filter((x) => x.name !== "id").map((attr) => (
                     h(bem("label#field"), {key: attr.name},
                         h(bem("div#title"), attr.name),
@@ -88,5 +143,10 @@ const SingleView = createClass({
         )
     },
 })
+
+SingleView.propTypes = {
+    scheme: PropTypes.array.isRequired,
+    resourceName: PropTypes.string.isRequired,
+}
 
 export default SingleView

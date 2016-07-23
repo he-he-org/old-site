@@ -42,14 +42,32 @@ export const fetchCollection = (collection, params = {}) => {
     })
 }
 
-export const patchRecord = (collection, record) => {
-    return client({path: `/api/${collection.name}/${record.id}`, method: "PATCH", entity: record})
+export const patchRecord = (resourceScheme, record) => {
+    const entity = resourceScheme.attrs.reduce((result, attr) => {
+        if (attr.type === "manyToOne") {
+            return merge(result, {
+                [attr[attr.type].fromAttr]: record[attr.name].id,
+            })
+        }
+        else if (attr.type === "manyToMany") {
+            throw new Error("Not implemented yet type: manyToMany")
+        }
+        else {
+            return merge(result, {
+                [attr.name]: record[attr.name],
+            })
+        }
+    }, {})
+
+    console.log("to patch", entity)
+
+    return client({path: `/api/${resourceScheme.name}/${record.id}`, method: "PATCH", entity})
 }
 
-export const postRecord = (collection, record) => {
-    return client({path: `/api/${collection.name}`, method: "POST", entity: record})
+export const postRecord = (resourceScheme, record) => {
+    return client({path: `/api/${resourceScheme.name}`, method: "POST", entity: record})
 }
 
-export const deleteRecord = (collection, record) => {
-    return client({path: `/api/${collection.name}/${record.id}`, method: "DELETE"})
+export const deleteRecord = (resourceScheme, record) => {
+    return client({path: `/api/${resourceScheme.name}/${record.id}`, method: "DELETE"})
 }

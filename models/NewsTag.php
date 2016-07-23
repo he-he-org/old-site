@@ -22,7 +22,7 @@ class NewsTag extends ActiveRecord
 
     public function extraFields()
     {
-        return ['news'];
+        return ['title', 'news'];
     }
 
     public static function tableName()

@@ -1,4 +1,4 @@
-import {createClass} from "react"
+import {createClass, PropTypes} from "react"
 import {h} from "react-markup"
 import prefixer from "bem-prefixer"
 import {merge} from "functional-utils"
@@ -31,6 +31,11 @@ const TableView = createClass({
         this.sync(props)
     },
 
+    getResourceScheme(props = this.props) {
+        const {scheme, resourceName} = props
+        return scheme.filter((x) => x.name === resourceName)[0] //todo: use util
+    },
+
     editRecord(record) {
         this.setState({
             editingRecord: record,
@@ -39,8 +44,8 @@ const TableView = createClass({
 
 
     updateRecord(record) {
-        const {scheme} = this.props
-        patchRecord(scheme, record)
+        const resourceScheme = this.getResourceScheme()
+        patchRecord(resourceScheme, record)
             .then(() => {
                 this.setState({
                     editingRecord: null,
@@ -60,9 +65,9 @@ const TableView = createClass({
 
 
     createRecord() {
-        const {scheme} = this.props
+        const resourceScheme = this.getResourceScheme()
         this.setState({
-            creatingRecord: scheme.attrs.reduce((acc, attr) => (
+            creatingRecord: resourceScheme.attrs.reduce((acc, attr) => (
                 merge(acc, {
                     [attr.name]: null,
                 })
@@ -77,8 +82,8 @@ const TableView = createClass({
     },
 
     saveCreateRecord(record) {
-        const {scheme} = this.props
-        postRecord(scheme, record)
+        const resourceScheme = this.getResourceScheme()
+        postRecord(resourceScheme, record)
             .then(() => {
                 this.setState({
                     creatingRecord: null,
@@ -91,7 +96,7 @@ const TableView = createClass({
     },
 
     sync(props = this.props) {
-        const {scheme} = props
+        const resourceScheme = this.getResourceScheme(props)
         this.setState({
             loading: true,
             data: null,
@@ -100,7 +105,7 @@ const TableView = createClass({
             const params = {
                 page: pagination.currentPage || 1,
             }
-            return fetchCollection(scheme, params).then(({pagination, data}) => {
+            return fetchCollection(resourceScheme, params).then(({pagination, data}) => {
                 this.setState({
                     loading: false,
                     pagination,
@@ -111,8 +116,8 @@ const TableView = createClass({
     },
 
     deleteRecord(record) {
-        const {scheme} = this.props
-        deleteRecord(scheme, record)
+        const resourceScheme = this.getResourceScheme()
+        deleteRecord(resourceScheme, record)
             .then(() => this.sync())
             .catch((e) => {
                 error(e.entity.message)
@@ -170,10 +175,32 @@ const TableView = createClass({
         }
     },
 
+    renderRecord(record) {
+        const {attrs} = this.getResourceScheme()
+        const {enableRecordSelect, onRecordSelect} = this.props
+
+        const onClick = enableRecordSelect
+            ? onRecordSelect.bind(null, record)
+            : null
+
+        return h("tr", {key: record.id, onClick},
+            attrs.map((attr) => (
+                h("td", {key: `${record.id}-${attr.name}`},
+                    this.renderAttr(record, attr))
+            )).concat([
+                h("td", {key: "controls"},
+                    h("button", {onClick: this.editRecord.bind(null, record)}, "Edit"),
+                    h("button", {onClick: this.deleteRecord.bind(null, record)}, "Delete")
+                ),
+            ])
+        )
+    },
+
     render() {
-        const {scheme} = this.props
-        const {attrs} = scheme
+        const {scheme, resourceName} = this.props
         const {editingRecord, creatingRecord, data, loading} = this.state
+
+        const {attrs} = this.getResourceScheme()
 
         if (loading) {
             return h(bem("div"), "Loading")
@@ -184,6 +211,7 @@ const TableView = createClass({
                 editingRecord && h(Modal,
                     h(SingleView, {
                         scheme,
+                        resourceName,
                         record: editingRecord,
                         onSave: this.updateRecord,
                         onCancel: this.cancelEditRecord,
@@ -192,6 +220,7 @@ const TableView = createClass({
                 creatingRecord && h(Modal,
                     h(SingleView, {
                         scheme,
+                        resourceName,
                         record: creatingRecord,
                         onSave: this.saveCreateRecord,
                         onCancel: this.cancelCreateRecord,
@@ -206,22 +235,26 @@ const TableView = createClass({
                         )))
                     ),
                     h("tbody", data.map((record) => (
-                        h("tr", {key: record.id},
-                            attrs.map((attr) => (
-                                h("td", {key: `${record.id}-${attr.name}`},
-                                    this.renderAttr(record, attr))
-                            )).concat([
-                                h("td", {key: "controls"},
-                                    h("button", {onClick: this.editRecord.bind(null, record)}, "Edit"),
-                                    h("button", {onClick: this.deleteRecord.bind(null, record)}, "Delete")
-                                ),
-                            ])
-                        ))
+                        this.renderRecord(record)
                     ))
                 )
             )
-        )
+        ))
     },
 })
+
+TableView.propTypes = {
+    scheme: PropTypes.array.isRequired,
+    resourceName: PropTypes.string.isRequired,
+
+    enableRecordSelect: PropTypes.bool,
+    onRecordSelect: PropTypes.func,
+}
+
+TableView.defaultProps = {
+    enableRecordSelect: false,
+    onRecordSelect: null,
+}
+
 
 export default TableView
