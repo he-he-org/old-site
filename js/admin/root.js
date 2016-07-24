@@ -68,7 +68,7 @@ const App = createClass({
                         {name: "image_url", type: "string"},
                         {name: "tags", type: "manyToMany", manyToMany: {
                             via: "news-news-tags",
-                            to: "news-tag",
+                            to: "news-tags",
                             fromAttr: "news_id",
                             toAttr: "news_tags_id",
                         }},
@@ -85,7 +85,7 @@ const App = createClass({
                         }},
                         {name: "news", type: "manyToMany", manyToMany: {
                             via: "news-news-tags",
-                            to: "news-item",
+                            to: "news-items",
                             fromAttr: "news_tags_id",
                             toAttr: "news_id",
                         }},

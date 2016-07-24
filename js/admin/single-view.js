@@ -4,6 +4,7 @@ import prefixer from "bem-prefixer"
 import {merge} from "functional-utils"
 
 import ManyToOneModal from "./many-to-one-modal"
+import ManyToManyModal from "./many-to-many-modal"
 const bem = prefixer("SingleView")
 
 
@@ -83,7 +84,7 @@ const SingleView = createClass({
             )
         }
         else if (attr.type === "manyToMany") {
-            return h("button",
+            return h("button", {onClick: this.editLinkAttr.bind(null, attr)},
                 record[attr.name] === null ? "null" : "[" + record[attr.name].map((x) => x.id).join(", ") + "]"
             )
         }
@@ -99,18 +100,31 @@ const SingleView = createClass({
     renderEditingLinkAttrModal() {
         const {editingLinkAttr} = this.state
         const {scheme} = this.props
+        const {record} = this.state
 
         if (editingLinkAttr !== null) {
+            const value = record[editingLinkAttr.name]
+            const typeParams = editingLinkAttr[editingLinkAttr.type]
             if (editingLinkAttr.type === "manyToOne") {
                 return h(ManyToOneModal, {
                     scheme,
-                    resourceName: editingLinkAttr[editingLinkAttr.type].to,
+                    resourceName: typeParams.to,
+                    value,
                     onCancel: this.cancelEditLinkAttr,
                     onSelect: this.changeEditLinkAttr,
                 })
             }
+            else if (editingLinkAttr.type === "manyToMany") {
+                return h(ManyToManyModal, {
+                    scheme,
+                    resourceName: typeParams.to,
+                    value,
+                    onCancel: this.cancelEditLinkAttr,
+                    onSave: this.changeEditLinkAttr,
+                })
+            }
             else {
-                throw new Error("Editing for many-to-many relations is not imlemented yet")
+                throw new Error(`Editing for '${editingLinkAttr.type}' relations is not imlemented yet`)
             }
         }
         else {

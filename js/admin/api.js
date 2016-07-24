@@ -10,25 +10,10 @@ const client = rest
     .wrap(errorCode)
 
 export const fetchCollection = (collection, params = {}) => {
-    const expand = []
-    collection.attrs.forEach((attr) => {
-        if (attr.type === "manyToOne" || attr.type === "manyToMany") {
-            expand.push(attr.name)
-        }
-    })
-
-    let extParams = params
-
-    if (expand.length > 0) {
-        extParams = merge(extParams, {
-            expand: expand.join(","),
-        })
-    }
-
     return client({
         method: "GET",
-        params: extParams,
-        path: `/api/${collection.name}{?page}{&expand}`,
+        params,
+        path: `/api/${collection.name}{?page,expand,q}`,
     }).then((result) => {
         return {
             pagination: {
@@ -43,25 +28,7 @@ export const fetchCollection = (collection, params = {}) => {
 }
 
 export const patchRecord = (resourceScheme, record) => {
-    const entity = resourceScheme.attrs.reduce((result, attr) => {
-        if (attr.type === "manyToOne") {
-            return merge(result, {
-                [attr[attr.type].fromAttr]: record[attr.name].id,
-            })
-        }
-        else if (attr.type === "manyToMany") {
-            throw new Error("Not implemented yet type: manyToMany")
-        }
-        else {
-            return merge(result, {
-                [attr.name]: record[attr.name],
-            })
-        }
-    }, {})
-
-    console.log("to patch", entity)
-
-    return client({path: `/api/${resourceScheme.name}/${record.id}`, method: "PATCH", entity})
+    return client({path: `/api/${resourceScheme.name}/${record.id}`, method: "PATCH", record})
 }
 
 export const postRecord = (resourceScheme, record) => {

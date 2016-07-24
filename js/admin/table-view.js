@@ -5,7 +5,8 @@ import {merge} from "functional-utils"
 
 import Modal from "./modal"
 import SingleView from "./single-view"
-import {patchRecord, deleteRecord, fetchCollection, postRecord} from "./api"
+import {patchRecord, deleteRecord} from "./api"
+import {updateRecord, createRecord, fetchCollection} from "./data-access"
 import {error} from "./alerts"
 
 const bem = prefixer("TableView")
@@ -44,8 +45,10 @@ const TableView = createClass({
 
 
     updateRecord(record) {
+        const {scheme} = this.props
         const resourceScheme = this.getResourceScheme()
-        patchRecord(resourceScheme, record)
+
+        updateRecord(scheme, resourceScheme, record, this.state.editingRecord)
             .then(() => {
                 this.setState({
                     editingRecord: null,
@@ -82,8 +85,9 @@ const TableView = createClass({
     },
 
     saveCreateRecord(record) {
+        const {scheme} = this.props
         const resourceScheme = this.getResourceScheme()
-        postRecord(resourceScheme, record)
+        createRecord(scheme, resourceScheme, record)
             .then(() => {
                 this.setState({
                     creatingRecord: null,
