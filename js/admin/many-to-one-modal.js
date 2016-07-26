@@ -9,7 +9,7 @@ const bem = prefixer("ManyToOneModal")
 const ManyToOneModal = createClass({
 
     render() {
-        const {scheme, resourceName, onCancel, onSelect} = this.props
+        const {scheme, resourceName, onCancel, onSelect, context} = this.props
 
         return (
             h(bem("div"),
@@ -19,6 +19,7 @@ const ManyToOneModal = createClass({
                         resourceName,
                         enableRecordSelect: true,
                         onRecordSelect: onSelect,
+                        context,
                     }),
                     h("button", {onClick: onCancel}, "Cancel")
                 )

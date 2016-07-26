@@ -99,7 +99,7 @@ const SingleView = createClass({
 
     renderEditingLinkAttrModal() {
         const {editingLinkAttr} = this.state
-        const {scheme} = this.props
+        const {scheme, context} = this.props
         const {record} = this.state
 
         if (editingLinkAttr !== null) {
@@ -112,6 +112,7 @@ const SingleView = createClass({
                     value,
                     onCancel: this.cancelEditLinkAttr,
                     onSelect: this.changeEditLinkAttr,
+                    context,
                 })
             }
             else if (editingLinkAttr.type === "manyToMany") {
@@ -121,6 +122,7 @@ const SingleView = createClass({
                     value,
                     onCancel: this.cancelEditLinkAttr,
                     onSave: this.changeEditLinkAttr,
+                    context,
                 })
             }
             else {

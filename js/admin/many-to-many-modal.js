@@ -44,7 +44,7 @@ const ManyToManyModal = createClass({
     },
 
     render() {
-        const {scheme, resourceName, onCancel} = this.props
+        const {scheme, resourceName, onCancel, context} = this.props
         const value = this.state.value || []
 
         return (
@@ -62,6 +62,7 @@ const ManyToManyModal = createClass({
                         resourceName,
                         enableRecordSelect: true,
                         onRecordSelect: this.selectRecord,
+                        context,
                     }),
                     h("button", {onClick: this.save}, "Save"),
                     h("button", {onClick: onCancel}, "Cancel")

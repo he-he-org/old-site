@@ -2,37 +2,36 @@
 
 namespace app\models;
 
+
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
+    static $ADMIN_PASSWORD;
+    static $ADMIN_ACCESS_TOKEN;
+
     public $id;
     public $username;
     public $password;
     public $authKey;
     public $accessToken;
 
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
+    private static function getUsers() {
+        return [
+            '100' => [
+                'id' => '100',
+                'username' => 'admin',
+                'password' => self::$ADMIN_PASSWORD,
+                'accessToken' => self::$ADMIN_ACCESS_TOKEN,
+                'authKey' => bin2hex(openssl_random_pseudo_bytes(16)),
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc
      */
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return isset(self::getUsers()[$id]) ? new static(self::getUsers()[$id]) : null;
     }
 
     /**
@@ -40,7 +39,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
+        foreach (self::getUsers() as $user) {
             if ($user['accessToken'] === $token) {
                 return new static($user);
             }
@@ -57,7 +56,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
+        foreach (self::getUsers() as $user) {
             if (strcasecmp($user['username'], $username) === 0) {
                 return new static($user);
             }
@@ -98,6 +97,10 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+
     }
 }
+
+$config = parse_ini_file(__DIR__ . '/../env.ini', true);
+User::$ADMIN_ACCESS_TOKEN = @$config['admin_access_token'] ?: bin2hex(openssl_random_pseudo_bytes(16));
+User::$ADMIN_PASSWORD = @$config['admin_password'] ?: bin2hex(openssl_random_pseudo_bytes(16));

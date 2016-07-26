@@ -20,7 +20,9 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+//            'enableAutoLogin' => true,
+            'enableSession' => true,
+            'loginUrl' => null,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -53,6 +55,7 @@ $config = [
                     'prefix' => 'api'
                 ],
                 'admin' => 'admin/main',
+                'admin/<section:.*>' => 'admin/<section>',
                 '<page>/<section:.*>' => 'site/<page>',
                 '<page>' => 'site/<page>',
             ],

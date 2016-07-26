@@ -5,8 +5,6 @@ import {merge} from "functional-utils"
 
 import Modal from "./modal"
 import SingleView from "./single-view"
-import {patchRecord, deleteRecord} from "./api"
-import {updateRecord, createRecord, fetchCollection} from "./data-access"
 import {error} from "./alerts"
 
 const bem = prefixer("TableView")
@@ -45,10 +43,10 @@ const TableView = createClass({
 
 
     updateRecord(record) {
-        const {scheme} = this.props
+        const {scheme, context: {dao}} = this.props
         const resourceScheme = this.getResourceScheme()
 
-        updateRecord(scheme, resourceScheme, record, this.state.editingRecord)
+        dao.updateRecord(scheme, resourceScheme, record, this.state.editingRecord)
             .then(() => {
                 this.setState({
                     editingRecord: null,
@@ -85,9 +83,9 @@ const TableView = createClass({
     },
 
     saveCreateRecord(record) {
-        const {scheme} = this.props
+        const {scheme, dao} = this.props
         const resourceScheme = this.getResourceScheme()
-        createRecord(scheme, resourceScheme, record)
+        dao.createRecord(scheme, resourceScheme, record)
             .then(() => {
                 this.setState({
                     creatingRecord: null,
@@ -100,6 +98,7 @@ const TableView = createClass({
     },
 
     sync(props = this.props) {
+        const {context: {dao}} = this.props
         const resourceScheme = this.getResourceScheme(props)
         this.setState({
             loading: true,
@@ -109,7 +108,7 @@ const TableView = createClass({
             const params = {
                 page: pagination.currentPage || 1,
             }
-            return fetchCollection(resourceScheme, params).then(({pagination, data}) => {
+            return dao.fetchCollection(resourceScheme, params).then(({pagination, data}) => {
                 this.setState({
                     loading: false,
                     pagination,
@@ -120,8 +119,9 @@ const TableView = createClass({
     },
 
     deleteRecord(record) {
+        const {dao} = this.props
         const resourceScheme = this.getResourceScheme()
-        deleteRecord(resourceScheme, record)
+        dao.deleteRecord(resourceScheme, record)
             .then(() => this.sync())
             .catch((e) => {
                 error(e.entity.message)
@@ -201,7 +201,7 @@ const TableView = createClass({
     },
 
     render() {
-        const {scheme, resourceName} = this.props
+        const {scheme, resourceName, context} = this.props
         const {editingRecord, creatingRecord, data, loading} = this.state
 
         const {attrs} = this.getResourceScheme()
@@ -219,6 +219,7 @@ const TableView = createClass({
                         record: editingRecord,
                         onSave: this.updateRecord,
                         onCancel: this.cancelEditRecord,
+                        context,
                     })
                 ),
                 creatingRecord && h(Modal,
@@ -228,6 +229,7 @@ const TableView = createClass({
                         record: creatingRecord,
                         onSave: this.saveCreateRecord,
                         onCancel: this.cancelCreateRecord,
+                        context,
                     })
                 ),
                 h("button", {onClick: this.createRecord}, "Create"),
