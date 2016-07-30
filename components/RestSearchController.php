@@ -45,7 +45,7 @@ trait RestSearchController
 
         if ($q !== '') {
             $conditionArray = ['and'];
-            foreach(explode(',', $q) as $cond) {
+            foreach(explode(';', $q) as $cond) {
                 if (preg_match('/^(.+):(.+)$/', $cond, $keyValue) !== 1) {
                     throw new BadRequestHttpException("Bad condition format: '$cond' (it should be 'key:value')");
                 }
@@ -101,7 +101,13 @@ trait RestSearchController
                     array_push($conditionArray, [substr($value, 0, 1), $attr, substr($value, 1)]);
                 }
                 else {
-                    array_push($conditionArray, [$attr => $value]);
+                    if (preg_match('/^\\[((?:[^,]+,)*(?:[^,]+))\\]$/', $value, $valueList) === 1) {
+                        $values = explode(",", $valueList[1]);
+                        array_push($conditionArray, [$attr => $values]);
+                    }
+                    else {
+                        array_push($conditionArray, [$attr => $value]);
+                    }
                 }
             }
             $query->where($conditionArray);
