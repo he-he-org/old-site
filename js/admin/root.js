@@ -116,6 +116,13 @@ const expandings = {
         "name",
         "role",
     ],
+    "news-tags": [
+        "title",
+        ["news", [
+            "title",
+            "text",
+        ]],
+    ],
     "news-items": [
         "title",
         "text",
