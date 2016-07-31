@@ -23,7 +23,7 @@ export default function(config) {
             return client({
                 method: "GET",
                 params,
-                path: `/api/${collection.name}{?page,expand,q}`,
+                path: `/api/${collection.name}{?page,expand,q,per-page}`,
             }).then((result) => {
                 return {
                     pagination: {

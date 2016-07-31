@@ -94,7 +94,7 @@ const scheme = [
         attrs: [
             {name: "id", type: "int"},
             {name: "news_id", type: "int"},
-            {name: "newsItem", type: "manyToOne", manyToOne: {
+            {name: "news_item", type: "manyToOne", manyToOne: {
                 to: "news-items",
                 fromAttr: "news_id",
                 toAttr: "id",
@@ -108,6 +108,31 @@ const scheme = [
         ],
     },
 ]
+
+const expandings = {
+    "translation-strings": [],
+    "translation-texts": [],
+    "members": [
+        "name",
+        "role",
+    ],
+    "news-items": [
+        "title",
+        "text",
+        ["tags", [
+            "title",
+        ]],
+    ],
+    "news-news-tags": [
+        ["news_item", [
+            "title",
+            "text",
+        ]],
+        ["tag", [
+            "title",
+        ]],
+    ],
+}
 
 const App = createClass({
 
@@ -125,9 +150,13 @@ const App = createClass({
             this.setState({
                 logined: true,
                 dao: DataAccess({
-                    basicAuth: {
-                        username: result.accessToken,
-                        password: "",
+                    scheme,
+                    expandings,
+                    api: {
+                        basicAuth: {
+                            username: result.accessToken,
+                            password: "",
+                        },
                     },
                 }),
             })
@@ -148,14 +177,18 @@ const App = createClass({
             this.setState({
                 logined: true,
                 dao: DataAccess({
-                    basicAuth: {
-                        username: result.accessToken,
-                        password: "",
+                    scheme,
+                    expandings,
+                    api: {
+                        basicAuth: {
+                            username: result.accessToken,
+                            password: "",
+                        },
                     },
                 }),
             })
-        }).catch(() => {
-            console.log("Unauthorized...")
+        }).catch((e) => {
+            console.log("Unauthorized...", e)
         })
     },
 

@@ -45,7 +45,7 @@
     "no-magic-numbers": ["error", { "ignore": [0, -1, 1, 8, 2] }],
     "eol-last": "error",
     "padded-blocks": ["error", "never"],
-    "quote-props": ["error", "as-needed", { "keywords": true }],
+    "quote-props": ["error", "consistent", { "keywords": true }],
     "space-before-function-paren": ["error", "never"],
     "strict": "error",
 

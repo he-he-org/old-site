@@ -1,85 +1,7 @@
 import {merge} from "functional-utils"
 import Api from "./api"
 
-const helper = (api, collection, params = {}, expandings, scheme) => {
-    const expand = []
-    expandings.forEach((param) => {
-        if (typeof param === "string") {
-            expand.push(param)
-        }
-        else {
-            expand.push(param[0])
-        }
-    })
 
-    let extParams = params
-    if (expand.length > 0) {
-        extParams = merge(extParams, {
-            expand: expand.join(","),
-        })
-    }
-
-    let embededExpandings = expandings.filter((x) => Array.isArray(x)) //todo: es6 only?
-
-    return api.fetchCollection(collection, extParams).then((result) => {
-        const expandingPromises = embededExpandings.map((exp) => {
-            const attrName = exp[0]
-            const attr = collection.attrs.filter((x) => x.name === attrName)[0]
-            const collectionScheme = scheme.filter((x) => x.name === attr[attr.type].to)[0]
-            const expandings = exp[1]
-            let ids = null
-            if (attr.type === "manyToMany") {
-                ids = [].concat(...result.data.map((record) => record[attr.name].map((x) => x.id)))
-            }
-            else if (attr.type === "manyToOne") {
-                ids = result.data.map((record) => record[attr.name].id)
-            }
-            else {
-                throw new Error(`Not supported yet: ${attr.type}`)
-            }
-
-            const subParams = {q: `id:[${ids.join(",")}]`} //todo: ids could be empty
-            return helper(api, collectionScheme, subParams, expandings, scheme).then((result) => {
-                return {
-                    attr,
-                    entities: result.data,
-                }
-            })
-        })
-
-        return Promise.all(expandingPromises).then((results) => {
-            const newData = result.data.map((record) => {
-                const newRecord = merge({}, record)
-                results.forEach(({attr, entities}) => {
-                    if (attr.type === "manyToMany") {
-                        const objectsToReplace = entities.filter((x) => {
-                            return newRecord[attr.name].filter((y) => y.id === x.id).length > 0
-                        })
-                        newRecord[attr.name] = objectsToReplace
-                    }
-                    else if (attr.type === "manyToOne") {
-                        const objectsToReplace = entities.filter((x) => {
-                            return newRecord[attr.name].id === x.id
-                        })
-                        if (objectsToReplace.length !== 1) {
-                            throw new Error(`Bad objects count: ${objectsToReplace.length}`)
-                        }
-                        newRecord[attr.name] = objectsToReplace[0]
-                    }
-                    else {
-                        throw new Error(`Relation type is not supported yet: ${attr.type}`)
-                    }
-                })
-                return newRecord
-            })
-
-            return merge(result, {
-                data: newData,
-            })
-        })
-
-    })
-}
 
 export default function(config) {
 
@@ -91,58 +13,93 @@ export default function(config) {
         fetchCollection(collection, params = {}) {
             const collectionExpandings = expandings[collection.name]
 
-            return helper(api, collection, params, collectionExpandings, scheme)
+            const helper = (collection, params = {}, expandings) => {
+                const expand = []
+                expandings.forEach((param) => {
+                    if (typeof param === "string") {
+                        expand.push(param)
+                    }
+                    else {
+                        expand.push(param[0])
+                    }
+                })
 
+                let extParams = params
+                if (expand.length > 0) {
+                    extParams = merge(extParams, {
+                        expand: expand.join(","),
+                    })
+                }
 
-            //const expand = []
-            //collection.attrs.forEach((attr) => {
-            //    if (attr.type === "manyToOne" || attr.type === "manyToMany") {
-            //        expand.push(attr.name)
-            //    }
-            //})
-            //
-            //let extParams = params
-            //
-            //if (expand.length > 0) {
-            //    extParams = merge(extParams, {
-            //        expand: expand.join(","),
-            //    })
-            //}
-            //
-            //return api.fetchCollection(collection, extParams).then((result) => {
-            //    collection.attrs
-            //        .filter((attr) => attr.type === "manyToOne" || attr.type === "manyToMany")
-            //        .forEach((attr) => {
-            //            const attrParams = attr[attr.type]
-            //            if (attr.type === "manyToOne") {
-            //                const ids = result.data.map((record) => record[attr.name].id)
-            //                const toScheme = scheme.filter((x) => x.name === attrParams.to)[0]
-            //
-            //                //todo: need to pass big page size to make sure to extract all objects
-            //                this.fetchCollection(toScheme, {q: `id:[${ids.join(",")}]`})
-            //                    .then((x) => {
-            //                        //console.log("result of subquery manyToOne", attr.name, x)
-            //                    })
-            //
-            //            }
-            //            else if (attr.type === "manyToMany") {
-            //                const ids = [].concat(...result.data.map((record) => record[attr.name].map(x => x.id)))
-            //                console.log("ids", ids)
-            //                const toScheme = scheme.filter((x) => x.name === attrParams.to)[0]
-            //                //
-            //                ////todo: need to pass big page size to make sure to extract all objects
-            //                //this.fetchCollection(toScheme, {q: `id:[${ids.join(",")}]`})
-            //                //    .then((x) => {
-            //                //        console.log("result of subquery manyToOne", attr.name, x)
-            //                //    })
-            //            }
-            //            else {
-            //                //throw new Error(`Unsupported attr type: ${attr.type}`)
-            //            }
-            //        })
-            //
-            //    return result
-            //})
+                const embededExpandings = expandings.filter((x) => Array.isArray(x)) //todo: es6 only?
+
+                return api.fetchCollection(collection, extParams).then((result) => {
+                    const expandingPromises = embededExpandings.map((exp) => {
+                        const attrName = exp[0]
+                        const attr = collection.attrs.filter((x) => x.name === attrName)[0]
+                        const collectionScheme = scheme.filter((x) => x.name === attr[attr.type].to)[0]
+                        const expandings = exp[1]
+                        let ids = null
+                        if (attr.type === "manyToMany") {
+                            ids = [].concat(...result.data.map((record) => record[attr.name].map((x) => x.id)))
+                        }
+                        else if (attr.type === "manyToOne") {
+                            ids = result.data.map((record) => record[attr.name].id)
+                        }
+                        else {
+                            throw new Error(`Not supported yet: ${attr.type}`)
+                        }
+
+                        if (ids.length !== 0) {
+                            const subParams = {
+                                "q": `id:[${ids.join(",")}]`,
+                                "per-page": ids.length,
+                            }
+                            return helper(collectionScheme, subParams, expandings)
+                                .then((result) => ({attr, entities: result.data}))
+                        }
+                        else {
+                            return {
+                                attr,
+                                entities: [],
+                            }
+                        }
+                    })
+
+                    return Promise.all(expandingPromises).then((results) => {
+                        const newData = result.data.map((record) => {
+                            const newRecord = merge({}, record)
+                            results.forEach(({attr, entities}) => {
+                                if (attr.type === "manyToMany") {
+                                    const objectsToReplace = entities.filter((x) => (
+                                        newRecord[attr.name].filter((y) => y.id === x.id).length > 0
+                                    ))
+                                    newRecord[attr.name] = objectsToReplace
+                                }
+                                else if (attr.type === "manyToOne") {
+                                    const objectsToReplace = entities.filter((x) => (
+                                        newRecord[attr.name].id === x.id
+                                    ))
+                                    if (objectsToReplace.length !== 1) {
+                                        throw new Error(`Bad objects count: ${objectsToReplace.length}`)
+                                    }
+                                    newRecord[attr.name] = objectsToReplace[0]
+                                }
+                                else {
+                                    throw new Error(`Relation type is not supported yet: ${attr.type}`)
+                                }
+                            })
+                            return newRecord
+                        })
+
+                        return merge(result, {
+                            data: newData,
+                        })
+                    })
+                })
+            }
+
+            return helper(collection, params, collectionExpandings)
         },
 
         updateRecord(scheme, resourceScheme, newRecord, oldRecord) {

@@ -25,10 +25,10 @@ class NewsNewsTag extends ActiveRecord
 
     public function extraFields()
     {
-        return ['newsItem', 'tag'];
+        return ['news_item', 'tag'];
     }
 
-    public function getNewsItem()
+    public function getNews_item()
     {
         return $this->hasOne(NewsItem::className(), ['id' => 'news_id']);
     }
