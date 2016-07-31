@@ -42,4 +42,7 @@ phpunit.phar
 # ignore database files folder
 dbdata
 
+# ignore dev assets
+web/dev
+
 env.ini
