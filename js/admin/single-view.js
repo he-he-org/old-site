@@ -9,6 +9,7 @@ const bem = prefixer("SingleView")
 
 
 const SingleView = createClass({
+    displayName: "SingleView",
 
     getInitialState() {
         return {
@@ -26,7 +27,7 @@ const SingleView = createClass({
     },
 
     getResourceScheme(props = this.props) {
-        const {scheme, resourceName} = props
+        const {context: {config: {scheme}}, resourceName} = props
         return scheme.filter((x) => x.name === resourceName)[0] //todo: use util
     },
 
@@ -98,16 +99,14 @@ const SingleView = createClass({
     },
 
     renderEditingLinkAttrModal() {
-        const {editingLinkAttr} = this.state
-        const {scheme, context} = this.props
-        const {record} = this.state
+        const {editingLinkAttr, record} = this.state
+        const {context} = this.props
 
         if (editingLinkAttr !== null) {
             const value = record[editingLinkAttr.name]
             const typeParams = editingLinkAttr[editingLinkAttr.type]
             if (editingLinkAttr.type === "manyToOne") {
                 return h(ManyToOneModal, {
-                    scheme,
                     resourceName: typeParams.to,
                     value,
                     onCancel: this.cancelEditLinkAttr,
@@ -117,7 +116,6 @@ const SingleView = createClass({
             }
             else if (editingLinkAttr.type === "manyToMany") {
                 return h(ManyToManyModal, {
-                    scheme,
                     resourceName: typeParams.to,
                     value,
                     onCancel: this.cancelEditLinkAttr,
@@ -161,7 +159,7 @@ const SingleView = createClass({
 })
 
 SingleView.propTypes = {
-    scheme: PropTypes.array.isRequired,
+    context: PropTypes.object.isRequired,
     resourceName: PropTypes.string.isRequired,
 }
 

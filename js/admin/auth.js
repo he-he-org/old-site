@@ -5,6 +5,8 @@ import prefixer from "bem-prefixer"
 const bem = prefixer("Auth")
 
 const Auth = createClass({
+    displayName: "Auth",
+
     auth(e) {
         e.preventDefault()
         this.props.onLogin(this.usernameEl.value, this.passwordEl.value)

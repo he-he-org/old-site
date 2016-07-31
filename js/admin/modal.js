@@ -5,6 +5,8 @@ import prefixer from "bem-prefixer"
 const bem = prefixer("Modal")
 
 const Modal = createClass({
+    displayName: "Modal",
+
     render() {
         return (
             h(bem("div"),

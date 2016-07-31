@@ -8,14 +8,15 @@ const bem = prefixer("ManyToOneModal")
 
 const ManyToOneModal = createClass({
 
+    displayName: "ManyToOneModal",
+
     render() {
-        const {scheme, resourceName, onCancel, onSelect, context} = this.props
+        const {resourceName, onCancel, onSelect, context} = this.props
 
         return (
             h(bem("div"),
                 h(Modal,
                     h(TableView, {
-                        scheme,
                         resourceName,
                         enableRecordSelect: true,
                         onRecordSelect: onSelect,
@@ -29,7 +30,7 @@ const ManyToOneModal = createClass({
 })
 
 ManyToOneModal.propTypes = {
-    scheme: PropTypes.array.isRequired,
+    context: PropTypes.object.isRequired,
     resourceName: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,

@@ -141,12 +141,27 @@ const expandings = {
     ],
 }
 
+const renderers = {
+    "members": {
+        "table": {
+            "name": (attr) => {
+                return attr["ru-RU"]
+            },
+            "role": (value) => {
+                return value["ru-RU"]
+            },
+        },
+    },
+}
+
 const config = {
     scheme,
     expandings,
+    renderers,
 }
 
 const App = createClass({
+    displayName: "App",
 
     getInitialState() {
         return {
@@ -213,9 +228,9 @@ const App = createClass({
                 h(Auth, {logined, onLogin: this.auth, onLogout: this.logout}),
                 h(Navigation, {items: scheme, activeItem: activeResource}),
                 h(TableView, {
-                    scheme,
                     resourceName: resource,
                     context: {
+                        config,
                         dao,
                     },
                 })

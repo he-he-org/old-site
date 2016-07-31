@@ -8,6 +8,8 @@ const bem = prefixer("ManyToOneModal")
 
 const ManyToManyModal = createClass({
 
+    displayName: "ManyToManyModal",
+
     getInitialState() {
         return {
             value: this.props.value || [],
@@ -21,7 +23,7 @@ const ManyToManyModal = createClass({
     },
 
     getResourceScheme(props = this.props) {
-        const {scheme, resourceName} = props
+        const {context: {config: {scheme}}, resourceName} = props
         return scheme.filter((x) => x.name === resourceName)[0] //todo: use util
     },
 
@@ -73,7 +75,8 @@ const ManyToManyModal = createClass({
 })
 
 ManyToManyModal.propTypes = {
-    scheme: PropTypes.array.isRequired,
+    context: PropTypes.object.isRequired,
+
     resourceName: PropTypes.string.isRequired,
     onCancel: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,

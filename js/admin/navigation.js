@@ -7,6 +7,7 @@ import { Link } from 'react-router'
 const bem = prefixer("Navigation")
 
 const Navigation = createClass({
+    displayName: "Navigation",
 
     render() {
         const {items, activeItem} = this.props

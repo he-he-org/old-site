@@ -10,6 +10,7 @@ import {error} from "./alerts"
 const bem = prefixer("TableView")
 
 const TableView = createClass({
+    displayName: "TableView",
 
     getInitialState() {
         return {
@@ -31,7 +32,7 @@ const TableView = createClass({
     },
 
     getResourceScheme(props = this.props) {
-        const {scheme, resourceName} = props
+        const {context: {config: {scheme}}, resourceName} = props
         return scheme.filter((x) => x.name === resourceName)[0] //todo: use util
     },
 
@@ -116,7 +117,7 @@ const TableView = createClass({
     },
 
     deleteRecord(record) {
-        const {dao} = this.props
+        const {context: {dao}} = this.props
         const resourceScheme = this.getResourceScheme()
         dao.deleteRecord(resourceScheme, record)
             .then(() => this.sync())
@@ -162,11 +163,18 @@ const TableView = createClass({
     },
 
     renderAttr(record, attr) {
+        const {context: {config: {renderers}}, resourceName} = this.props
+
         if (record[attr.name] === null) {
             return "null"
         }
         else if (attr.type === "manyToOne") {
-            return "[" + record[attr.name].id + "]"
+            if (renderers[resourceName] && renderers[resourceName]['table'] && renderers[resourceName]['table'][attr.name]) {
+                return renderers[resourceName]['table'][attr.name](record[attr.name])
+            }
+            else {
+                return "[" + record[attr.name].id + "]"
+            }
         }
         else if (attr.type === "manyToMany") {
             return "[" + record[attr.name].map((x) => x.id).join(", ") + "]"
@@ -198,7 +206,7 @@ const TableView = createClass({
     },
 
     render() {
-        const {scheme, resourceName, context} = this.props
+        const {resourceName, context} = this.props
         const {editingRecord, creatingRecord, data, loading} = this.state
 
         const {attrs} = this.getResourceScheme()
@@ -211,7 +219,6 @@ const TableView = createClass({
             h(bem("div"),
                 editingRecord && h(Modal,
                     h(SingleView, {
-                        scheme,
                         resourceName,
                         record: editingRecord,
                         onSave: this.updateRecord,
@@ -221,7 +228,6 @@ const TableView = createClass({
                 ),
                 creatingRecord && h(Modal,
                     h(SingleView, {
-                        scheme,
                         resourceName,
                         record: creatingRecord,
                         onSave: this.saveCreateRecord,
@@ -247,7 +253,7 @@ const TableView = createClass({
 })
 
 TableView.propTypes = {
-    scheme: PropTypes.array.isRequired,
+    context: PropTypes.object.isRequired,
     resourceName: PropTypes.string.isRequired,
 
     enableRecordSelect: PropTypes.bool,
