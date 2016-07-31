@@ -43,10 +43,9 @@ const TableView = createClass({
 
 
     updateRecord(record) {
-        const {scheme, context: {dao}} = this.props
-        const resourceScheme = this.getResourceScheme()
+        const {context: {dao}, resourceName} = this.props
 
-        dao.updateRecord(scheme, resourceScheme, record, this.state.editingRecord)
+        dao.updateRecord(resourceName, record, this.state.editingRecord)
             .then(() => {
                 this.setState({
                     editingRecord: null,
@@ -83,9 +82,8 @@ const TableView = createClass({
     },
 
     saveCreateRecord(record) {
-        const {scheme, dao} = this.props
-        const resourceScheme = this.getResourceScheme()
-        dao.createRecord(scheme, resourceScheme, record)
+        const {dao, resourceName} = this.props
+        dao.createRecord(resourceName, record)
             .then(() => {
                 this.setState({
                     creatingRecord: null,
@@ -98,8 +96,7 @@ const TableView = createClass({
     },
 
     sync(props = this.props) {
-        const {context: {dao}} = this.props
-        const resourceScheme = this.getResourceScheme(props)
+        const {context: {dao}, resourceName} = props
         this.setState({
             loading: true,
             data: null,
@@ -108,7 +105,7 @@ const TableView = createClass({
             const params = {
                 page: pagination.currentPage || 1,
             }
-            return dao.fetchCollection(resourceScheme, params).then(({pagination, data}) => {
+            return dao.fetchResource(resourceName, params).then(({pagination, data}) => {
                 this.setState({
                     loading: false,
                     pagination,

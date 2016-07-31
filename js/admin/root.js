@@ -134,6 +134,11 @@ const expandings = {
     ],
 }
 
+const config = {
+    scheme,
+    expandings,
+}
+
 const App = createClass({
 
     getInitialState() {
@@ -150,8 +155,7 @@ const App = createClass({
             this.setState({
                 logined: true,
                 dao: DataAccess({
-                    scheme,
-                    expandings,
+                    config,
                     api: {
                         basicAuth: {
                             username: result.accessToken,
@@ -177,8 +181,7 @@ const App = createClass({
             this.setState({
                 logined: true,
                 dao: DataAccess({
-                    scheme,
-                    expandings,
+                    config,
                     api: {
                         basicAuth: {
                             username: result.accessToken,
@@ -188,7 +191,8 @@ const App = createClass({
                 }),
             })
         }).catch((e) => {
-            console.log("Unauthorized...", e)
+            console.error(e)
+            //console.log("Unauthorized...", e)
         })
     },
 

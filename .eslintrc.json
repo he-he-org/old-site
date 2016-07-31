@@ -131,7 +131,6 @@
     "no-delete-var": "error",
     "no-label-var": "error",
     "no-restricted-globals": "error",
-    "no-shadow": "error",
     "no-shadow-restricted-names": "error",
     "no-undef-init": "error",
     "no-undefined": "error",
@@ -182,7 +181,6 @@
     "one-var-declaration-per-line": "error",
     "operator-assignment": "error",
     "operator-linebreak": ["error", "before"],
-    "require-jsdoc": "error",
     "semi-spacing": "error",
     "sort-vars": "error",
     "space-before-blocks": "error",
@@ -220,6 +218,8 @@
     "new-cap": "off",
     "newline-after-var": "off",
     "newline-before-return": "off",
-    "no-warning-comments": "off"
+    "no-warning-comments": "off",
+    "no-shadow": "off",
+    "require-jsdoc": "off"
   }
 }

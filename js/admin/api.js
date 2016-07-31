@@ -19,7 +19,7 @@ export default function(config) {
         .wrap(basicAuth, {username, password})
 
     return {
-        fetchCollection: (collection, params = {}) => {
+        fetchResource: (collection, params = {}) => {
             return client({
                 method: "GET",
                 params,

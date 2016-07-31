@@ -1,19 +1,16 @@
 import {merge} from "functional-utils"
 import Api from "./api"
 
-
-
-export default function(config) {
-
-    const {expandings, scheme, api: apiConfig} = config
+export default function(context) {
+    const {config: {scheme, expandings}, api: apiConfig} = context
 
     const api = Api(apiConfig)
 
     return {
-        fetchCollection(collection, params = {}) {
-            const collectionExpandings = expandings[collection.name]
+        fetchResource(resourceName, params = {}) {
+            const resourceExpandings = expandings[resourceName]
 
-            const helper = (collection, params = {}, expandings) => {
+            const helper = (resourceName, params = {}, expandings) => {
                 const expand = []
                 expandings.forEach((param) => {
                     if (typeof param === "string") {
@@ -33,11 +30,13 @@ export default function(config) {
 
                 const embededExpandings = expandings.filter((x) => Array.isArray(x)) //todo: es6 only?
 
-                return api.fetchCollection(collection, extParams).then((result) => {
+                const resourceScheme = scheme.filter((x) => x.name === resourceName)[0] //todo: check if exists
+
+                return api.fetchResource(resourceScheme, extParams).then((result) => {
                     const expandingPromises = embededExpandings.map((exp) => {
                         const attrName = exp[0]
-                        const attr = collection.attrs.filter((x) => x.name === attrName)[0]
-                        const collectionScheme = scheme.filter((x) => x.name === attr[attr.type].to)[0]
+                        const attr = resourceScheme.attrs.filter((x) => x.name === attrName)[0]
+                        const resourceName = attr[attr.type].to
                         const expandings = exp[1]
                         let ids = null
                         if (attr.type === "manyToMany") {
@@ -55,7 +54,7 @@ export default function(config) {
                                 "q": `id:[${ids.join(",")}]`,
                                 "per-page": ids.length,
                             }
-                            return helper(collectionScheme, subParams, expandings)
+                            return helper(resourceName, subParams, expandings)
                                 .then((result) => ({attr, entities: result.data}))
                         }
                         else {
@@ -99,10 +98,11 @@ export default function(config) {
                 })
             }
 
-            return helper(collection, params, collectionExpandings)
+            return helper(resourceName, params, resourceExpandings)
         },
 
-        updateRecord(scheme, resourceScheme, newRecord, oldRecord) {
+        updateRecord(resourceName, newRecord, oldRecord) {
+            const resourceScheme = scheme.filter((x) => x.name === resourceName)[0] //todo: check if exists
             const entityPromise = resourceScheme.attrs.reduce((promise, attr) => {
                 if (attr.type === "manyToOne") {
                     return promise.then((entity) => (
@@ -126,7 +126,7 @@ export default function(config) {
                     const typeParams = attr[attr.type]
                     const viaResourceScheme = scheme.filter((x) => x.name === typeParams.via)[0]
 
-                    return api.fetchCollection(viaResourceScheme, {
+                    return api.fetchResource(viaResourceScheme, {
                         q: typeParams.fromAttr + ":" + newRecord.id,
                     }).then((result) => {
                         const links = result.data
@@ -158,7 +158,9 @@ export default function(config) {
         },
 
 
-        createRecord(scheme, resourceScheme, newRecord) {
+        createRecord(resourceName, newRecord) {
+            const resourceScheme = scheme.filter((x) => x.name === resourceName)[0] //todo: check if exists
+
             const entityPromise = resourceScheme.attrs.reduce((promise, attr) => {
                 if (attr.type === "manyToOne") {
                     return promise.then((entity) => (
