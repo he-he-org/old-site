@@ -1,12 +1,9 @@
 <?php
 
 namespace app\assets;
-use yii\web\AssetBundle;
 
-class ContactsAsset extends AssetBundle
+class ContactsAsset extends BaseAsset
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
     public $css = [
         'css/contacts.css',
     ];

@@ -1,12 +1,9 @@
 <?php
 
 namespace app\assets;
-use yii\web\AssetBundle;
 
-class NewsAsset extends AssetBundle
+class NewsAsset extends BaseAsset
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
     public $css = [
         'css/news.css',
     ];

@@ -7,21 +7,19 @@
 
 namespace app\assets;
 
-use yii\web\AssetBundle;
-
 /**
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AboutAsset extends AssetBundle
+class AboutAsset extends BaseAsset
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+
     public $css = [
         'css/about.css',
     ];
     public $js = [
     ];
     public $depends = [
+        'app\assets\AppAsset'
     ];
 }

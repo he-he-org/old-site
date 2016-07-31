@@ -38,7 +38,10 @@
   "gulp": {
     "scripts": {
       "src": "./js",
-      "dest": "./web/js",
+      "dest": {
+        "prod": "./web/prod/js",
+        "dev":  "./web/dev/js"
+      },
       "entryPoints": [
         "main",
         "help",
@@ -47,7 +50,10 @@
     },
     "styles": {
       "src": "./styles",
-      "dest": "./web/css",
+      "dest": {
+        "prod": "./web/prod/css",
+        "dev":  "./web/dev/css"
+      },
       "entryPoints": [
         "about",
         "main",

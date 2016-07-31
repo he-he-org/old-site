@@ -36,7 +36,7 @@ function onError(e) {
 }
 
 const scriptsEntryPoints = settings.scripts.entryPoints.map(x => ({from: `entry-${x}.js`, to: `${x}.js`}));
-const cssEntryPoints = settings.styles.entryPoints.map(x => ({from: settings.styles.src + `/entry-${x}.css`, to: settings.styles.dest +`/${x}.css`}));
+const cssEntryPoints = settings.styles.entryPoints.map(x => ({from: `entry-${x}.css`, to: `${x}.css`}));
 
 /*
  *
@@ -63,7 +63,7 @@ gulp.task("scripts:vendor", function () {
         .on("error", onError)
         .pipe(streamify(uglify()))
         .on("error", onError)
-        .pipe(gulp.dest(settings.scripts.dest))
+        .pipe(gulp.dest(settings.scripts.dest.prod))
         .on("error", onError)
 })
 
@@ -93,7 +93,7 @@ gulp.task("scripts", function () {
             .on("error", onError)
             .pipe(streamify(uglify()))
             .on("error", onError)
-            .pipe(gulp.dest(settings.scripts.dest))
+            .pipe(gulp.dest(settings.scripts.dest.prod))
             .on("error", onError)
     }
 
@@ -118,7 +118,12 @@ gulp.task("styles", function () {
             .pipe(gulp.dest("."))
     }
 
-    return merge(cssEntryPoints.map(bundle))
+    return merge(cssEntryPoints
+        .map((x) => ({
+            from: settings.styles.src + "/" + x.from,
+            to: settings.styles.dest.prod + "/" + x.to
+        }))
+        .map(bundle))
 })
 
 gulp.task('lint', function () {
@@ -165,7 +170,7 @@ gulp.task("debug:scripts:vendor", function () {
             .on("error", onError)
             .pipe(source("vendor.js"))
             .on("error", onError)
-            .pipe(gulp.dest(settings.scripts.dest))
+            .pipe(gulp.dest(settings.scripts.dest.dev))
             .on("error", onError)
     }
 
@@ -205,7 +210,7 @@ gulp.task("debug:scripts", function () {
                 .on("error", onError)
                 .pipe(source(entryPoint.to))
                 .on("error", onError)
-                .pipe(gulp.dest(settings.scripts.dest))
+                .pipe(gulp.dest(settings.scripts.dest.dev))
                 .on("error", onError)
         }
 
@@ -253,7 +258,12 @@ gulp.task("debug:styles", function () {
         return watcher
     }
 
-    return cssEntryPoints.forEach(bundle)
+    return cssEntryPoints
+        .map((x) => ({
+            from: settings.styles.src + "/" + x.from,
+            to: settings.styles.dest.dev + "/" + x.to
+        }))
+        .forEach(bundle)
 })
 
 gulp.task("browser-sync", function(){

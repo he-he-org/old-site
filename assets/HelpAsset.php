@@ -1,12 +1,9 @@
 <?php
 
 namespace app\assets;
-use yii\web\AssetBundle;
 
-class HelpAsset extends AssetBundle
+class HelpAsset extends BaseAsset
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
     public $css = [
         'css/help.css',
     ];
