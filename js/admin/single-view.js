@@ -73,26 +73,27 @@ const SingleView = createClass({
     },
 
     renderInput(record, attr) {
+
+        const {context: {config: {renderers}}, resourceName} = this.props
+        const renderer = renderers[resourceName][attr.name]
+        const value = record[attr.name]
+        const renderedValue = renderer(value)
+
         if (attr.type === "text") {
             return h("textarea", {
-                value: record[attr.name] === null ? "" : record[attr.name],
+                value: renderedValue,
                 onChange: this.handleAttrChange.bind(null, attr.name),
             })
         }
-        else if (attr.type === "manyToOne") {
+        else if (attr.type === "manyToOne" || attr.type === "manyToMany") {
             return h("button", {onClick: this.editLinkAttr.bind(null, attr)},
-                record[attr.name] === null ? "null" : "[" + record[attr.name].id + "]"
-            )
-        }
-        else if (attr.type === "manyToMany") {
-            return h("button", {onClick: this.editLinkAttr.bind(null, attr)},
-                record[attr.name] === null ? "null" : "[" + record[attr.name].map((x) => x.id).join(", ") + "]"
+                renderedValue
             )
         }
         else {
             return h("input", {
                 type: "text",
-                value: record[attr.name] === null ? "" : record[attr.name],
+                value: renderedValue,
                 onChange: this.handleAttrChange.bind(null, attr.name),
             })
         }

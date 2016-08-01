@@ -39,9 +39,8 @@ const normalizeConfig = (config) => {
     // Normalize renderers
     let defaultRenderers = renderers
     scheme.forEach((resource) => {
-        let table = {}
+        let renderers = {}
         resource.attrs.forEach((attr) => {
-
             let renderer = null
             if (attr.type === "manyToOne") {
                 renderer = (value) => value === null ? "null" : "[" + value.id + "]"
@@ -52,14 +51,12 @@ const normalizeConfig = (config) => {
             else {
                 renderer = (value) => value === null ? "null" : value
             }
-            table = merge(table, {
+            renderers = merge(renderers, {
                 [attr.name]: renderer,
             })
         })
         defaultRenderers = merge(defaultRenderers, {
-            [resource.name]: {
-                table,
-            },
+            [resource.name]: renderers,
         })
     })
 

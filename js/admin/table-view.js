@@ -164,7 +164,7 @@ const TableView = createClass({
 
     renderAttr(record, attr) {
         const {context: {config: {renderers}}, resourceName} = this.props
-        const renderer = renderers[resourceName]["table"][attr.name]
+        const renderer = renderers[resourceName][attr.name]
         const value = record[attr.name]
         return renderer(value)
     },

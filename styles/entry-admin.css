@@ -88,6 +88,13 @@ table td,  table th {
         flex-direction: column;
         align-items: stretch;
         flex-basis: 75%;
+
+        button {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: 400px;
+        }
     }
 
 
