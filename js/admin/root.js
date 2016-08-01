@@ -139,12 +139,13 @@ const expandings = {
 const renderers = {
     "members": {
         "table": {
-            "name": (attr) => {
-                return attr["ru-RU"]
-            },
-            "role": (value) => {
-                return value["ru-RU"]
-            },
+            "name": (value) => value["ru-RU"],
+            "role": (value) => value["ru-RU"],
+        },
+    },
+    "news-items": {
+        "table": {
+            "tags": (tags) => tags.map((x) => x.title["ru-RU"]).join(", "),
         },
     },
 }

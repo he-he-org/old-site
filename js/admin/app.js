@@ -9,6 +9,68 @@ import Auth from "./auth"
 import TableView from "./table-view"
 import DataAccess from "./data-access"
 
+
+const deepMerge = (obj1, obj2) => {
+    if (typeof obj1 !== "object" || typeof obj2 !== "object" || Array.isArray(obj1) || Array.isArray(obj2)) { //todo: es6
+        return obj2
+    }
+
+    const result = merge({}, obj1)
+
+    Object.keys(obj2).forEach((key) => {
+        if (key in obj1) {
+            result[key] = deepMerge(obj1[key], obj2[key])
+        }
+        else {
+            result[key] = obj2[key]
+        }
+    })
+
+    return result
+}
+
+const normalizeConfig = (config) => {
+    const {scheme, expandings, renderers} = config
+
+    // todo: validate and normalize scheme
+    // todo: validate and normalize expandings
+    // todo: validate renderers
+
+    // Normalize renderers
+    let defaultRenderers = renderers
+    scheme.forEach((resource) => {
+        let table = {}
+        resource.attrs.forEach((attr) => {
+
+            let renderer = null
+            if (attr.type === "manyToOne") {
+                renderer = (value) => value === null ? "null" : "[" + value.id + "]"
+            }
+            else if (attr.type === "manyToMany") {
+                renderer = (value) => value === null ? "null" : "[" + value.map((x) => x.id).join(", ") + "]"
+            }
+            else {
+                renderer = (value) => value === null ? "null" : value
+            }
+            table = merge(table, {
+                [attr.name]: renderer,
+            })
+        })
+        defaultRenderers = merge(defaultRenderers, {
+            [resource.name]: {
+                table,
+            },
+        })
+    })
+
+    return merge(config, {
+        renderers: deepMerge(defaultRenderers, renderers),
+    })
+}
+
+
+
+
 const Component = createClass({
     displayName: "App",
 
@@ -18,7 +80,7 @@ const Component = createClass({
             dao: null,
         }
     },
-    
+
     auth(username, password) {
         login(username, password).then(() => {
             return user()
@@ -99,9 +161,13 @@ const Component = createClass({
 
 const App = createClass({
     render() {
-        return h(Router, {history: hashHistory, config: this.props.config},
-            h(Route, merge({path: "/:resource", component: Component}, this.props)),
-            h(Route, merge({path: "/", component: Component}, this.props))
+        const {config} = this.props
+
+        const normalizedConfig = normalizeConfig(config)
+
+        return h(Router, {history: hashHistory},
+            h(Route, {path: "/:resource", component: Component, config: normalizedConfig}),
+            h(Route, {path: "/", component: Component, config: normalizedConfig})
         )
     },
 })

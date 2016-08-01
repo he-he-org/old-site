@@ -163,18 +163,10 @@ const TableView = createClass({
     },
 
     renderAttr(record, attr) {
-        if (record[attr.name] === null) {
-            return "null"
-        }
-        else if (attr.type === "manyToOne") {
-            return "[" + record[attr.name].id + "]"
-        }
-        else if (attr.type === "manyToMany") {
-            return "[" + record[attr.name].map((x) => x.id).join(", ") + "]"
-        }
-        else {
-            return record[attr.name]
-        }
+        const {context: {config: {renderers}}, resourceName} = this.props
+        const renderer = renderers[resourceName]["table"][attr.name]
+        const value = record[attr.name]
+        return renderer(value)
     },
 
     renderRecord(record) {
