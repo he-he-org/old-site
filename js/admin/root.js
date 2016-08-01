@@ -1,12 +1,7 @@
 import {createClass} from "react"
 import {h} from "react-markup"
-import {Router, Route, hashHistory} from "react-router"
 
-import {login, logout, user} from "./api"
-import Navigation from "./navigation"
-import Auth from "./auth"
-import TableView from "./table-view"
-import DataAccess from "./data-access"
+import App from "./app"
 
 const scheme = [
     {
@@ -160,96 +155,9 @@ const config = {
     renderers,
 }
 
-const App = createClass({
-    displayName: "App",
-
-    getInitialState() {
-        return {
-            logined: false,
-            dao: null,
-        }
-    },
-
-    auth(username, password) {
-        login(username, password).then(() => {
-            return user()
-        }).then((result) => {
-            this.setState({
-                logined: true,
-                dao: DataAccess({
-                    config,
-                    api: {
-                        basicAuth: {
-                            username: result.accessToken,
-                            password: "",
-                        },
-                    },
-                }),
-            })
-        })
-    },
-
-    logout() {
-        logout().then(() => {
-            this.setState({
-                logined: false,
-                dao: null,
-            })
-        })
-    },
-
-    componentDidMount() {
-        user().then((result) => {
-            this.setState({
-                logined: true,
-                dao: DataAccess({
-                    config,
-                    api: {
-                        basicAuth: {
-                            username: result.accessToken,
-                            password: "",
-                        },
-                    },
-                }),
-            })
-        }).catch((e) => {
-            console.error(e)
-            //console.log("Unauthorized...", e)
-        })
-    },
-
-    render() {
-        const {logined, dao} = this.state
-        const {params: {resource = "translation-strings"}} = this.props
-        const activeResource = scheme.filter((x) => x.name === resource)[0]
-
-        if (logined) {
-            return h("div",
-                h(Auth, {logined, onLogin: this.auth, onLogout: this.logout}),
-                h(Navigation, {items: scheme, activeItem: activeResource}),
-                h(TableView, {
-                    resourceName: resource,
-                    context: {
-                        config,
-                        dao,
-                    },
-                })
-            )
-        }
-        else {
-            return h("div",
-                h(Auth, {logined, onLogin: this.auth})
-            )
-        }
-    },
-})
-
 const Root = createClass({
     render() {
-        return h(Router, {history: hashHistory},
-            h(Route, {path: "/:resource", component: App}),
-            h(Route, {path: "/", component: App})
-        )
+        return h(App, {config})
     },
 })
 
