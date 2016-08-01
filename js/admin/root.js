@@ -139,14 +139,28 @@ const expandings = {
 const renderers = {
     "members": {
         "table": {
-            "name": (value) => value["ru-RU"],
-            "role": (value) => value["ru-RU"],
+            "name": (value) => value === null ? "null" : value["ru-RU"],
+            "role": (value) => value === null ? "null" : value["ru-RU"],
         },
     },
     "news-items": {
         "table": {
-            "tags": (tags) => tags.map((x) => x.title["ru-RU"]).join(", "),
+            "title": (value) => value === null ? "null" : value["ru-RU"],
+            "text": (value) => value === null ? "null" : value["ru-RU"],
+            "tags": (tags) => tags === null ? "null" : tags.map((x) => x.title["ru-RU"]).join(", "),
         },
+    },
+    "news-tags": {
+        "table": {
+            "title": (value) => value === null ? "null" : value["ru-RU"],
+            "news": (tags) => tags === null ? "null" : tags.map((x) => x.title["ru-RU"]).join(", "),
+        },
+    },
+    "news-news-tags": {
+        "table": {
+            "news_item": (value) => value === null ? "null" : value.title["ru-RU"],
+            "tag": (value) => value === null ? "null" : value.title["ru-RU"],
+        }
     },
 }
 
