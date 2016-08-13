@@ -38,7 +38,7 @@ export default function(config) {
         },
 
         patchRecord: (resourceScheme, record) => {
-            return client({path: `/api/${resourceScheme.name}/${record.id}`, method: "PATCH", record})
+            return client({path: `/api/${resourceScheme.name}/${record.id}`, method: "PATCH", entity: record})
         },
 
         postRecord: (resourceScheme, record) => {
