@@ -29,9 +29,9 @@
         <input type="hidden" readonly="readonly" name="sum" value="" data-type="number" data-role="hidden-sum" />
     </form>
 
-    
-    <?php 
-    
+
+    <?php
+
     $data = [
         [
             'amount' => '300',
@@ -68,22 +68,22 @@
             ],
         ],
     ]
-    
+
     ?>
-    
+
     <div class="section-donate-info row_block-5" date-role="info">
-        
+
         <?php foreach($data as $i => $entry) {?>
 
             <div  class="section-donate-info_block <?= $i !== 1 ? 'hidden' : '' ?>" date-value="<?= $entry['amount'] ?>">
                 <div class="section-donate-info_amount"><?= $entry['amount'] ?> ₽</div>
-                <div class="section-donate-info_title">Для них</div>
+                <div class="section-donate-info_title">Для вас</div>
                 <div class="section-donate-info_desc-container">
                     <?php foreach($entry['for-us'] as $j => $value) { ?>
                         <div class="section-donate-info_desc <?= $j !== 0 ? 'hidden' : ''?>"><?= $value ?></div>
                     <?php } ?>
                 </div>
-                <div class="section-donate-info_title">Для вас</div>
+                <div class="section-donate-info_title">Для них</div>
                 <div class="section-donate-info_desc-container">
                     <?php foreach($entry['for-them'] as $j => $value) { ?>
                         <div class="section-donate-info_desc <?= $j !== 0 ? 'hidden' : ''?>"><?= $value ?></div>
