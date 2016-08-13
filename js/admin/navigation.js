@@ -2,7 +2,7 @@ import {createClass} from "react"
 import {h} from "react-markup"
 import prefixer from "bem-prefixer"
 
-import { Link } from 'react-router'
+import {Link} from "react-router"
 
 const bem = prefixer("Navigation")
 

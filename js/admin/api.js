@@ -56,7 +56,6 @@ const commonClient = rest
     .wrap(template)
 
 export const login = (username, password) => {
-
     const client = commonClient
         .wrap(mime, {mime: "application/x-www-form-urlencoded"})
         .wrap(template)
@@ -69,7 +68,6 @@ export const login = (username, password) => {
 }
 
 export const logout = () => {
-
     const client = commonClient
         .wrap(mime, {mime: "application/x-www-form-urlencoded"})
         .wrap(template)

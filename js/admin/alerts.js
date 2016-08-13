@@ -22,5 +22,6 @@ export const error = (msg) => {
         document.body.appendChild(error)
     }
 
-    setTimeout(() => document.body.removeChild(error), 10000)
+    const ALERT_REMOTE_TIMEOUT = 10000
+    setTimeout(() => document.body.removeChild(error), ALERT_REMOTE_TIMEOUT)
 }

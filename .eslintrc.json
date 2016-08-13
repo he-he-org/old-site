@@ -147,7 +147,7 @@
     "no-sync": "error",
     "array-bracket-spacing": "error",
     "block-spacing": "error",
-    "brace-style": ["error", "stroustrup"],
+    "brace-style": ["error", "stroustrup", {"allowSingleLine": true}],
     "camelcase": "error",
     "comma-spacing": "error",
     "comma-style": "error",

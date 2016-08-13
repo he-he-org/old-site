@@ -30,7 +30,7 @@ const deepMerge = (obj1, obj2) => {
 }
 
 const normalizeConfig = (config) => {
-    const {scheme, expandings, renderers} = config
+    const {scheme, renderers} = config
 
     // todo: validate and normalize scheme
     // todo: validate and normalize expandings
@@ -64,8 +64,6 @@ const normalizeConfig = (config) => {
         renderers: deepMerge(defaultRenderers, renderers),
     })
 }
-
-
 
 
 const Component = createClass({

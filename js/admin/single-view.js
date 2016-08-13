@@ -73,7 +73,6 @@ const SingleView = createClass({
     },
 
     renderInput(record, attr) {
-
         const {context: {config: {renderers}}, resourceName} = this.props
         const renderer = renderers[resourceName][attr.name]
         const value = record[attr.name]
