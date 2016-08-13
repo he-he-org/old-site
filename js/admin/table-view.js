@@ -83,7 +83,7 @@ const TableView = createClass({
     },
 
     saveCreateRecord(record) {
-        const {dao, resourceName} = this.props
+        const {context: {dao}, resourceName} = this.props
         dao.createRecord(resourceName, record)
             .then(() => {
                 this.setState({
