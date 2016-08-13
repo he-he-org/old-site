@@ -26,11 +26,11 @@ use app\widgets\help\PreparedPackage;
             <span  id="pharmacy"/>
             <?= Yii::t('texts/help', 'help/pharmacy/part1') ?>
 
-            
 
-                        
-            
-            
+
+
+
+
             <div class="packages">
                 <?= PreparedPackage::widget([
                     'title' => 'Минимальный',
@@ -124,7 +124,7 @@ use app\widgets\help\PreparedPackage;
             <h1 id="children">Детям</h1>
             <p>Учебники английского/русского языков<br/>
             Детские книжки с картинками<br/>
-            Расскраски<br/>
+            Раскраски<br/>
             Цветные карандаши<br/>
             Мелки<br/>
             Пластилин<br/>

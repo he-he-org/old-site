@@ -92,7 +92,7 @@
             </div>
 
         <?php } ?>
-        
+
         <div  class="section-donate-info_block hidden" date-value="free">
         </div>
     </div>
