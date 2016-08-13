@@ -22,8 +22,8 @@ TeamAsset::register($this);
     <div class="row_block-6 intro">
         <h1>Вся команда</h1>
         <p>
-            В проекте участвует почти сто человек, и некоторые из них постоянно работают над проектом — координируют 
-            работу волонтеров, руководят спецпроектами, управляют расходами и лечат людей. Мы благодарны каждому за 
+            В проекте участвует почти сто человек, и некоторые из них постоянно работают над проектом — координируют
+            работу волонтеров, руководят спецпроектами, управляют расходами и лечат людей. Мы благодарны каждому за
             помощь и участие.
         </p>
     </div>
@@ -59,8 +59,8 @@ TeamAsset::register($this);
             <div class="common-donation_bottom">
                 <div class="common-donation_status">
                     <div class="common-donation_collected-title">Уже собрано</div>
-                    <div class="common-donation_collected">1 245 584 ₽</div>
-                    <div class="common-donation_boom-link"><a href="#">Проект на boomstarter</a></div>
+                    <div class="common-donation_collected">1 888 676 ₽</div>
+                    <div class="common-donation_boom-link"><a href="https://www.generosity.com/medical-fundraising/let-s-build-a-clinic-for-locals-in-guatemala">Проект на Generosity</a></div>
                 </div>
                 <div class="common-donation_gateway">
                     Платеж через систему<br/>
