@@ -9,12 +9,6 @@ use yii\helpers\Url;
         $lang = Yii::$app->request->getLang();
     ?>
 
-    <div class="layout-header_languages-item"><a href="http://new.he-he.org/ru/">Ru</a></div>
-    <div class="layout-header_languages-item"><a href="https://he-he.org/en/">En</a></div>
-    <div class="layout-header_languages-item"><a href="https://he-he.org/es/">Es</a></div>
-    
-    
-    <?php /*
     <?php foreach($items as $item) { ?>
         <?php
             $href = Url::toRoute([$page, 'section' => $section, 'lang' => $item['lang']]);
@@ -27,5 +21,4 @@ use yii\helpers\Url;
             </a>
         </div>
     <?php } ?>
- */?>
 </div>

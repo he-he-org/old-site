@@ -43,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const sumInput = form.querySelector("input[name=sum]")
 
+        // Get tips template
+        const tipsTempalte = tips.innerText
+
         // Configure rendering
         const store = createStore(donationFormReducer)
         const render = () => {
@@ -56,7 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
             // Update view
             input.value = value + (!focused ? " ₽" : "")
             button.disabled = !(value > 0)
-            tips.innerText = `Будет переведено ${amountDue.toFixed(2)} ₽ (комиссия ${fee.toFixed(2)} ₽)`
+            tips.innerText = tipsTempalte
+                .replace("{amount}", amountDue.toFixed(2))
+                .replace("{fee}", fee.toFixed(2))
+            tips.classList.remove("hidden")
             sumInput.value = value
         }
         store.subscribe(render)

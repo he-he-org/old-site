@@ -8,6 +8,7 @@ const scheme = [
         name: "translation-strings",
         attrs: [
             {name: "id", type: "int"},
+            {name: "name", type: "string"},
             {name: "en-US", type: "string"},
             {name: "es-ES", type: "string"},
             {name: "ru-RU", type: "string"},
@@ -17,6 +18,7 @@ const scheme = [
         name: "translation-texts",
         attrs: [
             {name: "id", type: "int"},
+            {name: "name", type: "string"},
             {name: "en-US", type: "text"},
             {name: "es-ES", type: "text"},
             {name: "ru-RU", type: "text"},
