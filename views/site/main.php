@@ -22,28 +22,22 @@ MainAsset::register($this);
 ?>
 <div class="row intro-row">
     <div class="row_block-6 intro">
-        <h1>Благотворительный проект</h1>
-        <p>
-            В проекте Health&Help почти сотня людей объединилась для того, чтобы дать гватемальским индейцам
-            Майя доступ к базовой медицинской помощи. Работаем, чтобы помогать людям, а для покупки
-            лекарств, расходных материалов и оборудования нам нужна ваша помощь. Даже сто рублей могут
-            помочь вылечить человека
-        </p>
+        <?= \Yii::t('texts', 'main/intro') ?>
     </div>
     <div class="row_block-5">
         <?= MainDonateForm::widget() ?>
     </div>
 </div>
 <div class="row  all-members-link-row">
-    <a href="<?= Url::toRoute(['team']) ?>">Вся команда</a>
+    <a href="<?= Url::toRoute(['team']) ?>"><?= \Yii::t('strings', 'main/team-title') ?></a>
 </div>
 <div class="row team-row">
     <?php foreach ($members as $member ) {?>
         <?= TeamMemberWidget::widget($member) ?>
     <?php } ?>
 </div>
-<div class="row special-projects-title-row">Наши спецпроекты</div>
 
+<div class="row special-projects-title-row"><?= \Yii::t('strings', 'main/special-projects-title') ?></div>
 <?php foreach ($specialProjects as $specialProject) { ?>
     <div class="row">
         <?= SpecialProject::widget($specialProject) ?>

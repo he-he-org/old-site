@@ -5,7 +5,7 @@ use yii\helpers\Url;
     <div class="special-project_top">
         <div class="special-project_left">
             <div class="special-project_title">
-                <?= $title ?> 
+                <?= $title ?>
                 <a class="fa fa-link special-project_anchor-link" href="#<?= $anchor ?>"  aria-hidden="true"></a>
             </div>
             <p class="special-project_description"><?= $desc ?></p>
@@ -13,7 +13,9 @@ use yii\helpers\Url;
         <div class="special-project_right">
             <?php if (count($news) > 0) { ?>
                 <div class="special-project_news">
-                    <a class="special-project_news-header" href="<?= Url::toRoute(["news", "tag" => $news_tag_id]) ?>">Новости</a>
+                    <a class="special-project_news-header" href="<?= Url::toRoute(["news", "tag" => $news_tag_id]) ?>">
+                        <?= \Yii::t('strings', 'main/special-project/news-title') ?>
+                    </a>
                     <ol class="special-project_news-list">
                         <?php foreach ($news as $news_item) { ?>
                             <li class="special-project_news-item"><?= $news_item ?></li>
@@ -44,11 +46,11 @@ use yii\helpers\Url;
 
             <input value="1 000 ₽" class="special-project_donate-amount"/>
 
-            <button class="special-project_donate-button">Пожертвовать</button>
+            <button class="special-project_donate-button"><?= \Yii::t('strings', 'main/special-project/donate-button-title') ?></button>
         </form>
         <div class="special-project_links">
             <?php if ($details_url !== null) { ?>
-                <a class="special-project_link-button" href="<?= $details_url ?>">Подробности</a>
+                <a class="special-project_link-button" href="<?= $details_url ?>"><?= \Yii::t('strings', 'main/special-project/more-title') ?></a>
             <?php } ?>
         </div>
     </div>

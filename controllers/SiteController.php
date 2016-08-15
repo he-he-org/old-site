@@ -62,24 +62,24 @@ class SiteController extends Controller
         $specialProjects = [
             [
                 'anchor' => 'crowdfunding-2',
-                'title' => 'Строительство клиники',
+                'title' => \Yii::t('strings', 'main/special-project/clinic-title'),
                 'modifier' => 'green',
-                'desc' => 'Собираем средства на второй этап строительства клиники и организацию регулярных выездов мобильных бригад',
+                'desc' => \Yii::t('strings', 'main/special-project/clinic-desc'),
                 'details_url' => 'https://www.generosity.com/medical-fundraising/let-s-build-a-clinic-for-locals-in-guatemala',
                 'news_tag_id' => 'краудфандинг 2',
             ],
             [
                 'anchor' => 'eye-care',
-                'title' => 'Очки для индейцев Майя',
+                'title' => \Yii::t('strings', 'main/special-project/glasses-title'),
                 'modifier' => 'blue',
-                'desc' => 'Твои старые очки помогут гватемальцу вернуться к работе и спасти свою семью от бедности',
+                'desc' => \Yii::t('strings', 'main/special-project/glasses-desc'),
                 'news_tag_id' => 'офтальмологическая программа',
             ],
             [
                 'anchor' => 'mobile-teams',
-                'title' => 'Мобильные бригады',
+                'title' => \Yii::t('strings', 'main/special-project/brigades-title'),
                 'modifier' => 'red',
-                'desc' => 'Мы регулярно берем лекарства и инструменты, садимся в наш пикап и едем лечить людей из отдаленных поселений',
+                'desc' => \Yii::t('strings', 'main/special-project/brigades-desc'),
                 'news_tag_id' => 'мобильные бригады',
             ]
         ];
