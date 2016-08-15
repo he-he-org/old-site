@@ -78,27 +78,27 @@ AppAsset::register($this);
             <div class="layout-fields">
                 <div class="row">
                     <div class="layout-footer_links-block row_block-3">
-                        <div class="layout-footer_links-block_header">Задачи</div>
-                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['#crowdfunding-2']) ?>">Строительство клиники</a></div>
-                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/package#pharmacy']) ?>">Медикаменты</a></div>
-                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/package#food']) ?>">Продукты питания</a></div>
+                        <div class="layout-footer_links-block_header"><?= \Yii::t('strings', 'layout/main/footer/link/goals') ?></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['#crowdfunding-2']) ?>"><?= \Yii::t('strings', 'layout/main/footer/link/clinic-construction') ?></a></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/package#pharmacy']) ?>"><?= \Yii::t('strings', 'layout/main/footer/link/medical-supplies') ?></a></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/package#food']) ?>"><?= \Yii::t('strings', 'layout/main/footer/link/food-products') ?></a></div>
 <!--                        <div class="layout-footer_links-block_item">Строительство водопровода</div>-->
                     </div>
                     <div class="layout-footer_links-block row_block-3">
-                        <div class="layout-footer_links-block_header">О проекте</div>
-                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['news']) ?>">Новости</a></div>
+                        <div class="layout-footer_links-block_header"><?= \Yii::t('strings', 'layout/main/footer/link/about-healp-and-help') ?></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['news']) ?>"><?= \Yii::t('strings', 'layout/main/footer/link/news') ?></a></div>
 <!--                        <div class="layout-footer_links-block_item">Наши спецпроекты</div>-->
-                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['team']) ?>">Команда проекта</a></div>
-                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['about']) ?>">История создания</a></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['team']) ?>"><?= \Yii::t('strings', 'layout/main/footer/link/team') ?></a></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['about']) ?>"><?= \Yii::t('strings', 'layout/main/footer/link/facts') ?></a></div>
 <!--                        <div class="layout-footer_links-block_item">На что мы тратим деньги</div>-->
                     </div>
                     <div class="layout-footer_links-block row_block-3">
-                        <div class="layout-footer_links-block_header">Как помочь</div>
-                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/donate']) ?>">Внести пожертвование</a></div>
-                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['volunteers']) ?>">Стать волонтером</a></div>
-                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/package']) ?>">Отправить посылку</a></div>
+                        <div class="layout-footer_links-block_header"><?= \Yii::t('strings', 'layout/main/footer/link/help-the-project') ?></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/donate']) ?>"><?= \Yii::t('strings', 'layout/main/footer/link/donate-now') ?></a></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['volunteers']) ?>"><?= \Yii::t('strings', 'layout/main/footer/link/become-a-volunteer') ?></a></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['help/package']) ?>"><?= \Yii::t('strings', 'layout/main/footer/link/send-a-package') ?></a></div>
 <!--                        <div class="layout-footer_links-block_item">Рассказать в соцсетях</div>-->
-                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['contacts']) ?>">Написать нам</a></div>
+                        <div class="layout-footer_links-block_item"><a href="<?= Url::toRoute(['contacts']) ?>"><?= \Yii::t('strings', 'layout/main/footer/link/contact-us') ?></a></div>
                     </div>
                     <div class="row_block-3">
                         <div class="layout-social-networks">
