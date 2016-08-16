@@ -8,54 +8,56 @@ use app\widgets\help\PreparedPackage;
     <div class="row_block-3">
         <!-- todo: make a proper translation -->
         <?= CategoryMenu::widget(['items' => [
-            ['title' => 'Медикаменты', 'section' => 'pharmacy'],
-            ['title' => 'Печатные материалы', 'section' => 'press'],
-            ['title' => 'Посуда, хозяйство', 'section' => 'tableware'],
-            ['title' => 'Белье, текстиль', 'section' => 'linen'],
-            ['title' => 'Одежда, обувь', 'section' => 'clothes'],
-            ['title' => 'Кожа, гигиена', 'section' => 'hygiene'],
-            ['title' => 'Музыка', 'section' => 'music'],
-            ['title' => 'Детям', 'section' => 'children'],
-            ['title' => 'Еда, напитки', 'section' => 'food'],
-            ['title' => 'Книги', 'section' => 'books'],
-            ['title' => 'Разное', 'section' => 'misc'],
+            ['title' => Yii::t('strings', 'help/package/category/medical-supplies'), 'section' => 'medical-supplies'],
+            ['title' => Yii::t('strings', 'help/package/category/promotional-products'), 'section' => 'promotional-products'],
+            ['title' => Yii::t('strings', 'help/package/category/household-products'), 'section' => 'household-products'],
+            ['title' => Yii::t('strings', 'help/package/category/linen'), 'section' => 'linen'],
+            ['title' => Yii::t('strings', 'help/package/category/clothing-and-footwear'), 'section' => 'clothing-and-footwear'],
+            ['title' => Yii::t('strings', 'help/package/category/hygienic-products'), 'section' => 'hygienic-products'],
+            ['title' => Yii::t('strings', 'help/package/category/musical-instruments'), 'section' => 'musical-instruments'],
+            ['title' => Yii::t('strings', 'help/package/category/childcare-products'), 'section' => 'childcare-products'],
+            ['title' => Yii::t('strings', 'help/package/category/groceries'), 'section' => 'groceries'],
+            ['title' => Yii::t('strings', 'help/package/category/books'), 'section' => 'books'],
+            ['title' => Yii::t('strings', 'help/package/category/other'), 'section' => 'other'],
         ]]) ?>
     </div>
+
+        
     <div class="row_block-9">
 
             <span  id="pharmacy"/>
             <?= Yii::t('texts/help', 'help/pharmacy/part1') ?>
 
 
-
+            
 
 
 
             <div class="packages">
                 <?= PreparedPackage::widget([
-                    'title' => 'Минимальный',
+                    'title' => Yii::t('strings', 'help/kits/minimal/title'),
                     'desc' => [
                         'Аспирин, раствор йода, аскорбиновая кислота, стериальная вата, дротаверин',
-                        'Лидокаин, тетрациклин, анальгин, бактерицидный лейкопластырь, амоксициллин',
+                        \Yii::t('strings', 'help/kit/minimal/options/1'),
                         'Стерильные салфетки, нафтизин, парацетамол, активированный уголь, атропин'
                     ][rand (0, 2)],
                     'cost' => '500',
                 ]) ?>
                 <?= PreparedPackage::widget([
-                    'title' => 'Средний',
+                    'title' => Yii::t('strings', 'help/kits/medium/title'),
                     'desc' => [
                         'Амоксиклав, мазь Вишневского, гидрокортизон, стерильный бинт, нитроглицерин, кетанов, перметрин',
-                        'Хирургическая вата, адреналин, глюкоза, дротаверин, кетонал, диазолин, кровоостанавливающий жгут',
+                        \Yii::t('strings', 'help/kits/medium/options/1'),
                         'Ибупрофен, клотримазол, вигантол, липкий бинт, новакоин, фолиевая кислота, панкреатин'
                     ][rand (0, 2)],
                     'cost' => '1000',
                 ]) ?>
                 <?= PreparedPackage::widget([
-                    'title' => 'Максимальный',
+                    'title' => Yii::t('strings', 'help/kits/maximum/title'),
                     'desc' => [
                         'Найз, митрогил гель, гигиеническая вата, бисептол, цефотаксим, фурацилин, окситацин, новакоин, метоклопрамид',
                         'Цефазолин, спазмалгон, вермокс, диклофенак, впитывающая повязка, панкреатин, левомеколь, гепариновая мазь, бисопролол',
-                        'Белогент крем, селмевит, регидрон, ацесоль, флуконазол, повязка для лечения хронических ран, палин, омепрозол, альбуцид',
+                        \Yii::t('strings', 'help/kits/maximum/options/1'),
                     ][rand (0, 2)],
                     'cost' => '2000',
                 ]) ?>
@@ -69,119 +71,15 @@ use app\widgets\help\PreparedPackage;
                 </div>
             </div>
 
-            <h1 id="press">Печатные материалы</h1>
-
-            <p>Футболки с нашим логотипом<br/>
-            Нашивки с нашим логотипом<br/>
-            Наклейки с нашим логотипом</p>
-
-            <h1 id="tableware">Посуда, хозяйство</h1>
-
-            <p>Посуда из твердого пластика или алюминия<br/>
-            Пластиковые контейнеры<br/>
-            Коробки для вещей из пластика или твердого картона<br/>
-            Прищепки<br/>
-            Надувные кровати-матрацы (лучше полуторные.</p>
-
-            <h1 id="linen">Текстиль</h1>
-
-            <p>Тряпичные мешки<br/>
-            Полотенца<br/>
-            Веревки, канаты, тросы</p>
-
-
-            <h1 id="clothes">Одежда, обувь</h1>
-
-            <p>Резиновые сапоги<br/>
-            Рюкзаки разных размеров<br/>
-            Носки<br/>
-            Перчатки рабочие (х/б)<br/>
-            Любая чистая одежда (новая или б/у)</p>
-
-            <h1 id="hygiene">Кожа, гигиена</h1>
-            <p>Солнцезащитный крем<br/>
-            Крем от комаров<br/>
-            Мыло</p>
-
-            <!--
-            <h1 id="tech">Техника</h1>
-            <p>проектор</p>
-            <p>фотокамера</p>
-            <p>видеокамера</p>
-            <p>принтер</p>
-            -->
-
-            <h1 id="music">Музыка</h1>
-            <p>Губная гармошка<br/>
-            Гармошка<br/>
-            Флейта<br/>
-            Гавайская гитара<br/>
-            Балалайка<br/>
-            Ксилофон<br/>
-            Бубен<br/>
-            Тамбурин</p>
-
-            <h1 id="children">Детям</h1>
-            <p>Учебники английского/русского языков<br/>
-            Детские книжки с картинками<br/>
-            Раскраски<br/>
-            Цветные карандаши<br/>
-            Мелки<br/>
-            Пластилин<br/>
-            Краски<br/>
-            Фломастеры<br/>
-            Настольные игры<br/>
-            Детские игрушки-погремушки<br/>
-            Детская одежда и обувь (новая или чистая б/у)<br/>
-            Шапочки для новорожденных<br/>
-            Детское питание<br/>
-            Детские смеси</p>
-
-            <h1 id="food">Еда, напитки</h1>
-            <p>Сухое молоко<br/>
-            Шоколад<br/>
-            Гематоген<br/>
-            Мука цельнозерновая<br/>
-            Дрожжи<br/>
-            Ванилин<br/>
-            Сода<br/>
-            Манка<br/>
-            Гречка<br/>
-            Пшенка<br/>
-            Макароны<br/>
-            Сгущенка<br/>
-            Кубики бульонные<br/>
-            Сгущенка<br/>
-            Тущенка<br/>
-            Рыбные консервы<br/>
-            Козинаки<br/>
-            Халва<br/>
-            Печенье/пряники<br/>
-            Изюм/курага/чернослив<br/>
-            Орехи<br/>
-            Мед<br/>
-            Чай<br/>
-            Кисель<br/>
-            Пудинги в пакетах</p>
-
-            <h1 id="books">Книги</h1>
-            <br>Книги по медицине на испанском/английском языках</br>
-            Атласы медицинские</p>
-
-            <h1 id="misc">Разное</h1>
-            <p>Кисточки малярные<br/>
-            Мотивы русской культуры (матрешки/орнаменты/баба на чайник/утварь)<br/>
-            Семена газонной травы<br/>
-            Муляжи медицинские<br/>
-            Манекены<br/>
-            Перчатки медицинские<br/>
-            Тест-полоски для анализа мочи<br/>
-            Катетеры урологические CH16/18<br/>
-            Ортопедические шины (запястье, рука и другие)<br/>
-            Тесты на беременность<br/>
-            Тест-полоски для глюкометров (аку)<br/>
-            Компрессионные чулки</p>
-
-
+            <?= Yii::t('texts/help', 'help/package/sections/promotional-products') ?>
+            <?= Yii::t('texts/help', 'help/package/sections/household-products') ?>
+            <?= Yii::t('texts/help', 'help/package/sections/linen') ?>
+            <?= Yii::t('texts/help', 'help/package/sections/clothing-and-footwear') ?>
+            <?= Yii::t('texts/help', 'help/package/sections/hygienic-products') ?>
+            <?= Yii::t('texts/help', 'help/package/sections/musical-instruments') ?>
+            <?= Yii::t('texts/help', 'help/package/sections/childcare-products') ?>
+            <?= Yii::t('texts/help', 'help/package/sections/groceries') ?>
+            <?= Yii::t('texts/help', 'help/package/sections/books') ?>
+            <?= Yii::t('texts/help', 'help/package/sections/other') ?>
     </div>
 </div>

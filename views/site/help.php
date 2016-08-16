@@ -16,13 +16,12 @@ $this->title = 'Health & Help - ' . $pageName;
 HelpAsset::register($this);
 ?>
 
-
 <div class="row row--separate-bottom">
     <div class="row_block-12">
         <?= HelpOptions::widget(['items' => [
-            ['title' => 'Отправить посылку', 'section' => 'package', 'icon_url' => '/images/help/shipping.svg'],
-            ['title' => 'Сделать пожертвование', 'section' => 'donate', 'icon_url' => '/images/help/card.svg'],
-            ['title' => 'Стать волонтером', 'url' => Url::toRoute(['/volunteers']), 'icon_url' => '/images/help/user.svg'],
+            ['title' => \Yii::t('strings', 'help/submenu/send-a-package/title'), 'section' => 'package', 'icon_url' => '/images/help/shipping.svg'],
+            ['title' => \Yii::t('strings', 'help/submenu/donate-now/title'), 'section' => 'donate', 'icon_url' => '/images/help/card.svg'],
+            ['title' => \Yii::t('strings', 'help/submenu/donate-now/become-a-volunteer'), 'url' => Url::toRoute(['/volunteers']), 'icon_url' => '/images/help/user.svg'],
         ]]) ?>
     </div>
 </div>

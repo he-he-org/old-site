@@ -21,7 +21,7 @@
         <div class="package_title"><?= $title ?></div>
         <div class="package_desc"><?= $desc ?></div>
         <div class="package_button">
-            <button type="submit" class="send-button">Отправить <?= $cost ?> &#8381;</button>
+            <button type="submit" class="send-button"><?= \Yii::t('strings', 'help/kit/donate-button-title') ?> <?= $cost ?> &#8381;</button>
         </div>
 
 </form>

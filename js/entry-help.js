@@ -99,8 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const fee = amount - amountDue
 
 
-            get(form, "[data-role=amount-due]").textContent = amountDue.toFixed(2)
-            get(form, "[data-role=fee]").textContent = fee.toFixed(2)
+            get(form, "[data-role=fee-info]").textContent = get(form, "[data-role=fee-info-template]")
+                .textContent
+                .replace(/\{amount\}/g, amountDue.toFixed(2))
+                .replace(/\{fee\}/g, fee.toFixed(2))
 
             get(form, "[data-role=submit]").disabled = amount === 0
 
