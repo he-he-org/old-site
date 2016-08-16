@@ -19,6 +19,7 @@ const scheme = [
         attrs: [
             {name: "id", type: "int"},
             {name: "name", type: "string"},
+            {name: "scope", type: "string"},
             {name: "en-US", type: "text"},
             {name: "es-ES", type: "text"},
             {name: "ru-RU", type: "text"},

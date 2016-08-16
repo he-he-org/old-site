@@ -8,7 +8,7 @@ class TranslationText extends ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'name', 'en-US', 'es-ES', 'ru-RU'], 'safe']
+            [['id', 'name', 'en-US', 'es-ES', 'ru-RU', 'scope'], 'safe']
         ];
     }
 
