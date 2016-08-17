@@ -46,7 +46,7 @@ AppAsset::register($this);
                         ]]) ?>
                         <div class="layout-header_social-networks">
                             <div class="layout-header_social-networks_title">
-                                Мы в социальных сетях
+                                <?= \Yii::t('strings', 'layout/follow-us') ?>
                             </div>
                             <div class="layout-social-networks">
                                 <a href="https://www.facebook.com/healthandhelporg/" class="fa fa-facebook layout-social-networks_item" aria-hidden="true"></a>
