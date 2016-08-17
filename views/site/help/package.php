@@ -38,8 +38,8 @@ use app\widgets\help\PreparedPackage;
                     'title' => Yii::t('strings', 'help/kits/minimal/title'),
                     'desc' => [
                         \Yii::t('strings', 'help/kit/minimal/options/1'),
-                        'Аспирин, раствор йода, аскорбиновая кислота, стериальная вата, дротаверин',
-                        'Стерильные салфетки, нафтизин, парацетамол, активированный уголь, атропин'
+                        \Yii::t('strings', 'help/kit/minimal/options/2'),
+                        \Yii::t('strings', 'help/kit/minimal/options/3'),
                     ][rand (0, 2)],
                     'cost' => '500',
                 ]) ?>
@@ -47,8 +47,8 @@ use app\widgets\help\PreparedPackage;
                     'title' => Yii::t('strings', 'help/kits/medium/title'),
                     'desc' => [
                         \Yii::t('strings', 'help/kits/medium/options/1'),
-                        'Амоксиклав, мазь Вишневского, гидрокортизон, стерильный бинт, нитроглицерин, кетанов, перметрин',
-                        'Ибупрофен, клотримазол, вигантол, липкий бинт, новокаин, фолиевая кислота, панкреатин'
+                        \Yii::t('strings', 'help/kits/medium/options/2'),
+                        \Yii::t('strings', 'help/kits/medium/options/3'),
                     ][rand (0, 2)],
                     'cost' => '1000',
                 ]) ?>
@@ -56,8 +56,8 @@ use app\widgets\help\PreparedPackage;
                     'title' => Yii::t('strings', 'help/kits/maximum/title'),
                     'desc' => [
                         \Yii::t('strings', 'help/kits/maximum/options/1'),
-                        'Найз, митрогил гель, гигиеническая вата, бисептол, цефотаксим, фурацилин, окситацин, новокаин, метоклопрамид',
-                        'Цефазолин, спазмалгон, вермокс, диклофенак, впитывающая повязка, панкреатин, левомеколь, гепариновая мазь, бисопролол',
+                        \Yii::t('strings', 'help/kits/maximum/options/2'),
+                        \Yii::t('strings', 'help/kits/maximum/options/3'),
                     ][rand (0, 2)],
                     'cost' => '2000',
                 ]) ?>
