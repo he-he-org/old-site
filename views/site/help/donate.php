@@ -37,7 +37,7 @@
             'for-us' => [
                 \Yii::t('strings', 'help/donate/info/300/for-us/options/1'),
                 \Yii::t('strings', 'help/donate/info/300/for-us/options/2'),
-                'Одна поездка на такси',
+                \Yii::t('strings', 'help/donate/info/300/for-us/options/3'),
             ],
             'for-them' => [
                 \Yii::t('strings', 'help/donate/info/300/for-them/options/1'),

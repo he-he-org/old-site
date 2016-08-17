@@ -26,24 +26,24 @@ VolunteersAsset::register($this);
 
     <div class="row row--separate">
         <div class="row_block-12 features-block">
-            <div class="feature"><div class="feature_content">Упорно и бесплатно работать, чтобы изменить жизнь людей к лучшему</div></div>
-            <div class="feature"><div class="feature_content">Сделать плановые прививки, от гепатита А, В, брюшного тифа и бешенства</div></div>
-            <div class="feature"><div class="feature_content">Придерживаться высоких моральных ценностей</div></div>
+            <div class="feature"><div class="feature_content"><?= Yii::t('strings', 'help/volunteers/features/1') ?></div></div>
+            <div class="feature"><div class="feature_content"><?= Yii::t('strings', 'help/volunteers/features/2') ?></div></div>
+            <div class="feature"><div class="feature_content"><?= Yii::t('strings', 'help/volunteers/features/3') ?></div></div>
         </div>
     </div>
 
     <div class="row row--separate">
         <div class="row_block-12 features-block">
-            <div class="feature"><div class="feature_content">Уметь хорошо выполнять свою работу</div></div>
-            <div class="feature"><div class="feature_content">Оплатить проезд и дорожные расходы</div></div>
+            <div class="feature"><div class="feature_content"><?= Yii::t('strings', 'help/volunteers/features/4') ?></div></div>
+            <div class="feature"><div class="feature_content"><?= Yii::t('strings', 'help/volunteers/features/5') ?></div></div>
             <div class="feature"></div>
         </div>
     </div>
 
     <div class="row row--separate">
         <div class="row_block-12 features-block">
-            <div class="feature"><div class="feature_content">Уважать чужую культуру, расу, религию и ценности</div></div>
-            <div class="feature"><div class="feature_content">Сделать взнос в 600$ на покупку лекарств, расходных материалов для клиники и медицинских бригад</div></div>
+            <div class="feature"><div class="feature_content"><?= Yii::t('strings', 'help/volunteers/features/6') ?></div></div>
+            <div class="feature"><div class="feature_content"><?= Yii::t('strings', 'help/volunteers/features/7') ?></div></div>
             <div class="feature"></div>
         </div>
     </div>

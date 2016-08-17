@@ -8,7 +8,7 @@ function startsWith($str, $prefix) {
 
 ?>
 
-<div class="layout-navigation-menu row_block-8">
+<div class="layout-navigation-menu row_block-9">
     <?php foreach ($items as $item) { ?>
         <?php $isActive = Yii::$app->request->getPage('main') === $item['page'] ?>
         <a class="layout-navigation-menu_item <?= $isActive ? 'layout-navigation-menu_item--active' : ''?>" href="<?= Url::toRoute([$item['page']])?>">

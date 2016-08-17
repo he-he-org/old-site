@@ -2,7 +2,7 @@
     display: flex;
 
     &_title {
-        width: 400px;
+        width: 520px;
         display: flex;
 
         .text {
