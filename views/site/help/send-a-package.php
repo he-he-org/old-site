@@ -3,6 +3,6 @@
 ?>
 <div class="row">
     <div class="row_block-10">
-        <?= Yii::t('texts/help', 'help/russian-post') ?>
+        <?= Yii::t('texts/help', 'help/send-a-package') ?>
     </div>
 </div>
