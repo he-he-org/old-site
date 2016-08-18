@@ -25,7 +25,7 @@ use app\widgets\help\PreparedPackage;
         
     <div class="row_block-9">
 
-            <span  id="pharmacy"/>
+            <span  id="medical-supplies"/>
             <?= Yii::t('texts/help', 'help/pharmacy/part1') ?>
 
 
