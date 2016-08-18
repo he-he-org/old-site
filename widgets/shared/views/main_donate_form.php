@@ -6,10 +6,10 @@ use yii\helpers\Url;
     <div class="widget-main-donate-form_top">
         <form class="widget-main-donate-form_form" action="https://money.yandex.ru/quickpay/confirm.xml">
             <!-- Получатель (тестовый кошелек): --> <input type="hidden" name="receiver" value="410012180500847" />
-            <!-- Название перевода на странице подтверждения: --> <input type="hidden" name="formcomment" value="Проект «Health &amp; Help»" />
-            <!-- Название перевода в истории отправителя: --> <input type="hidden" name="short-dest" value="Проект «Health &amp; Help»" />
+            <!-- Название перевода на странице подтверждения: --> <input type="hidden" name="formcomment" value="<?= \Yii::t('strings', 'widgets/shared/main-donate-form/formcomment') ?>" />
+            <!-- Название перевода в истории отправителя: --> <input type="hidden" name="short-dest" value="<?= \Yii::t('strings', 'widgets/shared/main-donate-form/short-dest') ?>" />
             <!-- Тип транзакции: --> <input type="hidden" name="quickpay-form" value="donate" />
-            <!-- Назначение платежа: --> <input type="hidden" name="targets" value="Пожертвование на уставные цели" />
+            <!-- Назначение платежа: --> <input type="hidden" name="targets" value="<?= \Yii::t('strings', 'widgets/shared/main-donate-form/targets') ?>" />
             <!-- Способ оплаты: --> <input type="hidden" readonly="readonly" name="paymentType" value="PC" data-type="string" />
 
             <!-- Сумма: --> <input type="hidden" readonly="readonly" name="sum" value="" data-type="number" />

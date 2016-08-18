@@ -1,7 +1,7 @@
 <form class="packages_item package" action="https://money.yandex.ru/quickpay/confirm.xml">
     <!-- Получатель (тестовый кошелек): --> <input type="hidden" name="receiver" value="410012180500847" />
-    <!-- Название перевода на странице подтверждения: --> <input type="hidden" name="formcomment" value="Health &amp; Help: готовый набор «<?= $title ?>»" />
-    <!-- Название перевода в истории отправителя: --> <input type="hidden" name="short-dest" value="Health &amp; Help: готовый набор «<?= $title ?>»" />
+    <!-- Название перевода на странице подтверждения: --> <input type="hidden" name="formcomment" value="<?= str_replace('{title}', $title, \Yii::t('strings', 'help/prepared-package/formcomment-template')) ?>" />
+    <!-- Название перевода в истории отправителя: --> <input type="hidden" name="short-dest" value="<?= str_replace('{title}', $title, \Yii::t('strings', 'help/prepared-package/short-dest-template'))  ?>" />
     <!-- Тип транзакции: --> <input type="hidden" name="quickpay-form" value="donate" />
     <!-- Назначение платежа: --> <input type="hidden" name="targets" value="<?= \Yii::t('strings', 'help/prepared-package/targets') ?>" />
     <!-- Способ оплаты: --> <input type="hidden" readonly="readonly" name="paymentType" value="PC" data-type="string" />

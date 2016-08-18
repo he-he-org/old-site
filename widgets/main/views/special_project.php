@@ -25,13 +25,15 @@ use yii\helpers\Url;
             <?php } ?>
         </div>
     </div>
+
+
     <div class="special-project_bottom">
         <form class="special-project_donate" action="https://money.yandex.ru/quickpay/confirm.xml">
             <!-- Получатель (тестовый кошелек): --> <input type="hidden" name="receiver" value="410012180500847" />
-            <!-- Название перевода на странице подтверждения: --> <input type="hidden" name="formcomment" value="Проект «Health &amp; Help»: пожертвование на специальный проект «<?= $title ?>»" />
-            <!-- Название перевода в истории отправителя: --> <input type="hidden" name="short-dest" value="Проект «Health &amp; Help»" />
+            <!-- Название перевода на странице подтверждения: --> <input type="hidden" name="formcomment" value="<?= str_replace('{project}', $title, \Yii::t('strings', 'main/special-project/formcomment-template')) ?>" />
+            <!-- Название перевода в истории отправителя: --> <input type="hidden" name="short-dest" value="<?= \Yii::t('strings', 'main/special-project/short-dest') ?>" />
             <!-- Тип транзакции: --> <input type="hidden" name="quickpay-form" value="donate" />
-            <!-- Назначение платежа: --> <input type="hidden" name="targets" value="Проект «Health &amp; Help»" />
+            <!-- Назначение платежа: --> <input type="hidden" name="targets" value="<?= \Yii::t('strings', 'main/special-project/targets') ?>" />
             <!-- Способ оплаты: --> <input type="hidden" readonly="readonly" name="paymentType" value="PC" data-type="string" />
 
             <!-- Сумма: --> <input type="hidden" readonly="readonly" name="sum" value="" data-type="number" />

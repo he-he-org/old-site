@@ -29,10 +29,6 @@ use app\widgets\help\PreparedPackage;
             <?= Yii::t('texts/help', 'help/pharmacy/part1') ?>
 
 
-            
-
-
-
             <div class="packages">
                 <?= PreparedPackage::widget([
                     'title' => Yii::t('strings', 'help/kits/minimal/title'),

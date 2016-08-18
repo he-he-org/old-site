@@ -34,12 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
     /*
         Common donation logic
      */
-    Array.prototype.slice.apply(document.querySelectorAll(".common-donation")).forEach((formDiv) => {
-        const form = formDiv.querySelector(".common-donation_form")
+    Array.prototype.slice.apply(document.querySelectorAll(".widget-main-donate-form")).forEach((formDiv) => {
+        const form = formDiv.querySelector(".widget-main-donate-form_form")
 
-        const tips = formDiv.querySelector(".common-donation_tips")
-        const input = formDiv.querySelector(".common-donation_amount")
-        const button = formDiv.querySelector(".common-donation_donate-button")
+        const tips = formDiv.querySelector(".widget-main-donate-form_tips")
+        const input = formDiv.querySelector(".widget-main-donate-form_amount")
+        const button = formDiv.querySelector(".widget-main-donate-form_donate-button")
 
         const sumInput = form.querySelector("input[name=sum]")
 
