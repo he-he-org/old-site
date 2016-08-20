@@ -3,16 +3,7 @@
 use app\assets\ContactsAsset;
 
 
-//
-// TODO: update localization algorythm
-// NOTE! See https://github.com/samdark/yii2-cookbook/blob/master/book/i18n-selecting-application-language.md
-//
-$pageName = 'Contacts';
-if (Yii::$app->language == 'ru-RU') {
-    $pageName = 'Контакты';
-}
-
-$this->title = 'Health & Help - ' . $pageName;
+$this->title = 'Health & Help - ' . \Yii::t('strings', 'layout/main-menu/contacts');
 
 ContactsAsset::register($this);
 

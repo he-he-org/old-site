@@ -4,16 +4,8 @@ use app\widgets\main\TeamMemberWidget;
 use app\widgets\main\SpecialProject;
 use app\assets\VolunteersAsset;
 
-//
-// TODO: update localization algorythm
-// NOTE! See https://github.com/samdark/yii2-cookbook/blob/master/book/i18n-selecting-application-language.md
-//
-$pageName = 'Became a member';
-if (Yii::$app->language == 'ru-RU') {
-    $pageName = 'Стать волонтером';
-}
+$this->title = 'Health & Help - ' . \Yii::t('strings', 'layout/main-menu/volunteers');
 
-$this->title = 'Health & Help - ' . $pageName;
 VolunteersAsset::register($this);
 
 ?>
@@ -47,7 +39,7 @@ VolunteersAsset::register($this);
             <div class="feature"></div>
         </div>
     </div>
-    
+
 </div>
 
 

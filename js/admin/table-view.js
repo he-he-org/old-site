@@ -20,6 +20,7 @@ const TableView = createClass({
             creatingRecord: null,
             pagination: null,
             data: null,
+            search: {},
         }
     },
 
@@ -28,7 +29,11 @@ const TableView = createClass({
     },
 
     componentWillReceiveProps(props) {
-        this.sync(props)
+        this.setState({
+            search: {},
+        }, () => {
+            this.sync(props)
+        })
     },
 
     getResourceScheme(props = this.props) {
@@ -102,9 +107,14 @@ const TableView = createClass({
             loading: true,
             data: null,
         }, () => {
-            const pagination = this.state.pagination || {}
+            const {search, pagination} = this.state
+            const searchParam = Object.keys(search)
+                .filter((key) => search[key] !== undefined && search[key] !== "")
+                .map((key) => `${key}:*${search[key].trim()}*`)
+                .join(";")
             const params = {
-                page: pagination.currentPage || 1,
+                page: (pagination || {}).currentPage || 1,
+                q: searchParam,
             }
             return dao.fetchResource(resourceName, params).then(({pagination, data}) => {
                 this.setState({
@@ -112,6 +122,25 @@ const TableView = createClass({
                     pagination,
                     data,
                 })
+            })
+        })
+    },
+
+    search(props = this.props) {
+        const {context: {dao}, resourceName} = props
+        const {search, pagination} = this.state
+        const searchParam = Object.keys(search)
+            .filter((key) => search[key] !== undefined && search[key] !== "")
+            .map((key) => `${key}:*${search[key]}*`)
+            .join(";")
+        const params = {
+            page: (pagination || {}).currentPage || 1,
+            q: searchParam,
+        }
+        return dao.fetchResource(resourceName, params).then(({pagination, data}) => {
+            this.setState({
+                pagination,
+                data,
             })
         })
     },
@@ -190,6 +219,42 @@ const TableView = createClass({
         )
     },
 
+    searchChange(field, e) {
+        this.setState({
+            search: merge(this.state.search, {
+                [field.name]: e.target.value,
+            }),
+        }, () => {
+            this.search()
+        })
+    },
+
+    searchClear(field) {
+        this.setState({
+            search: merge(this.state.search, {
+                [field.name]: "",
+            }),
+        }, () => {
+            this.search()
+        })
+    },
+
+    renderSearch() {
+        const {attrs} = this.getResourceScheme()
+        const {search} = this.state
+        return h("tr", {key: "search"}, attrs.map((field) => (
+            h("td", {key: field.name},
+                h("input", {
+                    value: search[field.name] || "",
+                    type: "text",
+                    onChange: this.searchChange.bind(null, field),
+                    onClick: this.searchClear.bind(null, field),
+                })
+            )
+        )))
+    },
+
+
     render() {
         const {resourceName, context} = this.props
         const {editingRecord, creatingRecord, data, loading} = this.state
@@ -228,12 +293,16 @@ const TableView = createClass({
                             h("th", {key: field.name}, field.name)
                         )))
                     ),
-                    h("tbody", data.map((record) => (
-                        this.renderRecord(record)
-                    ))
+                    h("tbody",
+                        [this.renderSearch()].concat(
+                            data.map((record) => (
+                                this.renderRecord(record)
+                            ))
+                        )
+                    )
                 )
             )
-        ))
+        )
     },
 })
 

@@ -19,14 +19,14 @@
         <button class="section-donate-form_submit" data-role="submit"><?= \Yii::t('strings', 'help/donate/donate-button-title') ?></button>
 
 
-        
-        
-        
+
+
+
         <!-- Получатель (тестовый кошелек): --> <input type="hidden" name="receiver" value="410012180500847" />
         <!-- Название перевода на странице подтверждения: --> <input type="hidden" name="formcomment" value="<?= \Yii::t('strings', 'help/donate/formcomment') ?>" />
         <!-- Название перевода в истории отправителя: --> <input type="hidden" name="short-dest" value="<?= \Yii::t('strings', 'help/donate/short-dest') ?>" />
         <!-- Тип транзакции: --> <input type="hidden" name="quickpay-form" value="donate" data-role="" />
-        <!-- Назначение платежа: --> <input type="hidden" name="targets" value="<?= \Yii::t('strings', ' help/donate/targets') ?>" />
+        <!-- Назначение платежа: --> <input type="hidden" name="targets" value="<?= \Yii::t('strings', 'help/donate/targets') ?>" />
         <!-- Способ оплаты: --> <input type="hidden" readonly="readonly" name="paymentType" value="PC" data-type="string"  data-role="hidden-paymentType"/>
         <input type="hidden" readonly="readonly" name="sum" value="" data-type="number" data-role="hidden-sum" />
     </form>
@@ -61,7 +61,7 @@
             'amount' => '1000',
             'for-us' => [
                 \Yii::t('strings', 'help/donate/info/1000/for-us/options/1'),
-                \Yii::t('strings', 'help/donate/info/1000/for-us/options/2'), 
+                \Yii::t('strings', 'help/donate/info/1000/for-us/options/2'),
             ],
             'for-them' => [
                 \Yii::t('strings', 'help/donate/info/1000/for-them/options/1'),

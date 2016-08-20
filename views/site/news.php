@@ -3,13 +3,7 @@
 use app\assets\NewsAsset;
 use yii\helpers\Url;
 
-
-$pageName = 'News';
-if (Yii::$app->language == 'ru-RU') {
-    $pageName = 'Новости';
-}
-
-$this->title = 'Health & Help - ' . $pageName;
+$this->title = 'Health & Help - ' . \Yii::t('strings', 'layout/main-menu/news');
 
 NewsAsset::register($this);
 
@@ -26,7 +20,7 @@ $tag_param = intval(Yii::$app->getRequest()->getQueryParam('tag'))
                     <div class="item_date"><?= date('d.m.Y', $item['date']) ?></div>
                     <div class="item_title"><?= $item['title'] ?></div>
                     <div class="item_text"><?= $item['text'] ?></div>
-                    <div class="item_tags">Теги:
+                    <div class="item_tags"><?= \Yii::t('strings', 'news/tags/title') ?>:
                         <?php foreach ($item['tags'] as $tag) { ?>
                             <a class="item_tag <?= $tag_param === $tag['id'] ? 'item_tag--active' : '' ?>"
                                href="<?= Url::toRoute(['/news', 'tag' => $tag['id']]) ?>"><?= $tag['title'] ?>

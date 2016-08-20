@@ -6,12 +6,7 @@ use app\assets\HelpAsset;
 use app\widgets\help\HelpOptions;
 use yii\helpers\Url;
 
-$pageName = 'Help';
-if (Yii::$app->language == 'ru-RU') {
-    $pageName = 'Помочь проекту';
-}
-
-$this->title = 'Health & Help - ' . $pageName;
+$this->title = 'Health & Help - ' . \Yii::t('strings', 'layout/main-menu/help');
 
 HelpAsset::register($this);
 ?>

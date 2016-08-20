@@ -6,16 +6,7 @@ use app\widgets\shared\MainDonateForm;
 use app\assets\MainAsset;
 use yii\helpers\Url;
 
-//
-// TODO: update localization algorythm
-// NOTE! See https://github.com/samdark/yii2-cookbook/blob/master/book/i18n-selecting-application-language.md
-//
-$pageName = 'Main';
-if (Yii::$app->language == 'ru-RU') {
-    $pageName = 'Главная';
-}
-
-$this->title = 'Health & Help - ' . $pageName;
+$this->title = 'Health & Help';
 
 MainAsset::register($this);
 

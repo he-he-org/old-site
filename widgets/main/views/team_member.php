@@ -5,7 +5,7 @@
     <div class="team-member_links">
         <?php if($vk) {?> <a href="<?= $vk ?>" class="fa fa-vk team-member_link "></a> <?php } ?>
         <?php if($fb) {?> <a href="<?= $fb ?>" class="fa fa-facebook team-member_link "></a> <?php } ?>
-        <?php if($email) {?> <a href="<?= $email ?>" class="fa fa-envelope team-member_link "></a> <?php } ?>
+        <?php if($email) {?> <a href="mailto:<?= $email ?>" class="fa fa-envelope team-member_link "></a> <?php } ?>
         <?php if($linked_in) {?> <a href="<?= $linked_in ?>" class="fa fa-linkedin team-member_link "></a> <?php } ?>
     </div>
 </div>

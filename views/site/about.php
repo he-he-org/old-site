@@ -4,16 +4,7 @@ use app\assets\AboutAsset;
 use app\widgets\main\TeamMemberWidget;
 use app\widgets\main\SpecialProject;
 
-//
-// TODO: update localization algorythm
-// NOTE! See https://github.com/samdark/yii2-cookbook/blob/master/book/i18n-selecting-application-language.md
-//
-$pageName = 'Main';
-if (Yii::$app->language == 'ru-RU') {
-    $pageName = 'Главная';
-}
-
-$this->title = 'Health & Help - ' . $pageName;
+$this->title = 'Health & Help - ' . \Yii::t('strings', 'layout/main-menu/about_us');
 
 AboutAsset::register($this);
 

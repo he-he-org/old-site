@@ -8,9 +8,7 @@ use app\widgets\shared\MainDonateForm;
 // TODO: update localization algorythm
 // NOTE! See https://github.com/samdark/yii2-cookbook/blob/master/book/i18n-selecting-application-language.md
 //
-$pageName = \Yii::t('strings', 'main/team-title');
-
-$this->title = 'Health & Help - ' . $pageName;
+$this->title = 'Health & Help - ' . \Yii::t('strings', 'main/team-title');
 
 TeamAsset::register($this);
 
