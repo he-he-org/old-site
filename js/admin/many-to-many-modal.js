@@ -1,14 +1,14 @@
-import {createClass, PropTypes} from "react"
-import {h} from "react-markup"
-import prefixer from "bem-prefixer"
+import {createClass, PropTypes} from 'react'
+import {h} from 'react-markup'
+import prefixer from 'bem-prefixer'
 
-import TableView from "./table-view"
-import Modal from "./modal"
-const bem = prefixer("ManyToOneModal")
+import TableView from './table-view'
+import Modal from './modal'
+const bem = prefixer('ManyToOneModal')
 
 const ManyToManyModal = createClass({
 
-    displayName: "ManyToManyModal",
+    displayName: 'ManyToManyModal',
 
     getInitialState() {
         return {
@@ -50,13 +50,13 @@ const ManyToManyModal = createClass({
         const value = this.state.value || []
 
         return (
-            h(bem("div"),
+            h(bem('div'),
                 h(Modal,
-                    h("div", value.map((record) => (
-                        h("div",
+                    h('div', value.map((record) => (
+                        h('div',
                             {key: record.id},
-                            h("span", Object.keys(record).map((key) => key + ":" + record[key]).join(", ")),
-                            h("button", {onClick: this.deleteRecord.bind(null, record)}, "del")
+                            h('span', Object.keys(record).map((key) => key + ':' + record[key]).join(', ')),
+                            h('button', {onClick: this.deleteRecord.bind(null, record)}, 'del')
                         )
                     ))),
                     h(TableView, {
@@ -66,8 +66,8 @@ const ManyToManyModal = createClass({
                         onRecordSelect: this.selectRecord,
                         context,
                     }),
-                    h("button", {onClick: this.save}, "Save"),
-                    h("button", {onClick: onCancel}, "Cancel")
+                    h('button', {onClick: this.save}, 'Save'),
+                    h('button', {onClick: onCancel}, 'Cancel')
                 )
             )
         )

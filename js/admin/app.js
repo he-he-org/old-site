@@ -1,17 +1,17 @@
-import {createClass} from "react"
-import {h} from "react-markup"
-import {Router, Route, hashHistory} from "react-router"
+import {createClass} from 'react'
+import {h} from 'react-markup'
+import {Router, Route, hashHistory} from 'react-router'
 
-import {merge} from "functional-utils"
-import {login, logout, user} from "./api"
-import Navigation from "./navigation"
-import Auth from "./auth"
-import TableView from "./table-view"
-import DataAccess from "./data-access"
+import {merge} from 'functional-utils'
+import {login, logout, user} from './api'
+import Navigation from './navigation'
+import Auth from './auth'
+import TableView from './table-view'
+import DataAccess from './data-access'
 
 
 const deepMerge = (obj1, obj2) => {
-    if (typeof obj1 !== "object" || typeof obj2 !== "object" || Array.isArray(obj1) || Array.isArray(obj2)) { //todo: es6
+    if (typeof obj1 !== 'object' || typeof obj2 !== 'object' || Array.isArray(obj1) || Array.isArray(obj2)) { //todo: es6
         return obj2
     }
 
@@ -42,14 +42,14 @@ const normalizeConfig = (config) => {
         let renderers = {}
         resource.attrs.forEach((attr) => {
             let renderer = null
-            if (attr.type === "manyToOne") {
-                renderer = (value) => value === null ? "null" : "[" + value.id + "]"
+            if (attr.type === 'manyToOne') {
+                renderer = (value) => value === null ? 'null' : '[' + value.id + ']'
             }
-            else if (attr.type === "manyToMany") {
-                renderer = (value) => value === null ? "null" : "[" + value.map((x) => x.id).join(", ") + "]"
+            else if (attr.type === 'manyToMany') {
+                renderer = (value) => value === null ? 'null' : '[' + value.map((x) => x.id).join(', ') + ']'
             }
             else {
-                renderer = (value) => value === null ? "null" : value
+                renderer = (value) => value === null ? 'null' : value
             }
             renderers = merge(renderers, {
                 [attr.name]: renderer,
@@ -67,7 +67,7 @@ const normalizeConfig = (config) => {
 
 
 const Component = createClass({
-    displayName: "App",
+    displayName: 'App',
 
     getInitialState() {
         return {
@@ -88,7 +88,7 @@ const Component = createClass({
                     api: {
                         basicAuth: {
                             username: result.accessToken,
-                            password: "",
+                            password: '',
                         },
                     },
                 }),
@@ -115,7 +115,7 @@ const Component = createClass({
                     api: {
                         basicAuth: {
                             username: result.accessToken,
-                            password: "",
+                            password: '',
                         },
                     },
                 }),
@@ -130,11 +130,11 @@ const Component = createClass({
         const {config} = this.props.route
         const {scheme} = config
         const {logined, dao} = this.state
-        const {params: {resource = "translation-strings"}} = this.props //todo: get first from scheme
+        const {params: {resource = 'translation-strings'}} = this.props //todo: get first from scheme
         const activeResource = scheme.filter((x) => x.name === resource)[0]
 
         if (logined) {
-            return h("div",
+            return h('div',
                 h(Auth, {logined, onLogin: this.auth, onLogout: this.logout}),
                 h(Navigation, {items: scheme, activeItem: activeResource}),
                 h(TableView, {
@@ -147,7 +147,7 @@ const Component = createClass({
             )
         }
         else {
-            return h("div",
+            return h('div',
                 h(Auth, {logined, onLogin: this.auth})
             )
         }
@@ -161,8 +161,8 @@ const App = createClass({
         const normalizedConfig = normalizeConfig(config)
 
         return h(Router, {history: hashHistory},
-            h(Route, {path: "/:resource", component: Component, config: normalizedConfig}),
-            h(Route, {path: "/", component: Component, config: normalizedConfig})
+            h(Route, {path: '/:resource', component: Component, config: normalizedConfig}),
+            h(Route, {path: '/', component: Component, config: normalizedConfig})
         )
     },
 })

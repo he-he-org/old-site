@@ -1,18 +1,18 @@
 export const error = (msg) => {
-    const error = document.createElement("div")
-    error.classList.add("Alert--error")
+    const error = document.createElement('div')
+    error.classList.add('Alert--error')
 
-    const controls = document.createElement("div")
-    controls.textContent = "\u2716"
-    controls.classList.add("Alert__close")
-    controls.addEventListener("click", () => {
+    const controls = document.createElement('div')
+    controls.textContent = '\u2716'
+    controls.classList.add('Alert__close')
+    controls.addEventListener('click', () => {
         document.body.removeChild(error)
     })
     error.appendChild(controls)
 
-    const body = document.createElement("div")
+    const body = document.createElement('div')
     body.textContent = msg
-    controls.classList.add("Alert__body")
+    controls.classList.add('Alert__body')
     error.appendChild(body)
 
     if (document.body.firstChild) {

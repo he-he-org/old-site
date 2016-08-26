@@ -32,7 +32,7 @@ export const map = (a, ifWait, ifReady, ifFail) => {
         return ifFail(a.value)
     }
     else {
-        throw new Error("Wrong state", a)
+        throw new Error('Wrong state', a)
     }
 }
 

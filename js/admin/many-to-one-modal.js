@@ -1,20 +1,20 @@
-import {createClass, PropTypes} from "react"
-import {h} from "react-markup"
-import prefixer from "bem-prefixer"
+import {createClass, PropTypes} from 'react'
+import {h} from 'react-markup'
+import prefixer from 'bem-prefixer'
 
-import TableView from "./table-view"
-import Modal from "./modal"
-const bem = prefixer("ManyToOneModal")
+import TableView from './table-view'
+import Modal from './modal'
+const bem = prefixer('ManyToOneModal')
 
 const ManyToOneModal = createClass({
 
-    displayName: "ManyToOneModal",
+    displayName: 'ManyToOneModal',
 
     render() {
         const {resourceName, onCancel, onSelect, context} = this.props
 
         return (
-            h(bem("div"),
+            h(bem('div'),
                 h(Modal,
                     h(TableView, {
                         resourceName,
@@ -22,7 +22,7 @@ const ManyToOneModal = createClass({
                         onRecordSelect: onSelect,
                         context,
                     }),
-                    h("button", {onClick: onCancel}, "Cancel")
+                    h('button', {onClick: onCancel}, 'Cancel')
                 )
             )
         )

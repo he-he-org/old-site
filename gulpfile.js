@@ -127,7 +127,7 @@ gulp.task("styles", function () {
 })
 
 gulp.task('lint', function () {
-    return gulp.src(settings.scripts.src + '/**').pipe(eslint())
+    return gulp.src(settings.scripts.src + '/**/*.js').pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failOnError())
 });
@@ -137,7 +137,7 @@ gulp.task('lint-n-fix', function () {
         return file.eslint != null && file.eslint.fixed
     }
 
-    return gulp.src(settings.scripts.src + '/**.js').pipe(eslint({fix: true}))
+    return gulp.src(settings.scripts.src + '/**/*.js').pipe(eslint({fix: true}))
         .pipe(eslint.format())
         .pipe(gulpIf(isFixed, gulp.dest(settings.scripts.src)))
 });

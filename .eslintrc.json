@@ -13,7 +13,7 @@
     "eqeqeq": "error",
     "default-case": "error",
     "consistent-return": "error",
-    "quotes": ["error", "double", "avoid-escape"],
+    "quotes": ["error", "single", "avoid-escape"],
     "no-eq-null": "error",
     "no-implicit-globals": "error",
     "no-useless-escape": "error",

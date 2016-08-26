@@ -1,16 +1,16 @@
-import {createClass, PropTypes} from "react"
-import {h} from "react-markup"
-import prefixer from "bem-prefixer"
-import {merge} from "functional-utils"
+import {createClass, PropTypes} from 'react'
+import {h} from 'react-markup'
+import prefixer from 'bem-prefixer'
+import {merge} from 'functional-utils'
 
-import Modal from "./modal"
-import SingleView from "./single-view"
-import {error} from "./alerts"
+import Modal from './modal'
+import SingleView from './single-view'
+import {error} from './alerts'
 
-const bem = prefixer("TableView")
+const bem = prefixer('TableView')
 
 const TableView = createClass({
-    displayName: "TableView",
+    displayName: 'TableView',
 
     getInitialState() {
         return {
@@ -109,9 +109,9 @@ const TableView = createClass({
         }, () => {
             const {search, pagination} = this.state
             const searchParam = Object.keys(search)
-                .filter((key) => search[key] !== undefined && search[key] !== "")
+                .filter((key) => typeof search[key] !== 'undefined' && search[key] !== '')
                 .map((key) => `${key}:*${search[key].trim()}*`)
-                .join(";")
+                .join(';')
             const params = {
                 page: (pagination || {}).currentPage || 1,
                 q: searchParam,
@@ -130,9 +130,9 @@ const TableView = createClass({
         const {context: {dao}, resourceName} = props
         const {search, pagination} = this.state
         const searchParam = Object.keys(search)
-            .filter((key) => search[key] !== undefined && search[key] !== "")
+            .filter((key) => typeof search[key] !== 'undefined' && search[key] !== '')
             .map((key) => `${key}:*${search[key]}*`)
-            .join(";")
+            .join(';')
         const params = {
             page: (pagination || {}).currentPage || 1,
             q: searchParam,
@@ -183,11 +183,11 @@ const TableView = createClass({
 
     renderPagination() {
         const {pagination} = this.state
-        return h(bem("div#pagination"),
-            h("button", {onClick: this.prevPage}, "Previous page"),
-            h("span", `${pagination.currentPage} / ${pagination.pageCount}`),
-            h("button", {onClick: this.nextPage}, "Next page"),
-            h("span", ` (per page: ${pagination.perPage}, total: ${pagination.totalCount})`)
+        return h(bem('div#pagination'),
+            h('button', {onClick: this.prevPage}, 'Previous page'),
+            h('span', `${pagination.currentPage} / ${pagination.pageCount}`),
+            h('button', {onClick: this.nextPage}, 'Next page'),
+            h('span', ` (per page: ${pagination.perPage}, total: ${pagination.totalCount})`)
         )
     },
 
@@ -206,14 +206,14 @@ const TableView = createClass({
             ? onRecordSelect.bind(null, record)
             : null
 
-        return h("tr", {key: record.id, onClick},
+        return h('tr', {key: record.id, onClick},
             attrs.map((attr) => (
-                h("td", {key: `${record.id}-${attr.name}`},
+                h('td', {key: `${record.id}-${attr.name}`},
                     this.renderAttr(record, attr))
             )).concat([
-                h("td", {key: "controls"},
-                    h("button", {onClick: this.editRecord.bind(null, record)}, "Edit"),
-                    h("button", {onClick: this.deleteRecord.bind(null, record)}, "Delete")
+                h('td', {key: 'controls'},
+                    h('button', {onClick: this.editRecord.bind(null, record)}, 'Edit'),
+                    h('button', {onClick: this.deleteRecord.bind(null, record)}, 'Delete')
                 ),
             ])
         )
@@ -232,7 +232,7 @@ const TableView = createClass({
     searchClear(field) {
         this.setState({
             search: merge(this.state.search, {
-                [field.name]: "",
+                [field.name]: '',
             }),
         }, () => {
             this.search()
@@ -242,11 +242,11 @@ const TableView = createClass({
     renderSearch() {
         const {attrs} = this.getResourceScheme()
         const {search} = this.state
-        return h("tr", {key: "search"}, attrs.map((field) => (
-            h("td", {key: field.name},
-                h("input", {
-                    value: search[field.name] || "",
-                    type: "text",
+        return h('tr', {key: 'search'}, attrs.map((field) => (
+            h('td', {key: field.name},
+                h('input', {
+                    value: search[field.name] || '',
+                    type: 'text',
                     onChange: this.searchChange.bind(null, field),
                     onClick: this.searchClear.bind(null, field),
                 })
@@ -262,11 +262,11 @@ const TableView = createClass({
         const {attrs} = this.getResourceScheme()
 
         if (loading) {
-            return h(bem("div"), "Loading")
+            return h(bem('div'), 'Loading')
         }
 
         return (
-            h(bem("div"),
+            h(bem('div'),
                 editingRecord && h(Modal,
                     h(SingleView, {
                         resourceName,
@@ -285,15 +285,15 @@ const TableView = createClass({
                         context,
                     })
                 ),
-                h("button", {onClick: this.createRecord}, "Create"),
+                h('button', {onClick: this.createRecord}, 'Create'),
                 this.renderPagination(),
-                h("table",
-                    h("thead",
-                        h("tr", attrs.map((field) => (
-                            h("th", {key: field.name}, field.name)
+                h('table',
+                    h('thead',
+                        h('tr', attrs.map((field) => (
+                            h('th', {key: field.name}, field.name)
                         )))
                     ),
-                    h("tbody",
+                    h('tbody',
                         [this.renderSearch()].concat(
                             data.map((record) => (
                                 this.renderRecord(record)

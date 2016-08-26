@@ -1,15 +1,15 @@
-import {createClass, PropTypes} from "react"
-import {h} from "react-markup"
-import prefixer from "bem-prefixer"
-import {merge} from "functional-utils"
+import {createClass, PropTypes} from 'react'
+import {h} from 'react-markup'
+import prefixer from 'bem-prefixer'
+import {merge} from 'functional-utils'
 
-import ManyToOneModal from "./many-to-one-modal"
-import ManyToManyModal from "./many-to-many-modal"
-const bem = prefixer("SingleView")
+import ManyToOneModal from './many-to-one-modal'
+import ManyToManyModal from './many-to-many-modal'
+const bem = prefixer('SingleView')
 
 
 const SingleView = createClass({
-    displayName: "SingleView",
+    displayName: 'SingleView',
 
     getInitialState() {
         return {
@@ -78,20 +78,20 @@ const SingleView = createClass({
         const value = record[attr.name]
         const renderedValue = renderer(value)
 
-        if (attr.type === "text") {
-            return h("textarea", {
+        if (attr.type === 'text') {
+            return h('textarea', {
                 value: renderedValue,
                 onChange: this.handleAttrChange.bind(null, attr.name),
             })
         }
-        else if (attr.type === "manyToOne" || attr.type === "manyToMany") {
-            return h("button", {onClick: this.editLinkAttr.bind(null, attr)},
+        else if (attr.type === 'manyToOne' || attr.type === 'manyToMany') {
+            return h('button', {onClick: this.editLinkAttr.bind(null, attr)},
                 renderedValue
             )
         }
         else {
-            return h("input", {
-                type: "text",
+            return h('input', {
+                type: 'text',
                 value: renderedValue,
                 onChange: this.handleAttrChange.bind(null, attr.name),
             })
@@ -105,7 +105,7 @@ const SingleView = createClass({
         if (editingLinkAttr !== null) {
             const value = record[editingLinkAttr.name]
             const typeParams = editingLinkAttr[editingLinkAttr.type]
-            if (editingLinkAttr.type === "manyToOne") {
+            if (editingLinkAttr.type === 'manyToOne') {
                 return h(ManyToOneModal, {
                     resourceName: typeParams.to,
                     value,
@@ -114,7 +114,7 @@ const SingleView = createClass({
                     context,
                 })
             }
-            else if (editingLinkAttr.type === "manyToMany") {
+            else if (editingLinkAttr.type === 'manyToMany') {
                 return h(ManyToManyModal, {
                     resourceName: typeParams.to,
                     value,
@@ -137,20 +137,20 @@ const SingleView = createClass({
         const {attrs} = this.getResourceScheme()
 
         return (
-            h(bem("div"),
+            h(bem('div'),
                 this.renderEditingLinkAttrModal(),
 
-                h(bem("div#fields"), attrs.filter((x) => x.name !== "id").map((attr) => (
-                    h(bem("label#field"), {key: attr.name},
-                        h(bem("div#title"), attr.name),
-                        h(bem("div#input"),
+                h(bem('div#fields'), attrs.filter((x) => x.name !== 'id').map((attr) => (
+                    h(bem('label#field'), {key: attr.name},
+                        h(bem('div#title'), attr.name),
+                        h(bem('div#input'),
                             this.renderInput(record, attr)
                         )
                     )
                 )).concat([
-                    h(bem("div#controls"), {key: "controls"},
-                        h("button", {onClick: this.save}, "Save"),
-                        h("button", {onClick: this.cancel}, "Cancel")
+                    h(bem('div#controls'), {key: 'controls'},
+                        h('button', {onClick: this.save}, 'Save'),
+                        h('button', {onClick: this.cancel}, 'Cancel')
                     ),
                 ]))
             )

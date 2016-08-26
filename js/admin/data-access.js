@@ -1,5 +1,5 @@
-import {merge} from "functional-utils"
-import Api from "./api"
+import {merge} from 'functional-utils'
+import Api from './api'
 
 export default function(context) {
     const {config: {scheme, expandings}, api: apiConfig} = context
@@ -13,7 +13,7 @@ export default function(context) {
             const helper = (resourceName, params = {}, expandings) => {
                 const expand = []
                 expandings.forEach((param) => {
-                    if (typeof param === "string") {
+                    if (typeof param === 'string') {
                         expand.push(param)
                     }
                     else {
@@ -24,7 +24,7 @@ export default function(context) {
                 let extParams = params
                 if (expand.length > 0) {
                     extParams = merge(extParams, {
-                        expand: expand.join(","),
+                        expand: expand.join(','),
                     })
                 }
 
@@ -39,10 +39,10 @@ export default function(context) {
                         const resourceName = attr[attr.type].to
                         const expandings = exp[1]
                         let ids = null
-                        if (attr.type === "manyToMany") {
+                        if (attr.type === 'manyToMany') {
                             ids = [].concat(...result.data.map((record) => record[attr.name].map((x) => x.id)))
                         }
-                        else if (attr.type === "manyToOne") {
+                        else if (attr.type === 'manyToOne') {
                             ids = result.data.map((record) => record[attr.name].id)
                         }
                         else {
@@ -51,8 +51,8 @@ export default function(context) {
 
                         if (ids.length !== 0) {
                             const subParams = {
-                                "q": `id:[${ids.join(",")}]`,
-                                "per-page": ids.length,
+                                'q': `id:[${ids.join(',')}]`,
+                                'per-page': ids.length,
                             }
                             return helper(resourceName, subParams, expandings)
                                 .then((result) => ({attr, entities: result.data}))
@@ -69,13 +69,13 @@ export default function(context) {
                         const newData = result.data.map((record) => {
                             const newRecord = merge({}, record)
                             results.forEach(({attr, entities}) => {
-                                if (attr.type === "manyToMany") {
+                                if (attr.type === 'manyToMany') {
                                     const objectsToReplace = entities.filter((x) => (
                                         newRecord[attr.name].filter((y) => y.id === x.id).length > 0
                                     ))
                                     newRecord[attr.name] = objectsToReplace
                                 }
-                                else if (attr.type === "manyToOne") {
+                                else if (attr.type === 'manyToOne') {
                                     const objectsToReplace = entities.filter((x) => (
                                         newRecord[attr.name].id === x.id
                                     ))
@@ -104,14 +104,14 @@ export default function(context) {
         updateRecord(resourceName, newRecord, oldRecord) {
             const resourceScheme = scheme.filter((x) => x.name === resourceName)[0] //todo: check if exists
             const entityPromise = resourceScheme.attrs.reduce((promise, attr) => {
-                if (attr.type === "manyToOne") {
+                if (attr.type === 'manyToOne') {
                     return promise.then((entity) => (
                         merge(entity, {
                             [attr[attr.type].fromAttr]: newRecord[attr.name].id,
                         })
                     ))
                 }
-                else if (attr.type === "manyToMany") {
+                else if (attr.type === 'manyToMany') {
                     const oldValue = oldRecord[attr.name]
                     const newValue = newRecord[attr.name]
 
@@ -127,7 +127,7 @@ export default function(context) {
                     const viaResourceScheme = scheme.filter((x) => x.name === typeParams.via)[0]
 
                     return api.fetchResource(viaResourceScheme, {
-                        q: typeParams.fromAttr + ":" + newRecord.id,
+                        q: typeParams.fromAttr + ':' + newRecord.id,
                     }).then((result) => {
                         const links = result.data
 
@@ -162,14 +162,14 @@ export default function(context) {
             const resourceScheme = scheme.filter((x) => x.name === resourceName)[0] //todo: check if exists
 
             const entityPromise = resourceScheme.attrs.reduce((promise, attr) => {
-                if (attr.type === "manyToOne") {
+                if (attr.type === 'manyToOne') {
                     return promise.then((entity) => (
                         merge(entity, {
                             [attr[attr.type].fromAttr]: newRecord[attr.name].id,
                         })
                     ))
                 }
-                else if (attr.type === "manyToMany") {
+                else if (attr.type === 'manyToMany') {
                     return promise
                 }
                 else {
@@ -184,7 +184,7 @@ export default function(context) {
             return entityPromise
                 .then((entity) => api.postRecord(resourceScheme, entity))
                 .then(({entity: insertedRecord}) => (
-                    Promise.all(resourceScheme.attrs.filter((attr) => attr.type === "manyToMany").map((attr) => {
+                    Promise.all(resourceScheme.attrs.filter((attr) => attr.type === 'manyToMany').map((attr) => {
                         const value = newRecord[attr.name]
 
                         const typeParams = attr[attr.type]
