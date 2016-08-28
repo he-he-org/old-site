@@ -2,15 +2,16 @@
 
 $params = require(__DIR__ . '/params.php');
 
+$env = parse_ini_file(__DIR__ . '/../env.ini', true);
+
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'class' => 'app\components\LangRequest',
-            'cookieValidationKey' => 'dP2rUYAXX50oCRVqQ3p4yGNggvfFLVti',
+            'cookieValidationKey' => @$env['yii_request_cookie_validation_key'],
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ]
@@ -54,6 +55,9 @@ $config = [
                     'controller' => ['translation-string','translation-text', 'member', 'news-item', 'news-tag', 'news-news-tag'],
                     'prefix' => 'api'
                 ],
+                'paypal' => 'paypal/main',
+                'paypal/<action>' => 'paypal/<action>',
+                'translations/<resource>' => 'translations/main',
                 'admin' => 'admin/main',
                 'admin/<section:.*>' => 'admin/<section>',
                 '<page>/<section:.*>' => 'site/<page>',

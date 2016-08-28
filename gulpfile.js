@@ -23,7 +23,11 @@ var settings = packageJson.gulp //todo: validate and provide reasonable defaults
 
 var babelConfig = {
     global: true,
-    presets: [require('babel-preset-es2015')],
+    presets: ["es2015"],
+    plugins: [
+        "transform-object-rest-spread",
+        "transform-class-properties",
+    ],
 };
 
 

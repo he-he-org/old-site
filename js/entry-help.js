@@ -1,152 +1,149 @@
 require('is-nan').shim()
 
-
-import {merge} from 'functional-utils'
 import {createStore} from 'redux'
+import {h} from 'react-markup'
+import ReactDOM from 'react-dom'
+import {setCurrency, setProvider, setAmountOption, setAmount} from './shared/action-creators'
 
-const PC_A = 0.005
-const AC_A = 0.02
+import MainDonationForm from './shared/main-donate-form'
+import DonateInfo from './help/donate/donate-info'
+import I18N from './i18n'
 
-const find = (...attrs) => {
-    let context = null
-    let selector = null
+import {ProvideType, MethodType, CurrencyType, AmountOptionType, currencyOptionsToAmount} from './shared/definitions'
 
-    if (attrs.length < 2) {
-        context = document
-        selector = attrs[0]
-    }
-    else {
-        context = attrs[0]
-        selector = attrs[1]
-    }
-
-    return Array.prototype.slice.apply(context.querySelectorAll(selector))
-}
-
-const get = (...attrs) => find(...attrs)[0]
-
-const MAX_AMOUNT_LENGTH = 10
-
+// Donation form and donate info
 document.addEventListener('DOMContentLoaded', () => {
-    find('.section-donate-form').forEach((form) => {
-        const initialState = {
-            paymentType: 'AC',
-            amountOption: '500',
-            amount: 500,
-        }
+    const initialState = {
+        provider: ProvideType.YANDEX_MONEY,
+        method: MethodType.ACCOUNT,
+        currency: CurrencyType.RUR,
+        amountOption: AmountOptionType.OPTION_SUM_2,
+        amount: currencyOptionsToAmount[CurrencyType.RUR][AmountOptionType.OPTION_SUM_2],
+    }
 
-        const donationFormReducer = (state = initialState, action) => {
-            switch (action.type) {
-                case 'SET_PAYMENT_TYPE': {
-                    return merge(state, {paymentType: action.value})
-                }
-                case 'SET_AMOUNT_OPTION': {
-                    return merge(state, {
-                        amountOption: action.value,
-                        amount: action.value !== 'free' ? parseInt(action.value, 10) : state.amount,
-                    })
-                }
-                case 'SET_AMOUNT': {
-                    const number = Number(action.text)
-                    if (action.text.length > MAX_AMOUNT_LENGTH || Number.isNaN(number)) {
-                        return state
-                    }
-                    else {
-                        return merge(state, {amount: Math.abs(Math.round(number))})
-                    }
-                }
-                default: return state
-            }
-        }
+    const reducer = (state = initialState, action) => {
+        switch (action.type) {
+            case 'SET_PROVIDER': {
+                const {provider} = action
+                const {amountOption} = state
+                const currency = provider === ProvideType.YANDEX_MONEY ? CurrencyType.RUR : state.currency
 
-        const store = createStore(donationFormReducer)
-        const renderer = () => {
-            const {paymentType, amountOption, amount} = store.getState()
-
-            find(form, '[data-role=payment-options] .section-donate-form_option').forEach((option) => {
-                if (option.getAttribute('data-value') === paymentType) {
-                    option.classList.add('section-donate-form_option--active')
+                let amount = null
+                if (amountOption === AmountOptionType.OPTION_SUM_1) {
+                    amount = currencyOptionsToAmount[currency][amountOption]
+                }
+                else if (amountOption === AmountOptionType.OPTION_SUM_2) {
+                    amount = currencyOptionsToAmount[currency][amountOption]
+                }
+                else if (amountOption === AmountOptionType.OPTION_SUM_3) {
+                    amount = currencyOptionsToAmount[currency][amountOption]
                 }
                 else {
-                    option.classList.remove('section-donate-form_option--active')
+                    amount = state.amount
                 }
-            })
 
-            find(form, '[data-role=amount-options]  .section-donate-form_option').forEach((option) => {
-                if (option.getAttribute('data-value') === amountOption) {
-                    option.classList.add('section-donate-form_option--active')
+                return {...state,
+                    provider,
+                    currency,
+                    amount,
+                }
+            }
+            case 'SET_CURRENCY': {
+                const {provider} = state
+                if (provider === ProvideType.PAYPAL) {
+                    const {currency} = action
+                    const {amountOption} = state
+                    const amount = amountOption === AmountOptionType.OPTION_OTHER
+                        ? state.amount
+                        : currencyOptionsToAmount[currency][amountOption]
+                    return {...state,
+                        currency,
+                        amount,
+                    }
+                }
+                return state
+            }
+            case 'SET_AMOUNT_OPTION': {
+                const {amountOption} = action
+                const {currency} = state
+                let amount = null
+                if (amountOption === AmountOptionType.OPTION_SUM_1) {
+                    amount = currencyOptionsToAmount[currency][amountOption]
+                }
+                else if (amountOption === AmountOptionType.OPTION_SUM_2) {
+                    amount = currencyOptionsToAmount[currency][amountOption]
+                }
+                else if (amountOption === AmountOptionType.OPTION_SUM_3) {
+                    amount = currencyOptionsToAmount[currency][amountOption]
                 }
                 else {
-                    option.classList.remove('section-donate-form_option--active')
+                    amount = state.amount
                 }
-            })
 
-            if (amountOption !== 'free') {
-                get(form, '.section-donate-form_amount-input').classList.add('hidden')
-                get(form, '.section-donate-form_amount').classList.remove('hidden')
+                return {...state,
+                    amountOption,
+                    amount,
+                }
             }
-            else {
-                get(form, '.section-donate-form_amount-input').classList.remove('hidden')
-                get(form, '.section-donate-form_amount').classList.add('hidden')
+            case 'SET_AMOUNT': {
+                return {...state,
+                    amount: action.amount,
+                }
             }
-            get(form, '.section-donate-form_amount-input input').value = amount
-            get(form, '.section-donate-form_amount').textContent = amount + ' ₽'
-
-            const amountDue = (paymentType === 'PC')
-                ? amount - amount * (PC_A / (1 + PC_A))
-                : amount * (1 - AC_A)
-
-            const fee = amount - amountDue
-
-
-            get(form, '[data-role=fee-info]').textContent = get(form, '[data-role=fee-info-template]')
-                .textContent
-                .replace(/\{amount\}/g, amountDue.toFixed(2))
-                .replace(/\{fee\}/g, fee.toFixed(2))
-
-            get(form, '[data-role=submit]').disabled = amount === 0
-
-            get(form, '[data-role=hidden-sum]').value = amount
-            get(form, '[data-role=hidden-paymentType]').value = paymentType
-
-
-            find('.section-donate-info').forEach((info) => {
-                find(info, '.section-donate-info_block').forEach((div) => {
-                    if (div.getAttribute('date-value') === amountOption) {
-                        div.classList.remove('hidden')
-                    }
-                    else {
-                        div.classList.add('hidden')
-
-                        find(div, '.section-donate-info_desc-container').forEach((container) => {
-                            // Show random description
-                            const descs = find(container, '.section-donate-info_desc')
-                            if (descs.length > 1) {
-                                descs.forEach((desc) => desc.classList.add('hidden'))
-                                descs[Math.floor(Math.random() * descs.length)].classList.remove('hidden')
-                            }
-                        })
-                    }
-                })
-            })
+            default: return state
         }
-        renderer()
-        store.subscribe(renderer)
+    }
 
-        find(form, '[data-role=payment-options] .section-donate-form_option').forEach((option) => {
-            option.addEventListener('click', () => {
-                store.dispatch({type: 'SET_PAYMENT_TYPE', value: option.getAttribute('data-value')})
-            })
-        })
-        find(form, '[data-role=amount-options] .section-donate-form_option').forEach((option) => {
-            option.addEventListener('click', () => {
-                store.dispatch({type: 'SET_AMOUNT_OPTION', value: option.getAttribute('data-value')})
-            })
-        })
-        get(form, '[data-role=amount-input] input').addEventListener('input', (e) => {
-            store.dispatch({type: 'SET_AMOUNT', text: e.target.value})
-        })
-    })
+    const store = createStore(reducer)
+
+    const changeProvider = (provider) => {
+        store.dispatch(setProvider(provider))
+    }
+
+    const changeCurrency = (currency) => {
+        store.dispatch(setCurrency(currency))
+    }
+
+    const changeAmountOption = (amountOption) => {
+        store.dispatch(setAmountOption(amountOption))
+    }
+
+    const changeAmount = (amount) => {
+        store.dispatch(setAmount(amount))
+    }
+
+    const formEl = document.querySelector('#react-main-donation-form')
+    const infoEl = document.querySelector('#react-donate-info')
+
+    const i18n = new I18N()
+
+    const render = () => {
+        const state = store.getState()
+        if (formEl) {
+            ReactDOM.render(
+                h(MainDonationForm, {
+                    i18n,
+                    onChangeProvider: changeProvider,
+                    onChangeCurrency: changeCurrency,
+                    onChangeAmountOption: changeAmountOption,
+                    onChangeAmount: changeAmount,
+                    ...state,
+                }),
+                formEl
+            )
+        }
+        if (infoEl) {
+            ReactDOM.render(
+                h(DonateInfo, {
+                    i18n,
+                    ...state,
+                }),
+                infoEl
+            )
+        }
+    }
+    store.subscribe(render)
+    render()
 })
 
 // Left menu bar
@@ -188,3 +185,4 @@ document.addEventListener('DOMContentLoaded', () => {
         checkSticky()
     })
 })
+

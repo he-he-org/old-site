@@ -35,7 +35,7 @@ WORKDIR /var/www/site
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y apache2 php5 php5-mysql php5-imagick && \
+    apt-get install -y apache2 php5 php5-mysql php5-imagick php5-curl && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server && \
     apt-get install -y git wget curl vim httpie # Usefull apps for development
 
