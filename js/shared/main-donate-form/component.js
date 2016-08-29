@@ -3,7 +3,7 @@ import {h} from 'react-markup'
 import prefixer from 'bem-prefixer'
 
 
-import {ProvideType, CurrencyType, AmountOptionType, currencyOptionsToAmount} from './definitions'
+import {ProvideType, CurrencyType, AmountOptionType, currencyOptionsToAmount} from '../definitions'
 const {YANDEX_MONEY, PAYPAL} = ProvideType
 const {RUR, USD, EUR} = CurrencyType
 const {OPTION_SUM_1, OPTION_SUM_2, OPTION_SUM_3, OPTION_OTHER} = AmountOptionType

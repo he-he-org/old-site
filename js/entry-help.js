@@ -3,10 +3,10 @@ require('is-nan').shim()
 import {createStore} from 'redux'
 import {h} from 'react-markup'
 import ReactDOM from 'react-dom'
-import {setCurrency, setProvider, setAmountOption, setAmount} from './shared/action-creators'
+import {setCurrency, setProvider, setAmountOption, setAmount} from './shared/main-donate-form/action-creators'
 import {detectLanguage} from './shared/utils'
 
-import MainDonationForm from './shared/main-donate-form'
+import MainDonationForm from './shared/main-donate-form/component'
 import DonateInfo from './help/donate/donate-info'
 import I18N from './i18n'
 
