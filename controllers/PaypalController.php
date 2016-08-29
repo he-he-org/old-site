@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 use GuzzleHttp\Psr7;
 
@@ -67,8 +68,8 @@ class PaypalController extends Controller
                              "intent": "sale",
                              "redirect_urls":
                                  {
-                                   "return_url": "http://localhost:3000/paypal/return",
-                                   "cancel_url": "http://localhost:3000/paypal/cancel"
+                                   "return_url": "' . Url::base(true) . Url::toRoute('paypal/return') . '",
+                                   "cancel_url": "' . Url::base(true) . Url::toRoute('/main') . '"
                                  },
                              "payer":
                              {
@@ -81,7 +82,7 @@ class PaypalController extends Controller
                                  "total": "' . $amount . '",
                                  "currency": "' . $currency . '"
                                },
-                               "description": "This is the payment transaction description."
+                               "description": "Donate '. $currency . $amount . ' to Health&Help"
                              }]
                            }'
             ]);
@@ -140,7 +141,7 @@ class PaypalController extends Controller
 
             $state = $json_response->state;
             if ($state === 'approved') {
-                return $this->renderContent("<b>Thank you! You donation successfuly approved!</b>"); //todo: translate
+                return $this->redirect(Url::toRoute('/main'));
             }
             else {
                 return $this->renderContent("<b>Something has gone wrong while executing you payment! Please, try again...</b>"); //todo: translate
@@ -167,15 +168,15 @@ class PaypalController extends Controller
     public function actionCancel()
     {
         $this->layout = 'main';
-        return $this->renderContent("<i>You transation was canceled...</i>");
+        return $this->renderContent(Url::base(true) . Url::toRoute('/main')); //todo: translate
     }
 
 }
 
 $config = parse_ini_file(__DIR__ . '/../env.ini', true);
-PaypalPaymentController::$PAYPAL_CLIENT_ID = @$config['paypal_client_id'] ?: null;
-PaypalPaymentController::$PAYPAL_SECRET = @$config['paypal_secret'] ?: null;
-PaypalPaymentController::$PAYPAL_MODE = @$config['paypal_mode'] ?: "sandbox";
+PaypalController::$PAYPAL_CLIENT_ID = @$config['paypal_client_id'] ?: null;
+PaypalController::$PAYPAL_SECRET = @$config['paypal_secret'] ?: null;
+PaypalController::$PAYPAL_MODE = @$config['paypal_mode'] ?: "sandbox";
 
 
 
