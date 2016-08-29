@@ -1,3 +1,9 @@
+const LanguageType = {
+    EN: 'en-US',
+    RU: 'ru-RU',
+    ES: 'es-ES',
+}
+
 const ProvideType = {
     YANDEX_MONEY: 'YANDEX_MONEY',
     PAYPAL: 'PAYPAL',
@@ -40,6 +46,7 @@ const currencyOptionsToAmount = {
 }
 
 export {
+    LanguageType,
     ProvideType,
     MethodType,
     CurrencyType,

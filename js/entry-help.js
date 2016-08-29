@@ -4,21 +4,31 @@ import {createStore} from 'redux'
 import {h} from 'react-markup'
 import ReactDOM from 'react-dom'
 import {setCurrency, setProvider, setAmountOption, setAmount} from './shared/action-creators'
+import {detectLanguage} from './shared/utils'
 
 import MainDonationForm from './shared/main-donate-form'
 import DonateInfo from './help/donate/donate-info'
 import I18N from './i18n'
 
-import {ProvideType, MethodType, CurrencyType, AmountOptionType, currencyOptionsToAmount} from './shared/definitions'
+import {
+    LanguageType,
+    ProvideType,
+    CurrencyType,
+    AmountOptionType,
+    currencyOptionsToAmount,
+} from './shared/definitions'
 
 // Donation form and donate info
 document.addEventListener('DOMContentLoaded', () => {
+    const language = detectLanguage()
+
+    const defaultProvider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
+    const defaultCurrency = language === LanguageType.RU ? CurrencyType.RUR : CurrencyType.USD
     const initialState = {
-        provider: ProvideType.YANDEX_MONEY,
-        method: MethodType.ACCOUNT,
-        currency: CurrencyType.RUR,
+        provider: defaultProvider,
+        currency: defaultCurrency,
         amountOption: AmountOptionType.OPTION_SUM_2,
-        amount: currencyOptionsToAmount[CurrencyType.RUR][AmountOptionType.OPTION_SUM_2],
+        amount: currencyOptionsToAmount[defaultCurrency][AmountOptionType.OPTION_SUM_2],
     }
 
     const reducer = (state = initialState, action) => {
