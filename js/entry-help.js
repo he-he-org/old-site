@@ -21,6 +21,7 @@ import {
 // Donation form and donate info
 document.addEventListener('DOMContentLoaded', () => {
     const language = detectLanguage()
+    const i18n = new I18N()
 
     const defaultProvider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
     const defaultCurrency = language === LanguageType.RU ? CurrencyType.RUR : CurrencyType.USD
@@ -29,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
         currency: defaultCurrency,
         amountOption: AmountOptionType.OPTION_SUM_2,
         amount: currencyOptionsToAmount[defaultCurrency][AmountOptionType.OPTION_SUM_2],
+        targets: i18n.t('strings', 'help/donate/targets'), // Назначение платежа
+        formComment: i18n.t('strings', 'help/donate/formcomment'), // Название перевода на странице подтверждения
+        shortDesc: i18n.t('strings', 'help/donate/short-dest'), // Название перевода в истории отправителя
     }
 
     const reducer = (state = initialState, action) => {
@@ -124,8 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const formEl = document.querySelector('#react-main-donation-form')
     const infoEl = document.querySelector('#react-donate-info')
-
-    const i18n = new I18N()
 
     const render = () => {
         const state = store.getState()

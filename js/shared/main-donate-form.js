@@ -144,15 +144,18 @@ export default class extends Component {
         const {
             i18n,
             amount,
+            targets,
+            formComment,
+            shortDesc,
             } = this.props
 
         return h(bem('form#form'), {action: YM_URL},
             h('input', {type: 'hidden', name: 'sum', value: amount}),
             h('input', {type: 'hidden', name: 'receiver', value: YM_RECEIVER}),
-            h('input', {type: 'hidden', name: 'formcomment', value: i18n.t('strings', 'help/donate/formcomment')}), // Название перевода на странице подтверждения
-            h('input', {type: 'hidden', name: 'short-dest', value: i18n.t('strings', 'help/donate/short-dest')}), // Название перевода в истории отправителя
+            h('input', {type: 'hidden', name: 'formcomment', value: formComment}),
+            h('input', {type: 'hidden', name: 'short-dest', value: shortDesc}),
             h('input', {type: 'hidden', name: 'quickpay-form', value: YM_QUICKPAY_FORM}),
-            h('input', {type: 'hidden', name: 'targets', value: i18n.t('strings', 'help/donate/targets')}), // Назначение платежа
+            h('input', {type: 'hidden', name: 'targets', value: targets}),
             h('input', {type: 'hidden', name: 'paymentType', value: YM_PAYMENT_TYPE}),
             h(bem('button#submit'),
                 i18n.t('strings', 'help/donate/donate-button-title')
