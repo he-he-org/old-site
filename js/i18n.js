@@ -1,9 +1,26 @@
+import {
+    LanguageType,
+} from './shared/definitions'
+
+
 export default class {
     constructor() {
         if (!('i18n' in window)) {
             throw new Error('I18n isn`t initialized correctly')
         }
         this.data = window.i18n
+    }
+
+    detectLanguage() {
+        if (/^(\/en$)|(\/en\/)/.test(window.location.pathname)) {
+            return LanguageType.EN
+        }
+        else if (/^(\/es$)|(\/es\/)/.test(window.location.pathname)) {
+            return LanguageType.ES
+        }
+        else {
+            return LanguageType.RU
+        }
     }
 
     t(cat, key) {

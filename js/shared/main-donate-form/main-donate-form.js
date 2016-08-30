@@ -7,6 +7,7 @@ import {ProvideType, CurrencyType, AmountOptionType, currencyOptionsToAmount} fr
 const {YANDEX_MONEY, PAYPAL} = ProvideType
 const {RUR, USD, EUR} = CurrencyType
 const {OPTION_SUM_1, OPTION_SUM_2, OPTION_SUM_3, OPTION_OTHER} = AmountOptionType
+import {getCurrencySign} from '../utils'
 
 const YM_URL = 'https://money.yandex.ru/quickpay/confirm.xml'
 const YM_RECEIVER = '410012180500847' //todo: move to config
@@ -18,18 +19,11 @@ const PP_URL = '/paypal'
 const bem = prefixer('main-donate-form')
 
 export default class extends Component {
-    getCurrencySign = (currency) => {
-        if (currency === RUR) return '₽'
-        else if (currency === USD) return '$'
-        else if (currency === EUR) return '€'
-        else throw new Error(`Currency isn't supported: ${currency}`)
-    }
-
     formatMoney = (amount, currency) => {
         const {i18n} = this.props
         return i18n.t('strings', 'help/main-donation-form/money-template')
             .replace(/\{amount\}/g, amount)
-            .replace(/\{currency\}/g, this.getCurrencySign(currency))
+            .replace(/\{currency\}/g, getCurrencySign(currency))
     }
 
     handleChangeAmount = (e) => {
@@ -68,15 +62,15 @@ export default class extends Component {
             return h(bem('div#options'),
                 h(bem('div', 'option', currency === RUR ? ['active'] : []),
                     {onClick: onChangeCurrency.bind(null, RUR)},
-                    this.getCurrencySign(RUR)
+                    getCurrencySign(RUR)
                 ),
                 h(bem('div', 'option', currency === USD ? ['active'] : []),
                     {onClick: onChangeCurrency.bind(null, USD)},
-                    this.getCurrencySign(USD)
+                    getCurrencySign(USD)
                 ),
                 h(bem('div', 'option', currency === EUR ? ['active'] : []),
                     {onClick: onChangeCurrency.bind(null, EUR)},
-                    this.getCurrencySign(EUR)
+                    getCurrencySign(EUR)
                 )
             )
         }
@@ -94,13 +88,13 @@ export default class extends Component {
         return h(bem('div#options'),
             h(bem('div', 'option', amountOption === OPTION_SUM_1 ? ['active'] : []),
                 {onClick: onChangeAmountOption.bind(null, OPTION_SUM_1)},
-                this.formatMoney(currencyOptionsToAmount[currency][OPTION_SUM_1], currency)),
+                currencyOptionsToAmount[currency][OPTION_SUM_1]),
             h(bem('div', 'option', amountOption === OPTION_SUM_2 ? ['active'] : []),
                 {onClick: onChangeAmountOption.bind(null, OPTION_SUM_2)},
-                this.formatMoney(currencyOptionsToAmount[currency][OPTION_SUM_2], currency)),
+                currencyOptionsToAmount[currency][OPTION_SUM_2]),
             h(bem('div', 'option', amountOption === OPTION_SUM_3 ? ['active'] : []),
                 {onClick: onChangeAmountOption.bind(null, OPTION_SUM_3)},
-                this.formatMoney(currencyOptionsToAmount[currency][OPTION_SUM_3], currency)),
+                currencyOptionsToAmount[currency][OPTION_SUM_3]),
             h(bem('div', 'option', amountOption === OPTION_OTHER ? ['active'] : []),
                 {onClick: onChangeAmountOption.bind(null, OPTION_OTHER)},
                 i18n.t('strings', 'help/donate/amount-options/other-amount'))
@@ -123,7 +117,7 @@ export default class extends Component {
                 if (i !== 0) {
                     renderingParts.push(h('input', {value: amount, size: 4, onChange: this.handleChangeAmount}))
                 }
-                renderingParts.push(part.replace('{currency}', this.getCurrencySign(currency)))
+                renderingParts.push(part.replace('{currency}', getCurrencySign(currency)))
             })
 
             return h(bem('div#amount-info'),

@@ -22,7 +22,7 @@ use yii\helpers\Url;
             <!-- Запрос телефона отправителя: <input type="hidden" name="need-phone" value="true" />-->
             <!-- Запрос адреса отправителя: <input type="hidden" name="need-address" value="true" />-->
 
-            <input value="1000 ₽" class="widget-main-donate-form_amount" size="1"/>
+            <input value="" class="widget-main-donate-form_amount" size="1"/>
 
             <button type="submit" class="widget-main-donate-form_donate-button"><?= \Yii::t('strings', 'widgets/shared/main-donate-form/button') ?></button>
         </form>
@@ -45,4 +45,5 @@ use yii\helpers\Url;
             <?= \Yii::t('strings', 'widgets/shared/main-donate-form/powered-by-part2') ?>
         </div>
     </div>
+    <div id="react-tmp-popup-place"></div>
 </div>

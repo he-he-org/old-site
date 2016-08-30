@@ -1,15 +1,9 @@
-import {
-    LanguageType,
-} from './definitions'
+import {CurrencyType} from './definitions'
+const {RUR, USD, EUR} = CurrencyType
 
-export const detectLanguage = () => {
-    if (/^(\/en$)|(\/en\/)/.test(window.location.pathname)) {
-        return LanguageType.EN
-    }
-    else if (/^(\/es$)|(\/es\/)/.test(window.location.pathname)) {
-        return LanguageType.ES
-    }
-    else {
-        return LanguageType.RU
-    }
+export const getCurrencySign = (currency) => {
+    if (currency === RUR) return '₽'
+    else if (currency === USD) return '$'
+    else if (currency === EUR) return '€'
+    else throw new Error(`Currency isn't supported: ${currency}`)
 }

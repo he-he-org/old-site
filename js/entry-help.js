@@ -4,9 +4,9 @@ import {createStore} from 'redux'
 import {h} from 'react-markup'
 import ReactDOM from 'react-dom'
 import {setCurrency, setProvider, setAmountOption, setAmount} from './shared/main-donate-form/action-creators'
-import {detectLanguage} from './shared/utils'
 
-import MainDonationForm from './shared/main-donate-form/component'
+import MainDonationForm from './shared/main-donate-form/main-donate-form'
+import mainDonationFormReducer from './shared/main-donate-form/reducer'
 import DonateInfo from './help/donate/donate-info'
 import I18N from './i18n'
 
@@ -20,8 +20,8 @@ import {
 
 // Donation form and donate info
 document.addEventListener('DOMContentLoaded', () => {
-    const language = detectLanguage()
     const i18n = new I18N()
+    const language = i18n.detectLanguage()
 
     const defaultProvider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
     const defaultCurrency = language === LanguageType.RU ? CurrencyType.RUR : CurrencyType.USD
@@ -35,80 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         shortDesc: i18n.t('strings', 'help/donate/short-dest'), // Название перевода в истории отправителя
     }
 
-    const reducer = (state = initialState, action) => {
-        switch (action.type) {
-            case 'SET_PROVIDER': {
-                const {provider} = action
-                const {amountOption} = state
-                const currency = provider === ProvideType.YANDEX_MONEY ? CurrencyType.RUR : state.currency
-
-                let amount = null
-                if (amountOption === AmountOptionType.OPTION_SUM_1) {
-                    amount = currencyOptionsToAmount[currency][amountOption]
-                }
-                else if (amountOption === AmountOptionType.OPTION_SUM_2) {
-                    amount = currencyOptionsToAmount[currency][amountOption]
-                }
-                else if (amountOption === AmountOptionType.OPTION_SUM_3) {
-                    amount = currencyOptionsToAmount[currency][amountOption]
-                }
-                else {
-                    amount = state.amount
-                }
-
-                return {...state,
-                    provider,
-                    currency,
-                    amount,
-                }
-            }
-            case 'SET_CURRENCY': {
-                const {provider} = state
-                if (provider === ProvideType.PAYPAL) {
-                    const {currency} = action
-                    const {amountOption} = state
-                    const amount = amountOption === AmountOptionType.OPTION_OTHER
-                        ? state.amount
-                        : currencyOptionsToAmount[currency][amountOption]
-                    return {...state,
-                        currency,
-                        amount,
-                    }
-                }
-                return state
-            }
-            case 'SET_AMOUNT_OPTION': {
-                const {amountOption} = action
-                const {currency} = state
-                let amount = null
-                if (amountOption === AmountOptionType.OPTION_SUM_1) {
-                    amount = currencyOptionsToAmount[currency][amountOption]
-                }
-                else if (amountOption === AmountOptionType.OPTION_SUM_2) {
-                    amount = currencyOptionsToAmount[currency][amountOption]
-                }
-                else if (amountOption === AmountOptionType.OPTION_SUM_3) {
-                    amount = currencyOptionsToAmount[currency][amountOption]
-                }
-                else {
-                    amount = state.amount
-                }
-
-                return {...state,
-                    amountOption,
-                    amount,
-                }
-            }
-            case 'SET_AMOUNT': {
-                return {...state,
-                    amount: action.amount,
-                }
-            }
-            default: return state
-        }
-    }
-
-    const store = createStore(reducer)
+    const store = createStore(mainDonationFormReducer, initialState);
 
     const changeProvider = (provider) => {
         store.dispatch(setProvider(provider))
