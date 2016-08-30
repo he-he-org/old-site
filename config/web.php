@@ -57,7 +57,7 @@ $config = [
                 ],
                 'paypal' => 'paypal/main',
                 'paypal/<action>' => 'paypal/<action>',
-                'translations/<resource>' => 'translations/main',
+                'translations' => 'translations/main',
                 'admin' => 'admin/main',
                 'admin/<section:.*>' => 'admin/<section>',
                 '<page>/<section:.*>' => 'site/<page>',

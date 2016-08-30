@@ -20,8 +20,38 @@ import {
 import {setCurrency, setProvider, setAmountOption, setAmount} from './shared/main-donate-form/action-creators'
 import {getCurrencySign} from './shared/utils'
 
-document.addEventListener('DOMContentLoaded', () => {
-    const i18n = new I18N()
+new Promise((resolve) => {
+    document.addEventListener('DOMContentLoaded', resolve)
+}).then(() => {
+    return I18N.create({
+        'strings': [
+            'help/donate/donate-button-title',
+            'help/donate/provider-options/ym',
+            'help/donate/amount-options/other-amount',
+            'help/main-donation-form/money-template',
+            'help/donate/info/for-us/title',
+            'help/donate/info/for-them/title',
+            'help/donate/info/300/for-us/options/1',
+            'help/donate/info/300/for-us/options/2',
+            'help/donate/info/300/for-us/options/3',
+            'help/donate/info/300/for-them/options/1',
+            'help/donate/info/500/for-us/options/1',
+            'help/donate/info/500/for-us/options/2',
+            'help/donate/info/500/for-us/options/3',
+            'help/donate/info/500/for-them/options/1',
+            'help/donate/info/1000/for-us/options/1',
+            'help/donate/info/1000/for-us/options/2',
+            'help/donate/info/1000/for-them/options/1',
+            'help/donate/info/1000/for-them/options/2',
+            'help/donate/info/1000/for-them/options/3',
+            'help/donate/formcomment',
+            'help/donate/short-dest',
+            'help/donate/targets',
+        ],
+        'texts': [],
+    })
+}).then((i18n) => {
+
     const language = i18n.detectLanguage()
     const currency = language === LanguageType.RU ? CurrencyType.RUR : CurrencyType.USD
     const provider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
@@ -237,4 +267,6 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < members.length; ++i) {
         teamRow.appendChild(members[Math.floor(Math.random() * members.length)])
     }
+}).catch((e) => {
+    console.error(e)
 })

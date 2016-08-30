@@ -3,12 +3,29 @@ import {
 } from './shared/definitions'
 
 
-export default class {
-    constructor() {
-        if (!('i18n' in window)) {
-            throw new Error('I18n isn`t initialized correctly')
-        }
-        this.data = window.i18n
+const I18N = class {
+    constructor(data) {
+        this.data = data
+    }
+
+    static create(params = {}) {
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest()
+            xhr.addEventListener('load', () => {
+                if (xhr.status === 200) {
+                    resolve(new I18N(JSON.parse(xhr.responseText)))
+                }
+                else {
+                    reject(xhr.responseText)
+                }
+            })
+            xhr.addEventListener('error', () => {
+                reject(xhr.responseText)
+            })
+            xhr.open('POST', '/translations')
+            xhr.setRequestHeader('Content-type', 'application/json')
+            xhr.send(JSON.stringify(params))
+        })
     }
 
     detectLanguage() {
@@ -40,5 +57,6 @@ export default class {
         }
         return def
     }
-}
+};
+export default I18N
 
