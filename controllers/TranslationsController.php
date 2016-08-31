@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\LangRequest;
 use Yii;
 use yii\web\Controller;
 use GuzzleHttp\Psr7;
@@ -18,17 +19,21 @@ class TranslationsController extends Controller
     {
         $this->layout = 'empty';
 
-        $resource = json_decode(Yii::$app->request->getRawBody());
+        $params = json_decode(Yii::$app->request->getRawBody());
 
         //todo: check resource format
 
+        if (in_array($params->language, array_values(Yii::$app->request->languages))) {
+            Yii::$app->language = $params->language;
+        }
+
         $strings = [];
-        foreach($resource->strings as $key) {
+        foreach($params->strings as $key) {
             $strings[$key] =  \Yii::t('strings', $key);
         }
 
         $texts = [];
-        foreach($resource->texts as $key) {
+        foreach($params->texts as $key) {
             $texts[$key] =  \Yii::t('texts', $key);
         }
 

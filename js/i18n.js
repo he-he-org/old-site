@@ -9,6 +9,11 @@ const I18N = class {
     }
 
     static create(params = {}) {
+        const extParams = {
+            ...params,
+            language: I18N.detectLanguage(),
+        }
+
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest()
             xhr.addEventListener('load', () => {
@@ -24,11 +29,11 @@ const I18N = class {
             })
             xhr.open('POST', '/translations')
             xhr.setRequestHeader('Content-type', 'application/json')
-            xhr.send(JSON.stringify(params))
+            xhr.send(JSON.stringify(extParams))
         })
     }
 
-    detectLanguage() {
+    static detectLanguage() {
         if (/^(\/en$)|(\/en\/)/.test(window.location.pathname)) {
             return LanguageType.EN
         }
@@ -38,6 +43,10 @@ const I18N = class {
         else {
             return LanguageType.RU
         }
+    }
+
+    detectLanguage() {
+        return I18N.detectLanguage()
     }
 
     t(cat, key) {

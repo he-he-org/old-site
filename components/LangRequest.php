@@ -6,7 +6,7 @@ use Yii;
 
 class LangRequest extends Request
 {
-    private $languages = [
+    public $languages = [
         'en' => 'en-US',
         'ru' => 'ru-RU',
         'es' => 'es-ES',

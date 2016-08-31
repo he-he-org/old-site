@@ -46,7 +46,7 @@ use yii\helpers\Url;
             <!-- Запрос телефона отправителя: <input type="hidden" name="need-phone" value="true" />-->
             <!-- Запрос адреса отправителя: <input type="hidden" name="need-address" value="true" />-->
 
-            <input value="" class="special-project_donate-amount"/>
+            <input value="..." class="special-project_donate-amount"/>
 
             <button class="special-project_donate-button"><?= \Yii::t('strings', 'main/special-project/donate-button-title') ?></button>
         </form>
