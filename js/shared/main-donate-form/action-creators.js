@@ -17,3 +17,18 @@ export const setAmount = (amount) => ({
     type: 'SET_AMOUNT',
     amount,
 })
+
+export const setTargets = (targets) => ({
+    type: 'SET_TARGETS',
+    targets,
+})
+
+export const setFormComment = (formComment) => ({
+    type: 'SET_FORM_COMMENT',
+    formComment,
+})
+
+export const setShortDesc = (shortDesc) => ({
+    type: 'SET_SHORT_DESC',
+    shortDesc,
+})

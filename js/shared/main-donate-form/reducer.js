@@ -98,6 +98,26 @@ const reducer = (state = initialState, action) => {
                 amount,
             }
         }
+
+        case 'SET_TARGETS': {
+            const {targets} = action
+            return {...state,
+                targets,
+            }
+        }
+        case 'SET_FORM_COMMENT': {
+            const {formComment} = action
+            return {...state,
+                formComment,
+            }
+        }
+        case 'SET_SHORT_DESC': {
+            const {shortdesc} = action
+            return {...state,
+                shortdesc,
+            }
+        }
+
         default: return state
     }
 }

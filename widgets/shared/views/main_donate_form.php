@@ -45,5 +45,4 @@ use yii\helpers\Url;
             <?= \Yii::t('strings', 'widgets/shared/main-donate-form/powered-by-part2') ?>
         </div>
     </div>
-    <div id="react-tmp-popup-place"></div>
 </div>

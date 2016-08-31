@@ -11,6 +11,8 @@ $this->title = 'Health & Help';
 MainAsset::register($this);
 
 ?>
+<div id="react-tmp-popup-place"></div>
+
 <div class="row intro-row">
     <div class="row_block-6 intro">
         <?= \Yii::t('texts', 'main/intro') ?>
