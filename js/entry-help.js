@@ -116,7 +116,6 @@ new Promise((resolve) => {
     render()
 
     packages.run(i18n)
-
 }).catch((e) => {
     console.error(e)
 })

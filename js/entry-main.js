@@ -73,7 +73,6 @@ new Promise((resolve) => {
         'texts': [],
     })
 }).then((i18n) => {
-
     const language = i18n.detectLanguage()
     const currency = language === LanguageType.RU ? CurrencyType.RUR : CurrencyType.USD
     const provider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
@@ -128,9 +127,9 @@ new Promise((resolve) => {
         const {modal, mainDonationForm} = modalStore.getState()
         ReactDOM.render(
             h(DonateModal, {
-                    ...modal,
-                    onClose: closeModal,
-                },
+                ...modal,
+                onClose: closeModal,
+            },
                 h(MainDonationForm, {
                     i18n,
                     onChangeProvider: changeProvider,
@@ -172,16 +171,10 @@ new Promise((resolve) => {
         }
     }
 
-
-
-
-
-
     /*
         Common donation logic
      */
     Array.prototype.slice.apply(document.querySelectorAll('.widget-main-donate-form')).forEach((formDiv) => {
-
         const form = formDiv.querySelector('.widget-main-donate-form_form')
 
         const tips = formDiv.querySelector('.widget-main-donate-form_tips')
@@ -226,7 +219,6 @@ new Promise((resolve) => {
                 tips.classList.remove('hidden')
             }
             sumInput.value = value
-
         }
         localStore.subscribe(render)
         render()
@@ -304,7 +296,6 @@ new Promise((resolve) => {
             })
         })
     })
-
 }).catch((e) => {
     console.error(e)
 })

@@ -17,7 +17,8 @@ const I18N = class {
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest()
             xhr.addEventListener('load', () => {
-                if (xhr.status === 200) {
+                const ST_OK = 200
+                if (xhr.status === ST_OK) {
                     resolve(new I18N(JSON.parse(xhr.responseText)))
                 }
                 else {
@@ -66,6 +67,6 @@ const I18N = class {
         }
         return def
     }
-};
+}
 export default I18N
 

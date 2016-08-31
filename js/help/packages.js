@@ -1,13 +1,8 @@
-
-
-
 require('is-nan').shim()
 
 import ReactDOM from 'react-dom'
 import {h} from 'react-markup'
 import {createStore, combineReducers} from 'redux'
-import {bindEvents} from '../redux-dom-binding'
-import {merge} from 'functional-utils'
 
 import MainDonationForm from '../shared/main-donate-form/main-donate-form'
 import mainDonationFormReducer from '../shared/main-donate-form/reducer'
@@ -28,7 +23,6 @@ import {
     setFormComment,
     setShortDesc,
 } from '../shared/main-donate-form/action-creators'
-import {getCurrencySign} from '../shared/utils'
 
 export const run = (i18n) => {
     const language = i18n.detectLanguage()
@@ -84,9 +78,9 @@ export const run = (i18n) => {
         const {modal, mainDonationForm} = modalStore.getState()
         ReactDOM.render(
             h(DonateModal, {
-                    ...modal,
-                    onClose: closeModal,
-                },
+                ...modal,
+                onClose: closeModal,
+            },
                 h(MainDonationForm, {
                     i18n,
                     onChangeProvider: changeProvider,
@@ -106,6 +100,7 @@ export const run = (i18n) => {
         Packages logic
      */
     Array.prototype.slice.apply(document.querySelectorAll('.packages .package')).forEach((form) => {
+        /* eslint-disable */
         // todo: REWRITE! REALLY BAD CODE!
         if (language !== LanguageType.RU) {
             const sum = form.querySelector('input[name=sum]')
