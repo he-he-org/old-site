@@ -28,6 +28,17 @@ import {
 } from './shared/main-donate-form/action-creators'
 import {getCurrencySign} from './shared/utils'
 
+/*
+ Shuffle team members
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    const teamRow = document.querySelector('.team-row')
+    const members = teamRow.querySelectorAll('.team-member')
+    for (let i = 0; i < members.length; ++i) {
+        teamRow.appendChild(members[Math.floor(Math.random() * members.length)])
+    }
+})
+
 new Promise((resolve) => {
     document.addEventListener('DOMContentLoaded', resolve)
 }).then(() => {
@@ -129,7 +140,7 @@ new Promise((resolve) => {
                     ...mainDonationForm,
                 })
             ),
-            document.querySelector('#react-tmp-popup-place')
+            document.querySelector('#react-popup-entry')
         )
     }
     modalStore.subscribe(modalRender)
@@ -294,14 +305,6 @@ new Promise((resolve) => {
         })
     })
 
-    /*
-       Shuffle team members
-     */
-    const teamRow = document.querySelector('.team-row')
-    const members = teamRow.querySelectorAll('.team-member')
-    for (let i = 0; i < members.length; ++i) {
-        teamRow.appendChild(members[Math.floor(Math.random() * members.length)])
-    }
 }).catch((e) => {
     console.error(e)
 })

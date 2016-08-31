@@ -13,8 +13,6 @@ $this->title = 'Health & Help - ' . \Yii::t('strings', 'main/team-title');
 TeamAsset::register($this);
 
 ?>
-<div id="react-tmp-popup-place"></div>
-
 <div class="row intro-row">
     <div class="row_block-6 intro">
         <h1><?= \Yii::t('strings', 'team/title') ?></h1>

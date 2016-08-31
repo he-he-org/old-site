@@ -22,7 +22,7 @@ use app\widgets\help\PreparedPackage;
         ]]) ?>
     </div>
 
-        
+
     <div class="row_block-9">
 
             <span  id="medical-supplies"/>

@@ -31,6 +31,7 @@ AppAsset::register($this);
 </head>
 <body>
     <?php $this->beginBody() ?>
+    <div id="react-popup-entry" ></div>
 
     <main>
         <div class="layout-container">

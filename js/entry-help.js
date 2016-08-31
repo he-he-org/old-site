@@ -18,6 +18,8 @@ import {
     currencyOptionsToAmount,
 } from './shared/definitions'
 
+import * as packages from './help/packages'
+
 // Donation form and donate info
 new Promise((resolve) => {
     document.addEventListener('DOMContentLoaded', resolve)
@@ -64,7 +66,7 @@ new Promise((resolve) => {
         shortDesc: i18n.t('strings', 'help/donate/short-dest'), // Название перевода в истории отправителя
     }
 
-    const store = createStore(mainDonationFormReducer, initialState);
+    const store = createStore(mainDonationFormReducer, initialState)
 
     const changeProvider = (provider) => {
         store.dispatch(setProvider(provider))
@@ -112,6 +114,9 @@ new Promise((resolve) => {
     }
     store.subscribe(render)
     render()
+
+    packages.run(i18n)
+
 }).catch((e) => {
     console.error(e)
 })

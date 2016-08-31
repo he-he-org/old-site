@@ -128,7 +128,7 @@ new Promise((resolve) => {
                     ...mainDonationForm,
                 })
             ),
-            document.querySelector('#react-tmp-popup-place')
+            document.querySelector('#react-popup-entry')
         )
     }
     modalStore.subscribe(modalRender)
@@ -235,14 +235,6 @@ new Promise((resolve) => {
         })
     })
 
-    /*
-     Shuffle team members
-     */
-    const teamRow = document.querySelector('.team-row')
-    const members = teamRow.querySelectorAll('.team-member')
-    for (let i = 0; i < members.length; ++i) {
-        teamRow.appendChild(members[Math.floor(Math.random() * members.length)])
-    }
 }).catch((e) => {
     console.error(e)
 })
