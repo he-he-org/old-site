@@ -1,4 +1,5 @@
 require('is-nan').shim()
+import Promise from 'promise-polyfill'
 
 import {createStore} from 'redux'
 import {h} from 'react-markup'

@@ -1,4 +1,5 @@
 require('is-nan').shim()
+import Promise from 'promise-polyfill'
 
 import ReactDOM from 'react-dom'
 import {h} from 'react-markup'

@@ -9,6 +9,7 @@
     "bem-prefixer": "^0.3.0",
     "functional-utils": "0.0.4",
     "is-nan": "^1.2.1",
+    "promise-polyfill": "^6.0.2",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-input-autosize": "^1.0.0",
