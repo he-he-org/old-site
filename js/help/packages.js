@@ -26,7 +26,7 @@ import {
 
 export const run = (i18n) => {
     const language = i18n.detectLanguage()
-    const currency = language === LanguageType.RU ? CurrencyType.RUR : CurrencyType.USD
+    const currency = language === LanguageType.RU ? CurrencyType.RUB : CurrencyType.USD
     const provider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
 
     const mainDonateFormInitialState = {

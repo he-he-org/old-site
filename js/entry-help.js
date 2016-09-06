@@ -56,7 +56,7 @@ new Promise((resolve) => {
     const language = i18n.detectLanguage()
 
     const defaultProvider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
-    const defaultCurrency = language === LanguageType.RU ? CurrencyType.RUR : CurrencyType.USD
+    const defaultCurrency = language === LanguageType.RU ? CurrencyType.RUB : CurrencyType.USD
     const initialState = {
         provider: defaultProvider,
         currency: defaultCurrency,

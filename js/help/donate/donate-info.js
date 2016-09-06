@@ -2,7 +2,7 @@ import {Component} from 'react'
 import {h} from 'react-markup'
 
 import {CurrencyType, AmountOptionType} from '../../shared/definitions'
-const {RUR, USD, EUR} = CurrencyType
+const {RUB, USD, EUR} = CurrencyType
 const {OPTION_OTHER} = AmountOptionType
 import prefixer from 'bem-prefixer'
 
@@ -49,7 +49,7 @@ class DonateInfo extends Component {
 
     //todo: copied from main-donation-form, generalize
     getCurrencySign = (currency) => {
-        if (currency === RUR) return '₽'
+        if (currency === RUB) return '₽'
         else if (currency === USD) return '$'
         else if (currency === EUR) return '€'
         else throw new Error(`Currency isn't supported: ${currency}`)

@@ -3,9 +3,9 @@ import {ProvideType, CurrencyType, AmountOptionType, currencyOptionsToAmount} fr
 
 const initialState = {
     provider: ProvideType.YANDEX_MONEY,
-    currency: CurrencyType.RUR,
+    currency: CurrencyType.RUB,
     amountOption: AmountOptionType.OPTION_SUM_2,
-    amount: currencyOptionsToAmount[CurrencyType.RUR][AmountOptionType.OPTION_SUM_2],
+    amount: currencyOptionsToAmount[CurrencyType.RUB][AmountOptionType.OPTION_SUM_2],
     targets: '', // Назначение платежа
     formComment: '', // Название перевода на странице подтверждения
     shortDesc: '', // Название перевода в истории отправителя
@@ -17,7 +17,7 @@ const reducer = (state = initialState, action) => {
         case 'SET_PROVIDER': {
             const {provider} = action
             const {amountOption} = state
-            const currency = provider === ProvideType.YANDEX_MONEY ? CurrencyType.RUR : state.currency
+            const currency = provider === ProvideType.YANDEX_MONEY ? CurrencyType.RUB : state.currency
 
             let amount = null
             if (amountOption === AmountOptionType.OPTION_SUM_1) {

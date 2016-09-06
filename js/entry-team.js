@@ -64,7 +64,7 @@ new Promise((resolve) => {
     })
 }).then((i18n) => {
     const language = i18n.detectLanguage()
-    const currency = language === LanguageType.RU ? CurrencyType.RUR : CurrencyType.USD
+    const currency = language === LanguageType.RU ? CurrencyType.RUB : CurrencyType.USD
     const provider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
 
 
@@ -190,7 +190,7 @@ new Promise((resolve) => {
 
             // Update view
             if (!focused) {
-                if (currency === CurrencyType.RUR) {
+                if (currency === CurrencyType.RUB) {
                     input.value = value + '\u00a0' + getCurrencySign(currency)
                 }
                 else {
@@ -202,7 +202,7 @@ new Promise((resolve) => {
             }
 
             button.disabled = !(value > 0)
-            if (currency === CurrencyType.RUR) {
+            if (currency === CurrencyType.RUB) {
                 tips.innerText = tipsTempalte
                     .replace('{amount}', amountDue.toFixed(2))
                     .replace('{fee}', fee.toFixed(2))

@@ -15,7 +15,7 @@ const MethodType = {
 }
 
 const CurrencyType = {
-    RUR: 'RUR',
+    RUB: 'RUB',
     USD: 'USD',
     EUR: 'EUR',
 }
@@ -28,7 +28,7 @@ const AmountOptionType = {
 }
 
 const currencyOptionsToAmount = {
-    [CurrencyType.RUR]: {
+    [CurrencyType.RUB]: {
         [AmountOptionType.OPTION_SUM_1]: 300,
         [AmountOptionType.OPTION_SUM_2]: 500,
         [AmountOptionType.OPTION_SUM_3]: 1000,

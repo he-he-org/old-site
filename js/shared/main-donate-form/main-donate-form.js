@@ -5,7 +5,7 @@ import prefixer from 'bem-prefixer'
 
 import {ProvideType, CurrencyType, AmountOptionType, currencyOptionsToAmount} from '../definitions'
 const {YANDEX_MONEY, PAYPAL} = ProvideType
-const {RUR, USD, EUR} = CurrencyType
+const {RUB, USD, EUR} = CurrencyType
 const {OPTION_SUM_1, OPTION_SUM_2, OPTION_SUM_3, OPTION_OTHER} = AmountOptionType
 import {getCurrencySign} from '../utils'
 
@@ -60,9 +60,9 @@ export default class extends Component {
 
         if (provider === PAYPAL) {
             return h(bem('div#options'),
-                h(bem('div', 'option', currency === RUR ? ['active'] : []),
-                    {onClick: onChangeCurrency.bind(null, RUR)},
-                    getCurrencySign(RUR)
+                h(bem('div', 'option', currency === RUB ? ['active'] : []),
+                    {onClick: onChangeCurrency.bind(null, RUB)},
+                    getCurrencySign(RUB)
                 ),
                 h(bem('div', 'option', currency === USD ? ['active'] : []),
                     {onClick: onChangeCurrency.bind(null, USD)},
@@ -165,7 +165,7 @@ export default class extends Component {
             } = this.props
 
         let paypalCurrency = currency
-        if (currency === RUR) {
+        if (currency === RUB) {
             paypalCurrency = 'RUB'
         }
         else if (currency === USD) {

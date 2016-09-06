@@ -90,7 +90,7 @@ $config = [
             ],
             'languageSettings' => [
                 'ru-RU' => [
-                    'defaultCurrency' => 'RUR',
+                    'defaultCurrency' => 'RUB',
                     'currencyTemplate' => '{amount} {currency}',
                 ],
                 'en-US' => [
@@ -103,7 +103,7 @@ $config = [
                 ],
             ],
             'currencySettings' => [
-                'RUR' => [
+                'RUB' => [
                     'symbol' => '₽',
                     'donationOption1' => 300,
                     'donationOption2' => 500,
