@@ -75,10 +75,10 @@ $config = [
                 'yii\bootstrap\BootstrapAsset' => [
                     'css' => [],
                 ],
-
             ],
         ],
         'i18n' => [
+            'class' => 'app\components\I18N',
             'translations' => [
                 'strings*' => [
                     'class' => 'app\components\MysqlMessageSource',
@@ -88,9 +88,41 @@ $config = [
                     'rootScope' => 'texts'
                 ],
             ],
+            'languageParams' => [
+                'ru-RU' => [
+                    'defaultCurrency' => 'RUR',
+                    'currencyTemplate' => '{amount} {currency}',
+                ],
+                'en-US' => [
+                    'defaultCurrency' => 'USD',
+                    'currencyTemplate' => '{currency}{amount}',
+                ],
+                'es-ES' => [
+                    'defaultCurrency' => 'USD',
+                    'currencyTemplate' => '{currency}{amount}',
+                ],
+            ],
+            'currencyParams' => [
+                'RUR' => [
+                    'donationOption1' => 300,
+                    'donationOption2' => 500,
+                    'donationOption3' => 1000,
+                    'donationOption4' => 2000,
+                ],
+                'USD' => [
+                    'donationOption1' => 10,
+                    'donationOption2' => 20,
+                    'donationOption3' => 50,
+                    'donationOption4' => 100,
+                ],
+                'EUR' => [
+                    'donationOption1' => 10,
+                    'donationOption2' => 20,
+                    'donationOption3' => 50,
+                    'donationOption4' => 100,
+                ],
+            ],
         ],
-
-
     ],
     'params' => $params,
     'sourceLanguage'=>'00',

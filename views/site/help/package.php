@@ -25,7 +25,7 @@ use app\widgets\help\PreparedPackage;
 
     <div class="row_block-9">
 
-            <span  id="medical-supplies"/>
+            <span  id="medical-supplies"></span>
             <?= Yii::t('texts/help', 'help/pharmacy/part1') ?>
 
 
@@ -37,7 +37,7 @@ use app\widgets\help\PreparedPackage;
                         \Yii::t('strings', 'help/kit/minimal/options/2'),
                         \Yii::t('strings', 'help/kit/minimal/options/3'),
                     ][rand (0, 2)],
-                    'cost' => '500',
+                    'cost' => Yii::$app->i18n->getCurrencyParam('donationOption2'),
                 ]) ?>
                 <?= PreparedPackage::widget([
                     'title' => Yii::t('strings', 'help/kits/medium/title'),
@@ -46,7 +46,7 @@ use app\widgets\help\PreparedPackage;
                         \Yii::t('strings', 'help/kits/medium/options/2'),
                         \Yii::t('strings', 'help/kits/medium/options/3'),
                     ][rand (0, 2)],
-                    'cost' => '1000',
+                    'cost' => Yii::$app->i18n->getCurrencyParam('donationOption3'),
                 ]) ?>
                 <?= PreparedPackage::widget([
                     'title' => Yii::t('strings', 'help/kits/maximum/title'),
@@ -55,7 +55,7 @@ use app\widgets\help\PreparedPackage;
                         \Yii::t('strings', 'help/kits/maximum/options/2'),
                         \Yii::t('strings', 'help/kits/maximum/options/3'),
                     ][rand (0, 2)],
-                    'cost' => '2000',
+                    'cost' => Yii::$app->i18n->getCurrencyParam('donationOption4'),
                 ]) ?>
             </div>
 

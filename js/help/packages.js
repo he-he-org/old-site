@@ -100,27 +100,6 @@ export const run = (i18n) => {
         Packages logic
      */
     Array.prototype.slice.apply(document.querySelectorAll('.packages .package')).forEach((form) => {
-        /* eslint-disable */
-        // todo: REWRITE! REALLY BAD CODE!
-        if (language !== LanguageType.RU) {
-            const sum = form.querySelector('input[name=sum]')
-            const button = form.querySelector('button[type=submit]')
-            const oldAmount = parseInt(sum.value, 10)
-            if (oldAmount === 500) {
-                sum.value = 20
-                button.textContent = button.textContent.replace('500 ₽', '$20')
-            }
-            else if (oldAmount === 1000) {
-                sum.value = 50
-                button.textContent = button.textContent.replace('1000 ₽', '$50')
-            }
-            else if (oldAmount === 2000) {
-                sum.value = 100
-                button.textContent = button.textContent.replace('2000 ₽', '$100')
-            }
-        }
-
-
         form.addEventListener('submit', (e) => {
             e.preventDefault()
             modalStore.dispatch(setAmount(provider))
