@@ -7,7 +7,7 @@ use Yii;
 use yii\web\Controller;
 use GuzzleHttp\Psr7;
 
-class TranslationsController extends Controller
+class I18nController extends Controller
 {
     public function beforeAction($action) {
         $this->enableCsrfValidation = false;
@@ -15,7 +15,7 @@ class TranslationsController extends Controller
     }
 
 
-    public function actionMain()
+    public function actionTranslate()
     {
         $this->layout = 'empty';
 
@@ -40,6 +40,26 @@ class TranslationsController extends Controller
         $result = [
             'strings' => $strings,
             'texts' => $texts,
+        ];
+
+        return json_encode($result);
+    }
+
+    public function actionSettings()
+    {
+        $this->layout = 'empty';
+
+        $params = json_decode(Yii::$app->request->getRawBody());
+
+        //todo: check resource format
+
+        if (in_array($params->language, array_values(Yii::$app->request->languages))) {
+            Yii::$app->language = $params->language;
+        }
+
+        $result = [
+            'language' => Yii::$app->i18n->getLanguageSettings(),
+            'currency' => Yii::$app->i18n->getCurrencySettings(),
         ];
 
         return json_encode($result);

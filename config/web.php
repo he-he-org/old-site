@@ -57,7 +57,7 @@ $config = [
                 ],
                 'paypal' => 'paypal/main',
                 'paypal/<action>' => 'paypal/<action>',
-                'translations' => 'translations/main',
+                'i18n/<action>' => 'i18n/<action>',
                 'admin' => 'admin/main',
                 'admin/<section:.*>' => 'admin/<section>',
                 '<page>/<section:.*>' => 'site/<page>',
@@ -88,7 +88,7 @@ $config = [
                     'rootScope' => 'texts'
                 ],
             ],
-            'languageParams' => [
+            'languageSettings' => [
                 'ru-RU' => [
                     'defaultCurrency' => 'RUR',
                     'currencyTemplate' => '{amount} {currency}',
@@ -102,20 +102,23 @@ $config = [
                     'currencyTemplate' => '{currency}{amount}',
                 ],
             ],
-            'currencyParams' => [
+            'currencySettings' => [
                 'RUR' => [
+                    'symbol' => '₽',
                     'donationOption1' => 300,
                     'donationOption2' => 500,
                     'donationOption3' => 1000,
                     'donationOption4' => 2000,
                 ],
                 'USD' => [
+                    'symbol' => '$',
                     'donationOption1' => 10,
                     'donationOption2' => 20,
                     'donationOption3' => 50,
                     'donationOption4' => 100,
                 ],
                 'EUR' => [
+                    'symbol' => '€',
                     'donationOption1' => 10,
                     'donationOption2' => 20,
                     'donationOption3' => 50,

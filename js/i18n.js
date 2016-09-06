@@ -5,22 +5,22 @@ import {
 
 
 const I18N = class {
-    constructor(data) {
+    constructor(data, settings = {}) {
         this.data = data
+        this.settings = settings
     }
 
     static create(params = {}) {
         const extParams = {
-            ...params,
             language: I18N.detectLanguage(),
         }
 
-        return new Promise((resolve, reject) => {
+        const settingsP = new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest()
             xhr.addEventListener('load', () => {
                 const ST_OK = 200
                 if (xhr.status === ST_OK) {
-                    resolve(new I18N(JSON.parse(xhr.responseText)))
+                    resolve(JSON.parse(xhr.responseText))
                 }
                 else {
                     reject(xhr.responseText)
@@ -29,10 +29,35 @@ const I18N = class {
             xhr.addEventListener('error', () => {
                 reject(xhr.responseText)
             })
-            xhr.open('POST', '/translations')
+            xhr.open('POST', '/i18n/settings')
             xhr.setRequestHeader('Content-type', 'application/json')
-            xhr.send(JSON.stringify(extParams))
+            xhr.send(JSON.stringify({
+                language: I18N.detectLanguage(),
+            }))
         })
+
+        const translationsP = new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest()
+            xhr.addEventListener('load', () => {
+                const ST_OK = 200
+                if (xhr.status === ST_OK) {
+                    resolve(JSON.parse(xhr.responseText))
+                }
+                else {
+                    reject(xhr.responseText)
+                }
+            })
+            xhr.addEventListener('error', () => {
+                reject(xhr.responseText)
+            })
+            xhr.open('POST', '/i18n/translate')
+            xhr.setRequestHeader('Content-type', 'application/json')
+            xhr.send(JSON.stringify({...params, ...extParams}))
+        })
+
+        return Promise
+            .all([translationsP, settingsP])
+            .then(([translations, settings]) => new I18N(translations, settings))
     }
 
     static detectLanguage() {

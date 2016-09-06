@@ -37,7 +37,7 @@ use app\widgets\help\PreparedPackage;
                         \Yii::t('strings', 'help/kit/minimal/options/2'),
                         \Yii::t('strings', 'help/kit/minimal/options/3'),
                     ][rand (0, 2)],
-                    'cost' => Yii::$app->i18n->getCurrencyParam('donationOption2'),
+                    'cost' => Yii::$app->i18n->getCurrencySetting('donationOption2'),
                 ]) ?>
                 <?= PreparedPackage::widget([
                     'title' => Yii::t('strings', 'help/kits/medium/title'),
@@ -46,7 +46,7 @@ use app\widgets\help\PreparedPackage;
                         \Yii::t('strings', 'help/kits/medium/options/2'),
                         \Yii::t('strings', 'help/kits/medium/options/3'),
                     ][rand (0, 2)],
-                    'cost' => Yii::$app->i18n->getCurrencyParam('donationOption3'),
+                    'cost' => Yii::$app->i18n->getCurrencySetting('donationOption3'),
                 ]) ?>
                 <?= PreparedPackage::widget([
                     'title' => Yii::t('strings', 'help/kits/maximum/title'),
@@ -55,7 +55,7 @@ use app\widgets\help\PreparedPackage;
                         \Yii::t('strings', 'help/kits/maximum/options/2'),
                         \Yii::t('strings', 'help/kits/maximum/options/3'),
                     ][rand (0, 2)],
-                    'cost' => Yii::$app->i18n->getCurrencyParam('donationOption4'),
+                    'cost' => Yii::$app->i18n->getCurrencySetting('donationOption4'),
                 ]) ?>
             </div>
 
