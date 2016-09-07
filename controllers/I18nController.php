@@ -49,17 +49,9 @@ class I18nController extends Controller
     {
         $this->layout = 'empty';
 
-        $params = json_decode(Yii::$app->request->getRawBody());
-
-        //todo: check resource format
-
-        if (in_array($params->language, array_values(Yii::$app->request->languages))) {
-            Yii::$app->language = $params->language;
-        }
-
         $result = [
-            'language' => Yii::$app->i18n->getLanguageSettings(),
-            'currency' => Yii::$app->i18n->getCurrencySettings(),
+            'language' => Yii::$app->i18n->languageSettings,
+            'currency' => Yii::$app->i18n->currencySettings,
         ];
 
         return json_encode($result);

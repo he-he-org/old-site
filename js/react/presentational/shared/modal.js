@@ -2,12 +2,12 @@ import {Component} from 'react'
 import {h} from 'react-markup'
 import prefixer from 'bem-prefixer'
 
-const bem = prefixer('donate-modal')
+const bem = prefixer('modal')
 
-export default class DonateModal extends Component {
+export default class Modal extends Component {
 
-    componentDidMount = () => {
-        window.addEventListener('keydown', (e) => {
+    componentDidMount() {
+        this.listener = window.addEventListener('keydown', (e) => {
             if (this.props.displayed) {
                 const ESCAPE_CODE = 27
                 if (e.keyCode === ESCAPE_CODE) {
@@ -15,6 +15,10 @@ export default class DonateModal extends Component {
                 }
             }
         })
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.listener)
     }
 
     render() {

@@ -3,11 +3,10 @@ import {h} from 'react-markup'
 import prefixer from 'bem-prefixer'
 
 
-import {ProvideType, CurrencyType, AmountOptionType, currencyOptionsToAmount} from '../definitions'
+import {ProvideType, CurrencyType, AmountOptionType} from '../../../shared/definitions'
 const {YANDEX_MONEY, PAYPAL} = ProvideType
 const {RUB, USD, EUR} = CurrencyType
 const {OPTION_SUM_1, OPTION_SUM_2, OPTION_SUM_3, OPTION_OTHER} = AmountOptionType
-import {getCurrencySign} from '../utils'
 
 const YM_URL = 'https://money.yandex.ru/quickpay/confirm.xml'
 const YM_RECEIVER = '410012180500847' //todo: move to config
@@ -23,7 +22,7 @@ export default class extends Component {
         const {i18n} = this.props
         return i18n.t('strings', 'help/main-donation-form/money-template')
             .replace(/\{amount\}/g, amount)
-            .replace(/\{currency\}/g, getCurrencySign(currency))
+            .replace(/\{currency\}/g, i18n.settings.currency[currency].symbol)
     }
 
     handleChangeAmount = (e) => {
@@ -53,6 +52,7 @@ export default class extends Component {
 
     renderCurrencyOptions = () => {
         const {
+            i18n,
             currency,
             provider,
             onChangeCurrency,
@@ -62,15 +62,15 @@ export default class extends Component {
             return h(bem('div#options'),
                 h(bem('div', 'option', currency === RUB ? ['active'] : []),
                     {onClick: onChangeCurrency.bind(null, RUB)},
-                    getCurrencySign(RUB)
+                    i18n.settings.currency[RUB].symbol
                 ),
                 h(bem('div', 'option', currency === USD ? ['active'] : []),
                     {onClick: onChangeCurrency.bind(null, USD)},
-                    getCurrencySign(USD)
+                    i18n.settings.currency[USD].symbol
                 ),
                 h(bem('div', 'option', currency === EUR ? ['active'] : []),
                     {onClick: onChangeCurrency.bind(null, EUR)},
-                    getCurrencySign(EUR)
+                    i18n.settings.currency[EUR].symbol
                 )
             )
         }
@@ -88,13 +88,13 @@ export default class extends Component {
         return h(bem('div#options'),
             h(bem('div', 'option', amountOption === OPTION_SUM_1 ? ['active'] : []),
                 {onClick: onChangeAmountOption.bind(null, OPTION_SUM_1)},
-                currencyOptionsToAmount[currency][OPTION_SUM_1]),
+                i18n.settings.currency[currency].donationOption1),
             h(bem('div', 'option', amountOption === OPTION_SUM_2 ? ['active'] : []),
                 {onClick: onChangeAmountOption.bind(null, OPTION_SUM_2)},
-                currencyOptionsToAmount[currency][OPTION_SUM_2]),
+                i18n.settings.currency[currency].donationOption2),
             h(bem('div', 'option', amountOption === OPTION_SUM_3 ? ['active'] : []),
                 {onClick: onChangeAmountOption.bind(null, OPTION_SUM_3)},
-                currencyOptionsToAmount[currency][OPTION_SUM_3]),
+                i18n.settings.currency[currency].donationOption3),
             h(bem('div', 'option', amountOption === OPTION_OTHER ? ['active'] : []),
                 {onClick: onChangeAmountOption.bind(null, OPTION_OTHER)},
                 i18n.t('strings', 'help/donate/amount-options/other-amount'))
@@ -117,7 +117,7 @@ export default class extends Component {
                 if (i !== 0) {
                     renderingParts.push(h('input', {value: amount, size: 4, onChange: this.handleChangeAmount}))
                 }
-                renderingParts.push(part.replace('{currency}', getCurrencySign(currency)))
+                renderingParts.push(part.replace('{currency}', i18n.settings.currency[currency].symbol))
             })
 
             return h(bem('div#amount-info'),

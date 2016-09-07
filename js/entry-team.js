@@ -3,20 +3,18 @@ import Promise from 'promise-polyfill'
 
 import ReactDOM from 'react-dom'
 import {h} from 'react-markup'
-import {createStore, combineReducers} from 'redux'
+import {createStore} from 'redux'
 import {bindEvents} from './redux-dom-binding'
 import {merge} from 'functional-utils'
+import {Provider, connect} from 'react-redux'
 
 import I18N from './i18n'
-import MainDonationForm from './shared/main-donate-form/main-donate-form'
-import mainDonationFormReducer from './shared/main-donate-form/reducer'
-import DonateModal from './shared/donate-modal'
+import MainDonationForm from './react/presentational/shared/main-donation-form'
+import DonateModal from './react/presentational/shared/modal'
 import {
     LanguageType,
     ProvideType,
     CurrencyType,
-    AmountOptionType,
-    currencyOptionsToAmount,
 } from './shared/definitions'
 import {
     setCurrency,
@@ -26,8 +24,12 @@ import {
     setTargets,
     setFormComment,
     setShortDesc,
-} from './shared/main-donate-form/action-creators'
-import {getCurrencySign} from './shared/utils'
+} from './react/action-creators/main-donation-form'
+import Popup from './react/container/donate-popup/donate-popup'
+import {
+    reducer as donateModalReducer,
+    initialState as donateModalInitialState,
+} from './react/reducers/donate-modal-reducer'
 
 new Promise((resolve) => {
     document.addEventListener('DOMContentLoaded', resolve)
@@ -68,75 +70,51 @@ new Promise((resolve) => {
     const provider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
 
 
-    const mainDonateFormInitialState = {
-        provider,
-        currency,
-        amountOption: AmountOptionType.OPTION_SUM_2,
-        amount: currencyOptionsToAmount[currency][AmountOptionType.OPTION_SUM_2],
-        targets: i18n.t('strings', 'help/donate/targets'), // Назначение платежа
-        formComment: i18n.t('strings', 'help/donate/formcomment'), // Название перевода на странице подтверждения
-        shortDesc: i18n.t('strings', 'help/donate/short-dest'), // Название перевода в истории отправителя
-    }
+    // Init store for popup
+    const popupStore = createStore(donateModalReducer, donateModalInitialState)
+    ReactDOM.render(
+        h(Provider, {store: popupStore},
+            h(Popup(i18n))
+        ),
+        document.querySelector('#react-popup-entry')
+    )
 
-    const modalInitialState = {
-        displayed: false,
-    }
-    const modalReducer = (state = modalInitialState, action) => {
-        switch (action.type) {
-            case 'SET_MODAL_DISPLAYED': {
-                return {
-                    ...state,
-                    displayed: action.displayed,
-                }
-            }
-            default: return state
-        }
-    }
-
-    const modalStore = createStore(combineReducers({
-        mainDonationForm: mainDonationFormReducer,
-        modal: modalReducer,
-    }), {
-        mainDonationForm: mainDonateFormInitialState,
-        modal: modalInitialState,
-    })
-
-    const modalRender = () => {
-        const closeModal = () => {
-            modalStore.dispatch({
-                type: 'SET_MODAL_DISPLAYED',
-                displayed: false,
-            })
-        }
-
-        const changeProvider = (provider) => { modalStore.dispatch(setProvider(provider)) }
-        const changeCurrency = (currency) => { modalStore.dispatch(setCurrency(currency)) }
-        const changeAmountOption = (amountOption) => { modalStore.dispatch(setAmountOption(amountOption)) }
-        const changeAmount = (amount) => { modalStore.dispatch(setAmount(amount)) }
-
-        const {modal, mainDonationForm} = modalStore.getState()
-        ReactDOM.render(
-            h(DonateModal, {
-                ...modal,
-                onClose: closeModal,
-            },
-                h(MainDonationForm, {
-                    i18n,
-                    onChangeProvider: changeProvider,
-                    onChangeCurrency: changeCurrency,
-                    onChangeAmountOption: changeAmountOption,
-                    onChangeAmount: changeAmount,
-                    ...mainDonationForm,
-                })
-            ),
-            document.querySelector('#react-popup-entry')
-        )
-    }
-    modalStore.subscribe(modalRender)
-    modalRender()
+    //const modalRender = () => {
+    //    const closeModal = () => {
+    //        popupStore.dispatch({
+    //            type: 'SET_MODAL_DISPLAYED',
+    //            displayed: false,
+    //        })
+    //    }
+    //
+    //    const changeProvider = (provider) => { popupStore.dispatch(setProvider(provider)) }
+    //    const changeCurrency = (currency) => { popupStore.dispatch(setCurrency(currency)) }
+    //    const changeAmountOption = (amountOption) => { popupStore.dispatch(setAmountOption(amountOption)) }
+    //    const changeAmount = (amount) => { popupStore.dispatch(setAmount(amount)) }
+    //
+    //    const {modal, mainDonationForm} = popupStore.getState()
+    //    ReactDOM.render(
+    //        h(DonateModal, {
+    //            ...modal,
+    //            onClose: closeModal,
+    //        },
+    //            h(MainDonationForm, {
+    //                i18n,
+    //                onChangeProvider: changeProvider,
+    //                onChangeCurrency: changeCurrency,
+    //                onChangeAmountOption: changeAmountOption,
+    //                onChangeAmount: changeAmount,
+    //                ...mainDonationForm,
+    //            })
+    //        ),
+    //        document.querySelector('#react-popup-entry')
+    //    )
+    //}
+    //popupStore.subscribe(modalRender)
+    //modalRender()
 
     const localInitialState = {
-        value: currencyOptionsToAmount[currency][AmountOptionType.OPTION_SUM_3],
+        value: i18n.settings.currency[currency].donationOption3,
         focused: false,
     }
 
@@ -191,10 +169,10 @@ new Promise((resolve) => {
             // Update view
             if (!focused) {
                 if (currency === CurrencyType.RUB) {
-                    input.value = value + '\u00a0' + getCurrencySign(currency)
+                    input.value = value + '\u00a0' + i18n.settings.currency[currency].symbol
                 }
                 else {
-                    input.value = getCurrencySign(currency) + value
+                    input.value = i18n.settings.currency[currency].symbol + value
                 }
             }
             else {
@@ -220,14 +198,14 @@ new Promise((resolve) => {
         form.addEventListener('submit', (e) => {
             e.preventDefault()
             const {value} = localStore.getState()
-            modalStore.dispatch(setProvider(provider))
-            modalStore.dispatch(setCurrency(currency))
-            modalStore.dispatch(setAmount(value))
+            popupStore.dispatch(setProvider(provider))
+            popupStore.dispatch(setCurrency(currency))
+            popupStore.dispatch(setAmount(value))
 
-            modalStore.dispatch(setTargets(i18n.t('strings', 'widgets/shared/main-donate-form/targets')))
-            modalStore.dispatch(setFormComment(i18n.t('strings', 'widgets/shared/main-donate-form/formcomment')))
-            modalStore.dispatch(setShortDesc(i18n.t('strings', 'widgets/shared/main-donate-form/short-dest')))
-            modalStore.dispatch({
+            popupStore.dispatch(setTargets(i18n.t('strings', 'widgets/shared/main-donate-form/targets')))
+            popupStore.dispatch(setFormComment(i18n.t('strings', 'widgets/shared/main-donate-form/formcomment')))
+            popupStore.dispatch(setShortDesc(i18n.t('strings', 'widgets/shared/main-donate-form/short-dest')))
+            popupStore.dispatch({
                 type: 'SET_MODAL_DISPLAYED',
                 displayed: true,
             })

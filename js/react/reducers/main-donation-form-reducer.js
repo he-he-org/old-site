@@ -1,37 +1,43 @@
-import {ProvideType, CurrencyType, AmountOptionType, currencyOptionsToAmount} from '../definitions'
+import {ProvideType, CurrencyType, AmountOptionType} from '../../shared/definitions'
+
+const {
+    OPTION_SUM_1,
+    OPTION_SUM_2,
+    OPTION_SUM_3,
+    OPTION_OTHER,
+    } = AmountOptionType
 
 
-const initialState = {
+export const initialState = {
     provider: ProvideType.YANDEX_MONEY,
     currency: CurrencyType.RUB,
-    amountOption: AmountOptionType.OPTION_SUM_2,
-    amount: currencyOptionsToAmount[CurrencyType.RUB][AmountOptionType.OPTION_SUM_2],
+    amountOption: OPTION_SUM_2,
+    amount: 0,
     targets: '', // Назначение платежа
     formComment: '', // Название перевода на странице подтверждения
     shortDesc: '', // Название перевода в истории отправителя
+    currencySettings: {},
 }
 
+const getCurrencyOptionAmount = (settings, currency, option, current) => {
+    if (option === OPTION_OTHER) {
+        return current
+    }
+    const currencySettings = settings[currency]
+    if (!currencySettings) return current
+    const optionSettings = currencySettings[option]
+    if (!optionSettings) return current
+    return optionSettings
+}
 
 const reducer = (state = initialState, action) => {
+    const {currencySettings} = state
     switch (action.type) {
         case 'SET_PROVIDER': {
             const {provider} = action
             const {amountOption} = state
             const currency = provider === ProvideType.YANDEX_MONEY ? CurrencyType.RUB : state.currency
-
-            let amount = null
-            if (amountOption === AmountOptionType.OPTION_SUM_1) {
-                amount = currencyOptionsToAmount[currency][amountOption]
-            }
-            else if (amountOption === AmountOptionType.OPTION_SUM_2) {
-                amount = currencyOptionsToAmount[currency][amountOption]
-            }
-            else if (amountOption === AmountOptionType.OPTION_SUM_3) {
-                amount = currencyOptionsToAmount[currency][amountOption]
-            }
-            else {
-                amount = state.amount
-            }
+            const amount = getCurrencyOptionAmount(currencySettings, currency, amountOption, state.amount)
 
             return {...state,
                 provider,
@@ -44,9 +50,9 @@ const reducer = (state = initialState, action) => {
             if (provider === ProvideType.PAYPAL) {
                 const {currency} = action
                 const {amountOption} = state
-                const amount = amountOption === AmountOptionType.OPTION_OTHER
+                const amount = amountOption === OPTION_OTHER
                     ? state.amount
-                    : currencyOptionsToAmount[currency][amountOption]
+                    : getCurrencyOptionAmount(currencySettings, currency, amountOption, state.amount)
                 return {...state,
                     currency,
                     amount,
@@ -57,19 +63,7 @@ const reducer = (state = initialState, action) => {
         case 'SET_AMOUNT_OPTION': {
             const {amountOption} = action
             const {currency} = state
-            let amount = null
-            if (amountOption === AmountOptionType.OPTION_SUM_1) {
-                amount = currencyOptionsToAmount[currency][amountOption]
-            }
-            else if (amountOption === AmountOptionType.OPTION_SUM_2) {
-                amount = currencyOptionsToAmount[currency][amountOption]
-            }
-            else if (amountOption === AmountOptionType.OPTION_SUM_3) {
-                amount = currencyOptionsToAmount[currency][amountOption]
-            }
-            else {
-                amount = state.amount
-            }
+            const amount = getCurrencyOptionAmount(state.currencySettings, currency, amountOption, state.amount)
 
             return {...state,
                 amountOption,
@@ -80,17 +74,18 @@ const reducer = (state = initialState, action) => {
             const {amount} = action
             const {currency} = state
             let amountOption = null
-            if (amount === currencyOptionsToAmount[currency][AmountOptionType.OPTION_SUM_1]) {
-                amountOption = AmountOptionType.OPTION_SUM_1
+
+            if (amount === getCurrencyOptionAmount(currencySettings, currency, OPTION_SUM_1, state.amount)) {
+                amountOption = OPTION_SUM_1
             }
-            else if (amount === currencyOptionsToAmount[currency][AmountOptionType.OPTION_SUM_2]) {
-                amountOption = AmountOptionType.OPTION_SUM_2
+            else if (amount === getCurrencyOptionAmount(currencySettings, currency, OPTION_SUM_2, state.amount)) {
+                amountOption = OPTION_SUM_2
             }
-            else if (amount === currencyOptionsToAmount[currency][AmountOptionType.OPTION_SUM_3]) {
-                amountOption = AmountOptionType.OPTION_SUM_3
+            else if (amount === getCurrencyOptionAmount(currencySettings, currency, OPTION_SUM_3, state.amount)) {
+                amountOption = OPTION_SUM_3
             }
             else {
-                amountOption = AmountOptionType.OPTION_OTHER
+                amountOption = OPTION_OTHER
             }
 
             return {...state,

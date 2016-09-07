@@ -4,11 +4,11 @@ import Promise from 'promise-polyfill'
 import {createStore} from 'redux'
 import {h} from 'react-markup'
 import ReactDOM from 'react-dom'
-import {setCurrency, setProvider, setAmountOption, setAmount} from './shared/main-donate-form/action-creators'
 
-import MainDonationForm from './shared/main-donate-form/main-donate-form'
-import mainDonationFormReducer from './shared/main-donate-form/reducer'
-import DonateInfo from './help/donate/donate-info'
+import {setCurrency, setProvider, setAmountOption, setAmount} from './react/action-creators/main-donation-form'
+import MainDonationForm from './react/presentational/shared/main-donation-form'
+import mainDonationFormReducer from './react/reducers/main-donation-form-reducer'
+import DonateInfo from './react/presentational/help/donate/donate-info'
 import I18N from './i18n'
 
 import {
@@ -16,7 +16,6 @@ import {
     ProvideType,
     CurrencyType,
     AmountOptionType,
-    currencyOptionsToAmount,
 } from './shared/definitions'
 
 import * as packages from './help/packages'
@@ -56,15 +55,16 @@ new Promise((resolve) => {
     const language = i18n.detectLanguage()
 
     const defaultProvider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
-    const defaultCurrency = language === LanguageType.RU ? CurrencyType.RUB : CurrencyType.USD
+    const defaultCurrency = CurrencyType[i18n.settings.language[language].defaultCurrency]
     const initialState = {
         provider: defaultProvider,
         currency: defaultCurrency,
         amountOption: AmountOptionType.OPTION_SUM_2,
-        amount: currencyOptionsToAmount[defaultCurrency][AmountOptionType.OPTION_SUM_2],
+        amount: i18n.settings.currency[defaultCurrency].donationOption2,
         targets: i18n.t('strings', 'help/donate/targets'), // Назначение платежа
         formComment: i18n.t('strings', 'help/donate/formcomment'), // Название перевода на странице подтверждения
         shortDesc: i18n.t('strings', 'help/donate/short-dest'), // Название перевода в истории отправителя
+        currencySettings: i18n.settings.currency,
     }
 
     const store = createStore(mainDonationFormReducer, initialState)

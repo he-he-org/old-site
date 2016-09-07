@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import {h} from 'react-markup'
 
-import {CurrencyType, AmountOptionType} from '../../shared/definitions'
+import {CurrencyType, AmountOptionType} from '../../../../shared/definitions'
 const {RUB, USD, EUR} = CurrencyType
 const {OPTION_OTHER} = AmountOptionType
 import prefixer from 'bem-prefixer'
@@ -47,19 +47,12 @@ const randomVariant = (variants) => variants[Math.floor(Math.random() * variants
 
 class DonateInfo extends Component {
 
-    //todo: copied from main-donation-form, generalize
-    getCurrencySign = (currency) => {
-        if (currency === RUB) return '₽'
-        else if (currency === USD) return '$'
-        else if (currency === EUR) return '€'
-        else throw new Error(`Currency isn't supported: ${currency}`)
-    }
-
+    //todo: use i18n
     formatMoney = (amount, currency) => {
         const {i18n} = this.props
         return i18n.t('strings', 'help/main-donation-form/money-template')
             .replace(/\{amount\}/g, amount)
-            .replace(/\{currency\}/g, this.getCurrencySign(currency))
+            .replace(/\{currency\}/g, i18n.settings.currency[currency].symbol)
     }
 
     render() {

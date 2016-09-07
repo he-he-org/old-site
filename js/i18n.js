@@ -31,9 +31,7 @@ const I18N = class {
             })
             xhr.open('POST', '/i18n/settings')
             xhr.setRequestHeader('Content-type', 'application/json')
-            xhr.send(JSON.stringify({
-                language: I18N.detectLanguage(),
-            }))
+            xhr.send('')
         })
 
         const translationsP = new Promise((resolve, reject) => {
@@ -85,13 +83,6 @@ const I18N = class {
             throw new Error(`Wrong key: ${cat}/${key}`)
         }
         return catData[key]
-    }
-
-    param(name, def) {
-        if (this.params[name]) {
-            return this.params[name]
-        }
-        return def
     }
 }
 export default I18N

@@ -1,22 +1,18 @@
 require('is-nan').shim()
 import Promise from 'promise-polyfill'
 
+import {createStore} from 'redux'
 import ReactDOM from 'react-dom'
-import {h} from 'react-markup'
-import {createStore, combineReducers} from 'redux'
 import {bindEvents} from './redux-dom-binding'
 import {merge} from 'functional-utils'
+import {Provider, connect} from 'react-redux'
+import {h} from 'react-markup'
 
 import I18N from './i18n'
-import MainDonationForm from './shared/main-donate-form/main-donate-form'
-import mainDonationFormReducer from './shared/main-donate-form/reducer'
-import DonateModal from './shared/donate-modal'
 import {
     LanguageType,
     ProvideType,
     CurrencyType,
-    AmountOptionType,
-    currencyOptionsToAmount,
 } from './shared/definitions'
 import {
     setCurrency,
@@ -26,8 +22,15 @@ import {
     setTargets,
     setFormComment,
     setShortDesc,
-} from './shared/main-donate-form/action-creators'
-import {getCurrencySign} from './shared/utils'
+} from './react/action-creators/main-donation-form'
+
+import {
+    reducer as donateModalReducer,
+    initialState as donateModalInitialState,
+} from './react/reducers/donate-modal-reducer'
+
+
+import Popup from './react/container/donate-popup/donate-popup'
 
 /*
  Shuffle team members
@@ -75,79 +78,21 @@ new Promise((resolve) => {
     })
 }).then((i18n) => {
     const language = i18n.detectLanguage()
-    const currency = language === LanguageType.RU ? CurrencyType.RUB : CurrencyType.USD
+
+    const currency = CurrencyType[i18n.settings.language[language].defaultCurrency]
     const provider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
 
-
-    const mainDonateFormInitialState = {
-        provider,
-        currency,
-        amountOption: AmountOptionType.OPTION_SUM_2,
-        amount: currencyOptionsToAmount[currency][AmountOptionType.OPTION_SUM_2],
-        targets: i18n.t('strings', 'help/donate/targets'), // Назначение платежа
-        formComment: i18n.t('strings', 'help/donate/formcomment'), // Название перевода на странице подтверждения
-        shortDesc: i18n.t('strings', 'help/donate/short-dest'), // Название перевода в истории отправителя
-    }
-
-    const modalInitialState = {
-        displayed: false,
-    }
-    const modalReducer = (state = modalInitialState, action) => {
-        switch (action.type) {
-            case 'SET_MODAL_DISPLAYED': {
-                return {
-                    ...state,
-                    displayed: action.displayed,
-                }
-            }
-            default: return state
-        }
-    }
-
-    const modalStore = createStore(combineReducers({
-        mainDonationForm: mainDonationFormReducer,
-        modal: modalReducer,
-    }), {
-        mainDonationForm: mainDonateFormInitialState,
-        modal: modalInitialState,
-    })
-
-    const modalRender = () => {
-        const closeModal = () => {
-            modalStore.dispatch({
-                type: 'SET_MODAL_DISPLAYED',
-                displayed: false,
-            })
-        }
-
-        const changeProvider = (provider) => { modalStore.dispatch(setProvider(provider)) }
-        const changeCurrency = (currency) => { modalStore.dispatch(setCurrency(currency)) }
-        const changeAmountOption = (amountOption) => { modalStore.dispatch(setAmountOption(amountOption)) }
-        const changeAmount = (amount) => { modalStore.dispatch(setAmount(amount)) }
-
-        const {modal, mainDonationForm} = modalStore.getState()
-        ReactDOM.render(
-            h(DonateModal, {
-                ...modal,
-                onClose: closeModal,
-            },
-                h(MainDonationForm, {
-                    i18n,
-                    onChangeProvider: changeProvider,
-                    onChangeCurrency: changeCurrency,
-                    onChangeAmountOption: changeAmountOption,
-                    onChangeAmount: changeAmount,
-                    ...mainDonationForm,
-                })
-            ),
-            document.querySelector('#react-popup-entry')
-        )
-    }
-    modalStore.subscribe(modalRender)
-    modalRender()
+    // Init store for popup
+    const popupStore = createStore(donateModalReducer, donateModalInitialState)
+    ReactDOM.render(
+        h(Provider, {store: popupStore},
+            h(Popup(i18n))
+        ),
+        document.querySelector('#react-popup-entry')
+    )
 
     const localInitialState = {
-        value: currencyOptionsToAmount[currency][AmountOptionType.OPTION_SUM_3],
+        value: i18n.settings.currency[currency].donationOption3,
         focused: false,
     }
 
@@ -200,12 +145,13 @@ new Promise((resolve) => {
             const fee = value - amountDue
 
             // Update view
+            //todo: implement formatMoney
             if (!focused) {
                 if (currency === CurrencyType.RUB) {
-                    input.value = value + '\u00a0' + getCurrencySign(currency)
+                    input.value = value + '\u00a0' + i18n.settings.currency[currency].symbol
                 }
                 else {
-                    input.value = getCurrencySign(currency) + value
+                    input.value = i18n.settings.currency[currency].symbol + value
                 }
             }
             else {
@@ -231,14 +177,14 @@ new Promise((resolve) => {
         form.addEventListener('submit', (e) => {
             e.preventDefault()
             const {value} = localStore.getState()
-            modalStore.dispatch(setProvider(provider))
-            modalStore.dispatch(setCurrency(currency))
-            modalStore.dispatch(setAmount(value))
+            popupStore.dispatch(setProvider(provider))
+            popupStore.dispatch(setCurrency(currency))
+            popupStore.dispatch(setAmount(value))
 
-            modalStore.dispatch(setTargets(i18n.t('strings', 'widgets/shared/main-donate-form/targets')))
-            modalStore.dispatch(setFormComment(i18n.t('strings', 'widgets/shared/main-donate-form/formcomment')))
-            modalStore.dispatch(setShortDesc(i18n.t('strings', 'widgets/shared/main-donate-form/short-dest')))
-            modalStore.dispatch({
+            popupStore.dispatch(setTargets(i18n.t('strings', 'widgets/shared/main-donate-form/targets')))
+            popupStore.dispatch(setFormComment(i18n.t('strings', 'widgets/shared/main-donate-form/formcomment')))
+            popupStore.dispatch(setShortDesc(i18n.t('strings', 'widgets/shared/main-donate-form/short-dest')))
+            popupStore.dispatch({
                 type: 'SET_MODAL_DISPLAYED',
                 displayed: true,
             })
@@ -262,10 +208,10 @@ new Promise((resolve) => {
             // Update view
             if (!focused) {
                 if (currency === CurrencyType.RUB) {
-                    input.value = value + '\u00a0' + getCurrencySign(currency)
+                    input.value = value + '\u00a0' + i18n.settings.currency[currency].symbol
                 }
                 else {
-                    input.value = getCurrencySign(currency) + value
+                    input.value = i18n.settings.currency[currency].symbol + value
                 }
             }
             else {
@@ -285,13 +231,13 @@ new Promise((resolve) => {
             e.preventDefault()
 
             const {value} = localStore.getState()
-            modalStore.dispatch(setProvider(provider))
-            modalStore.dispatch(setCurrency(currency))
-            modalStore.dispatch(setAmount(value))
-            modalStore.dispatch(setTargets(form.querySelector('input[name=formcomment]').value))
-            modalStore.dispatch(setFormComment(form.querySelector('input[name=short-dest]').value))
-            modalStore.dispatch(setShortDesc(form.querySelector('input[name=targets]').value))
-            modalStore.dispatch({
+            popupStore.dispatch(setProvider(provider))
+            popupStore.dispatch(setCurrency(currency))
+            popupStore.dispatch(setAmount(value))
+            popupStore.dispatch(setTargets(form.querySelector('input[name=formcomment]').value))
+            popupStore.dispatch(setFormComment(form.querySelector('input[name=short-dest]').value))
+            popupStore.dispatch(setShortDesc(form.querySelector('input[name=targets]').value))
+            popupStore.dispatch({
                 type: 'SET_MODAL_DISPLAYED',
                 displayed: true,
             })
