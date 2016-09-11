@@ -177,6 +177,8 @@ gulp.task("debug:scripts:vendor", function () {
             .on("error", onError)
             .pipe(source("vendor.js"))
             .on("error", onError)
+            .pipe(streamify(envify({NODE_ENV: "development"})))
+            .on("error", onError)
             .pipe(gulp.dest(settings.scripts.dest.dev))
             .on("error", onError)
     }
@@ -216,6 +218,8 @@ gulp.task("debug:scripts", function () {
             return bundler.bundle()
                 .on("error", onError)
                 .pipe(source(entryPoint.to))
+                .on("error", onError)
+                .pipe(streamify(envify({NODE_ENV: "development"})))
                 .on("error", onError)
                 .pipe(gulp.dest(settings.scripts.dest.dev))
                 .on("error", onError)

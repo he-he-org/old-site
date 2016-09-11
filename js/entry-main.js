@@ -1,19 +1,15 @@
 require('is-nan').shim()
 import Promise from 'promise-polyfill'
 
-import {createStore} from 'redux'
 import ReactDOM from 'react-dom'
 import {bindEvents} from './redux-dom-binding'
 import {merge} from 'functional-utils'
 import {Provider} from 'react-redux'
 import {h} from 'react-markup'
 
+import {createStore} from '~/shared/redux-helpers'
 import I18N from './i18n'
-import {
-    LanguageType,
-    ProvideType,
-    CurrencyType,
-} from './shared/definitions'
+import {LanguageType, ProvideType, CurrencyType} from './shared/definitions'
 import {
     setCurrency,
     setProvider,
@@ -29,7 +25,7 @@ import {
 } from './react/reducers/donate-modal-reducer'
 
 
-import Popup from './react/container/donate-popup/donate-popup'
+import Popup from '~/react/container/donate-popup'
 
 /*
  Shuffle team members
@@ -82,7 +78,14 @@ new Promise((resolve) => {
     const provider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
 
     // Init store for popup
-    const popupStore = createStore(donateModalReducer, donateModalInitialState)
+    const initialState = {
+        modal: donateModalInitialState.modal,
+        form: {
+            ...donateModalInitialState.form,
+            currencySettings: i18n.settings.currency,
+        },
+    }
+    const popupStore = createStore(donateModalReducer, initialState)
     ReactDOM.render(
         h(Provider, {store: popupStore},
             h(Popup(i18n))

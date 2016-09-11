@@ -11,7 +11,8 @@ import DataAccess from './data-access'
 
 
 const deepMerge = (obj1, obj2) => {
-    if (typeof obj1 !== 'object' || typeof obj2 !== 'object' || Array.isArray(obj1) || Array.isArray(obj2)) { //todo: es6
+    //todo: es6
+    if (typeof obj1 !== 'object' || typeof obj2 !== 'object' || Array.isArray(obj1) || Array.isArray(obj2)) {
         return obj2
     }
 

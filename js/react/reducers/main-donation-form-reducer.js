@@ -19,25 +19,28 @@ export const initialState = {
     currencySettings: {},
 }
 
-const getCurrencyOptionAmount = (settings, currency, option, current) => {
+const getCurrencyOptionAmount = (state, option) => {
     if (option === OPTION_OTHER) {
-        return current
+        return state.amount
     }
-    const currencySettings = settings[currency]
-    if (!currencySettings) return current
+    const currencySettings = state.currencySettings[state.currency]
+    if (!currencySettings) {
+        return state.amount
+    }
     const optionSettings = currencySettings[option]
-    if (!optionSettings) return current
+    if (!optionSettings) {
+        return state.amount
+    }
     return optionSettings
 }
 
 const reducer = (state = initialState, action) => {
-    const {currencySettings} = state
     switch (action.type) {
         case 'SET_PROVIDER': {
             const {provider} = action
             const {amountOption} = state
             const currency = provider === ProvideType.YANDEX_MONEY ? CurrencyType.RUB : state.currency
-            const amount = getCurrencyOptionAmount(currencySettings, currency, amountOption, state.amount)
+            const amount = getCurrencyOptionAmount(state, amountOption)
 
             return {...state,
                 provider,
@@ -52,7 +55,7 @@ const reducer = (state = initialState, action) => {
                 const {amountOption} = state
                 const amount = amountOption === OPTION_OTHER
                     ? state.amount
-                    : getCurrencyOptionAmount(currencySettings, currency, amountOption, state.amount)
+                    : getCurrencyOptionAmount(state, amountOption)
                 return {...state,
                     currency,
                     amount,
@@ -63,8 +66,7 @@ const reducer = (state = initialState, action) => {
         case 'SET_AMOUNT_OPTION': {
             const {amountOption} = action
             const {currency} = state
-            const amount = getCurrencyOptionAmount(state.currencySettings, currency, amountOption, state.amount)
-
+            const amount = getCurrencyOptionAmount(state, amountOption)
             return {...state,
                 amountOption,
                 amount,
@@ -72,16 +74,15 @@ const reducer = (state = initialState, action) => {
         }
         case 'SET_AMOUNT': {
             const {amount} = action
-            const {currency} = state
             let amountOption = null
 
-            if (amount === getCurrencyOptionAmount(currencySettings, currency, OPTION_SUM_1, state.amount)) {
+            if (amount === getCurrencyOptionAmount(state, OPTION_SUM_1)) {
                 amountOption = OPTION_SUM_1
             }
-            else if (amount === getCurrencyOptionAmount(currencySettings, currency, OPTION_SUM_2, state.amount)) {
+            else if (amount === getCurrencyOptionAmount(state, OPTION_SUM_2)) {
                 amountOption = OPTION_SUM_2
             }
-            else if (amount === getCurrencyOptionAmount(currencySettings, currency, OPTION_SUM_3, state.amount)) {
+            else if (amount === getCurrencyOptionAmount(state, OPTION_SUM_3)) {
                 amountOption = OPTION_SUM_3
             }
             else {

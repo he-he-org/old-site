@@ -1,15 +1,32 @@
 require('is-nan').shim()
 import Promise from 'promise-polyfill'
 
-import {createStore} from 'redux'
 import {h} from 'react-markup'
 import ReactDOM from 'react-dom'
 
-import {setCurrency, setProvider, setAmountOption, setAmount} from './react/action-creators/main-donation-form'
-import MainDonationForm from './react/presentational/shared/main-donation-form'
+import {createStore} from '~/shared/redux-helpers'
 import mainDonationFormReducer from './react/reducers/main-donation-form-reducer'
-import DonateInfo from './react/presentational/help/donate/donate-info'
+import {} from '~/react/reducers/modal-reducer'
+import MainDonationForm from '~/react/container/help/donate/main-donate-form'
+import DonateInfo from '~/react/container/help/donate/donate-info'
 import I18N from './i18n'
+import {Provider} from 'react-redux'
+import {
+    reducer as donateModalReducer,
+    initialState as donateModalInitialState,
+} from './react/reducers/donate-modal-reducer'
+import Popup from '~/react/container/donate-popup'
+import {
+    setCurrency,
+    setProvider,
+    setAmount,
+    setTargets,
+    setFormComment,
+    setShortDesc,
+} from '~/react/action-creators/main-donation-form'
+import {
+    setModalDisplayed,
+} from '~/react/action-creators/modal'
 
 import {
     LanguageType,
@@ -18,9 +35,9 @@ import {
     AmountOptionType,
 } from './shared/definitions'
 
-import * as packages from './help/packages'
-
-// Donation form and donate info
+/*
+ Donation form and donate info
+  */
 new Promise((resolve) => {
     document.addEventListener('DOMContentLoaded', resolve)
 }).then(() => {
@@ -66,64 +83,70 @@ new Promise((resolve) => {
         shortDesc: i18n.t('strings', 'help/donate/short-dest'), // Название перевода в истории отправителя
         currencySettings: i18n.settings.currency,
     }
-
     const store = createStore(mainDonationFormReducer, initialState)
 
-    const changeProvider = (provider) => {
-        store.dispatch(setProvider(provider))
-    }
-
-    const changeCurrency = (currency) => {
-        store.dispatch(setCurrency(currency))
-    }
-
-    const changeAmountOption = (amountOption) => {
-        store.dispatch(setAmountOption(amountOption))
-    }
-
-    const changeAmount = (amount) => {
-        store.dispatch(setAmount(amount))
-    }
-
+    /*
+        Donate page logic
+     */
+    // Render main donation form
     const formEl = document.querySelector('#react-main-donation-form')
-    const infoEl = document.querySelector('#react-donate-info')
-
-    const render = () => {
-        const state = store.getState()
-        if (formEl) {
-            ReactDOM.render(
-                h(MainDonationForm, {
-                    i18n,
-                    onChangeProvider: changeProvider,
-                    onChangeCurrency: changeCurrency,
-                    onChangeAmountOption: changeAmountOption,
-                    onChangeAmount: changeAmount,
-                    ...state,
-                }),
-                formEl
-            )
-        }
-        if (infoEl) {
-            ReactDOM.render(
-                h(DonateInfo, {
-                    i18n,
-                    ...state,
-                }),
-                infoEl
-            )
-        }
+    if (formEl) {
+        ReactDOM.render(
+            h(Provider, {store},
+                h(MainDonationForm(i18n))
+            ),
+            formEl
+        )
     }
-    store.subscribe(render)
-    render()
+    const infoEl = document.querySelector('#react-donate-info')
+    if (infoEl) {
+        ReactDOM.render(
+            h(Provider, {store},
+                h(DonateInfo(i18n))
+            ),
+            infoEl
+        )
+    }
 
-    packages.run(i18n)
+    /*
+     Packages page logic
+     */
+    // Init store for popup
+    const popupInitialState = {
+        modal: donateModalInitialState.modal,
+        form: {
+            ...donateModalInitialState.form,
+            currencySettings: i18n.settings.currency,
+        },
+    }
+    const popupStore = createStore(donateModalReducer, popupInitialState)
+    ReactDOM.render(
+        h(Provider, {store: popupStore},
+            h(Popup(i18n))
+        ),
+        document.querySelector('#react-popup-entry')
+    )
+
+    Array.prototype.slice.apply(document.querySelectorAll('.packages .package')).forEach((form) => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            popupStore.dispatch(setProvider(defaultProvider))
+            popupStore.dispatch(setCurrency(defaultCurrency))
+            popupStore.dispatch(setAmount(parseInt(form.querySelector('input[name=sum]').value, 10)))
+            popupStore.dispatch(setTargets(form.querySelector('input[name=formcomment]').value))
+            popupStore.dispatch(setFormComment(form.querySelector('input[name=short-dest]').value))
+            popupStore.dispatch(setShortDesc(form.querySelector('input[name=targets]').value))
+            popupStore.dispatch(setModalDisplayed(true))
+        })
+    })
 }).catch((e) => {
-    console.error(e)
+    console.error(e.stack)
 })
 
-// Left menu bar
+/*
+ Left menu bar
+  */
 const STICKY_MARGIN = 5
-
 document.addEventListener('DOMContentLoaded', () => {
     Array.prototype.slice.apply(document.querySelectorAll('.category-menu')).forEach((menu) => {
         // Highlight current item

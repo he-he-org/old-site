@@ -3,33 +3,26 @@ import Promise from 'promise-polyfill'
 
 import ReactDOM from 'react-dom'
 import {h} from 'react-markup'
-import {createStore} from 'redux'
 import {bindEvents} from './redux-dom-binding'
 import {merge} from 'functional-utils'
-import {Provider, connect} from 'react-redux'
+import {Provider} from 'react-redux'
 
 import I18N from './i18n'
-import MainDonationForm from './react/presentational/shared/main-donation-form'
-import DonateModal from './react/presentational/shared/modal'
-import {
-    LanguageType,
-    ProvideType,
-    CurrencyType,
-} from './shared/definitions'
+import {createStore} from '~/shared/redux-helpers'
+import {LanguageType, ProvideType, CurrencyType,} from '~/shared/definitions'
 import {
     setCurrency,
     setProvider,
-    setAmountOption,
     setAmount,
     setTargets,
     setFormComment,
     setShortDesc,
-} from './react/action-creators/main-donation-form'
-import Popup from './react/container/donate-popup/donate-popup'
+} from '~/react/action-creators/main-donation-form'
+import Popup from '~/react/container/donate-popup'
 import {
     reducer as donateModalReducer,
     initialState as donateModalInitialState,
-} from './react/reducers/donate-modal-reducer'
+} from '~/react/reducers/donate-modal-reducer'
 
 new Promise((resolve) => {
     document.addEventListener('DOMContentLoaded', resolve)
@@ -70,8 +63,17 @@ new Promise((resolve) => {
     const provider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
 
 
-    // Init store for popup
-    const popupStore = createStore(donateModalReducer, donateModalInitialState)
+    /*
+     Init store for popup
+    */
+    const initialState = {
+        modal: donateModalInitialState.modal,
+        form: {
+            ...donateModalInitialState.form,
+            currencySettings: i18n.settings.currency,
+        },
+    }
+    const popupStore = createStore(donateModalReducer, initialState)
     ReactDOM.render(
         h(Provider, {store: popupStore},
             h(Popup(i18n))
@@ -79,65 +81,6 @@ new Promise((resolve) => {
         document.querySelector('#react-popup-entry')
     )
 
-    //const modalRender = () => {
-    //    const closeModal = () => {
-    //        popupStore.dispatch({
-    //            type: 'SET_MODAL_DISPLAYED',
-    //            displayed: false,
-    //        })
-    //    }
-    //
-    //    const changeProvider = (provider) => { popupStore.dispatch(setProvider(provider)) }
-    //    const changeCurrency = (currency) => { popupStore.dispatch(setCurrency(currency)) }
-    //    const changeAmountOption = (amountOption) => { popupStore.dispatch(setAmountOption(amountOption)) }
-    //    const changeAmount = (amount) => { popupStore.dispatch(setAmount(amount)) }
-    //
-    //    const {modal, mainDonationForm} = popupStore.getState()
-    //    ReactDOM.render(
-    //        h(DonateModal, {
-    //            ...modal,
-    //            onClose: closeModal,
-    //        },
-    //            h(MainDonationForm, {
-    //                i18n,
-    //                onChangeProvider: changeProvider,
-    //                onChangeCurrency: changeCurrency,
-    //                onChangeAmountOption: changeAmountOption,
-    //                onChangeAmount: changeAmount,
-    //                ...mainDonationForm,
-    //            })
-    //        ),
-    //        document.querySelector('#react-popup-entry')
-    //    )
-    //}
-    //popupStore.subscribe(modalRender)
-    //modalRender()
-
-    const localInitialState = {
-        value: i18n.settings.currency[currency].donationOption3,
-        focused: false,
-    }
-
-    const localReducer = (state = localInitialState, action) => {
-        switch (action.type) {
-            case 'DOM_FOCUS': {
-                return merge(state, {focused: true})
-            }
-            case 'DOM_BLUR': {
-                return merge(state, {focused: false})
-            }
-            case 'DOM_INPUT': {
-                const number = Number(action.text)
-                if (Number.isNaN(number)) {
-                    return state
-                }
-                else {
-                    return merge(state, {value: number})
-                }
-            }
-            default: return state
-        }
-    }
 
     /*
      Common donation logic
@@ -155,8 +98,30 @@ new Promise((resolve) => {
         const tipsTempalte = tips.innerText
 
         // Configure rendering
-        const localStore = createStore(localReducer)
-
+        const localInitialState = {
+            value: i18n.settings.currency[currency].donationOption3,
+            focused: false,
+        }
+        const localStore = createStore((state = localInitialState, action) => {
+            switch (action.type) {
+                case 'DOM_FOCUS': {
+                    return merge(state, {focused: true})
+                }
+                case 'DOM_BLUR': {
+                    return merge(state, {focused: false})
+                }
+                case 'DOM_INPUT': {
+                    const number = Number(action.text)
+                    if (Number.isNaN(number)) {
+                        return state
+                    }
+                    else {
+                        return merge(state, {value: number})
+                    }
+                }
+                default: return state
+            }
+        })
 
         const render = () => {
             const {value, focused} = localStore.getState()
@@ -193,7 +158,6 @@ new Promise((resolve) => {
 
         // Bind some events to store dispatching
         bindEvents(input, ['input', 'focus', 'blur'], localStore)
-
 
         form.addEventListener('submit', (e) => {
             e.preventDefault()

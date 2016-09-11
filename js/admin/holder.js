@@ -1,3 +1,4 @@
+/* eslint-disable */
 const IS_WAITING = 0
 const IS_READY = 1
 const IS_FAILED = 2
