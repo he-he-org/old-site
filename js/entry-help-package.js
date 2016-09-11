@@ -5,10 +5,6 @@ import {h} from 'react-markup'
 import ReactDOM from 'react-dom'
 
 import {createStore} from '~/shared/redux-helpers'
-import mainDonationFormReducer from './react/reducers/main-donation-form-reducer'
-import {} from '~/react/reducers/modal-reducer'
-import MainDonationForm from '~/react/container/help/donate/main-donate-form'
-import DonateInfo from '~/react/container/help/donate/donate-info'
 import I18N from './i18n'
 import {Provider} from 'react-redux'
 import {
@@ -32,7 +28,6 @@ import {
     LanguageType,
     ProvideType,
     CurrencyType,
-    AmountOptionType,
 } from './shared/definitions'
 
 /*
@@ -73,44 +68,7 @@ new Promise((resolve) => {
 
     const defaultProvider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
     const defaultCurrency = CurrencyType[i18n.settings.language[language].defaultCurrency]
-    const initialState = {
-        provider: defaultProvider,
-        currency: defaultCurrency,
-        amountOption: AmountOptionType.OPTION_SUM_2,
-        amount: i18n.settings.currency[defaultCurrency].donationOption2,
-        targets: i18n.t('strings', 'help/donate/targets'), // Назначение платежа
-        formComment: i18n.t('strings', 'help/donate/formcomment'), // Название перевода на странице подтверждения
-        shortDesc: i18n.t('strings', 'help/donate/short-dest'), // Название перевода в истории отправителя
-        currencySettings: i18n.settings.currency,
-    }
-    const store = createStore(mainDonationFormReducer, initialState)
 
-    /*
-        Donate page logic
-     */
-    // Render main donation form
-    const formEl = document.querySelector('#react-main-donation-form')
-    if (formEl) {
-        ReactDOM.render(
-            h(Provider, {store},
-                h(MainDonationForm(i18n))
-            ),
-            formEl
-        )
-    }
-    const infoEl = document.querySelector('#react-donate-info')
-    if (infoEl) {
-        ReactDOM.render(
-            h(Provider, {store},
-                h(DonateInfo(i18n))
-            ),
-            infoEl
-        )
-    }
-
-    /*
-     Packages page logic
-     */
     // Init store for popup
     const popupInitialState = {
         modal: donateModalInitialState.modal,

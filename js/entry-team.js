@@ -9,7 +9,7 @@ import {Provider} from 'react-redux'
 
 import I18N from './i18n'
 import {createStore} from '~/shared/redux-helpers'
-import {LanguageType, ProvideType, CurrencyType,} from '~/shared/definitions'
+import {LanguageType, ProvideType, CurrencyType} from '~/shared/definitions'
 import {
     setCurrency,
     setProvider,

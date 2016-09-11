@@ -65,7 +65,6 @@ const reducer = (state = initialState, action) => {
         }
         case 'SET_AMOUNT_OPTION': {
             const {amountOption} = action
-            const {currency} = state
             const amount = getCurrencyOptionAmount(state, amountOption)
             return {...state,
                 amountOption,

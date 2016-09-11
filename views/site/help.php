@@ -1,14 +1,10 @@
 <?php
 
-
-use app\assets\HelpAsset;
-
 use app\widgets\help\HelpOptions;
 use yii\helpers\Url;
 
 $this->title = 'Health & Help - ' . \Yii::t('strings', 'layout/main-menu/help');
 
-HelpAsset::register($this);
 ?>
 
 <div class="row row--separate-bottom">

@@ -58,7 +58,8 @@
       "entryPoints": [
         "admin",
         "main",
-        "help",
+        "help-package",
+        "help-donate",
         "team"
       ]
     },
