@@ -5,7 +5,7 @@ import {createStore} from 'redux'
 import ReactDOM from 'react-dom'
 import {bindEvents} from './redux-dom-binding'
 import {merge} from 'functional-utils'
-import {Provider, connect} from 'react-redux'
+import {Provider} from 'react-redux'
 import {h} from 'react-markup'
 
 import I18N from './i18n'
@@ -17,7 +17,6 @@ import {
 import {
     setCurrency,
     setProvider,
-    setAmountOption,
     setAmount,
     setTargets,
     setFormComment,

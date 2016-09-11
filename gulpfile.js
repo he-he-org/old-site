@@ -27,6 +27,9 @@ var babelConfig = {
     plugins: [
         "transform-object-rest-spread",
         "transform-class-properties",
+        ["babel-root-import", {
+            "rootPathSuffix": "js"
+        }]
     ],
 };
 

@@ -1,4 +1,4 @@
-import {ProvideType, CurrencyType, AmountOptionType} from '../../shared/definitions'
+import {ProvideType, CurrencyType, AmountOptionType} from '~/shared/definitions'
 
 const {
     OPTION_SUM_1,

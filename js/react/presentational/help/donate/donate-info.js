@@ -1,10 +1,10 @@
 import {Component} from 'react'
 import {h} from 'react-markup'
 
-import {CurrencyType, AmountOptionType} from '../../../../shared/definitions'
-const {RUB, USD, EUR} = CurrencyType
-const {OPTION_OTHER} = AmountOptionType
 import prefixer from 'bem-prefixer'
+
+import {AmountOptionType} from '~/shared/definitions'
+const {OPTION_OTHER} = AmountOptionType
 
 const bem = prefixer('section-donate-info')
 
