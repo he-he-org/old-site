@@ -19,11 +19,11 @@ export const initialState = {
     currencySettings: {},
 }
 
-const getCurrencyOptionAmount = (state, option) => {
+const getCurrencyOptionAmount = (state, currency, option) => {
     if (option === OPTION_OTHER) {
         return state.amount
     }
-    const currencySettings = state.currencySettings[state.currency]
+    const currencySettings = state.currencySettings[currency]
     if (!currencySettings) {
         return state.amount
     }
@@ -40,7 +40,7 @@ const reducer = (state = initialState, action) => {
             const {provider} = action
             const {amountOption} = state
             const currency = provider === ProvideType.YANDEX_MONEY ? CurrencyType.RUB : state.currency
-            const amount = getCurrencyOptionAmount(state, amountOption)
+            const amount = getCurrencyOptionAmount(state, state.currency, amountOption)
 
             return {...state,
                 provider,
@@ -55,7 +55,7 @@ const reducer = (state = initialState, action) => {
                 const {amountOption} = state
                 const amount = amountOption === OPTION_OTHER
                     ? state.amount
-                    : getCurrencyOptionAmount(state, amountOption)
+                    : getCurrencyOptionAmount(state, currency, amountOption)
                 return {...state,
                     currency,
                     amount,
@@ -65,7 +65,7 @@ const reducer = (state = initialState, action) => {
         }
         case 'SET_AMOUNT_OPTION': {
             const {amountOption} = action
-            const amount = getCurrencyOptionAmount(state, amountOption)
+            const amount = getCurrencyOptionAmount(state, state.currency, amountOption)
             return {...state,
                 amountOption,
                 amount,
@@ -75,13 +75,13 @@ const reducer = (state = initialState, action) => {
             const {amount} = action
             let amountOption = null
 
-            if (amount === getCurrencyOptionAmount(state, OPTION_SUM_1)) {
+            if (amount === getCurrencyOptionAmount(state, state.currency, OPTION_SUM_1)) {
                 amountOption = OPTION_SUM_1
             }
-            else if (amount === getCurrencyOptionAmount(state, OPTION_SUM_2)) {
+            else if (amount === getCurrencyOptionAmount(state, state.currency, OPTION_SUM_2)) {
                 amountOption = OPTION_SUM_2
             }
-            else if (amount === getCurrencyOptionAmount(state, OPTION_SUM_3)) {
+            else if (amount === getCurrencyOptionAmount(state, state.currency, OPTION_SUM_3)) {
                 amountOption = OPTION_SUM_3
             }
             else {
