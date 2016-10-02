@@ -82,7 +82,7 @@ new Promise((resolve) => {
         h(Provider, {store: popupStore},
             h(Popup(i18n))
         ),
-        document.querySelector('#react-popup-entry')
+        document.querySelector('#react-donate-popup-entry')
     )
 
     Array.prototype.slice.apply(document.querySelectorAll('.packages .package')).forEach((form) => {

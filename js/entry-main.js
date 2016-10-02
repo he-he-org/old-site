@@ -24,8 +24,7 @@ import {
     initialState as donateModalInitialState,
 } from './react/reducers/donate-modal-reducer'
 
-
-import Popup from '~/react/container/donate-popup'
+import DonatePopup from '~/react/container/donate-popup'
 
 /*
  Shuffle team members
@@ -88,9 +87,9 @@ new Promise((resolve) => {
     const popupStore = createStore(donateModalReducer, initialState)
     ReactDOM.render(
         h(Provider, {store: popupStore},
-            h(Popup(i18n))
+            h(DonatePopup(i18n))
         ),
-        document.querySelector('#react-popup-entry')
+        document.querySelector('#react-donate-popup-entry')
     )
 
     const localInitialState = {

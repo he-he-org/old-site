@@ -1,28 +1,17 @@
 require('is-nan').shim()
 import Promise from 'promise-polyfill'
-
 import ReactDOM from 'react-dom'
-import {h} from 'react-markup'
-import {bindEvents} from './redux-dom-binding'
-import {merge} from 'functional-utils'
 import {Provider} from 'react-redux'
+import {h} from 'react-markup'
 
-import I18N from './i18n'
 import {createStore} from '~/shared/redux-helpers'
-import {LanguageType, ProvideType, CurrencyType} from '~/shared/definitions'
+import I18N from './i18n'
+
 import {
-    setCurrency,
-    setProvider,
-    setAmount,
-    setTargets,
-    setFormComment,
-    setShortDesc,
-} from '~/react/action-creators/main-donation-form'
-import Popup from '~/react/container/donate-popup'
-import {
-    reducer as donateModalReducer,
-    initialState as donateModalInitialState,
-} from '~/react/reducers/donate-modal-reducer'
+    reducer as subscribeModalReducer,
+    initialState as subscribeModalInitialState,
+} from './react/reducers/subscribe-modal-reducer'
+import SubscribePopup from '~/react/container/subscribe-popup'
 
 // Subscribe form
 new Promise((resolve) => {
@@ -45,7 +34,7 @@ new Promise((resolve) => {
         document.querySelector('#react-subscribe-popup-entry')
     )
     Array.prototype.slice.apply(document.querySelectorAll('.layout-footer_subscribe-button')).forEach((button) => {
-        button.addEventListener('click', (e) => {
+        button.addEventListener('click', () => {
             popupStore.dispatch({
                 type: 'SET_MODAL_DISPLAYED',
                 displayed: true,

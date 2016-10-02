@@ -32,7 +32,8 @@ AppAsset::register($this);
 </head>
 <body>
     <?php $this->beginBody() ?>
-    <div id="react-popup-entry" ></div>
+    <div id="react-donate-popup-entry" ></div>
+    <div id="react-subscribe-popup-entry" ></div>
 
     <main>
         <div class="layout-container">
@@ -77,6 +78,7 @@ AppAsset::register($this);
     </main>
     <footer>
         <div class="layout-footer">
+            <button class='layout-footer_subscribe-button'>Подписаться на рассылку</button>
             <div class="layout-fields">
                 <div class="row">
                     <div class="layout-footer_links-block row_block-3">

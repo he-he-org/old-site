@@ -21,6 +21,7 @@ class AppAsset extends BaseAsset
     ];
     public $js = [
         'js/vendor.js',
+        'js/layout.js',
     ];
     public $depends = [
     ];
