@@ -78,7 +78,15 @@ AppAsset::register($this);
     </main>
     <footer>
         <div class="layout-footer">
-            <button class='layout-footer_subscribe-button'>Подписаться на рассылку</button>
+            <form class="layout-subscribe-form" action="<?= \Yii::t('strings', 'layout/main/footer/subscribe-form/action-link') ?>" method="post">
+                <div class="layout-subscribe-form_title"><?= \Yii::t('strings', 'layout/main/footer/subscribe-form/title') ?></div>
+                <div class="layout-subscribe-form_controls">
+                    <input name="EMAIL" placeholder="<?= \Yii::t('strings', 'layout/main/footer/subscribe-form/email-placeholder') ?>" class="layout-subscribe-form_input" />
+                    <input name="FNAME" placeholder="<?= \Yii::t('strings', 'layout/main/footer/subscribe-form/first-name-placeholder') ?>" class="layout-subscribe-form_input"/>
+                    <button class="layout-subscribe-form_submit"><?= \Yii::t('strings', 'layout/main/footer/subscribe-form/submit-button') ?></button>
+                </div>
+                <div class="layout-subscribe-form_desc"><?= \Yii::t('strings', 'layout/main/footer/subscribe-form/desc') ?></div>
+            </form>
             <div class="layout-fields">
                 <div class="row">
                     <div class="layout-footer_links-block row_block-3">
