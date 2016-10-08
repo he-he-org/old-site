@@ -103,4 +103,4 @@ CMD service apache2 start && \
     else \
         mysqld_safe & \
     fi' && \
-    bash
+    tail -f /dev/null

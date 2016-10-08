@@ -1,0 +1,26 @@
+# docker exec -it repo_web_1 bash
+# notifyloop . rsync -avP /Users/koluch/Dropbox/dev/misc/hehe/repo/** rsync://localhost:10873/volume
+version: '2'
+
+services:
+  rsync:
+    build:
+      context: .
+      dockerfile: rsync.Dockerfile
+    ports:
+      - "10873:873"
+    volumes:
+      - /var/www/site
+  web:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    depends_on:
+      - rsync
+    ports:
+      - "3000:3000"
+      - "8080:80"
+    volumes_from:
+      - rsync
+    volumes:
+      - ./dbdata:/var/www/site/dbdata
