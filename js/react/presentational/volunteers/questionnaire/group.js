@@ -1,5 +1,8 @@
 import {h} from 'react-markup'
 import React, {PropTypes} from 'react'
+import prefixer from 'bem-prefixer'
+
+import QuestionTitle from './elements/question-title'
 
 const {string, number, object, func, bool, arrayOf, shape} = PropTypes
 
@@ -14,23 +17,26 @@ class GroupScale extends React.Component {
     }
 
     render() {
-        const {from, to, value, onChange} = this.props
-        return h('table',
-            h('tbody', this.props.items.map((item) => (
-                h('tr', {key: item.name},
-                    h('td', item.title),
-                    h('td',
-                        h('input', {
-                            type: 'range',
-                            min: from,
-                            max: to,
-                            value: value[item.name],
-                            onChange: this.handleChange.bind(null, item.name)
-                        })
-                    ),
-                    h('td', value[item.name])
-                )
-            )))
+        const bem = prefixer('questionnaire-group-scale')
+        const {from, to, value, title} = this.props
+        return h(bem('div'),
+            h(QuestionTitle, title),
+            h(bem('table#items'),
+                h('tbody', this.props.items.map((item) => (
+                    h(bem('tr#item'), {key: item.name},
+                        h(bem('td#item-title'), item.title),
+                        h(bem('td#item-range'),
+                            h(bem('input#input'), {
+                                type: 'range',
+                                min: from,
+                                max: to,
+                                value: value[item.name],
+                                onChange: this.handleChange.bind(null, item.name),
+                            })
+                        )
+                    )
+                )))
+            )
         )
     }
 }
@@ -38,6 +44,7 @@ class GroupScale extends React.Component {
 
 GroupScale.propTypes = {
     name: string.isRequired,
+    title: string.isRequired,
     from: number.isRequired,
     to: number.isRequired,
     items: arrayOf(shape({
@@ -65,32 +72,36 @@ class GroupCheckbox extends React.Component {
     }
 
     render() {
-        const {value} = this.props
-        return h('table',
-            h('thead',
-                h('tr',
-                    [
-                        h('th', {key: 'title'}, ''),
-                    ].concat(this.props.options.map((option) => (
-                        h('th', {key: option.name}, option.title)
-                    )))
-                )
-            ),
-            h('tbody', this.props.items.map((item) => (
-                h('tr', {key: item.name},
-                    [
-                        h('td', {key: 'title'}, item.title),
-                    ].concat(this.props.options.map((option) => (
-                        h('td', {key: option.name},
-                            h('input', {
-                                type: 'checkbox',
-                                checked: value[item.name][option.name],
-                                onClick: this.handleChange.bind(this, item.name, option.name)
-                            })
-                        )
-                    )))
-                )
-            )))
+        const bem = prefixer('questionnaire-group-checkbox')
+        const {value, title} = this.props
+        return h(bem('div'),
+            h(QuestionTitle, title),
+            h(bem('table#items'),
+                h('thead',
+                    h('tr',
+                        [
+                            h('th', {key: 'empty_cell'}, ''),
+                        ].concat(this.props.options.map((option) => (
+                            h(bem('th#option-header'), {key: option.name}, option.title)
+                        )))
+                    )
+                ),
+                h('tbody', this.props.items.map((item) => (
+                    h(bem('tr#item'), {key: item.name},
+                        [
+                            h(bem('td#item-title'), {key: 'title'}, item.title),
+                        ].concat(this.props.options.map((option) => (
+                            h(bem('td#item-option'), {key: option.name},
+                                h(bem('input#input'), {
+                                    type: 'checkbox',
+                                    checked: value[item.name][option.name],
+                                    onClick: this.handleChange.bind(this, item.name, option.name),
+                                })
+                            )
+                        )))
+                    )
+                )))
+            )
         )
     }
 }
@@ -98,6 +109,7 @@ class GroupCheckbox extends React.Component {
 
 GroupCheckbox.propTypes = {
     name: string.isRequired,
+    title: string.isRequired,
     options: arrayOf(shape({
         title: string.isRequired,
         name: string.isRequired,

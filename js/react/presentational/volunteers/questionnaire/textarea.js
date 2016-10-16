@@ -1,5 +1,10 @@
 import {h} from 'react-markup'
 import React, {PropTypes} from 'react'
+import prefixer from 'bem-prefixer'
+
+import QuestionTitle from './elements/question-title'
+
+const bem = prefixer('questionnaire-textarea')
 
 class Textarea extends React.Component {
 
@@ -10,10 +15,10 @@ class Textarea extends React.Component {
 
     render() {
         const {name, title, value} = this.props
-        return h('div',
-            h('label',
-                h('span', title),
-                h('textarea', {name, value, onChange: this.handleChange})
+        return h(bem('div'),
+            h(bem('label#label'),
+                h(QuestionTitle, title),
+                h(bem('textarea#input'), {name, value, onChange: this.handleChange})
             )
         )
     }

@@ -1,6 +1,8 @@
 import {h} from 'react-markup'
 import React, {PropTypes} from 'react'
 
+import QuestionTitle from './elements/question-title'
+
 class Tags extends React.Component {
 
     handleChange = (e) => {
@@ -12,7 +14,7 @@ class Tags extends React.Component {
         const {name, title, value} = this.props
         return h('div',
             h('label',
-                h('span', title),
+                h(QuestionTitle, title),
                 h('input', {type: 'text', name, value, onChange: this.handleChange})
             )
         )

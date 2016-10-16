@@ -9,6 +9,7 @@ import Checkbox from './checkbox'
 import Group from './group'
 import Tags from './tags'
 import Textarea from './textarea'
+import Row from './row'
 
 const ItemTypes = {
     H1: 'h1',
@@ -18,7 +19,9 @@ const ItemTypes = {
     GROUP: 'group',
     TAGS: 'tags',
     TEXTAREA: 'textarea',
+    ROW: 'row',
 }
+
 
 class Root extends React.Component {
 
@@ -26,59 +29,70 @@ class Root extends React.Component {
         this.props.onChange(path, value)
     }
 
+
+    renderItem = (page, item, i) => {
+        const {state} = this.props
+
+        switch (item.type) {
+            case ItemTypes.H1:
+                return h(H1, {key: `item_${i}`, ...item})
+            case ItemTypes.H2:
+                return h(H2, {key: `item_${i}`, ...item})
+            case ItemTypes.TEXT:
+                return h(Text, {
+                    ...item,
+                    key: `item_${i}`,
+                    value: state[page.name][item.name],
+                    onChange: this.handleChange.bind(null, [page.name, item.name]),
+                })
+            case ItemTypes.CHECKBOX:
+                return h(Checkbox, {
+                    ...item,
+                    key: `item_${i}`,
+                    value: state[page.name][item.name],
+                    onChange: this.handleChange.bind(null, [page.name, item.name]),
+                })
+            case ItemTypes.GROUP:
+                return h(Group, {
+                    ...item,
+                    key: `item_${i}`,
+                    value: state[page.name][item.name],
+                    onChange: this.handleChange.bind(null, [page.name, item.name]),
+                })
+            case ItemTypes.TAGS:
+                return h(Tags, {
+                    ...item,
+                    key: `item_${i}`,
+                    value: state[page.name][item.name],
+                    onChange: this.handleChange.bind(null, [page.name, item.name]),
+                })
+            case ItemTypes.TEXTAREA:
+                return h(Textarea, {
+                    ...item,
+                    key: `item_${i}`,
+                    value: state[page.name][item.name],
+                    onChange: this.handleChange.bind(null, [page.name, item.name]),
+                })
+            case ItemTypes.ROW:
+                return h(Row, {
+                    key: `item_${i}`,
+                }, item.content.map((child, i) => this.renderItem(page, child, i)))
+            default:
+                throw new Error('Unknown item type: ' + item.type)
+        }
+    }
+
+
     render() {
         const {settings, state} = this.props
 
         return h('div', settings.pages.map((page) => (
             h(Page, {
                 key: page.name,
-                name: page.name,
-                state: state[page.name],
-            }, page.items.map((item, i) => {
-                switch (item.type) {
-                    case ItemTypes.H1:
-                        return h(H1, {key: `item_${i}`, ...item})
-                    case ItemTypes.H2:
-                        return h(H2, {key: `item_${i}`, ...item})
-                    case ItemTypes.TEXT:
-                        return h(Text, {
-                            ...item,
-                            key: `item_${i}`,
-                            value: state[page.name][item.name],
-                            onChange: this.handleChange.bind(null, [page.name, item.name]),
-                        })
-                    case ItemTypes.CHECKBOX:
-                        return h(Checkbox, {
-                            ...item,
-                            key: `item_${i}`,
-                            value: state[page.name][item.name],
-                            onChange: this.handleChange.bind(null, [page.name, item.name]),
-                        })
-                    case ItemTypes.GROUP:
-                        return h(Group, {
-                            ...item,
-                            key: `item_${i}`,
-                            value: state[page.name][item.name],
-                            onChange: this.handleChange.bind(null, [page.name, item.name]),
-                        })
-                    case ItemTypes.TAGS:
-                        return h(Tags, {
-                            ...item,
-                            key: `item_${i}`,
-                            value: state[page.name][item.name],
-                            onChange: this.handleChange.bind(null, [page.name, item.name]),
-                        })
-                    case ItemTypes.TEXTAREA:
-                        return h(Textarea, {
-                            ...item,
-                            key: `item_${i}`,
-                            value: state[page.name][item.name],
-                            onChange: this.handleChange.bind(null, [page.name, item.name]),
-                        })
-                    default:
-                        throw new Error('Unknown item type: ' + item.type)
-                }
-            }))
+                state,
+                value: state[page.name],
+                condition: page.condition,
+            }, page.items.map((item,i) => this.renderItem(page, item, i)))
         )))
     }
 }

@@ -8,8 +8,6 @@ import Root from './root'
 import * as action from '~/react/action-creators/volunteers/questionnaire'
 
 export default (settings) => {
-
-
     function buildStateTree(data) {
         function buildGroupTree(group) {
             const result = {}
@@ -36,32 +34,49 @@ export default (settings) => {
             return result
         }
 
+        function buildItemValue(item) {
+            if (item.type === 'group') {
+                if (!item.name) {
+                    throw new Error('Item doesn`t have name: ' + JSON.stringify(item))
+                }
+                return buildGroupTree(item)
+            }
+            else {
+                if (!item.name) {
+                    throw new Error('Item doesn`t have name: ' + JSON.stringify(item))
+                }
+                let defValue = null
+                if (item.type === 'text') {
+                    defValue = ''
+                }
+                else if (item.type === 'tags') {
+                    defValue = ''
+                }
+                else if (item.type === 'textarea') {
+                    defValue = ''
+                }
+                else if (item.type === 'checkbox') {
+                    defValue = false
+                }
+                else {
+                    throw new Error(`Unsupported item type ${item.type}`)
+                }
+                return defValue
+            }
+        }
+
         function buildPageTree(page) {
             const result = {}
             page.items.forEach((item) => {
-                if (item.name) {
-                    if (item.type === 'group') {
-                        result[item.name] = buildGroupTree(item)
-                    }
-                    else {
-                        let defValue = null
-                        if (item.type === 'text') {
-                            defValue = ''
+                if (item.type === 'row') {
+                    item.content.forEach((child) => {
+                        if (child.name) {
+                            result[child.name] = buildItemValue(child)
                         }
-                        else if (item.type === 'tags') {
-                            defValue = ''
-                        }
-                        else if (item.type === 'textarea') {
-                            defValue = ''
-                        }
-                        else if (item.type === 'checkbox') {
-                            defValue = false
-                        }
-                        else {
-                            throw new Error(`Unsupported item type ${item.type}`)
-                        }
-                        result[item.name] = defValue
-                    }
+                    })
+                }
+                else if (item.name) {
+                    result[item.name] = buildItemValue(item)
                 }
             })
             return result
@@ -77,7 +92,6 @@ export default (settings) => {
 // todo: need to validate json
 
     const initialState = buildStateTree(settings)
-    console.log("initialState", initialState)
 
     const reducer = (state = initialState, action) => {
         if (action.type === 'SET_VALUE') {
