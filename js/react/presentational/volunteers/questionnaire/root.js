@@ -2,14 +2,15 @@ import {h} from 'react-markup'
 import React, {PropTypes} from 'react'
 
 import Page from './page'
+import Row from './row'
 import H1 from './h1'
 import H2 from './h2'
 import Text from './text'
 import Checkbox from './checkbox'
+import Radio from './radio'
 import Group from './group'
 import Tags from './tags'
 import Textarea from './textarea'
-import Row from './row'
 
 const ItemTypes = {
     H1: 'h1',
@@ -20,6 +21,7 @@ const ItemTypes = {
     TAGS: 'tags',
     TEXTAREA: 'textarea',
     ROW: 'row',
+    RADIO: 'radio',
 }
 
 
@@ -47,6 +49,13 @@ class Root extends React.Component {
                 })
             case ItemTypes.CHECKBOX:
                 return h(Checkbox, {
+                    ...item,
+                    key: `item_${i}`,
+                    value: state[page.name][item.name],
+                    onChange: this.handleChange.bind(null, [page.name, item.name]),
+                })
+            case ItemTypes.RADIO:
+                return h(Radio, {
                     ...item,
                     key: `item_${i}`,
                     value: state[page.name][item.name],
