@@ -123,19 +123,28 @@ document.addEventListener('DOMContentLoaded', () => {
         highlightItems()
 
         // Make sticky menu
-        const body = menu.querySelector('.category-menu_body')
+        const menuBody = menu.querySelector('.category-menu_body')
+        const footerEl = document.querySelector('footer')
+        const bodyEl = document.body
+        const htmlEl = document.documentElement
+
+        const bodyBounds = bodyEl.getBoundingClientRect()
+        const menuBounds = menu.getBoundingClientRect()
+        const footerBounds = footerEl.getBoundingClientRect()
+        const menuBodyBounds = menuBody.getBoundingClientRect()
+
+        const availableHeight = bodyBounds.height - footerBounds.height
+        const menuPosition = menuBounds.top - bodyBounds.top
+        const maxDif = availableHeight - menuBodyBounds.height - menuPosition - STICKY_MARGIN
+
         const checkSticky = () => {
-            const bodyRect = document.body.getBoundingClientRect()
-            const menuRect = menu.getBoundingClientRect()
-            const pos = menuRect.top - bodyRect.top
-
             const bodyScroll = window.pageYOffset
-                || document.documentElement.scrollTop
-                || document.body.scrollTop || 0
+                || htmlEl.scrollTop
+                || bodyEl.scrollTop || 0
 
-            const dif = Math.max(bodyScroll - pos + STICKY_MARGIN, 0)
+            const dif = Math.min(Math.max(bodyScroll - menuPosition + STICKY_MARGIN, 0), maxDif)
 
-            body.style.top = `${dif}px`
+            menuBody.style.top = `${dif}px`
         }
         document.addEventListener('scroll', checkSticky)
         checkSticky()
