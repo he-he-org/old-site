@@ -107,15 +107,25 @@ new Promise((resolve) => {
 const STICKY_MARGIN = 5
 document.addEventListener('DOMContentLoaded', () => {
     Array.prototype.slice.apply(document.querySelectorAll('.category-menu')).forEach((menu) => {
+        const items = Array.prototype.slice.apply(menu.querySelectorAll('.category-menu_item'))
+            .map((menuEl) => {
+                const id = menuEl.getAttribute('href').split("#")[1]
+                return {
+                    id,
+                    menuEl,
+                    targetEl: document.getElementById(id),
+                }
+            })
+
         // Highlight current item
         const highlightItems = () => {
-            Array.prototype.slice.apply(menu.querySelectorAll('.category-menu_item')).forEach((item) => {
-                const url = new URL(item.getAttribute('href'), window.location)
+            items.forEach(({menuEl}) => {
+                const url = new URL(menuEl.getAttribute('href'), window.location)
                 if (url.href === location.href) {
-                    item.classList.add('category-menu_item--active')
+                    menuEl.classList.add('category-menu_item--active')
                 }
                 else {
-                    item.classList.remove('category-menu_item--active')
+                    menuEl.classList.remove('category-menu_item--active')
                 }
             })
         }
@@ -137,7 +147,40 @@ document.addEventListener('DOMContentLoaded', () => {
         const menuPosition = menuBounds.top - bodyBounds.top
         const maxDif = availableHeight - menuBodyBounds.height - menuPosition - STICKY_MARGIN
 
+        let currentHighlightedId = null
         const checkSticky = () => {
+
+            // Find last element with negative position and highlight it
+            let lastNegative = null
+            for (let i = 0, len = items.length; i < len; ++i) {
+                const item = items[i]
+                const top = item.targetEl.getBoundingClientRect().top
+                if (top <= 0) {
+                    lastNegative = item
+                }
+            }
+            if (lastNegative) {
+                if (currentHighlightedId !== lastNegative.id) {
+                    currentHighlightedId = lastNegative.id
+                    if (window.history) {
+                        window.history.replaceState(null, null, `#${lastNegative.id}`)
+                        items.forEach((item) => {
+                            item.menuEl.classList.remove('category-menu_item--active')
+                        })
+                        lastNegative.menuEl.classList.add('category-menu_item--active')
+                    }
+                }
+            }
+            else if (currentHighlightedId !== null) {
+                if (window.history) {
+                    window.history.replaceState(null, null, window.location.href.split('#')[0])
+                }
+                items.forEach((obj) => {
+                    obj.menuEl.classList.remove('category-menu_item--active')
+                })
+                currentHighlightedId = null
+            }
+
             const bodyScroll = window.pageYOffset
                 || htmlEl.scrollTop
                 || bodyEl.scrollTop || 0
