@@ -12,9 +12,7 @@ class MysqlTextsMessageSource extends MessageSource
     {
         $parser = new ExtMarkdown();
 
-
-        $query = TranslationText::find()
-            ->select(['name', $language]);
+        $query = TranslationText::find()->select(['name', 'format', $language]);
 
         $rootScopePrefix = $this->rootScope . '/';
         if (substr($category, 0, strlen($rootScopePrefix)) == $rootScopePrefix) {
@@ -26,7 +24,14 @@ class MysqlTextsMessageSource extends MessageSource
         $translations = [];
 
         foreach($allTranslations as $translation) {
-            $translations[$translation['name']] = $parser->parse($translation[$language]); //todo: strip HTML codes?
+            $translatedRawText = $translation[$language];
+            if ($translation['format'] === 'markdown') {
+                $translatedText = $parser->parse($translatedRawText);  //todo: strip HTML codes?
+            }
+            else {
+                $translatedText = $translatedRawText;
+            }
+            $translations[$translation['name']] = $translatedText;
         }
 
         return $translations;

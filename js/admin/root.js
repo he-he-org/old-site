@@ -20,6 +20,7 @@ const scheme = [
             {name: 'id', type: 'int'},
             {name: 'name', type: 'string'},
             {name: 'scope', type: 'string'},
+            {name: 'format', type: 'enum', options: ['plain', 'markdown']},
             {name: 'en-US', type: 'text'},
             {name: 'es-ES', type: 'text'},
             {name: 'ru-RU', type: 'text'},
