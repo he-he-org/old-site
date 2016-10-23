@@ -59,6 +59,7 @@ $config = [
                 'paypal/<action>' => 'paypal/<action>',
                 'i18n/<action>' => 'i18n/<action>',
                 'admin' => 'admin/main',
+                'api/volunteers/<action>' => 'volunteers/<action>',
                 'admin/<section:.*>' => 'admin/<section>',
                 '<page>/<section:.*>' => 'site/<page>',
                 '<page>' => 'site/<page>',
