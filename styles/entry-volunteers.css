@@ -37,3 +37,152 @@
     margin-top: 9rem;
 }
 
+.questionnaire {
+
+    &__submit {
+        background: #ffed49;
+        border-color: #ffed49;
+        color: #2c2c2c;
+        margin-left: 2px;
+        font-weight: 600;
+        padding: 10px;
+
+        &:disabled {
+            opacity: 0.5;
+        }
+    }
+
+    &__done {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &-header {
+            text-align: center;
+        }
+
+        &-message {
+            max-width: 300px;
+            text-align: center;
+        }
+    }
+
+    /* items */
+    &-page {
+        margin-bottom: 2rem;
+    }
+
+    &-row {
+        display: flex;
+
+        & > *:not(:first-child) {
+            margin-left: 1rem;
+        }
+    }
+
+    &-question-title {
+        font-weight: 600;
+    }
+
+    &-h1 {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    &-h2 {
+        font-size: 0.75rem;
+        font-weight: normal;
+        margin: 1rem 0;
+        color: gray;
+    }
+
+    &-group-scale {
+        margin: 2rem 0;
+
+        &__items {
+            margin: 0.5rem 0;
+        }
+
+        &__item-title {
+            max-width: 300px;
+            padding: 0.2rem 0;
+            padding-right: 2rem;
+        }
+
+        &__input {
+            width: 200px;
+        }
+    }
+
+    &-group-checkbox {
+        margin: 2rem 0;
+
+        &__items {
+            margin: 0.5rem 0;
+        }
+
+        &__option-header {
+            width: 150px;
+            width: 50px;
+            padding: 0.5rem;
+        }
+
+        &__item-title {
+            max-width: 300px;
+            padding: 0.2rem 0;
+            padding-right: 2rem;
+        }
+
+        &__item-option {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+    }
+
+    &-group-checkbox {
+        margin: 1rem 0;
+    }
+
+    &-text {
+        margin: 1rem 0;
+
+        &__label {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+
+        &__title {
+            min-width: 200px;
+        }
+
+        &__input {
+            margin: 0.5rem 0;
+            min-width: 200px;
+        }
+    }
+
+    &-textarea {
+        margin: 1rem 0;
+
+        &__label {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+
+
+        &__title {
+            min-width: 200px;
+        }
+
+        &__input {
+            margin: 0.5rem 0;
+            min-width: 350px;
+            min-height: 100px;
+        }
+    }
+}

@@ -8,6 +8,7 @@ class VolunteersAsset extends BaseAsset
         'css/volunteers.css',
     ];
     public $js = [
+        'js/volunteers.js'
     ];
     public $depends = [
         'app\assets\AppAsset'
