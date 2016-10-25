@@ -1,5 +1,5 @@
 import {h} from 'react-markup'
-import React, {PropTypes} from 'react'
+import React from 'react'
 import prefixer from 'bem-prefixer'
 
 const bem = prefixer('questionnaire-question-title')

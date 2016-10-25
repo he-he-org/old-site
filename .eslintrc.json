@@ -147,7 +147,7 @@
     "comma-style": "error",
     "computed-property-spacing": "error",
     "consistent-this": "error",
-    "func-style": "error",
+    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
     "id-blacklist": "error",
     "id-match": "error",
     "indent": ["error", 4, {"SwitchCase": 1}],

@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Array.prototype.slice.apply(document.querySelectorAll('.category-menu')).forEach((menu) => {
         const items = Array.prototype.slice.apply(menu.querySelectorAll('.category-menu_item'))
             .map((menuEl) => {
-                const id = menuEl.getAttribute('href').split("#")[1]
+                const id = menuEl.getAttribute('href').split('#')[1]
                 return {
                     id,
                     menuEl,
@@ -149,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let currentHighlightedId = null
         const checkSticky = () => {
-
             // Find last element with negative position and highlight it
             let lastNegative = null
             for (let i = 0, len = items.length; i < len; ++i) {

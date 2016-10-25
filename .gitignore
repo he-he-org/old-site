@@ -46,3 +46,7 @@ dbdata
 web/dev
 
 env.ini
+google-secret.json
+
+# vagrant logs
+ubuntu-xenial-16.04-cloudimg-console.log

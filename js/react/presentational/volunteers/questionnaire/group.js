@@ -77,26 +77,21 @@ class GroupCheckbox extends React.Component {
         return h(bem('div'),
             h(QuestionTitle, title),
             h(bem('table#items'),
-                h('thead',
-                    h('tr',
-                        [
-                            h('th', {key: 'empty_cell'}, ''),
-                        ].concat(this.props.options.map((option) => (
-                            h(bem('th#option-header'), {key: option.name}, option.title)
-                        )))
-                    )
-                ),
+                h('thead'),
                 h('tbody', this.props.items.map((item) => (
                     h(bem('tr#item'), {key: item.name},
                         [
                             h(bem('td#item-title'), {key: 'title'}, item.title),
                         ].concat(this.props.options.map((option) => (
                             h(bem('td#item-option'), {key: option.name},
-                                h(bem('input#input'), {
-                                    type: 'checkbox',
-                                    checked: value[item.name][option.name],
-                                    onClick: this.handleChange.bind(this, item.name, option.name),
-                                })
+                                h(bem('label#label'),
+                                    h(bem('input#input'), {
+                                        type: 'checkbox',
+                                        checked: value[item.name][option.name],
+                                        onClick: this.handleChange.bind(this, item.name, option.name),
+                                    }),
+                                    option.title
+                                )
                             )
                         )))
                     )

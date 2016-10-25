@@ -10,12 +10,15 @@ const checkCondition = (inObj, what) => {
             const whatValue = what[key]
             const inValue = inObj[key]
             if (typeof whatValue === typeof inValue) {
-                if (typeof whatValue === 'object') {
+                if (typeof whatValue === 'object' && whatValue.constructor !== Array) {
                     return checkCondition(inValue, whatValue)
                 }
                 else {
                     return inValue === whatValue
                 }
+            }
+            else if (whatValue.constructor === Array) {
+                return whatValue.indexOf(inValue) !== -1
             }
         }
         return false
@@ -37,7 +40,7 @@ Page.propTypes = {
 }
 
 Page.defaultProps = {
-    condition: null
+    condition: null,
 }
 
 export default Page

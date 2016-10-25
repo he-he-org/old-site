@@ -80,7 +80,7 @@ const I18N = class {
             throw new Error(`Wrong category ${cat}`)
         }
         if (!(key in catData)) {
-            throw new Error(`Wrong key: ${cat}/${key}`)
+            throw new Error(`Wrong key: ${cat}:${key}`)
         }
         return catData[key]
     }

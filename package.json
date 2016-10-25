@@ -9,8 +9,10 @@
     "bem-prefixer": "^0.3.0",
     "functional-utils": "0.0.4",
     "is-nan": "^1.2.1",
+    "nanoajax": "^0.4.3",
     "promise-polyfill": "^6.0.2",
     "react": "^15.1.0",
+    "react-datepicker": "^0.32.0",
     "react-dom": "^15.1.0",
     "react-input-autosize": "^1.0.0",
     "react-markup": "^1.1.0",
@@ -61,7 +63,8 @@
         "main",
         "help-package",
         "help-donate",
-        "team"
+        "team",
+        "volunteers"
       ]
     },
     "styles": {

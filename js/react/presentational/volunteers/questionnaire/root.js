@@ -5,6 +5,8 @@ import Page from './page'
 import Row from './row'
 import H1 from './h1'
 import H2 from './h2'
+import P from './p'
+import Date from './date'
 import Text from './text'
 import Checkbox from './checkbox'
 import Radio from './radio'
@@ -15,7 +17,9 @@ import Textarea from './textarea'
 const ItemTypes = {
     H1: 'h1',
     H2: 'h2',
+    P: 'p',
     TEXT: 'text',
+    DATE: 'date',
     CHECKBOX: 'checkbox',
     GROUP: 'group',
     TAGS: 'tags',
@@ -40,8 +44,17 @@ class Root extends React.Component {
                 return h(H1, {key: `item_${i}`, ...item})
             case ItemTypes.H2:
                 return h(H2, {key: `item_${i}`, ...item})
+            case ItemTypes.P:
+                return h(P, {key: `item_${i}`, ...item})
             case ItemTypes.TEXT:
                 return h(Text, {
+                    ...item,
+                    key: `item_${i}`,
+                    value: state[page.name][item.name],
+                    onChange: this.handleChange.bind(null, [page.name, item.name]),
+                })
+            case ItemTypes.DATE:
+                return h(Date, {
                     ...item,
                     key: `item_${i}`,
                     value: state[page.name][item.name],
@@ -101,7 +114,7 @@ class Root extends React.Component {
                 state,
                 value: state[page.name],
                 condition: page.condition,
-            }, page.items.map((item,i) => this.renderItem(page, item, i)))
+            }, page.items.map((item, i) => this.renderItem(page, item, i)))
         )))
     }
 }

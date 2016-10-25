@@ -25,6 +25,10 @@ html {
     &--separate-bottom {
         margin-bottom: 50px;
     }
+
+    &--vcenter {
+        justify-content: center;
+    }
 }
 
 

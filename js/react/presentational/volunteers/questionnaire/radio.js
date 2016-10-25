@@ -17,19 +17,21 @@ class Radio extends React.Component {
     render() {
         const {name, value, title, options} = this.props
         return h(bem('div'),
-            h(bem('div#title'), title),
-            options.map((option) => (
-                h(bem('label#option'), {key: option.value},
-                    h('input', {
-                        type: 'radio',
-                        name, // todo: need to garantee, that name is globaly unique, need to build full name including page name, or generate random name
-                        value: option.value,
-                        checked: option.value === value,
-                        onChange: this.handleChange,
-                    }),
-                    option.title
-                )
-            ))
+            h(QuestionTitle, title),
+            h(bem('div#options'),
+                options.map((option) => (
+                    h(bem('label#option'), {key: option.value},
+                        h(bem('input#input'), {
+                            type: 'radio',
+                            name, // todo: need to garantee, that name is globaly unique, need to build full name including page name, or generate random name
+                            value: option.value,
+                            checked: option.value === value,
+                            onChange: this.handleChange,
+                        }),
+                        option.title
+                    )
+                ))
+            )
         )
     }
 }
