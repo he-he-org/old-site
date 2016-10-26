@@ -14,11 +14,17 @@ class Text extends React.Component {
     }
 
     render() {
-        const {name, title, value} = this.props
+        const {name, title, value, placeholder} = this.props
         return h(bem('div'),
             h(bem('label#label'),
                 h(QuestionTitle, title),
-                h(bem('input#input'), {type: 'text', name, value, onChange: this.handleChange})
+                h(bem('input#input'), {
+                    type: 'text',
+                    placeholder,
+                    name,
+                    value,
+                    onChange: this.handleChange,
+                })
             )
         )
     }
@@ -29,10 +35,12 @@ Text.propTypes = {
     title: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
     mandatory: PropTypes.bool,
 }
 
 Text.defaultType = {
+    placeholder: null,
     mandatory: false,
 }
 
