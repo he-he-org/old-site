@@ -29,13 +29,13 @@ class Text extends React.Component {
 
     render() {
         moment.locale('es')
-        const {name, title, value} = this.props
+        const {name, title, value, mandatory} = this.props
         const valueObj = value === ''
             ? moment()
             : moment(value, DATE_FORMAT) // todo: default value passed to component should be reasonable
         return h(bem('div'),
             h(bem('label#label'),
-                h(QuestionTitle, title),
+                h(QuestionTitle, {mandatory}, title),
                 h(DatePicker, {
                     className: 'questionnaire-date__input',
                     selected: valueObj,
@@ -57,7 +57,7 @@ Text.propTypes = {
     mandatory: PropTypes.bool,
 }
 
-Text.defaultType = {
+Text.defaultProps = {
     mandatory: false,
 }
 

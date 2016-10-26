@@ -11,10 +11,10 @@ class Tags extends React.Component {
     }
 
     render() {
-        const {name, title, value} = this.props
+        const {name, title, value, mandatory} = this.props
         return h('div',
             h('label',
-                h(QuestionTitle, title),
+                h(QuestionTitle, {mandatory}, title),
                 h('input', {type: 'text', name, value, onChange: this.handleChange})
             )
         )
@@ -29,7 +29,7 @@ Tags.propTypes = {
     mandatory: PropTypes.bool,
 }
 
-Tags.defaultType = {
+Tags.defaultProps = {
     mandatory: false,
 }
 

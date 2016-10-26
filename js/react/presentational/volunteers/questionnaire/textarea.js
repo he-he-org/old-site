@@ -14,10 +14,10 @@ class Textarea extends React.Component {
     }
 
     render() {
-        const {name, title, value} = this.props
+        const {name, title, value, mandatory} = this.props
         return h(bem('div'),
             h(bem('label#label'),
-                title !== null && h(QuestionTitle, title),
+                title !== null && h(QuestionTitle, {mandatory}, title),
                 h(bem('textarea#input'), {name, value, onChange: this.handleChange})
             )
         )
@@ -32,7 +32,7 @@ Textarea.propTypes = {
     mandatory: PropTypes.bool,
 }
 
-Textarea.defaultType = {
+Textarea.defaultProps = {
     mandatory: false,
     title: null,
 }

@@ -18,9 +18,9 @@ class GroupScale extends React.Component {
 
     render() {
         const bem = prefixer('questionnaire-group-scale')
-        const {from, to, value, title} = this.props
+        const {from, to, value, title, mandatory} = this.props
         return h(bem('div'),
-            h(QuestionTitle, title),
+            h(QuestionTitle, {mandatory}, title),
             h(bem('table#items'),
                 h('tbody', this.props.items.map((item) => (
                     h(bem('tr#item'), {key: item.name},
@@ -73,9 +73,9 @@ class GroupCheckbox extends React.Component {
 
     render() {
         const bem = prefixer('questionnaire-group-checkbox')
-        const {value, title} = this.props
+        const {value, title, mandatory} = this.props
         return h(bem('div'),
-            h(QuestionTitle, title),
+            h(QuestionTitle, {mandatory}, title),
             h(bem('table#items'),
                 h('thead'),
                 h('tbody', this.props.items.map((item) => (
@@ -137,7 +137,7 @@ Group.propTypes = {
     mandatory: bool,
 }
 
-Group.defaultType = {
+Group.defaultProps = {
     mandatory: false,
 }
 

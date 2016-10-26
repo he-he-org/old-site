@@ -15,9 +15,9 @@ class Radio extends React.Component {
     }
 
     render() {
-        const {name, value, title, options} = this.props
+        const {name, value, title, options, mandatory} = this.props
         return h(bem('div'),
-            h(QuestionTitle, title),
+            h(QuestionTitle, {mandatory}, title),
             h(bem('div#options'),
                 options.map((option) => (
                     h(bem('button', 'input', option.value === value ? ['is-checked'] : []), {
@@ -46,7 +46,7 @@ Radio.propTypes = {
     mandatory: bool,
 }
 
-Radio.defaultType = {
+Radio.defaultProps = {
     mandatory: false,
 }
 

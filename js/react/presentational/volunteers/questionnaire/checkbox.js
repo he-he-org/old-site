@@ -7,7 +7,7 @@ class Checkbox extends React.Component {
     }
 
     render() {
-        const {name, value, title} = this.props
+        const {name, value, title, mandatory} = this.props
         return h('div',
             h('label',
                 h('input', {type: 'checkbox', name, checked: value, onClick: this.handleChange}),
@@ -25,7 +25,7 @@ Checkbox.propTypes = {
     mandatory: PropTypes.bool,
 }
 
-Checkbox.defaultType = {
+Checkbox.defaultProps = {
     mandatory: false,
 }
 
