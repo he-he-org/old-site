@@ -36,6 +36,12 @@ function buildGroupTree(group) {
 }
 
 
+const TEXT_DEF_VALUE = ''
+const DATE_DEF_VALUE = ''
+const TAGS_DEF_VALUE = ''
+const TEXTAREA_DEF_VALUE = ''
+const CHECKBOX_DEF_VALUE = false
+
 function buildItemValue(item) {
     if (item.type === 'group') {
         if (!item.name) {
@@ -49,19 +55,19 @@ function buildItemValue(item) {
         }
         let defValue = null
         if (item.type === 'text') {
-            defValue = ''
+            defValue = TEXT_DEF_VALUE
         }
         else if (item.type === 'date') {
-            defValue = ''
+            defValue = DATE_DEF_VALUE
         }
         else if (item.type === 'tags') {
-            defValue = ''
+            defValue = TAGS_DEF_VALUE
         }
         else if (item.type === 'textarea') {
-            defValue = ''
+            defValue = TEXTAREA_DEF_VALUE
         }
         else if (item.type === 'checkbox') {
-            defValue = false
+            defValue = CHECKBOX_DEF_VALUE
         }
         else if (item.type === 'radio') {
             defValue = item.options[0].value //todo: fix
@@ -96,6 +102,55 @@ function buildStateTree(data) {
         result[page.name] = buildPageTree(page)
     })
     return result
+}
+
+
+function checkMandatoryItem(item, data) {
+    if (item.mandatory) {
+        if (item.type === 'text') {
+            return data !== TEXT_DEF_VALUE
+        }
+        else if (item.type === 'date') {
+            return data !== DATE_DEF_VALUE
+        }
+        else if (item.type === 'tags') {
+            return data !== TAGS_DEF_VALUE
+        }
+        else if (item.type === 'textarea') {
+            return data !== TEXTAREA_DEF_VALUE
+        }
+        else if (item.type === 'checkbox') {
+            return data !== CHECKBOX_DEF_VALUE
+        }
+        else if (item.type === 'radio') {
+            return data !== item.options[0].value //todo: fix
+        }
+        else {
+            throw new Error(`Unsupported item type ${item.type}`)
+        }
+    }
+    return true
+}
+
+function checkMandatoryPage(page, data) {
+    return page.items
+        .filter((item) => item.type !== 'h1' && item.type !== 'p')
+        .every((item) => {
+            if (item.type === 'row') {
+                return item.content
+                    .filter((item) => item.type !== 'h1' && item.type !== 'p')
+                    .every((item) => checkMandatoryItem(item, data[item.name]))
+            }
+            else {
+                return checkMandatoryItem(item, data[item.name])
+            }
+        })
+}
+
+function checkMandatory(settings, data) {
+    return settings.pages
+        .filter((page) => typeof page.name !== 'undefined')
+        .every((page) => checkMandatoryPage(page, data[page.name]))
 }
 
 
@@ -160,7 +215,7 @@ export default (settings, i18n) => {
 
     const send = () => {
         const {questionnaire} = store.getState()
-        //store.dispatch({type: 'SENDING_START'})
+        store.dispatch({type: 'SENDING_START'})
         nanoajax.ajax({
             url: '/api/volunteers/send-questionnaire',
             method: 'POST',
@@ -171,10 +226,10 @@ export default (settings, i18n) => {
         }, (code, responseText, request) => {
             const OK_CODE = 200
             if (code === OK_CODE) {
-                //store.dispatch({type: 'SENDING_DONE'})
+                store.dispatch({type: 'SENDING_DONE'})
             }
             else {
-                //store.dispatch({type: 'SENDING_FAILED'})
+                store.dispatch({type: 'SENDING_FAILED'})
             }
         })
     }
@@ -191,10 +246,18 @@ export default (settings, i18n) => {
             )
         }
         else {
+            const uiDisabled = ui.state === 'SENDING'
+            const mandatoryFilled = checkMandatory(settings, questionnaire)
+            const submitDisabled = uiDisabled || !mandatoryFilled
+            console.log("mandatoryFilled", mandatoryFilled)
+            console.log("submitDisabled", submitDisabled)
             el = h('div',
                 h(Root, {settings, state: questionnaire, onChange: handleChange}),
                 ui.state === 'SENDING_FAILED' && h('div.message', 'Something has gone wrong shile sending the form :('),
-                h(bem('button#submit'), {onClick: send, disabled: ui.state === 'SENDING'}, 'Отправить')
+                h(bem('button#submit'), {
+                    onClick: send,
+                    disabled: submitDisabled,
+                }, 'Отправить')
             )
         }
         ReactDOM.render(

@@ -15,7 +15,6 @@ class Text extends React.Component {
 
     render() {
         const {name, title, value, placeholder, mandatory} = this.props
-        console.log("this.props", this.props)
         return h(bem('div'),
             h(bem('label#label'),
                 h(QuestionTitle, {mandatory}, title),

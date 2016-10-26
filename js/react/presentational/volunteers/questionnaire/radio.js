@@ -10,7 +10,6 @@ const bem = prefixer('questionnaire-radio')
 
 class Radio extends React.Component {
     handleChange = (value) => {
-        console.log("value", value)
         this.props.onChange(value)
     }
 
