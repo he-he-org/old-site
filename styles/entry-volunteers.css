@@ -39,6 +39,10 @@
     margin-top: 9rem;
 }
 
+
+#react-volunteers-form {
+    margin-top: 1.75rem;
+}
 .questionnaire {
 
     &__submit {
@@ -84,6 +88,8 @@
 
     &-question-title {
         font-weight: 600;
+        font-size: 0.9375rem;
+        margin-top: 0.5rem;
     }
 
     &-h1 {
@@ -120,7 +126,7 @@
     }
 
     &-group-checkbox {
-        margin: 2rem 0;
+        margin: 1rem 0;
 
         &__items {
             margin: 0.5rem 0;
@@ -137,19 +143,56 @@
             max-width: 300px;
             padding: 0.2rem 0;
             padding-right: 2rem;
+            vertical-align: middle;
         }
 
         &__item-option {
             text-align: center;
             vertical-align: middle;
             padding: 10px;
+            width: 50%;
+        }
+
+        &__item-title, &__item-option {
+            border-style: dashed;
+            border-color: #e8e8e8;
+            border-width: 1px 0 1px 0;
+        }
+
+        &__inputs {
+            display: flex;
+        }
+
+        &__input {
+            margin: 7px 0;
+            border: solid 1px #e1e1e1;
+            background-color: white;
+            padding: 7px 32px;
+            flex: 1;
+
+            &--is-checked {
+                border: 1px solid red;
+            }
+            &:first-child {
+                border-radius: 5px 0 0 5px;
+            }
+            &:last-child {
+                border-radius: 0 5px 5px 0;
+            }
+            &:not(:first-child):not(:last-child):not(&--is-checked) {
+                border-left-color: transparent;
+                border-right-color: transparent;
+            }
+            &:first-child:nth-last-child(2):not(&--is-checked) {
+                border-right-color: transparent;
+            }
+            &--is-checked + &--is-checked {
+                border-left-color: transparent;
+            }
         }
 
     }
 
-    &-group-checkbox {
-        margin: 1rem 0;
-    }
 
     &-text {
         margin: 1rem 0;
@@ -214,6 +257,7 @@
 
         &__options {
             display: flex;
+            margin: 1rem 0;
         }
 
         &__option {
@@ -224,8 +268,24 @@
         }
 
         &__input {
-            margin: 7px;
-            margin-left: 0;
+            border: solid 1px #e1e1e1;
+            background-color: white;
+            padding: 7px 32px;
+            min-width: 200px;
+
+            &--is-checked {
+                border: 1px solid red;
+            }
+            &:first-child {
+                border-radius: 5px 0 0 5px;
+            }
+            &:last-child {
+                border-radius: 0 5px 5px 0;
+            }
+            &:not(:first-child):not(:last-child):not(&--is-checked) {
+                border-left-color: transparent;
+                border-right-color: transparent;
+            }
         }
     }
 }

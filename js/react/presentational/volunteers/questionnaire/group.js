@@ -59,14 +59,14 @@ GroupScale.propTypes = {
 
 class GroupCheckbox extends React.Component {
 
-    handleChange = (itemName, optionName, e) => {
+    handleChange = (itemName, optionName) => {
         const {value, onChange} = this.props
-        const checked = e.target.checked
+        const optionValue = value[itemName][optionName]
         onChange({
             ...value,
             [itemName]: {
                 ...value[itemName],
-                [optionName]: checked,
+                [optionName]: !optionValue,
             },
         })
     }
@@ -80,20 +80,15 @@ class GroupCheckbox extends React.Component {
                 h('thead'),
                 h('tbody', this.props.items.map((item) => (
                     h(bem('tr#item'), {key: item.name},
-                        [
-                            h(bem('td#item-title'), {key: 'title'}, item.title),
-                        ].concat(this.props.options.map((option) => (
-                            h(bem('td#item-option'), {key: option.name},
-                                h(bem('label#label'),
-                                    h(bem('input#input'), {
-                                        type: 'checkbox',
-                                        checked: value[item.name][option.name],
-                                        onClick: this.handleChange.bind(this, item.name, option.name),
-                                    }),
-                                    option.title
-                                )
-                            )
-                        )))
+                        h(bem('td#item-title'), {key: 'title'}, item.title),
+                        h(bem('td#item-option'),
+                            h(bem('div#inputs'), this.props.options.map((option) => (
+                                h(bem('button', 'input', value[item.name][option.name] ? ['is-checked'] : []), {
+                                    key: option.name,
+                                    onClick: this.handleChange.bind(this, item.name, option.name),
+                                }, option.title)
+                            )))
+                        )
                     )
                 )))
             )

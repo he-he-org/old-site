@@ -9,9 +9,9 @@ const bem = prefixer('questionnaire-radio')
 
 
 class Radio extends React.Component {
-    handleChange = (e) => {
-        window.e = e
-        this.props.onChange(e.target.value)
+    handleChange = (value) => {
+        console.log("value", value)
+        this.props.onChange(value)
     }
 
     render() {
@@ -20,16 +20,13 @@ class Radio extends React.Component {
             h(QuestionTitle, title),
             h(bem('div#options'),
                 options.map((option) => (
-                    h(bem('label#option'), {key: option.value},
-                        h(bem('input#input'), {
-                            type: 'radio',
-                            name, // todo: need to garantee, that name is globaly unique, need to build full name including page name, or generate random name
-                            value: option.value,
-                            checked: option.value === value,
-                            onChange: this.handleChange,
-                        }),
-                        option.title
-                    )
+                    h(bem('button', 'input', option.value === value ? ['is-checked'] : []), {
+                        key: option.value,
+                        name, // todo: need to guarantee, that name is globaly unique, need to build full name including page name, or generate random name
+                        value: option.value,
+                        checked: option.value === value,
+                        onClick: this.handleChange.bind(this, option.value),
+                    }, option.title)
                 ))
             )
         )
