@@ -3,8 +3,6 @@
 use app\widgets\help\CategoryMenu;
 use app\widgets\help\PreparedPackage;
 
-\app\assets\HelpPackageAsset::register($this);
-
 ?>
 <div class="row">
     <div class="row_block-3">

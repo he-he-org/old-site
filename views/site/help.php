@@ -3,6 +3,8 @@
 use app\widgets\help\HelpOptions;
 use yii\helpers\Url;
 
+\app\assets\HelpPackageAsset::register($this);
+
 $this->title = 'Health & Help - ' . \Yii::t('strings', 'layout/main-menu/help');
 
 ?>
