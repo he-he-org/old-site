@@ -3,6 +3,7 @@ namespace app\controllers;
 
 
 use app\helpers\GoogleSpreadsheetClient;
+use app\models\VolunteersQuestionnaireResponse;
 use Google_Client;
 use Google_Service_Sheets;
 use Google_Service_Sheets_ValueRange;
@@ -100,13 +101,18 @@ class VolunteersController extends Controller
             throw new BadRequestHttpException('Questionnaire and response versions are different');
         }
 
+        // Save response to database
+        $volunteersQuestionnaireResponse = new VolunteersQuestionnaireResponse();
+        $volunteersQuestionnaireResponse->body = Yii::$app->request->getRawBody();
+        $volunteersQuestionnaireResponse->save();
+
         $pages = $settings['pages'];
         $answers = $response['answers'];
 
         $userData = $this->buildData($pages, $answers);
 
         $DOC_ID = @$config['questionnaire_google_docid'] ?: null;
-        $SHEET = 'Sheet1';
+        $SHEET = 'version' . $settings['version'];
 
         define('APPLICATION_NAME', 'Google Sheets API PHP Quickstart');
         define('CLIENT_SECRET_PATH', Yii::getAlias('@app') . '/google-secret.json');
