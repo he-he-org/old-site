@@ -1,3 +1,3 @@
 <div class="row row--vcenter">
-    <div id="react-volunteers-form" class="row_block-9"></div>
+    <div id="react-volunteers-questionnaire-entry-point" class="row_block-7"></div>
 </div>

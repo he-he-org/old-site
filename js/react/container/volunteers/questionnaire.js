@@ -249,9 +249,7 @@ export default (settings, i18n) => {
             const uiDisabled = ui.state === 'SENDING'
             const mandatoryFilled = checkMandatory(settings, questionnaire)
             const submitDisabled = uiDisabled || !mandatoryFilled
-            console.log("mandatoryFilled", mandatoryFilled)
-            console.log("submitDisabled", submitDisabled)
-            el = h('div',
+            el = h('div.questionnaire-react-root',
                 h(Root, {settings, state: questionnaire, onChange: handleChange}),
                 ui.state === 'SENDING_FAILED' && h('div.message', 'Something has gone wrong shile sending the form :('),
                 h(bem('button#submit'), {
@@ -262,7 +260,7 @@ export default (settings, i18n) => {
         }
         ReactDOM.render(
             el,
-            document.getElementById('react-volunteers-form')
+            document.getElementById('react-volunteers-questionnaire-entry-point')
         )
     }
 

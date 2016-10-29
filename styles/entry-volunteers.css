@@ -40,18 +40,34 @@
 }
 
 
-#react-volunteers-form {
+#react-volunteers-questionnaire-entry-point {
     margin-top: 1.75rem;
 }
+
+.questionnaire-react-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .questionnaire {
 
     &__submit {
-        background: #ffed49;
-        border-color: #ffed49;
+        background: white;
+        border: 2px solid #ff7777;
         color: #2c2c2c;
         margin-left: 2px;
         font-weight: 600;
-        padding: 10px;
+        padding: 15px 40px;
+        border-radius: 5px;
+
+        &:hover:not(:disabled) {
+            border-color: #ff3a3a;
+        }
+
+        &:active:not(:disabled) {
+            border-color: #dd2222;
+        }
 
         &:disabled {
             opacity: 0.5;

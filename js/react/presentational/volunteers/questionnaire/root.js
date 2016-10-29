@@ -14,6 +14,8 @@ import Group from './group'
 import Tags from './tags'
 import Textarea from './textarea'
 
+import prefixer from 'bem-prefixer'
+
 const ItemTypes = {
     H1: 'h1',
     H2: 'h2',
@@ -28,6 +30,8 @@ const ItemTypes = {
     RADIO: 'radio',
 }
 
+
+const bem = prefixer('questionnaire-root')
 
 class Root extends React.Component {
 
@@ -108,7 +112,7 @@ class Root extends React.Component {
     render() {
         const {settings, state} = this.props
 
-        return h('div', settings.pages.map((page) => (
+        return h(bem('div'), settings.pages.map((page) => (
             h(Page, {
                 key: page.name,
                 state,
