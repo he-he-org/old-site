@@ -6,6 +6,7 @@ use app\components\ExtMarkdown;
 use app\models\Member;
 use app\models\NewsItem;
 use app\models\NewsTag;
+use app\models\Vacancy;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -151,7 +152,61 @@ class SiteController extends Controller
     public function actionVolunteers()
     {
         $this->layout = 'main';
-        return $this->render('volunteers');
+
+        if (Yii::$app->request->getSectionPart(0, 'requirements') === 'vacancies') {
+
+            $id = Yii::$app->request->getSectionPart(1, null);
+
+            if ($id === null) {
+                $vacancies = Vacancy::find()
+                    ->with(['title'])
+                    ->all();
+                $vacancies = array_map(function ($vacancy) {
+                    return [
+                        'id' => $vacancy['id'],
+                        'title' => $vacancy['title'][Yii::$app->language],
+                    ];
+                }, $vacancies);
+                return $this->render('volunteers', [
+                    'vacancies' => $vacancies
+                ]);
+            }
+            else {
+                $parser = new ExtMarkdown();
+                $vacancy = Vacancy::findOne(['id' => intval($id)]);
+                if ($vacancy) {
+                    return $this->render('volunteers', [
+                        'vacancy' => [
+                            'id' => $vacancy['id'],
+                            'title' => $vacancy['title'][Yii::$app->language],
+                            'body' => $parser->parse($vacancy['body'][Yii::$app->language]),
+                        ]
+                    ]);
+                }
+                else {
+                    throw new \yii\web\NotFoundHttpException("Vacancy with id $id not found");
+                }
+            }
+
+        }
+        else if(Yii::$app->request->getSectionPart(0, 'requirements') === 'requirements') {
+            $vacancies = Vacancy::find()
+                ->with(['title'])
+                ->all();
+            $vacancies = array_map(function ($vacancy) {
+                return [
+                    'id' => $vacancy['id'],
+                    'title' => $vacancy['title'][Yii::$app->language],
+                ];
+            }, $vacancies);
+            return $this->render('volunteers', [
+                'vacancies' => $vacancies
+            ]);
+        }
+        else {
+            return $this->render('volunteers');
+        }
+
     }
 
     public function actionNews()

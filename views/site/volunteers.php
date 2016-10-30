@@ -20,5 +20,9 @@ VolunteersAsset::register($this);
 
     <?php include("volunteers/questionnaire.php") ?>
 
+<?php } else if ($mainSection === 'vacancies') { ?>
+
+    <?php include("volunteers/vacancies.php") ?>
+
 <?php } ?>
 

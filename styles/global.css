@@ -29,6 +29,10 @@ html {
     &--vcenter {
         justify-content: center;
     }
+
+    &--vstart {
+        justify-content: flex-start;
+    }
 }
 
 

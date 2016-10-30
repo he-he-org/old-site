@@ -106,6 +106,22 @@ const scheme = [
             {name: 'news_tags_id', type: 'int'},
         ],
     },
+    {
+        name: 'vacancies',
+        attrs: [
+            {name: 'id', type: 'int'},
+            {name: 'title', type: 'manyToOne', manyToOne: {
+                to: 'translation-strings',
+                fromAttr: 'title_id',
+                toAttr: 'id',
+            }},
+            {name: 'body', type: 'manyToOne', manyToOne: {
+                to: 'translation-texts',
+                fromAttr: 'body_id',
+                toAttr: 'id',
+            }},
+        ],
+    },
 ]
 
 const expandings = {
@@ -138,6 +154,7 @@ const expandings = {
             'title',
         ]],
     ],
+    'vacancies': ['title', 'body'],
 }
 
 const renderers = {
@@ -157,6 +174,10 @@ const renderers = {
     'news-news-tags': {
         'news_item': (value) => value === null ? 'null' : value.title['ru-RU'],
         'tag': (value) => value === null ? 'null' : value.title['ru-RU'],
+    },
+    'vacancies': {
+        'title': (value) => value === null ? 'null' : value['ru-RU'],
+        'body': (value) => value === null ? 'null' : value['ru-RU'],
     },
 }
 
