@@ -2,12 +2,10 @@
 
 namespace app\assets;
 
-class HelpDonateAsset extends BaseAsset
+class HelpCommonAsset extends BaseAsset
 {
     public $css = [
-    ];
-    public $js = [
-        'js/help-donate.js',
+        'css/help.css',
     ];
     public $depends = [
         'app\assets\AppAsset'
