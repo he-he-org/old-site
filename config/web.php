@@ -52,7 +52,15 @@ $config = [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['translation-string','translation-text', 'member', 'news-item', 'news-tag', 'news-news-tag'],
+                    'controller' => [
+                        'translation-string',
+                        'translation-text',
+                        'member',
+                        'news-item',
+                        'news-tag',
+                        'news-news-tag',
+                        'vacancy',
+                    ],
                     'prefix' => 'api'
                 ],
                 'paypal' => 'paypal/main',
@@ -61,6 +69,7 @@ $config = [
                 'admin' => 'admin/main',
                 'api/volunteers/<action>' => 'volunteers/<action>',
                 'admin/<section:.*>' => 'admin/<section>',
+                '<page>/<section:.*>/<subsection:.*>' => 'site/<page>',
                 '<page>/<section:.*>' => 'site/<page>',
                 '<page>' => 'site/<page>',
             ],
