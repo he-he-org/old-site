@@ -1,6 +1,6 @@
 <?php
 
-use app\widgets\help\HelpOptions;
+use app\widgets\layout\SubMenu;
 use yii\helpers\Url;
 
 \app\assets\HelpCommonAsset::register($this);
@@ -11,10 +11,21 @@ $this->title = 'Health & Help - ' . \Yii::t('strings', 'layout/main-menu/help');
 
 <div class="row row--separate-bottom">
     <div class="row_block-12">
-        <?= HelpOptions::widget(['items' => [
-            ['title' => \Yii::t('strings', 'help/submenu/send-a-package/title'), 'section' => 'package', 'icon_url' => '/images/help/shipping.svg'],
-            ['title' => \Yii::t('strings', 'help/submenu/donate-now/title'), 'section' => 'donate', 'icon_url' => '/images/help/card.svg'],
-            ['title' => \Yii::t('strings', 'help/submenu/donate-now/become-a-volunteer'), 'url' => Url::toRoute(['/volunteers']), 'icon_url' => '/images/help/user.svg'],
+        <?= SubMenu::widget(['items' => [
+            [
+                'title' => \Yii::t('strings', 'help/submenu/send-a-package/title'),
+                'section' => 'package',
+                'icon_url' => '/images/help/shipping.svg'],
+            [
+                'title' => \Yii::t('strings', 'help/submenu/donate-now/title'),
+                'section' => 'donate',
+                'icon_url' => '/images/help/card.svg'],
+            [
+                'title' => \Yii::t('strings', 'help/submenu/donate-now/become-a-volunteer'),
+                'page' => 'volunteers',
+                'section' => '',
+                'icon_url' => '/images/help/user.svg'
+            ],
         ]]) ?>
     </div>
 </div>

@@ -221,4 +221,44 @@ main {
             text-decoration: none;
         }
     }
+
+    &-submenu{
+
+        display: flex;
+
+        &_option {
+            display: flex;
+            align-content: center;
+            margin-right: 50px;
+            color: #2c2c2c;
+        }
+
+        &_icon {
+            display: inline-block;
+            vertical-align: middle;
+            width: 60px;
+            height: 60px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+
+            img {
+                position: relative;
+                left: 50%;
+                top: 50%;
+                width: 35px;
+                transform: translate(-50%,-50%);
+            }
+        }
+
+        &_title {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        &_option--active &_title {
+            font-weight: bold;
+        }
+    }
 }

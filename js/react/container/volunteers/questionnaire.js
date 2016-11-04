@@ -154,7 +154,7 @@ function checkMandatory(settings, data) {
 }
 
 
-export default (settings, i18n) => {
+export default (settings, container, i18n) => {
     // todo: need to validate json
     const questionnaireInitialState = Object.assign({}, buildStateTree(settings), {
         language: i18n.detectLanguage(),
@@ -238,29 +238,30 @@ export default (settings, i18n) => {
         const bem = prefixer('questionnaire')
 
         const {questionnaire, ui} = store.getState()
-        let el = null
+        let rootEl = null
         if (ui.state === 'SENDING_DONE') {
-            el = h(bem('div#done'),
-                h(bem('h1#done-header'), 'Спасибо!'),
-                h(bem('p#done-message'), 'Мы рассмотрим вашу анкету в самое ближайшее время!')
+            rootEl = h(bem('div#done'),
+                h(bem('p#done-message'), {
+                    dangerouslySetInnerHTML: {__html: i18n.t('texts', 'volunteers/questionnaire/done-message')},
+                })
             )
         }
         else {
             const uiDisabled = ui.state === 'SENDING'
             const mandatoryFilled = checkMandatory(settings, questionnaire)
             const submitDisabled = uiDisabled || !mandatoryFilled
-            el = h('div.questionnaire-react-root',
+            rootEl = h('div.questionnaire-react-root',
                 h(Root, {settings, state: questionnaire, onChange: handleChange}),
                 ui.state === 'SENDING_FAILED' && h('div.message', 'Something has gone wrong shile sending the form :('),
                 h(bem('button#submit'), {
                     onClick: send,
                     disabled: submitDisabled,
-                }, 'Отправить')
+                }, i18n.t('strings', 'volunteers/quetaionnaire/submit-button/title'))
             )
         }
         ReactDOM.render(
-            el,
-            document.getElementById('react-volunteers-questionnaire-entry-point')
+            rootEl,
+            container
         )
     }
 

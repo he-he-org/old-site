@@ -11,7 +11,7 @@ $lang = Yii::$app->request->getLang();
 <div class="row">
     <?php if ($subsection === null) { ?>
         <div class="row_block-8">
-            <h1>Вакансии</h1>
+            <h1><?= \Yii::t('strings', 'volunteers/vacancies/title'); ?></h1>
             <?php foreach($vacancies as $vacancy) { ?>
                 <p><a href="<?= Url::toRoute([
                         $page,

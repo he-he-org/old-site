@@ -7,15 +7,21 @@ new Promise((resolve) => {
     document.addEventListener('DOMContentLoaded', resolve)
 }).then(() => {
     return I18N.create({
-        'strings': [],
+        'strings': [
+            'volunteers/quetaionnaire/submit-button/title',
+        ],
         'texts': [
-            'help/volunteers/questionnaire/settings',
+            'volunteers/questionnaire/settings',
+            'volunteers/questionnaire/done-message',
         ],
     })
 }).then((i18n) => {
-    const jsonString = i18n.t('texts', 'help/volunteers/questionnaire/settings')
-    const data = JSON.parse(jsonString)
-    Questionnaire(data, i18n)
+    const questionnaire = document.getElementById('react-volunteers-questionnaire-entry-point')
+    if (questionnaire) {
+        const jsonString = i18n.t('texts', 'volunteers/questionnaire/settings')
+        const data = JSON.parse(jsonString)
+        Questionnaire(data, questionnaire, i18n)
+    }
 }).catch((e) => {
     console.error(e.stack)
 })

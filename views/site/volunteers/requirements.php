@@ -45,6 +45,7 @@ use yii\helpers\Url;
     <div class="row_block-8"><?= Yii::t('texts/help', 'help/volunteers/part4') ?></div>
 </div>
 
+<?php /*
 <div class="row row--separate">
     <div class="row_block-12">
         <h1>Открытые вакансии</h1>
@@ -57,3 +58,4 @@ use yii\helpers\Url;
         </div>
     </div>
 </div>
+*/?>

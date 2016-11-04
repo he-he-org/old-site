@@ -1,9 +1,9 @@
 <?php
-namespace app\widgets\help;
+namespace app\widgets\layout;
 use yii\base\Widget;
 use yii\helpers\Html;
 
-class HelpOptions extends Widget {
+class SubMenu extends Widget {
 
     public $items;
 
@@ -14,7 +14,7 @@ class HelpOptions extends Widget {
 
     public function run()
     {
-        return $this->render('help_options', [
+        return $this->render('sub_menu', [
             'items' => $this->items,
         ]);
     }

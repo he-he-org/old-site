@@ -109,7 +109,7 @@ class VolunteersController extends Controller
         $SHEET = 'Sheet1';
 
         define('APPLICATION_NAME', 'Google Sheets API PHP Quickstart');
-        define('CLIENT_SECRET_PATH', Yii::getAlias('@app') . '/google-secret.json');
+        define('CLIENT_SECRET_PATH', Yii::getAlias('@app') . '/questionnaire-google-secret.json');
         define('SCOPES', implode(' ', array(
             Google_Service_Sheets::SPREADSHEETS)
         ));
