@@ -24,12 +24,12 @@ VolunteersAsset::register($this);
                     'is_active' => $mainSection === 'requirements',
                     'icon_url' => '/images/volunteers/icons/requirements.svg'
                 ],
-    //            [
-    //                'title' => \Yii::t('strings', 'volunteers/submenu/questionnaire/title'),
-    //                'section' => 'questionnaire',
-    //                'is_active' => $mainSection === 'questionnaire',
-    //                'icon_url' => '/images/volunteers/icons/questionnaire.svg'
-    //            ],
+                [
+                    'title' => \Yii::t('strings', 'volunteers/submenu/questionnaire/title'),
+                    'section' => 'questionnaire',
+                    'is_active' => $mainSection === 'questionnaire',
+                    'icon_url' => '/images/volunteers/icons/questionnaire.svg'
+                ],
                 [
                     'title' => \Yii::t('strings', 'volunteers/submenu/vacancies/title'),
                     'section' => 'vacancies',
