@@ -93,7 +93,7 @@ class VolunteersController extends Controller
 
         Yii::$app->language = 'ru-RU';
 
-        $settings = json_decode(\Yii::t('texts', 'help/volunteers/questionnaire/settings'), true);
+        $settings = json_decode(\Yii::t('texts', 'volunteers/questionnaire/settings'), true);
         $response = json_decode(Yii::$app->request->getRawBody(), true);
 
         if ($settings['version'] !== $response['version']) {
