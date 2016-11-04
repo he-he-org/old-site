@@ -6,19 +6,18 @@ use yii\helpers\Url;
 <div class="row_block-12 layout-submenu">
     <?php foreach ($items as $item) { ?>
         <?php
-            $page = isset($item['page']) ? $item['page'] : Yii::$app->request->getPage();
-            $section = isset($item['section']) ? $item['section'] : Yii::$app->request->getSectionPart(0);
+            $urlPage = Yii::$app->request->getPage($default_page);
+            $urlSection = Yii::$app->request->getSectionPart(0, $default_section);
+
+            $itemPage = isset($item['page']) ? $item['page'] : $urlPage;
+            $itemSection = isset($item['section']) ? $item['section'] : $urlSection;
+
+            $isActive = $urlPage === $itemPage && $urlSection === $itemSection;
+
             $href = Url::toRoute([
-                $page,
-                'section' => $section,
+                $itemPage,
+                'section' => $itemSection,
             ]);
-            $isActive = isset($item['is_active'])
-                ? $item['is_active']
-                : $section === Yii::$app->request->getSectionPart(0)
-//            $isActive = isset($item['section'])
-//                ? Yii::$app->request->getSectionPart(0, 'package') === $item['section']
-//                : false;
-//            $href = isset($item['url']) ? $href = $item['url'] : Url::toRoute(["help/${item['section']}"]);
         ?>
 
         <a class="layout-submenu_option<?= $isActive ? ' layout-submenu_option--active' : '' ?>"

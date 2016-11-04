@@ -11,22 +11,25 @@ $this->title = 'Health & Help - ' . \Yii::t('strings', 'layout/main-menu/help');
 
 <div class="row row--separate-bottom">
     <div class="row_block-12">
-        <?= SubMenu::widget(['items' => [
-            [
-                'title' => \Yii::t('strings', 'help/submenu/send-a-package/title'),
-                'section' => 'package',
-                'icon_url' => '/images/help/shipping.svg'],
-            [
-                'title' => \Yii::t('strings', 'help/submenu/donate-now/title'),
-                'section' => 'donate',
-                'icon_url' => '/images/help/card.svg'],
-            [
-                'title' => \Yii::t('strings', 'help/submenu/donate-now/become-a-volunteer'),
-                'page' => 'volunteers',
-                'section' => '',
-                'icon_url' => '/images/help/user.svg'
+        <?= SubMenu::widget([
+            'items' => [
+                [
+                    'title' => \Yii::t('strings', 'help/submenu/send-a-package/title'),
+                    'section' => 'package',
+                    'icon_url' => '/images/help/shipping.svg'],
+                [
+                    'title' => \Yii::t('strings', 'help/submenu/donate-now/title'),
+                    'section' => 'donate',
+                    'icon_url' => '/images/help/card.svg'],
+                [
+                    'title' => \Yii::t('strings', 'help/submenu/donate-now/become-a-volunteer'),
+                    'page' => 'volunteers',
+                    'icon_url' => '/images/help/user.svg'
+                ],
             ],
-        ]]) ?>
+            'default_page' => 'help',
+            'default_section' => 'package',
+        ]) ?>
     </div>
 </div>
 

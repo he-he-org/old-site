@@ -6,6 +6,8 @@ use yii\helpers\Html;
 class SubMenu extends Widget {
 
     public $items;
+    public $default_section;
+    public $default_page;
 
     public function init()
     {
@@ -16,6 +18,8 @@ class SubMenu extends Widget {
     {
         return $this->render('sub_menu', [
             'items' => $this->items,
+            'default_section' => $this->default_section,
+            'default_page' => $this->default_page,
         ]);
     }
 }
