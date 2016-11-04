@@ -106,7 +106,7 @@ class VolunteersController extends Controller
         $userData = $this->buildData($pages, $answers);
 
         $DOC_ID = @$config['questionnaire_google_docid'] ?: null;
-        $SHEET = $settings['version'];
+        $SHEET = 'version' . $settings['version'];
 
         define('APPLICATION_NAME', 'Google Sheets API PHP Quickstart');
         define('CLIENT_SECRET_PATH', Yii::getAlias('@app') . '/questionnaire-google-secret.json');
