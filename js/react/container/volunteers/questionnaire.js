@@ -179,7 +179,7 @@ export default (settings, container, i18n) => {
         return state
     }
 
-    const uiReducer = (state = {state: 'SENDING_FAILED'}, action) => {
+    const uiReducer = (state = {state: 'IDLE'}, action) => {
         if (action.type === 'SENDING_START') {
             return {
                 ...state,
@@ -252,10 +252,7 @@ export default (settings, container, i18n) => {
             const submitDisabled = uiDisabled || !mandatoryFilled
             rootEl = h('div.questionnaire-react-root',
                 h(Root, {settings, state: questionnaire, onChange: handleChange}),
-                ui.state === 'SENDING_FAILED' && h('div.message',
-                    {style: {margin: '1rem', color: 'red'}},
-                    'Something has gone wrong while sending the form. Sorry :('
-                ),
+                ui.state === 'SENDING_FAILED' && h('div.message', 'Something has gone wrong shile sending the form :('),
                 h(bem('button#submit'), {
                     onClick: send,
                     disabled: submitDisabled,
