@@ -42,6 +42,11 @@ $config = [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning', 'info', 'trace'],
                 ],
+                [
+                    'class' => 'app\components\SqlFileLogTarget',
+                    'enabled' => false,
+                    'logFile' => '@runtime/logs/sql.log',
+                ],
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
