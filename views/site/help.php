@@ -24,6 +24,7 @@ $this->title = 'Health & Help - ' . \Yii::t('strings', 'layout/main-menu/help');
                 [
                     'title' => \Yii::t('strings', 'help/submenu/donate-now/become-a-volunteer'),
                     'page' => 'volunteers',
+                    'section' => 'requirements',
                     'icon_url' => '/images/help/user.svg'
                 ],
             ],
