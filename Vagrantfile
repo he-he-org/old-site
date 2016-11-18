@@ -41,8 +41,15 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
 
+  config.vm.synced_folder ".", "/vagrant",
+    owner: 'www-data',
+    group: 'www-data',
+    mount_options: ["dmode=777,fmode=777"]
+
   config.vm.synced_folder "dbdata/", "/var/lib/mysql",
-    owner: 112, group: 118 # mysql user and group ids
+    owner: 112,
+    group: 118, # mysql user and group ids
+    mount_options: ["dmode=777,fmode=777"]
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
