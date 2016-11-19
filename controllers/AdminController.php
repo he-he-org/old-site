@@ -34,6 +34,12 @@ class AdminController extends Controller
         ];
     }
 
+    public function actionDb()
+    {
+        $this->layout = 'empty';
+        return $this->render('db');
+    }
+
     public function actionMain()
     {
         $this->layout = 'empty';

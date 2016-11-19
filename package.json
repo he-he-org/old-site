@@ -59,6 +59,7 @@
       },
       "entryPoints": [
         "layout",
+        "admin-db",
         "admin",
         "main",
         "help-package",
@@ -74,6 +75,7 @@
         "dev": "./web/dev/css"
       },
       "entryPoints": [
+        "admin-db",
         "admin",
         "about",
         "main",
