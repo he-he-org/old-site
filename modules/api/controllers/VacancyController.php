@@ -1,5 +1,6 @@
 <?php
-namespace app\controllers;
+
+namespace app\modules\api\controllers;
 
 use app\components\RestAuthController;
 use app\components\RestSearchController;
@@ -7,9 +8,9 @@ use yii\filters\AccessControl;
 use yii\filters\auth\HttpBasicAuth;
 use yii\rest\ActiveController;
 
-class MemberController extends ActiveController
+class VacancyController extends ActiveController
 {
-    public $modelClass = 'app\models\Member';
+    public $modelClass = 'app\models\Vacancy';
 
     use RestSearchController, RestAuthController;
 }

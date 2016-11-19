@@ -8,6 +8,11 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+        'api' => [
+            'class' => 'app\modules\api\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             'class' => 'app\components\LangRequest',
@@ -58,15 +63,14 @@ $config = [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
-                        'translation-string',
-                        'translation-text',
-                        'member',
-                        'news-item',
-                        'news-tag',
-                        'news-news-tag',
-                        'vacancy',
+                        'api/translation-string',
+                        'api/translation-text',
+                        'api/member',
+                        'api/news-item',
+                        'api/news-tag',
+                        'api/news-news-tag',
+                        'api/vacancy',
                     ],
-                    'prefix' => 'api'
                 ],
                 'paypal' => 'paypal/main',
                 'paypal/<action>' => 'paypal/<action>',
