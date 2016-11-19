@@ -20,7 +20,7 @@ class AppAsset extends BaseAsset
         'css/common.css',
     ];
     public $js = [
-        'js/vendor.js',
+        'js/vendor-site.js',
         'js/layout.js',
     ];
     public $depends = [

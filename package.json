@@ -15,6 +15,7 @@
     "react-datepicker": "^0.32.0",
     "react-dom": "^15.1.0",
     "react-input-autosize": "^1.0.0",
+    "react-markdown": "^2.4.2",
     "react-markup": "^1.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.0",
@@ -66,7 +67,35 @@
         "help-donate",
         "team",
         "volunteers"
-      ]
+      ],
+      "vendorBundles": {
+        "vendor-site": [
+          "bem-prefixer",
+          "functional-utils",
+          "is-nan",
+          "nanoajax",
+          "promise-polyfill",
+          "react",
+          "react-datepicker",
+          "react-dom",
+          "react-input-autosize",
+          "react-markup",
+          "react-redux",
+          "react-router",
+          "redux",
+          "redux-logger"
+        ],
+        "vendor-admin": [
+          "is-nan",
+          "bem-prefixer",
+          "react",
+          "react-dom",
+          "react-markup",
+          "bem-prefixer",
+          "rest",
+          "react-markdown"
+        ]
+      }
     },
     "styles": {
       "src": "./styles",

@@ -51,27 +51,34 @@ const cssEntryPoints = settings.styles.entryPoints.map(x => ({from: `entry-${x}.
  *
  */
 gulp.task("scripts:vendor", function () {
-    var bundler = browserify("", {
-        debug: false,
-        cache: {},
-        packageCache: {},
-        fullPaths: true,
-        extensions: [".js", ".jsx"],
-        require: Object.keys(packageJson.dependencies)
-    })
+    function bundle(name, deps) {
+        var bundler = browserify("", {
+            debug: false,
+            cache: {},
+            packageCache: {},
+            fullPaths: true,
+            extensions: [".js", ".jsx"],
+            require: deps
+        })
 
-    bundler = bundler.transform(babelify, babelConfig)
+        bundler = bundler.transform(babelify, babelConfig)
 
-    return bundler.bundle()
-        .on("error", onError)
-        .pipe(source("vendor.js"))
-        .on("error", onError)
-        .pipe(streamify(envify({NODE_ENV: "production"})))
-        .on("error", onError)
-        .pipe(streamify(uglify()))
-        .on("error", onError)
-        .pipe(gulp.dest(settings.scripts.dest.prod))
-        .on("error", onError)
+        return bundler.bundle()
+            .on("error", onError)
+            .pipe(source(name + ".js"))
+            .on("error", onError)
+            .pipe(streamify(envify({NODE_ENV: "production"})))
+            .on("error", onError)
+            .pipe(streamify(uglify()))
+            .on("error", onError)
+            .pipe(gulp.dest(settings.scripts.dest.prod))
+            .on("error", onError)
+    }
+
+    var bundles = settings.scripts.vendorBundles
+    return merge(Object.keys(bundles).map((key) => (
+        bundle(key, bundles[key])
+    )))
 })
 
 
@@ -160,39 +167,46 @@ gulp.task("default", ["lint", "scripts:vendor", "scripts", "styles"])
  */
 gulp.task("debug:scripts:vendor", function () {
 
-    var bundler = browserify("", {
-        debug: true,
-        cache: {},
-        packageCache: {},
-        fullPaths: true,
-        extensions: [".js", ".jsx"],
-        require: Object.keys(packageJson.dependencies)
-    })
+    function bundle(name, deps) {
+        var bundler = browserify("", {
+            debug: true,
+            cache: {},
+            packageCache: {},
+            fullPaths: true,
+            extensions: [".js", ".jsx"],
+            require: deps
+        })
 
-    bundler = bundler.transform(babelify, babelConfig)
-    bundler = watchify(bundler)
+        bundler = bundler.transform(babelify, babelConfig)
+        bundler = watchify(bundler)
 
-    function rebundle() {
-        return bundler.bundle()
-            .on("error", onError)
-            .pipe(source("vendor.js"))
-            .on("error", onError)
-            .pipe(streamify(envify({NODE_ENV: "development"})))
-            .on("error", onError)
-            .pipe(gulp.dest(settings.scripts.dest.dev))
-            .on("error", onError)
+        function rebundle() {
+            return bundler.bundle()
+                .on("error", onError)
+                .pipe(source(name + '.js'))
+                .on("error", onError)
+                .pipe(streamify(envify({NODE_ENV: "development"})))
+                .on("error", onError)
+                .pipe(gulp.dest(settings.scripts.dest.dev))
+                .on("error", onError)
+        }
+
+        bundler.on("update", function () {
+            var start = Date.now()
+            gutil.log("Rebundling vendor...")
+            var bundle = rebundle()
+            bundle.on("end", function () {
+                gutil.log("Rebundling vendor... Done! Time: " + (Date.now() - start))
+            })
+        })
+
+        return rebundle()
     }
 
-    bundler.on("update", function () {
-        var start = Date.now()
-        gutil.log("Rebundling vendor...")
-        var bundle = rebundle()
-        bundle.on("end", function () {
-            gutil.log("Rebundling vendor... Done! Time: " + (Date.now() - start))
-        })
-    })
-
-    return rebundle()
+    var bundles = settings.scripts.vendorBundles;
+    return merge(Object.keys(bundles).map((key) => (
+        bundle(key, bundles[key])
+    )))
 })
 
 

@@ -19,7 +19,7 @@ class AdminAsset extends BaseAsset
         'css/admin.css',
     ];
     public $js = [
-        'js/vendor.js',
+        'js/vendor-admin.js',
         'js/admin.js'
     ];
     public $depends = [
