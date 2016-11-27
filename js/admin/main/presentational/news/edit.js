@@ -131,7 +131,7 @@ export default createClass({
                     this.renderSpaceRow(),
                     this.renderTitle('Body'),
                     this.renderInput(
-                        h(LanguageSwitcher, {active: textLang, onChange: this.handleChangeTextLang}),
+                        h(LanguageSwitcher, {value: textLang, onChange: this.handleChangeTextLang}),
                         h(b('textarea#body-input'), {
                             value: item.text[textLang],
                             onChange: this.handleChangeText,
