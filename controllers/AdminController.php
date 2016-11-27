@@ -87,4 +87,16 @@ class AdminController extends Controller
         Yii::$app->response->statusCode = 401;
     }
 
+    public function actionFlushCache() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $user = Yii::$app->user->identity;
+        if ($user) {
+            Yii::$app->cache->flush();
+            Yii::$app->response->statusCode = 200;
+        }
+        else {
+            Yii::$app->response->statusCode = 401;
+        }
+    }
+
 }

@@ -216,6 +216,7 @@ class SiteController extends Controller
         $this->layout = 'main';
 
         $newsQuery = NewsItem::find()
+            ->where(['published' => true])
             ->with(['title', 'text'])
             ->orderBy(['date' => SORT_DESC]);
         $tagParam = Yii::$app->getRequest()->getQueryParam('tag');
