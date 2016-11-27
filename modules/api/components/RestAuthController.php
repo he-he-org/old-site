@@ -1,5 +1,5 @@
 <?php
-namespace app\components;
+namespace app\modules\api\components;
 
 use Yii;
 use yii\filters\AccessControl;

@@ -1,8 +1,8 @@
 <?php
 namespace app\modules\api\controllers;
 
-use app\components\RestAuthController;
-use app\components\RestSearchController;
+use app\modules\api\components\RestAuthController;
+use app\modules\api\components\RestSearchController;
 use yii\filters\AccessControl;
 use yii\filters\auth\HttpBasicAuth;
 use yii\rest\ActiveController;

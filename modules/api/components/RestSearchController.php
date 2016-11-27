@@ -1,12 +1,5 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: koluch
- * Date: 16/06/16
- * Time: 23:58
- */
-
-namespace app\components;
+namespace app\modules\api\components;
 
 
 use Yii;
