@@ -3,7 +3,7 @@ import {h} from 'react-markup'
 import {Router, Route, hashHistory} from 'react-router'
 
 import {merge} from 'functional-utils'
-import {login, logout, user} from './api'
+import {login, logout, user} from '../api'
 import Navigation from './navigation'
 import Auth from './auth'
 import TableView from './table-view'

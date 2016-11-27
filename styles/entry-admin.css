@@ -1,0 +1,361 @@
+@import "html5-doctor-reset-stylesheet.css";
+
+
+html {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#react {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+* {
+    font-family: 'Open Sans', 'PT Sans', sans-serif;
+}
+
+.App {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.NewsTab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.NewsTable {
+    display: flex;
+    flex: 1;
+
+    &__left, &__right {
+        flex: 1
+    }
+
+    &__right {
+        border-left: 1px solid #cccccc;
+        padding: 20px
+    }
+
+}
+
+.NewsTableList {
+    &__create {
+        margin: 10px;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        border-bottom: 1px solid #c7c7c7;
+
+        &--unpublished {
+            opacity: 0.5;
+        }
+
+        &:first-child {
+            border-top: 1px solid #c7c7c7;
+        }
+
+        &--active {
+            background: #efefef;
+        }
+
+        &-title {
+            margin-bottom: 10px;
+        }
+
+        &-tags {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        &-tag {
+            margin: 5px;
+        }
+
+    }
+
+    &__controls {
+        display: flex;
+        justify-content: flex-end;
+        visibility: hidden;
+    }
+
+    &__item:hover &__controls {
+        visibility: visible;
+    }
+}
+
+.NewsTableCurrent {
+    &__title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 1em;
+    }
+
+    &__image {
+        margin-bottom: 30px
+    }
+
+    &__body {
+        p {
+            margin: 10px 0;
+            line-height: 1.5em;
+        }
+    }
+}
+
+.NewsEditModal {
+    &__body {
+        background: white;
+        margin: 20px
+    }
+
+    &__controls {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        align-items: center;
+
+        > * {
+            margin: 5px;
+        }
+    }
+}
+
+.NewsEdit {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__inputs {
+    }
+
+    &__space-row {
+        td {
+            height: 20px;
+        }
+    }
+
+
+    &__title-row {
+        td {
+            font-size: 16px;
+            font-weight: bold;
+            padding-bottom: 5px;
+        }
+    }
+
+    &__modifiers {
+        text-align: right;
+        vertical-align: top;
+        padding-right: 5px;
+        width: 1px;
+    }
+
+    &__title-input {
+        min-width: 400px;
+    }
+
+
+    &__body-input {
+        min-width: 500px;
+        min-height: 300px;
+        font-family: monospace;
+        font-size: 16px;
+    }
+
+    &__tags {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 500px;
+    }
+
+    &__tag {
+        display: flex;
+        align-items: center;
+        margin: 5px;
+    }
+}
+
+.LanguageSwitcher {
+    display: flex;
+
+    &__item {
+        font-size: 10px;
+        margin: 2px;
+        text-transform: uppercase;
+        border: 3px solid #d8d8d8;
+        font-weight: bold;
+        width: 20px;
+        height: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &--active {
+            border-color: black;
+        }
+    }
+}
+
+.Tag {
+    background: #f5f5f5;
+    border: 1px solid #d6d6d6;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 0;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.Modal {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.53);
+    min-width: 100%;
+    min-height: 100%;
+    top: 0;
+    z-index: 1;
+}
+
+/*********************************/
+.TagsTable {
+    padding: 20px;
+
+    &__tag-row {
+        border-top: 1px solid #f1f1f1;
+
+        &:hover {
+            background: #fbfbfb;
+        }
+    }
+
+    &__table {
+        th {
+            padding: 20px 5px;
+            text-align: left;
+        }
+    }
+
+    &__title-cell {
+        max-width: 20vw;
+        padding: 10px 5px;
+
+        > div {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    &__controls-cell {
+        white-space: nowrap;
+
+        > * {
+            margin: 5px;
+        }
+    }
+
+    &__title-cell, &__controls-cell {
+        vertical-align: middle;
+    }
+}
+
+.TagsEditModal {
+    &__body {
+        margin: 20px;
+        background: white;
+        padding: 20px;
+    }
+
+    &__controls {
+        display: flex;
+        justify-content: center;
+
+        > * {
+            margin: 5px;
+        }
+    }
+}
+
+.TagsEdit {
+    &__inputs {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__input-group {
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+    }
+
+    &__label {
+        flex: 1;
+        padding: 10px;
+    }
+}
+
+.Navigation {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #ccc;
+
+    &__item {
+        padding: 8px 10px;
+        margin: 5px;
+        background: #fdfdfd;
+        border-radius: 9px;
+
+
+        &--active {
+            font-weight: bold;
+            border-color: black;
+
+            > a {
+                border-bottom-color: transparent;
+            }
+        }
+
+    }
+}
+
+
+.Auth {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    align-items: center;
+
+    label {
+        margin: 5px;
+    }
+}
+
+.ControlPanel {
+    display: flex;
+    background: #ffffff;
+    border-bottom: 1px solid #c7c7c7;
+    padding: 5px;
+    justify-content: space-between;
+}

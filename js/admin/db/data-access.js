@@ -1,5 +1,5 @@
 import {merge} from 'functional-utils'
-import Api from './api'
+import Api from '../api'
 
 export default function(context) {
     const {config: {scheme, expandings}, api: apiConfig} = context

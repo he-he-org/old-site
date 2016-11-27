@@ -37,6 +37,24 @@ export default function(config) {
             })
         },
 
+        fetchRecord: (collection, record, params = {}) => {
+            return client({
+                method: 'GET',
+                params,
+                path: `/api/${collection.name}/${record.id}{?page,expand,q,per-page}`,
+            }).then((result) => {
+                return {
+                    pagination: {
+                        currentPage: parseInt(result.headers['X-Pagination-Current-Page'], 10),
+                        pageCount: parseInt(result.headers['X-Pagination-Page-Count'], 10),
+                        perPage: parseInt(result.headers['X-Pagination-Per-Page'], 10),
+                        totalCount: parseInt(result.headers['X-Pagination-Total-Count'], 10),
+                    },
+                    data: result.entity,
+                }
+            })
+        },
+
         patchRecord: (resourceScheme, record) => {
             return client({path: `/api/${resourceScheme.name}/${record.id}`, method: 'PATCH', entity: record})
         },
@@ -90,3 +108,7 @@ export const user = () => {
         })
 }
 
+export const flushCache = () => {
+    const client = commonClient.wrap(mime, {mime: 'application/json'})
+    return client({path: '/admin/flush-cache', method: 'GET'})
+}
