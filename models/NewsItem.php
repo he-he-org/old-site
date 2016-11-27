@@ -14,7 +14,7 @@ class NewsItem extends ActiveRecord
     public function rules()
     {
         return [
-            [["id", "date", "title_id", "text_id", "image_url"], "safe"]
+            [["id", "date", "title_id", "text_id", "image_url", "published"], "safe"]
         ];
     }
 
