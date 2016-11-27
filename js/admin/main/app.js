@@ -81,6 +81,8 @@ const App = createClass({
         }).then(() => {
             this.setState({
                 logined: true,
+            }, () => {
+                this.refresh()
             })
         })
     },
