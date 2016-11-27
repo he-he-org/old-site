@@ -90,7 +90,7 @@ class SiteController extends Controller
             $tag = NewsTag::find()->joinWith('title t')->where(['t.ru-RU' => $specialProject['news_tag_id']])->one();
 
             if ($tag !== null) {
-                $news = $tag->getNews()->orderBy(['date' => SORT_DESC])->limit(4)->all();
+                $news = $tag->getNews()->where(['published' => true])->orderBy(['date' => SORT_DESC])->limit(4)->all();
                 $news = array_map(function($item) use ($parser){
                     return $item['title'][Yii::$app->language];
                 }, $news);
