@@ -142,7 +142,6 @@
     "array-bracket-spacing": "error",
     "block-spacing": "error",
     "brace-style": ["error", "stroustrup", {"allowSingleLine": true}],
-    "camelcase": "error",
     "comma-spacing": "error",
     "comma-style": "error",
     "computed-property-spacing": "error",
@@ -199,6 +198,7 @@
     "max-depth": "warn",
     "max-len": ["warn", 120],
 
+    "camelcase": "off",
     "no-process-env": "off",
     "max-statements": "off",
     "arrow-body-style": "off",
