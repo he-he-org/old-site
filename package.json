@@ -81,7 +81,6 @@
           "react-input-autosize",
           "react-markup",
           "react-redux",
-          "react-router",
           "redux",
           "redux-logger"
         ],
@@ -91,6 +90,7 @@
           "react",
           "react-dom",
           "react-markup",
+          "react-router",
           "bem-prefixer",
           "rest",
           "react-markdown"
