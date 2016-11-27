@@ -13,6 +13,8 @@ apt-get install -y apache2
 
 # Install php
 apt-get install -y php5.6 php5.6-mysql php5.6-imagick php5.6-curl php5.6-mbstring
+if [ -f /usr/bin/php ]; then rm /usr/bin/php; fi
+ln -s /usr/bin/php5.6 /usr/bin/php
 
 # Install mysql
 DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
