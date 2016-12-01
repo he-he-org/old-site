@@ -85,6 +85,7 @@
           "redux-logger"
         ],
         "vendor-admin": [
+          "functional-utils",
           "is-nan",
           "bem-prefixer",
           "react",
