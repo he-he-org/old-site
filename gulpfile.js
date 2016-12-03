@@ -15,6 +15,7 @@ var gulp = require("gulp"),
     eslint = require("gulp-eslint"),
     postcss = require("gulp-postcss"),
     gulpIf = require('gulp-if'),
+    notifier = require('node-notifier'),
 
     packageJson = require("./package.json") || {};
 
@@ -197,6 +198,10 @@ gulp.task("debug:scripts:vendor", function () {
             var bundle = rebundle()
             bundle.on("end", function () {
                 gutil.log("Rebundling vendor... Done! Time: " + (Date.now() - start))
+                notifier.notify({
+                    'title': 'debug:scripts:vendor',
+                    'message': 'Rebuilding has finished'
+                })
             })
         })
 
@@ -245,6 +250,10 @@ gulp.task("debug:scripts", function () {
             var bundle = rebundle()
             bundle.on("end", function () {
                 gutil.log("Rebundling '" + entryPoint.from + "'... Done! Time: " + (Date.now() - start))
+                notifier.notify({
+                    'title': 'debug:scripts',
+                    'message': 'Rebuilding has finished'
+                })
             })
         })
 
@@ -278,6 +287,10 @@ gulp.task("debug:styles", function () {
             var start = Date.now()
             build().on('end', function() {
                 gutil.log("Rebuilding styles... Done! Time: " + + (Date.now() - start))
+                notifier.notify({
+                    'title': 'debug:styles',
+                    'message': 'Rebuilding has finished'
+                })
             })
         });
         return watcher
@@ -293,8 +306,9 @@ gulp.task("debug:styles", function () {
 
 gulp.task("browser-sync", function(){
     require('browser-sync').create().init({
-        proxy: "localhost:80",
-        files: ["web/css/*.css", "web/js/*.js"]
+        proxy: "localhost:8080",
+        files: ["web/css/*.css", "web/js/*.js"],
+        open: false,
     })
 })
 

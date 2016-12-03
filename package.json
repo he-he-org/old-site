@@ -44,7 +44,7 @@
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
-    "node-notifier": "^4.5.0",
+    "node-notifier": "^4.6.1",
     "postcss-import": "^8.1.2",
     "postcss-nested": "^1.0.0",
     "postcss-simple-vars": "^1.2.0",
