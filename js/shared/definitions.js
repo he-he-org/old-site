@@ -4,9 +4,10 @@ const LanguageType = {
     ES: 'es-ES',
 }
 
-const ProvideType = {
+const ProviderType = {
     YANDEX_MONEY: 'YANDEX_MONEY',
     PAYPAL: 'PAYPAL',
+    SBERBANK: 'SBERBANK',
 }
 
 const MethodType = {
@@ -29,7 +30,7 @@ const AmountOptionType = {
 
 export {
     LanguageType,
-    ProvideType,
+    ProviderType,
     MethodType,
     CurrencyType,
     AmountOptionType,

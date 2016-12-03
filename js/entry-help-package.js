@@ -26,7 +26,7 @@ import {
 
 import {
     LanguageType,
-    ProvideType,
+    ProviderType,
     CurrencyType,
 } from './shared/definitions'
 
@@ -66,7 +66,7 @@ new Promise((resolve) => {
 }).then((i18n) => {
     const language = i18n.detectLanguage()
 
-    const defaultProvider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
+    const defaultProvider = language === LanguageType.RU ? ProviderType.YANDEX_MONEY : ProviderType.PAYPAL
     const defaultCurrency = CurrencyType[i18n.settings.language[language].defaultCurrency]
 
     // Init store for popup

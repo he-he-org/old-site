@@ -12,7 +12,7 @@ import I18N from './i18n'
 import {Provider} from 'react-redux'
 import {
     LanguageType,
-    ProvideType,
+    ProviderType,
     CurrencyType,
     AmountOptionType,
 } from './shared/definitions'
@@ -50,7 +50,7 @@ new Promise((resolve) => {
 }).then((i18n) => {
     const language = i18n.detectLanguage()
 
-    const defaultProvider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
+    const defaultProvider = language === LanguageType.RU ? ProviderType.YANDEX_MONEY : ProviderType.PAYPAL
     const defaultCurrency = CurrencyType[i18n.settings.language[language].defaultCurrency]
     const initialState = {
         provider: defaultProvider,

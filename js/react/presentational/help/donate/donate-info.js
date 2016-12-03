@@ -3,7 +3,7 @@ import {h} from 'react-markup'
 
 import prefixer from 'bem-prefixer'
 
-import {AmountOptionType} from '~/shared/definitions'
+import {AmountOptionType, ProviderType} from '~/shared/definitions'
 const {OPTION_OTHER} = AmountOptionType
 
 const bem = prefixer('section-donate-info')
@@ -61,9 +61,10 @@ class DonateInfo extends Component {
             amountOption,
             amount,
             currency,
+            provider,
             } = this.props
 
-        if (amountOption === OPTION_OTHER) {
+        if (amountOption === OPTION_OTHER || provider === ProviderType.SBERBANK) {
             return h(bem('div'),
                 h(bem('div#block'))
             )

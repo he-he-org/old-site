@@ -9,7 +9,7 @@ import {Provider} from 'react-redux'
 
 import I18N from './i18n'
 import {createStore} from '~/shared/redux-helpers'
-import {LanguageType, ProvideType, CurrencyType} from '~/shared/definitions'
+import {LanguageType, ProviderType, CurrencyType} from '~/shared/definitions'
 import {
     setCurrency,
     setProvider,
@@ -60,7 +60,7 @@ new Promise((resolve) => {
 }).then((i18n) => {
     const language = i18n.detectLanguage()
     const currency = language === LanguageType.RU ? CurrencyType.RUB : CurrencyType.USD
-    const provider = language === LanguageType.RU ? ProvideType.YANDEX_MONEY : ProvideType.PAYPAL
+    const provider = language === LanguageType.RU ? ProviderType.YANDEX_MONEY : ProviderType.PAYPAL
 
     /*
      Init store for popup

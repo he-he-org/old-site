@@ -3,11 +3,10 @@ import {h} from 'react-markup'
 import prefixer from 'bem-prefixer'
 
 
-import {ProvideType, CurrencyType, AmountOptionType} from '../../../shared/definitions'
-const {YANDEX_MONEY, PAYPAL} = ProvideType
+import {ProviderType, CurrencyType, AmountOptionType, LanguageType} from '~/shared/definitions'
+const {YANDEX_MONEY, PAYPAL, SBERBANK} = ProviderType
 const {RUB, USD, EUR} = CurrencyType
 const {OPTION_SUM_1, OPTION_SUM_2, OPTION_SUM_3, OPTION_OTHER} = AmountOptionType
-
 const YM_URL = 'https://money.yandex.ru/quickpay/confirm.xml'
 const YM_RECEIVER = '410012180500847' //todo: move to config
 const YM_QUICKPAY_FORM = 'donate' // Тип транзакции
@@ -38,14 +37,19 @@ export default class extends Component {
             provider,
             onChangeProvider,
             } = this.props
+        const isRussian = i18n.detectLanguage() === LanguageType.RU
         return h(bem('div#options'),
             h(bem('div', 'option', provider === YANDEX_MONEY ? ['active'] : []),
-                {onClick: onChangeProvider.bind(null, ProvideType.YANDEX_MONEY)},
+                {onClick: onChangeProvider.bind(null, ProviderType.YANDEX_MONEY)},
                 i18n.t('strings', 'help/donate/provider-options/ym')
             ),
             h(bem('div', 'option', provider === PAYPAL ? ['active'] : []),
-                {onClick: onChangeProvider.bind(null, ProvideType.PAYPAL)},
+                {onClick: onChangeProvider.bind(null, ProviderType.PAYPAL)},
                 'PayPal'
+            ),
+            isRussian && h(bem('div', 'option', provider === SBERBANK ? ['active'] : []),
+                {onClick: onChangeProvider.bind(null, ProviderType.SBERBANK)},
+                'Сбербанк' //todo: translate
             )
         )
     }
@@ -81,24 +85,28 @@ export default class extends Component {
         const {
             i18n,
             currency,
+            provider,
             amountOption,
             onChangeAmountOption,
             } = this.props
 
-        return h(bem('div#options'),
-            h(bem('div', 'option', amountOption === OPTION_SUM_1 ? ['active'] : []),
-                {onClick: onChangeAmountOption.bind(null, OPTION_SUM_1)},
-                i18n.settings.currency[currency].donationOption1),
-            h(bem('div', 'option', amountOption === OPTION_SUM_2 ? ['active'] : []),
-                {onClick: onChangeAmountOption.bind(null, OPTION_SUM_2)},
-                i18n.settings.currency[currency].donationOption2),
-            h(bem('div', 'option', amountOption === OPTION_SUM_3 ? ['active'] : []),
-                {onClick: onChangeAmountOption.bind(null, OPTION_SUM_3)},
-                i18n.settings.currency[currency].donationOption3),
-            h(bem('div', 'option', amountOption === OPTION_OTHER ? ['active'] : []),
-                {onClick: onChangeAmountOption.bind(null, OPTION_OTHER)},
-                i18n.t('strings', 'help/donate/amount-options/other-amount'))
-        )
+        if (provider !== SBERBANK) {
+            return h(bem('div#options'),
+                h(bem('div', 'option', amountOption === OPTION_SUM_1 ? ['active'] : []),
+                    {onClick: onChangeAmountOption.bind(null, OPTION_SUM_1)},
+                    i18n.settings.currency[currency].donationOption1),
+                h(bem('div', 'option', amountOption === OPTION_SUM_2 ? ['active'] : []),
+                    {onClick: onChangeAmountOption.bind(null, OPTION_SUM_2)},
+                    i18n.settings.currency[currency].donationOption2),
+                h(bem('div', 'option', amountOption === OPTION_SUM_3 ? ['active'] : []),
+                    {onClick: onChangeAmountOption.bind(null, OPTION_SUM_3)},
+                    i18n.settings.currency[currency].donationOption3),
+                h(bem('div', 'option', amountOption === OPTION_OTHER ? ['active'] : []),
+                    {onClick: onChangeAmountOption.bind(null, OPTION_OTHER)},
+                    i18n.t('strings', 'help/donate/amount-options/other-amount'))
+            )
+        }
+        return null
     }
 
     renderAmount = () => {
@@ -106,31 +114,35 @@ export default class extends Component {
             i18n,
             amount,
             amountOption,
+            provider,
             currency,
             } = this.props
 
-        if (amountOption === AmountOptionType.OPTION_OTHER) {
-            const template = i18n.t('strings', 'help/main-donation-form/money-template').replace(/ /g, '\u00a0')
-            const parts = template.split('{amount}')
-            const renderingParts = []
-            parts.forEach((part, i) => {
-                if (i !== 0) {
-                    renderingParts.push(h('input', {value: amount, size: 4, onChange: this.handleChangeAmount}))
-                }
-                renderingParts.push(part.replace('{currency}', i18n.settings.currency[currency].symbol))
-            })
+        if (provider !== SBERBANK) {
+            if (amountOption === AmountOptionType.OPTION_OTHER) {
+                const template = i18n.t('strings', 'help/main-donation-form/money-template').replace(/ /g, '\u00a0')
+                const parts = template.split('{amount}')
+                const renderingParts = []
+                parts.forEach((part, i) => {
+                    if (i !== 0) {
+                        renderingParts.push(h('input', {value: amount, size: 4, onChange: this.handleChangeAmount}))
+                    }
+                    renderingParts.push(part.replace('{currency}', i18n.settings.currency[currency].symbol))
+                })
 
-            return h(bem('div#amount-info'),
-                h(bem('div#amount-input'),
-                    ...renderingParts
+                return h(bem('div#amount-info'),
+                    h(bem('div#amount-input'),
+                        ...renderingParts
+                    )
                 )
-            )
+            }
+            else {
+                return h(bem('div#amount-info'),
+                    h(bem('div#amount'), this.formatMoney(amount, currency))
+                )
+            }
         }
-        else {
-            return h(bem('div#amount-info'),
-                h(bem('div#amount'), this.formatMoney(amount, currency))
-            )
-        }
+        return null
     }
 
 
@@ -187,6 +199,76 @@ export default class extends Component {
         )
     }
 
+    renderSberbankForm = () => {
+        return h(bem('form#form'))
+    }
+
+    renderInfo = () => {
+        const {provider} = this.props
+
+        if (provider === SBERBANK) {
+            //todo: translate
+            return h(bem('div#info'),
+                h(bem('div#info-p'),
+                    h('span', 'Вы можете сделать пожертвование на счет в Сбербанке. Проще всего это сделать по '),
+                    h('b', 'номеру карты:')
+
+                ),
+                h(bem('div#info-details.card'),
+                    '63900206 9033829878'
+                ),
+                h(bem('div#info-p'),
+                    h('a', {href: 'http://tropical-doc.livejournal.com/profile'}, 'Реквизиты для банковского перевода')
+                )
+
+                //h(bem('div#info-p'),
+                //    'Кроме того, можно сделать банковский перевод. Реквизиты для рублевых переводов:'
+                //),
+                //h(bem('div#info-details'),
+                //    //h('div', 'Получатель: ВАЛИКОВА ВИКТОРИЯ НИКОЛАЕВНА'),
+                //    //h('div', 'Счет получателя: 40817810006002449548'),
+                //    //h('div', 'Банк получателя: ОТДЕЛЕНИЕ N8598 СБЕРБАНКА РОССИИ г. УФА'),
+                //    //h('div', 'БИК банка получателя: 048073601'),
+                //    //h('div', 'Корреспонденский счет: 30101810300000000601'),
+                //    //h('div', 'Код подразделения банка по месте ведения счета карты (для внутренних переводов по системе Сбербанка России): 1685980180'),
+                //    //h('div', 'Адрес подразделения Банка по месту ведения счета карты: г. Уфа, ул.Революционная, 49')
+                //    h(bem('div#info-details-section'),
+                //        h(bem('div#info-details-h'), 'Получатель: '), h(bem('div#info-details-v'), 'ВАЛИКОВА ВИКТОРИЯ НИКОЛАЕВНА')
+                //    ),
+                //    h(bem('div#info-details-section'),
+                //        h(bem('div#info-details-h'), 'Счет получателя: '), h(bem('div#info-details-v'), '40817810006002449548')
+                //    ),
+                //    h(bem('div#info-details-section'),
+                //        h(bem('div#info-details-h'), 'Банк получателя: '), h(bem('div#info-details-v'), 'ОТДЕЛЕНИЕ N8598 СБЕРБАНКА РОССИИ г. УФА')
+                //    ),
+                //    h(bem('div#info-details-section'),
+                //        h(bem('div#info-details-h'), 'БИК банка получателя: '), h(bem('div#info-details-v'), '048073601')
+                //    ),
+                //    h(bem('div#info-details-section'),
+                //        h(bem('div#info-details-h'), 'Корреспонденский счет: '), h(bem('div#info-details-v'), '30101810300000000601')
+                //    ),
+                //    h(bem('div#info-details-section'),
+                //        h(bem('div#info-details-h'), 'Код подразделения банка по месте ведения счета карты (для внутренних переводов по системе Сбербанка России): '), h(bem('div#info-details-v'), '1685980180')
+                //    ),
+                //    h(bem('div#info-details-section'),
+                //        h(bem('div#info-details-h'), 'Адрес подразделения Банка по месту ведения счета карты: '), h(bem('div#info-details-v'), 'г. Уфа, ул.Революционная, 49')
+                //    )
+                //),
+                //h(bem('div#info-p'),
+                //    'Реквизиты для валютных переводов:'
+                //),
+                //h(bem('div#info-details'),
+                //    h('div', 'Получатель: VALIKOVA VIKTORIA NIKOLAEVNA'),
+                //    h('div', 'Счет получателя: 40817810006002449548'),
+                //    h('div', 'Наименование банка получателя: SBERBANK (URALSKY HEAD OFFICE) EKATERINBURG RUSSIAN FEDERATION'),
+                //    h('div', 'SWIFT-код: SABRRUMMEA1'),
+                //    h('div', 'Код подразделения Банка по месте ведения счета карты (для внутренних переводов по системе Сбербанка России):1685980180')
+                //)
+            )
+        }
+        return null
+    }
+
     renderButton = () => {
         const {
             provider,
@@ -199,7 +281,7 @@ export default class extends Component {
             return this.renderPaypalForm()
         }
         else {
-            throw new Error(`Wrong provider value: ${provider}`)
+            return this.renderSberbankForm()
         }
     }
 
@@ -209,6 +291,7 @@ export default class extends Component {
             this.renderCurrencyOptions(),
             this.renderAmountOptions(),
             this.renderAmount(),
+            this.renderInfo(),
             this.renderButton()
         )
     }

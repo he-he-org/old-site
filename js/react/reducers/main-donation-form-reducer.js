@@ -1,4 +1,4 @@
-import {ProvideType, CurrencyType, AmountOptionType} from '~/shared/definitions'
+import {ProviderType, CurrencyType, AmountOptionType} from '~/shared/definitions'
 
 const {
     OPTION_SUM_1,
@@ -9,7 +9,7 @@ const {
 
 
 export const initialState = {
-    provider: ProvideType.YANDEX_MONEY,
+    provider: ProviderType.YANDEX_MONEY,
     currency: CurrencyType.RUB,
     amountOption: OPTION_SUM_2,
     amount: 0,
@@ -39,7 +39,7 @@ const reducer = (state = initialState, action) => {
         case 'SET_PROVIDER': {
             const {provider} = action
             const {amountOption} = state
-            const currency = provider === ProvideType.YANDEX_MONEY ? CurrencyType.RUB : state.currency
+            const currency = provider === ProviderType.YANDEX_MONEY ? CurrencyType.RUB : state.currency
             const amount = getCurrencyOptionAmount(state, state.currency, amountOption)
 
             return {...state,
@@ -50,7 +50,7 @@ const reducer = (state = initialState, action) => {
         }
         case 'SET_CURRENCY': {
             const {provider} = state
-            if (provider === ProvideType.PAYPAL) {
+            if (provider === ProviderType.PAYPAL) {
                 const {currency} = action
                 const {amountOption} = state
                 const amount = amountOption === OPTION_OTHER
