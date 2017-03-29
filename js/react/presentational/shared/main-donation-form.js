@@ -215,7 +215,7 @@ export default class extends Component {
 
                 ),
                 h(bem('div#info-details.card'),
-                    '63900206 9033829878'
+                    '4276 0600 1625 7654'
                 ),
                 h(bem('div#info-p'),
                     h('a', {href: 'http://tropical-doc.livejournal.com/profile'}, 'Реквизиты для банковского перевода')
